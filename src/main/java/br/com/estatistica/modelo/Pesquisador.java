@@ -1,6 +1,5 @@
 package br.com.estatistica.modelo;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
