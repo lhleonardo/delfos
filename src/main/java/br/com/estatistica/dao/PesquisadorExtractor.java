@@ -17,7 +17,7 @@ public class PesquisadorExtractor {
 		Date dataNascimento = rs.getDate("dataNascimento");
 		String descricao = rs.getString("descricao");
 
-		return new Pesquisador(nome, cpf, rg, dataNascimento, descricao);
+		return new Pesquisador(id, nome, cpf, rg, dataNascimento, descricao);
 	}
 
 }

@@ -47,6 +47,16 @@ public class Pessoa {
 		this.descricao = descricao;
 	}
 
+	public Pessoa(Integer id, String nome, Cpf cpf, String rg, Date dataNascimento, String descricao) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.tipoDocumento = cpf;
+		this.rg = rg;
+		this.dataNascimento = dataNascimento;
+		this.descricao = descricao;
+	}
+
 	private String descricao;
 
 	/**

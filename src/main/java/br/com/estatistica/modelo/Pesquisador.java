@@ -18,4 +18,9 @@ public class Pesquisador extends Pessoa {
 		super(nome, tipoDocumento, rg, dataNascimento, descricao);
 	}
 
+	public Pesquisador(Integer id, String nome, Cpf cpf, String rg, Date dataNascimento, String descricao) {
+		
+		super(id, nome, cpf, rg, dataNascimento, descricao);
+	}
+
 }
