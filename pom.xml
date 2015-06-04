@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.delfos</groupId>
 	<artifactId>delfos_maven</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.5-SNAPSHOT</version>
 	<name>Projeto Delfos</name>
 	<description>Software Estatístico</description>
 
@@ -78,4 +78,7 @@
 
 
 	</dependencies>
+	<organization>
+		<name>UNIR - IFRO</name>
+	</organization>
 </project>
