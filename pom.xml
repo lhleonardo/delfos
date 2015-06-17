@@ -20,6 +20,16 @@
 		</dependency>
 
 
+		<!-- dependências para utilização das bibliotecas de compilação dos relatórios 
+			criados pelo iReport -->
+		<dependency>
+			<groupId>net.sf.jasperreports</groupId>
+			<artifactId>jasperreports</artifactId>
+			<version>6.1.0</version>
+		</dependency>
+
+
+
 		<!-- dependências para utilização das bibliotecas do Hibernate -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
