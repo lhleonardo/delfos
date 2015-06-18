@@ -7,6 +7,20 @@
 	<name>Projeto Delfos</name>
 	<description>Software Estatístico</description>
 
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 
 
 	<!-- Especificação de todas as dependências que serão utilizadas no projeto. -->
@@ -18,16 +32,6 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.35</version>
 		</dependency>
-
-
-		<!-- dependências para utilização das bibliotecas de compilação dos relatórios 
-			criados pelo iReport -->
-		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>6.1.0</version>
-		</dependency>
-
 
 
 		<!-- dependências para utilização das bibliotecas do Hibernate -->
@@ -86,6 +90,24 @@
 		</dependency>
 
 
+
+		<!--Dependencias retiradas do projeto por motivos de muitos erros.... <dependency> 
+			<groupId>jfree</groupId> <artifactId>jcommon</artifactId> <version>1.0.16</version> 
+			</dependency> <dependency> <groupId>commons-beanutils</groupId> <artifactId>commons-beanutils</artifactId> 
+			<version>1.9.2</version> </dependency> <dependency> <groupId>commons-collections</groupId> 
+			<artifactId>commons-collections</artifactId> <version>3.2.1</version> </dependency> 
+			<dependency> <groupId>commons-digester</groupId> <artifactId>commons-digester</artifactId> 
+			<version>2.1</version> </dependency> <dependency> <groupId>com.itextpdf</groupId> 
+			<artifactId>itextpdf</artifactId> <version>5.5.6</version> </dependency> 
+			<dependency> <groupId>jfree</groupId> <artifactId>jcommon</artifactId> <version>1.0.16</version> 
+			</dependency> <dependency> <groupId>jfree</groupId> <artifactId>jfreechart</artifactId> 
+			<version>1.0.13</version> </dependency> <dependency> <groupId>org.apache.poi</groupId> 
+			<artifactId>poi</artifactId> <version>3.12</version> </dependency> <dependency> 
+			<groupId>com.fasterxml.jackson.core</groupId> <artifactId>jackson-databind</artifactId> 
+			<version>2.6.0-rc2</version> </dependency> <dependency> <groupId>net.sf.jasperreports</groupId> 
+			<artifactId>jasperreports</artifactId> <version>5.1.0</version> </dependency> 
+			<dependency> <groupId>org.eclipse.birt.runtime.3_7_1</groupId> <artifactId>com.lowagie.text</artifactId> 
+			<version>2.1.7</version> </dependency> -->
 
 	</dependencies>
 	<organization>
