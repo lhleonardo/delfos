@@ -26,7 +26,7 @@ public interface DAO<T> {
 	 * @throws SQLException
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
-	void save(T modelo) throws SQLException;
+	void save(T modelo) throws SQLException, NullPointerException;
 
 	/**
 	 * Exclui o registro na base de dados
@@ -35,7 +35,7 @@ public interface DAO<T> {
 	 *            sendo a classe genérica que será recebida na declaração da interface.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
-	void remove(T modelo) throws SQLException;
+	void remove(T modelo) throws SQLException, NullPointerException;
 
 	/**
 	 * Método que retorna todos os registros que estarão presentes na base de dados
@@ -53,7 +53,7 @@ public interface DAO<T> {
 	 * @return Lista com filtro em nome.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
-	List<T> getByNome(String nome) throws SQLException;
+	List<T> getByNome(String nome) throws SQLException, NullPointerException;
 
 	/**
 	 * Método responsável por pesquisar o registro pelo código.
@@ -63,7 +63,7 @@ public interface DAO<T> {
 	 * @return T já com o filtro, caso não encontre nada retorna <code>null</code>.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
-	T findById(Integer id) throws SQLException;
+	T findById(Integer id) throws SQLException, NullPointerException;
 
 	/**
 	 * Inicializa o componente de persistencia.
