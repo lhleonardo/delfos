@@ -8,7 +8,7 @@ import java.util.Date;
  * 
  * @see Pessoa
  * @author Leonardo Braz
- * @since 5.0
+ * @since 1.4
  */
 
 public class Pesquisador extends Pessoa {
@@ -19,7 +19,7 @@ public class Pesquisador extends Pessoa {
 	}
 
 	public Pesquisador(Integer id, String nome, Cpf cpf, String rg, Date dataNascimento, String descricao) {
-		
+
 		super(id, nome, cpf, rg, dataNascimento, descricao);
 	}
 

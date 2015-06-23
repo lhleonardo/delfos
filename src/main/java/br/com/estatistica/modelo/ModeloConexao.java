@@ -10,7 +10,7 @@ import br.com.estatistica.util.Mensagem;
  * Caminho para o banco de dados, Driver, Usuário e Senha</b> para conexão.
  * 
  * @author Leonardo Braz
- * @since 5.0
+ * @since 1.6
  * @version 0.1
  * 
  */
@@ -107,7 +107,7 @@ public class ModeloConexao {
 	 * 
 	 * @author Leonardo Braz
 	 * @return String
-	 * @since 5.0
+	 * @since 1.4
 	 */
 	public String getURL() {
 		return "jdbc:" + getJdbc() + "://" + this.getHost().trim() + '/' + this.getNomeDatabase().trim();
@@ -117,7 +117,7 @@ public class ModeloConexao {
 	 * Método responsável por descobrir o tipo de banco a partir da classe de conexão
 	 * utilizada pelo driver, sendo MySQL, Firebird, Oracle, etc.
 	 * 
-	 * @since 5.0
+	 * @since 1.4
 	 * @author Leonardo Braz
 	 * @return String
 	 */
