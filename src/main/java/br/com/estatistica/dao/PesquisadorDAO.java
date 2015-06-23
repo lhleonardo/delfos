@@ -91,14 +91,10 @@ public class PesquisadorDAO implements DAO<Pesquisador> {
 			PesquisadorExtractor extractor = new PesquisadorExtractor();
 
 			while (rs.next()) {
-
 				Pesquisador pesquisador = extractor.extract(rs);
 				filtro.add(pesquisador);
-
 			}
-
 		}
-
 		return filtro;
 	}
 
