@@ -103,12 +103,43 @@ public class PesquisadorDAO implements DAO<Pesquisador> {
 	}
 
 	@Override
-	public List<Pesquisador> getByNome(String nome) {
-		return null;
+	public List<Pesquisador> getByNome(String nome) throws SQLException {
+		ArrayList<Pesquisador> filtro = new ArrayList<>();
+
+		try (Connection con = new ConnectionFactory().getConnection()) {
+			String consulta = SQL_SELECT + "where nome like '?%'";
+			PreparedStatement pst = con.prepareStatement(consulta);
+			pst.setString(1, nome);
+			pst.execute();
+
+			ResultSet rs = pst.getResultSet();
+
+			PesquisadorExtractor extractor = new PesquisadorExtractor();
+
+			while (rs.next()) {
+				Pesquisador pesquisador = extractor.extract(rs);
+				filtro.add(pesquisador);
+			}
+		}
+		return filtro;
 	}
 
 	@Override
-	public Pesquisador findById(Integer id) {
+	public Pesquisador findById(Integer id) throws SQLException {
+		try (Connection con = new ConnectionFactory().getConnection()) {
+			String consulta = SQL_SELECT + "where idPesquisador = ?";
+			PreparedStatement pst = con.prepareStatement(consulta);
+			pst.setInt(1, id);
+			pst.execute();
+
+			ResultSet rs = pst.getResultSet();
+
+			PesquisadorExtractor extractor = new PesquisadorExtractor();
+
+			while (rs.next()) {
+				return extractor.extract(rs);
+			}
+		}
 		return null;
 	}
 
