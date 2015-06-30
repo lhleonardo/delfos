@@ -33,8 +33,8 @@ public class ManipuladorDePropriedades {
 	 * 
 	 * @return Properties instância de Properties pronta para manipulação.
 	 * @throws IOException
-	 *             caso o caminho do arquivo informado no construtor não for encontrado ou
-	 *             válido
+	 *             caso o caminho do arquivo informado no construtor não for encontrado
+	 *             ou válido
 	 * @author Leonardo Braz
 	 */
 
@@ -45,6 +45,10 @@ public class ManipuladorDePropriedades {
 		// instancia esse arquivo
 		properties.load(file);
 		return properties;
+	}
+
+	public String getProperty(String key) throws IOException {
+		return getProp().getProperty(key);
 	}
 
 }
