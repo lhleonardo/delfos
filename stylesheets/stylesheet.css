@@ -18,6 +18,7 @@ html {
 
 body {
   margin: 0;
+  text-align: justify;
 }
 
 /* HTML5 display definitions
@@ -438,6 +439,7 @@ body {
 
 p {
   margin-top: 0;
+  text-align: justify;
 }
 
 a {
