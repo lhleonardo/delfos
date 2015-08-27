@@ -3,7 +3,7 @@ package br.com.estatistica.dao;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.com.estatistica.modelo.Especialista;
+import br.com.estatistica.modelo.cadastro.Especialista;
 
 public class EspecialistaDAO implements DAO<Especialista> {
 

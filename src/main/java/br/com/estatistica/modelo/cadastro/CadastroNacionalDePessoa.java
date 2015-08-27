@@ -1,4 +1,4 @@
-package br.com.estatistica.modelo;
+package br.com.estatistica.modelo.cadastro;
 
 /**
  * Classe responsável por validar e mascarar os documentos do Cadastro Nacional de

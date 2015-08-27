@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import br.com.estatistica.modelo.Cpf;
-import br.com.estatistica.modelo.Pesquisador;
+import br.com.estatistica.modelo.cadastro.Cpf;
+import br.com.estatistica.modelo.cadastro.Pesquisador;
 
 /**
  * Classe responsável por fazer a extração dos dados presentes no banco e tranformá-los

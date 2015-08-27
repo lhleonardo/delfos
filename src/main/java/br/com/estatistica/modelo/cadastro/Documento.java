@@ -1,4 +1,4 @@
-package br.com.estatistica.modelo;
+package br.com.estatistica.modelo.cadastro;
 
 /**
  * Interface <b>Documento</b> responsável por realizar um contrato entre os documentos que

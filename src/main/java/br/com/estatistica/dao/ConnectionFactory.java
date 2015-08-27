@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import br.com.estatistica.modelo.ModeloConexao;
+import br.com.estatistica.modelo.cadastro.ModeloConexao;
 import br.com.estatistica.util.Mensagem;
 
 /**

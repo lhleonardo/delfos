@@ -1,4 +1,4 @@
-package br.com.estatistica.modelo;
+package br.com.estatistica.modelo.cadastro;
 
 public class Cnpj extends CadastroNacionalDePessoa {
 

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.estatistica.modelo.Pesquisador;
+import br.com.estatistica.modelo.cadastro.Pesquisador;
 import br.com.estatistica.util.Mensagem;
 
 public class PesquisadorDAO implements DAO<Pesquisador> {
