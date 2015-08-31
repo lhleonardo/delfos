@@ -1,8 +1,8 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe respons√°vel por validar e mascarar os documentos do Cadastro Nacional de
- * Pessoa, sendo F√≠sica ou Juridica. <br>
+ * Classe respons·vel por validar e mascarar os documentos do Cadastro Nacional de
+ * Pessoa, sendo FÌsica ou Juridica. <br>
  * Algumas classes que representam: {@code Cpf}, {@code Cnpj} e etc.
  * 
  * @author lhleonardo
@@ -28,7 +28,7 @@ public abstract class CadastroNacionalDePessoa implements Documento {
 	 *            valor do documento recebido.
 	 * @param peso
 	 *            do tipo de documento.
-	 * @return 0 se o resultado da soma for maior que nove, sen√£o o pr√≥prio valor.
+	 * @return 0 se o resultado da soma for maior que nove, sen„o o prÛprio valor.
 	 */
 	protected static int calcularDigito(String str, int[] peso) {
 		int soma = 0;
@@ -41,7 +41,7 @@ public abstract class CadastroNacionalDePessoa implements Documento {
 	}
 
 	/**
-	 * M√©todo respons√°vel por fazer a verifica√ß√£o dos digitos.
+	 * MÈtodo respons·vel por fazer a verificaÁ„o dos digitos.
 	 * 
 	 */
 	public boolean isValido() {

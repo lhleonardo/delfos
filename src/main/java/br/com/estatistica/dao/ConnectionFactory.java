@@ -8,7 +8,7 @@ import br.com.estatistica.modelo.cadastro.ModeloConexao;
 import br.com.estatistica.util.Mensagem;
 
 /**
- * Classe respons√°vel pelas opera√ß√µes de conex√£o do banco de dados, como conectar e
+ * Classe respons·vel pelas operaÁıes de conex„o do banco de dados, como conectar e
  * desconectar.
  * 
  * @author Leonardo Braz
@@ -18,23 +18,23 @@ import br.com.estatistica.util.Mensagem;
 public class ConnectionFactory {
 
 	/**
-	 * Classe manipuladora do modelo de conex√µes, que ser√° respons√°vel por trazer as
-	 * informa√ß√µes necess√°rias para abrir uma conex√£o com o banco.
+	 * Classe manipuladora do modelo de conexıes, que ser· respons·vel por trazer as
+	 * informaÁıes necess·rias para abrir uma conex„o com o banco.
 	 */
 	private ModeloConexao modelo;
 
 	/**
-	 * Interface respons√°vel por gerenciar a conex√£o.
+	 * Interface respons·vel por gerenciar a conex„o.
 	 * 
 	 * @see Connection
 	 */
 	private Connection con = null;
 
 	/**
-	 * Construtor para utiliza√ß√£o da classe, recebendo objeto do tipo ModeloConexao
+	 * Construtor para utilizaÁ„o da classe, recebendo objeto do tipo ModeloConexao
 	 * 
 	 * @param modelo
-	 *            {@link ModeloConexao} com as informa√ß√µes pr√©-definidas
+	 *            {@link ModeloConexao} com as informaÁıes prÈ-definidas
 	 * @author Leonardo Braz
 	 * @see ModeloConexao
 	 */
@@ -47,41 +47,41 @@ public class ConnectionFactory {
 	}
 
 	/**
-	 * Respons√°vel por realizar a conex√£o bruta com o banco de dados, retornando um
-	 * Connection que j√° tenha a conex√£o pronta para uso
+	 * Respons·vel por realizar a conex„o bruta com o banco de dados, retornando um
+	 * Connection que j· tenha a conex„o pronta para uso
 	 * 
-	 * @return Connection Conex√£o pronta para ser manipulada.
+	 * @return Connection Conex„o pronta para ser manipulada.
 	 * @author Leonardo Braz
 	 */
 	public Connection getConnection() {
 		try {
-			// salva na mem√≥ria a classe de conex√£o do conector java
+			// salva na memÛria a classe de conex„o do conector java
 			Class.forName(modelo.getDriver());
-			// realiza a conex√£o recebendo a URL, usu√°rio e senha
+			// realiza a conex„o recebendo a URL, usu·rio e senha
 			con = DriverManager.getConnection(modelo.getURL(), modelo.getUsuario(), modelo.getSenha());
 
 			System.out.println("Conectado.");
 
 		} catch (SQLException e) {
 			// erro SQL
-			Mensagem.informa("N√£o foi poss√≠vel conectar-se ao banco de dados pelo devido motivo: \n"
+			Mensagem.informa("N„o foi possÌvel conectar-se ao banco de dados pelo devido motivo: \n"
 			        + e.getMessage());
 		} catch (ClassNotFoundException e) {
-			// n√£o encontrou a classe do conector
-			Mensagem.informa("N√£o foi poss√≠vel conectar-se ao banco de dados pois a classe \n"
-			        + modelo.getDriver() + " \nn√£o foi encontrada.");
+			// n„o encontrou a classe do conector
+			Mensagem.informa("N„o foi possÌvel conectar-se ao banco de dados pois a classe \n" + modelo.getDriver()
+			        + " \nn„o foi encontrada.");
 		}
 		return con;
 
 	}
 
 	/**
-	 * Respons√°vel por desconectar o banco de dados, recebendo uma conex√£o
-	 * <b>Connection</b> que n√£o esteja nula.
+	 * Respons·vel por desconectar o banco de dados, recebendo uma conex„o
+	 * <b>Connection</b> que n„o esteja nula.
 	 * 
 	 * @return true para desconectado e false para falha.
 	 * @param conexao
-	 *            Connection que ser√° fechada
+	 *            Connection que ser· fechada
 	 * @author Leonardo Braz
 	 */
 	public boolean desconectar(Connection conexao) {
@@ -92,7 +92,7 @@ public class ConnectionFactory {
 				resultado = true;
 			}
 		} catch (SQLException ex) {
-			Mensagem.informa("N√£o foi possivel desconectar-se ao banco de dados pelo devido motivo: \n"
+			Mensagem.informa("N„o foi possivel desconectar-se ao banco de dados pelo devido motivo: \n"
 			        + ex.getMessage());
 			resultado = false;
 		}

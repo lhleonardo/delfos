@@ -6,8 +6,8 @@ import br.com.estatistica.util.ManipuladorDePropriedades;
 import br.com.estatistica.util.Mensagem;
 
 /**
- * Classe modelo para as configura√ß√µes de conex√£o com o banco de dados, contendo <b>Host,
- * Caminho para o banco de dados, Driver, Usu√°rio e Senha</b> para conex√£o.
+ * Classe modelo para as configuraÁıes de conex„o com o banco de dados, contendo <b>Host,
+ * Caminho para o banco de dados, Driver, Usu·rio e Senha</b> para conex„o.
  * 
  * @author Leonardo Braz
  * @since 1.6
@@ -33,7 +33,7 @@ public class ModeloConexao {
 	}
 
 	/**
-	 * Atributo respons√°vel por indicar a localiza√ß√£o do servidor onde se encontram o
+	 * Atributo respons·vel por indicar a localizaÁ„o do servidor onde se encontram o
 	 * banco de dados, podendo ser em uma rede local ou externa.
 	 * 
 	 */
@@ -46,17 +46,17 @@ public class ModeloConexao {
 
 	/**
 	 * Caminho do driver de gerenciamento de determinado banco. <br>
-	 * Geralmente √© encontrado em uma biblioteca .jar
+	 * Geralmente È encontrado em uma biblioteca .jar
 	 */
 	private String driver;
 
 	/**
-	 * Usu√°rio para a conex√£o do banco de dados.
+	 * Usu·rio para a conex„o do banco de dados.
 	 */
 	private String usuario;
 
 	/**
-	 * Senha para autentica√ß√£o do usu√°rio no banco de dados.
+	 * Senha para autenticaÁ„o do usu·rio no banco de dados.
 	 */
 	private String senha;
 
@@ -101,9 +101,9 @@ public class ModeloConexao {
 	}
 
 	/**
-	 * M√©todo respons√°vel por retornar a URL para conex√£o j√° formatada, contendo o seu
-	 * tipo de conector(JDBC), o host onde se encontra o servidor e o endere√ßo para a
-	 * conex√£o.
+	 * MÈtodo respons·vel por retornar a URL para conex„o j· formatada, contendo o seu
+	 * tipo de conector(JDBC), o host onde se encontra o servidor e o endereÁo para a
+	 * conex„o.
 	 * 
 	 * @author Leonardo Braz
 	 * @return String
@@ -114,7 +114,7 @@ public class ModeloConexao {
 	}
 
 	/**
-	 * M√©todo respons√°vel por descobrir o tipo de banco a partir da classe de conex√£o
+	 * MÈtodo respons·vel por descobrir o tipo de banco a partir da classe de conex„o
 	 * utilizada pelo driver, sendo MySQL, Firebird, Oracle, etc.
 	 * 
 	 * @since 1.4
@@ -131,11 +131,11 @@ public class ModeloConexao {
 	}
 
 	/**
-	 * M√©todo respons√°vel por retornar o Jdbc pela classe utilizada pelo Driver, onde √©
-	 * utilizado pelo m√©todo getJdbc.
+	 * MÈtodo respons·vel por retornar o Jdbc pela classe utilizada pelo Driver, onde È
+	 * utilizado pelo mÈtodo getJdbc.
 	 * 
 	 * @param valores
-	 *            que ser√£o informados pelo m√©todo getJdbc
+	 *            que ser„o informados pelo mÈtodo getJdbc
 	 * @return String
 	 * @author Leonardo Braz
 	 * 

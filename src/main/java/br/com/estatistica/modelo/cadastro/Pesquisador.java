@@ -3,8 +3,8 @@ package br.com.estatistica.modelo.cadastro;
 import java.util.Date;
 
 /**
- * Classe respons√°vel por ser um modelador de informa√ß√µes dos <code>Pesquisadores</code>
- * que ser√£o cadastrados no sistema.
+ * Classe respons·vel por ser um modelador de informaÁıes dos <code>Pesquisadores</code>
+ * que ser„o cadastrados no sistema.
  * 
  * @see Pessoa
  * @author Leonardo Braz

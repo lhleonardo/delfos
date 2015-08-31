@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * Classe responsÃ¡vel por manipular os arquivos de propriedades
+ * Classe responsável por manipular os arquivos de propriedades
  * 
  * @author Leonardo Braz
  * @since 5.0
@@ -13,8 +13,8 @@ import java.util.Properties;
 public class ManipuladorDePropriedades {
 
 	/**
-	 * Atributo responsÃ¡vel por armazenar o caminho que se encontra o arquivo de
-	 * manipulaÃ§Ã£o.
+	 * Atributo responsável por armazenar o caminho que se encontra o arquivo de
+	 * manipulação.
 	 */
 	private String arquivo;
 
@@ -22,25 +22,25 @@ public class ManipuladorDePropriedades {
 	 * Construtor que recebe o caminho de onde se encontra o arquivo de propriedades
 	 * 
 	 * @param arquivo
-	 *            localizaÃ§Ã£o do arquivo
+	 *            localização do arquivo
 	 */
 	public ManipuladorDePropriedades(String arquivo) {
 		this.arquivo = arquivo;
 	}
 
 	/**
-	 * MÃ©todo responsÃ¡vel por preparar o arquivo para sua manipulaÃ§Ã£o.
+	 * Método responsável por preparar o arquivo para sua manipulação.
 	 * 
-	 * @return Properties instÃ¢ncia de Properties pronta para manipulaÃ§Ã£o.
+	 * @return Properties instância de Properties pronta para manipulação.
 	 * @throws IOException
-	 *             caso o caminho do arquivo informado no construtor nÃ£o for encontrado
-	 *             ou vÃ¡lido
+	 *             caso o caminho do arquivo informado no construtor não for encontrado
+	 *             ou válido
 	 * @author Leonardo Braz
 	 */
 
 	public Properties getProp() throws IOException {
 		Properties properties = new Properties();
-		// indica um caminho da localizaÃ§Ã£o do arquivo
+		// indica um caminho da localização do arquivo
 		FileInputStream file = new FileInputStream(this.arquivo);
 		// instancia esse arquivo
 		properties.load(file);

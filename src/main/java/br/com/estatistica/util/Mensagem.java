@@ -1,8 +1,8 @@
 package br.com.estatistica.util;
 
-import javax.swing.JOptionPane;
-
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
 
 public class Mensagem {
 
