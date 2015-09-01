@@ -2,10 +2,9 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.delfos</groupId>
-	<artifactId>delfos_maven</artifactId>
+	<artifactId>delfos</artifactId>
 	<version>0.0.5-SNAPSHOT</version>
 	<name>Projeto Delfos</name>
-	<description>Software Estatístico</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -113,5 +112,8 @@
 	</dependencies>
 	<organization>
 		<name>UNIR - IFRO</name>
+		<url>www.ifro.edu.br</url>
 	</organization>
+	<url>http://lhleonardo.github.io/delfos</url>
+	<description>Software para cálculos estatísticos</description>
 </project>
