@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+@SuppressWarnings("serial")
 public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
 
 	/**
@@ -133,7 +134,7 @@ public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
 		btnSalvar = new javax.swing.JButton();
 		btnCancelar = new javax.swing.JButton();
 		spItens = new javax.swing.JScrollPane();
-		
+
 		table = new JTable();
 		spItens.setViewportView(table);
 		btnCalcular = new javax.swing.JButton();
@@ -143,113 +144,191 @@ public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
 	private void configureGroupLayout(javax.swing.GroupLayout pnlPrincipalLayout) {
 
 		javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-		layout.setHorizontalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(pnlPrincipal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(12, Short.MAX_VALUE))
-		);
-		layout.setVerticalGroup(
-			layout.createParallelGroup(Alignment.LEADING)
-				.addGroup(layout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(pnlPrincipal, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(24, Short.MAX_VALUE))
-		);
+		layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(
+		        layout.createSequentialGroup().addContainerGap()
+		                .addComponent(pnlPrincipal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                .addContainerGap(12, Short.MAX_VALUE)));
+		layout.setVerticalGroup(layout.createParallelGroup(Alignment.LEADING).addGroup(
+		        layout.createSequentialGroup().addContainerGap()
+		                .addComponent(pnlPrincipal, GroupLayout.PREFERRED_SIZE, 319, GroupLayout.PREFERRED_SIZE)
+		                .addContainerGap(24, Short.MAX_VALUE)));
 		getContentPane().setLayout(layout);
 	}
 
 	private javax.swing.GroupLayout createGroupLayout() {
 		javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
-		pnlPrincipalLayout.setHorizontalGroup(
-			pnlPrincipalLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(pnlPrincipalLayout.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(jLabel1)
-						.addComponent(txtPergunta, 412, 412, 412)
-						.addGroup(pnlPrincipalLayout.createSequentialGroup()
-							.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(spItens, GroupLayout.PREFERRED_SIZE, 412, GroupLayout.PREFERRED_SIZE)
-								.addGroup(Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
-									.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.LEADING)
-										.addGroup(pnlPrincipalLayout.createSequentialGroup()
-											.addComponent(btnNovo, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(btnSalvar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-										.addComponent(jLabel2)
-										.addGroup(pnlPrincipalLayout.createSequentialGroup()
-											.addComponent(rbAlto)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addComponent(rbMedio)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(rbBaixo)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(btnExcluir, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-										.addComponent(jLabel4)
-										.addGroup(pnlPrincipalLayout.createSequentialGroup()
-											.addComponent(jLabel5)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtValorAlto)))
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.TRAILING)
-										.addGroup(pnlPrincipalLayout.createSequentialGroup()
-											.addComponent(jLabel6)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtValorMedio, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(jLabel7)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(txtValorBaixo, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE))
-										.addComponent(btnCancelar, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
-								.addGroup(Alignment.LEADING, pnlPrincipalLayout.createSequentialGroup()
-									.addComponent(btnCalcular)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblResultado)))
-							.addGap(0, 0, Short.MAX_VALUE)))
-					.addContainerGap())
-		);
-		pnlPrincipalLayout.setVerticalGroup(
-			pnlPrincipalLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(pnlPrincipalLayout.createSequentialGroup()
-					.addComponent(jLabel1)
-					.addGap(0)
-					.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(pnlPrincipalLayout.createSequentialGroup()
-							.addComponent(txtPergunta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(5)
-							.addComponent(jLabel2)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(rbAlto)
-								.addComponent(rbMedio)
-								.addComponent(rbBaixo)))
-						.addGroup(pnlPrincipalLayout.createSequentialGroup()
-							.addComponent(jLabel4)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(jLabel5)
-								.addComponent(txtValorAlto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jLabel6)
-								.addComponent(txtValorMedio, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(jLabel7)
-								.addComponent(txtValorBaixo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnSalvar)
-						.addComponent(btnExcluir)
-						.addComponent(btnNovo)
-						.addComponent(btnCancelar))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(spItens, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCalcular)
-						.addComponent(lblResultado))
-					.addContainerGap(332, Short.MAX_VALUE))
-		);
+		pnlPrincipalLayout
+		        .setHorizontalGroup(pnlPrincipalLayout
+		                .createParallelGroup(Alignment.LEADING)
+		                .addGroup(
+		                        pnlPrincipalLayout
+		                                .createSequentialGroup()
+		                                .addContainerGap()
+		                                .addGroup(
+		                                        pnlPrincipalLayout
+		                                                .createParallelGroup(Alignment.LEADING)
+		                                                .addComponent(jLabel1)
+		                                                .addComponent(txtPergunta, 412, 412, 412)
+		                                                .addGroup(
+		                                                        pnlPrincipalLayout
+		                                                                .createSequentialGroup()
+		                                                                .addGroup(
+		                                                                        pnlPrincipalLayout
+		                                                                                .createParallelGroup(Alignment.TRAILING, false)
+		                                                                                .addComponent(spItens, GroupLayout.PREFERRED_SIZE,
+		                                                                                        412, GroupLayout.PREFERRED_SIZE)
+		                                                                                .addGroup(
+		                                                                                        Alignment.LEADING,
+		                                                                                        pnlPrincipalLayout
+		                                                                                                .createSequentialGroup()
+		                                                                                                .addGroup(
+		                                                                                                        pnlPrincipalLayout
+		                                                                                                                .createParallelGroup(
+		                                                                                                                        Alignment.LEADING)
+		                                                                                                                .addGroup(
+		                                                                                                                        pnlPrincipalLayout
+		                                                                                                                                .createSequentialGroup()
+		                                                                                                                                .addComponent(
+		                                                                                                                                        btnNovo,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE,
+		                                                                                                                                        80,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        btnSalvar,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE,
+		                                                                                                                                        80,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE))
+		                                                                                                                .addComponent(
+		                                                                                                                        jLabel2)
+		                                                                                                                .addGroup(
+		                                                                                                                        pnlPrincipalLayout
+		                                                                                                                                .createSequentialGroup()
+		                                                                                                                                .addComponent(
+		                                                                                                                                        rbAlto)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.UNRELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        rbMedio)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        rbBaixo)))
+		                                                                                                .addPreferredGap(
+		                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                .addGroup(
+		                                                                                                        pnlPrincipalLayout
+		                                                                                                                .createParallelGroup(
+		                                                                                                                        Alignment.LEADING,
+		                                                                                                                        false)
+		                                                                                                                .addComponent(
+		                                                                                                                        btnExcluir,
+		                                                                                                                        GroupLayout.PREFERRED_SIZE,
+		                                                                                                                        80,
+		                                                                                                                        GroupLayout.PREFERRED_SIZE)
+		                                                                                                                .addComponent(
+		                                                                                                                        jLabel4)
+		                                                                                                                .addGroup(
+		                                                                                                                        pnlPrincipalLayout
+		                                                                                                                                .createSequentialGroup()
+		                                                                                                                                .addComponent(
+		                                                                                                                                        jLabel5)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        txtValorAlto)))
+		                                                                                                .addPreferredGap(
+		                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                .addGroup(
+		                                                                                                        pnlPrincipalLayout
+		                                                                                                                .createParallelGroup(
+		                                                                                                                        Alignment.TRAILING)
+		                                                                                                                .addGroup(
+		                                                                                                                        pnlPrincipalLayout
+		                                                                                                                                .createSequentialGroup()
+		                                                                                                                                .addComponent(
+		                                                                                                                                        jLabel6)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        txtValorMedio,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE,
+		                                                                                                                                        41,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        jLabel7)
+		                                                                                                                                .addPreferredGap(
+		                                                                                                                                        ComponentPlacement.RELATED)
+		                                                                                                                                .addComponent(
+		                                                                                                                                        txtValorBaixo,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE,
+		                                                                                                                                        41,
+		                                                                                                                                        GroupLayout.PREFERRED_SIZE))
+		                                                                                                                .addComponent(
+		                                                                                                                        btnCancelar,
+		                                                                                                                        GroupLayout.PREFERRED_SIZE,
+		                                                                                                                        80,
+		                                                                                                                        GroupLayout.PREFERRED_SIZE)))
+		                                                                                .addGroup(
+		                                                                                        Alignment.LEADING,
+		                                                                                        pnlPrincipalLayout
+		                                                                                                .createSequentialGroup()
+		                                                                                                .addComponent(btnCalcular)
+		                                                                                                .addPreferredGap(
+		                                                                                                        ComponentPlacement.RELATED,
+		                                                                                                        GroupLayout.DEFAULT_SIZE,
+		                                                                                                        Short.MAX_VALUE)
+		                                                                                                .addComponent(lblResultado)))
+		                                                                .addGap(0, 0, Short.MAX_VALUE))).addContainerGap()));
+		pnlPrincipalLayout.setVerticalGroup(pnlPrincipalLayout.createParallelGroup(Alignment.LEADING).addGroup(
+		        pnlPrincipalLayout
+		                .createSequentialGroup()
+		                .addComponent(jLabel1)
+		                .addGap(0)
+		                .addGroup(
+		                        pnlPrincipalLayout
+		                                .createParallelGroup(Alignment.TRAILING)
+		                                .addGroup(
+		                                        pnlPrincipalLayout
+		                                                .createSequentialGroup()
+		                                                .addComponent(txtPergunta, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+		                                                        GroupLayout.PREFERRED_SIZE)
+		                                                .addGap(5)
+		                                                .addComponent(jLabel2)
+		                                                .addPreferredGap(ComponentPlacement.RELATED)
+		                                                .addGroup(
+		                                                        pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE)
+		                                                                .addComponent(rbAlto).addComponent(rbMedio).addComponent(rbBaixo)))
+		                                .addGroup(
+		                                        pnlPrincipalLayout
+		                                                .createSequentialGroup()
+		                                                .addComponent(jLabel4)
+		                                                .addPreferredGap(ComponentPlacement.RELATED)
+		                                                .addGroup(
+		                                                        pnlPrincipalLayout
+		                                                                .createParallelGroup(Alignment.BASELINE)
+		                                                                .addComponent(jLabel5)
+		                                                                .addComponent(txtValorAlto, GroupLayout.PREFERRED_SIZE,
+		                                                                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                                                                .addComponent(jLabel6)
+		                                                                .addComponent(txtValorMedio, GroupLayout.PREFERRED_SIZE,
+		                                                                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		                                                                .addComponent(jLabel7)
+		                                                                .addComponent(txtValorBaixo, GroupLayout.PREFERRED_SIZE,
+		                                                                        GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
+		                .addPreferredGap(ComponentPlacement.RELATED)
+		                .addGroup(
+		                        pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnSalvar).addComponent(btnExcluir)
+		                                .addComponent(btnNovo).addComponent(btnCancelar))
+		                .addPreferredGap(ComponentPlacement.RELATED)
+		                .addComponent(spItens, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+		                .addPreferredGap(ComponentPlacement.UNRELATED)
+		                .addGroup(
+		                        pnlPrincipalLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnCalcular)
+		                                .addComponent(lblResultado)).addContainerGap(332, Short.MAX_VALUE)));
 		pnlPrincipal.setLayout(pnlPrincipalLayout);
 		return pnlPrincipalLayout;
 	}
