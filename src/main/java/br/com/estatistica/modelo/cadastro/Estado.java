@@ -1,7 +1,7 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe responsável por representar um estado de determinada cidade.
+ * Classe responsÃ¡vel por representar um estado de determinada cidade.
  * 
  * @version 1.0
  * @author Leonardo Braz
@@ -56,7 +56,7 @@ public class Estado {
 		if (uf.length() <= 3) {
 			this.uf = uf;
 		} else {
-			throw new IndexOutOfBoundsException("Valor inválido para a representação de UF.");
+			throw new IndexOutOfBoundsException("Valor invÃ¡lido para a representaÃ§Ã£o de UF.");
 		}
 	}
 

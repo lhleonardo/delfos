@@ -5,24 +5,24 @@ import java.util.List;
 
 /**
  * 
- * Interface respons·vel por realizar um contrato com as classes que realizar„o operaÁıes
+ * Interface respons√°vel por realizar um contrato com as classes que realizar√£o opera√ß√µes
  * com o banco de dados.<br>
- * Essa interface dever· incluir as operaÁıes b·sicas que o banco pode fazer, tais como
+ * Essa interface dever√° incluir as opera√ß√µes b√°sicas que o banco pode fazer, tais como
  * salvar, cadastrar, excluir e etc.
  * 
  * @author lhleonardo
  *
  * @param <T>
- *            classe que ser· manipulada para realizar operaÁıes no banco de dados.
+ *            classe que ser√° manipulada para realizar opera√ß√µes no banco de dados.
  */
 
 public interface DAO<T> {
 
 	/**
-	 * Faz a inserÁ„o ou atualizaÁ„o na base de dados.
+	 * Faz a inser√ß√£o ou atualiza√ß√£o na base de dados.
 	 * 
 	 * @param T
-	 *            sendo a classe genÈrica que ser· recebida na declaraÁ„o da interface.
+	 *            sendo a classe gen√©rica que ser√° recebida na declara√ß√£o da interface.
 	 * @throws SQLException
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
@@ -32,13 +32,13 @@ public interface DAO<T> {
 	 * Exclui o registro na base de dados
 	 * 
 	 * @param T
-	 *            sendo a classe genÈrica que ser· recebida na declaraÁ„o da interface.
+	 *            sendo a classe gen√©rica que ser√° recebida na declara√ß√£o da interface.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
 	void remove(T modelo) throws SQLException, NullPointerException;
 
 	/**
-	 * MÈtodo que retorna todos os registros que estar„o presentes na base de dados
+	 * M√©todo que retorna todos os registros que estar√£o presentes na base de dados
 	 * 
 	 * @return Lista com os registros.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
@@ -46,7 +46,7 @@ public interface DAO<T> {
 	List<T> getAll() throws SQLException;
 
 	/**
-	 * MÈtodo respons·vel por pesquisar os registros a partir de um nome.
+	 * M√©todo respons√°vel por pesquisar os registros a partir de um nome.
 	 * 
 	 * @param nome
 	 *            Filtro da pesquisa.
@@ -56,11 +56,11 @@ public interface DAO<T> {
 	List<T> getByNome(String nome) throws SQLException, NullPointerException;
 
 	/**
-	 * MÈtodo respons·vel por pesquisar o registro pelo cÛdigo.
+	 * M√©todo respons√°vel por pesquisar o registro pelo c√≥digo.
 	 * 
 	 * @param id
 	 *            filtro da pesquisa.
-	 * @return T j· com o filtro, caso n„o encontre nada retorna <code>null</code>.
+	 * @return T j√° com o filtro, caso n√£o encontre nada retorna <code>null</code>.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
 	T findById(Integer id) throws SQLException, NullPointerException;

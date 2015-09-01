@@ -1,7 +1,7 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe responsável por representar um bairro para um determinado endereço.
+ * Classe responsÃ¡vel por representar um bairro para um determinado endereÃ§o.
  * 
  * @version 1.0
  * @author Leonardo Braz

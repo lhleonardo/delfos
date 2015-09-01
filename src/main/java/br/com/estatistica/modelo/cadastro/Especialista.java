@@ -3,7 +3,7 @@ package br.com.estatistica.modelo.cadastro;
 import java.util.Date;
 
 /**
- * Classe respons·vel por ser um modelador de informaÁıes dos Especialistas que ser„o
+ * Classe respons√°vel por ser um modelador de informa√ß√µes dos Especialistas que ser√£o
  * cadastrados no sistema.
  * 
  * @see Pessoa

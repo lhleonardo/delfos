@@ -1,8 +1,8 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe responsável por representar um endereço que reside determinada pessoa, contendo
- * suas informações para localização.
+ * Classe responsÃ¡vel por representar um endereÃ§o que reside determinada pessoa, contendo
+ * suas informaÃ§Ãµes para localizaÃ§Ã£o.
  * 
  * @version 1.0
  * @author Leonardo Braz

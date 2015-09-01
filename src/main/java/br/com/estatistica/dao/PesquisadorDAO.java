@@ -28,13 +28,13 @@ public class PesquisadorDAO implements DAO<Pesquisador> {
 			try (Connection con = new ConnectionFactory().getConnection()) {
 				boolean op = insert(modelo, con);
 				Mensagem.informa((op) ? "Salvo com sucesso"
-				        : "Falha desconhecida, operaÁ„o cancelada...\nCaso persista, entre em contato com o administrador.");
+				        : "Falha desconhecida, opera√ß√£o cancelada...\nCaso persista, entre em contato com o administrador.");
 			}
 		} else if (modelo.getId() != null) {
 			try (Connection con = new ConnectionFactory().getConnection()) {
 				boolean op = update(modelo, con);
 				Mensagem.informa((op) ? "Salvo com sucesso"
-				        : "Falha desconhecida, operaÁ„o cancelada...\nCaso persista, entre em contato com o administrador.");
+				        : "Falha desconhecida, opera√ß√£o cancelada...\nCaso persista, entre em contato com o administrador.");
 			}
 		}
 
@@ -61,7 +61,7 @@ public class PesquisadorDAO implements DAO<Pesquisador> {
 	@Override
 	public void remove(Pesquisador modelo) throws SQLException, NullPointerException {
 		if (modelo == null) {
-			throw new NullPointerException("Nenhum valor foi informado para a exclus„o.");
+			throw new NullPointerException("Nenhum valor foi informado para a exclus√£o.");
 		}
 
 		Pesquisador pesquisa = findById(modelo.getId());
@@ -70,8 +70,8 @@ public class PesquisadorDAO implements DAO<Pesquisador> {
 				PreparedStatement pst = con.prepareStatement(SQL_DELETE);
 				pst.setInt(1, modelo.getId());
 				boolean op = pst.execute();
-				Mensagem.informa((op) ? "ExcluÌdo com sucesso"
-				        : "Falha desconhecida, operaÁ„o cancelada...\nCaso persista, entre em contato com o administrador.");
+				Mensagem.informa((op) ? "Exclu√≠do com sucesso"
+				        : "Falha desconhecida, opera√ß√£o cancelada...\nCaso persista, entre em contato com o administrador.");
 
 			}
 		}

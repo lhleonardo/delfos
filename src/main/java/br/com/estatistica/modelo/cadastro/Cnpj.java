@@ -4,7 +4,7 @@ public class Cnpj extends CadastroNacionalDePessoa {
 
 	/**
 	 * 
-	 * MÈtodo de inicializaÁ„o da classe Cnpj sem receber parametros para inicializaÁ„o.
+	 * M√©todo de inicializa√ß√£o da classe Cnpj sem receber parametros para inicializa√ß√£o.
 	 */
 
 	public Cnpj() {
@@ -13,10 +13,10 @@ public class Cnpj extends CadastroNacionalDePessoa {
 
 	/**
 	 * 
-	 * MÈtodo de inicializaÁ„o da classe Cnpj
+	 * M√©todo de inicializa√ß√£o da classe Cnpj
 	 * 
 	 * @param valor
-	 *            - NumeraÁ„o do CNPJ sem mascara.
+	 *            - Numera√ß√£o do CNPJ sem mascara.
 	 */
 	public Cnpj(String valor) {
 		super(valor);
@@ -24,16 +24,16 @@ public class Cnpj extends CadastroNacionalDePessoa {
 
 	/**
 	 * Constante que representa o peso relacionado ao CNPJ. <br>
-	 * Para mais informaÁıes, acesse o mÈtodo {@link #verifica()}
+	 * Para mais informa√ß√µes, acesse o m√©todo {@link #verifica()}
 	 */
 	private static final int[] peso = { 6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2 };
 
 	/**
-	 * MÈtodo respons·vel por fazer a verificaÁ„o dos dÌgitos validadores de um CNPJ a
-	 * partir da funÁ„o {@link #calcularDigito(String, int[])} encontrado na classe
+	 * M√©todo respons√°vel por fazer a verifica√ß√£o dos d√≠gitos validadores de um CNPJ a
+	 * partir da fun√ß√£o {@link #calcularDigito(String, int[])} encontrado na classe
 	 * {@code CadastroNacionalDePessoa}.
 	 * 
-	 * @return true para CNPJ v·lido a partir do validador e false para CNPJ inv·lido.
+	 * @return true para CNPJ v√°lido a partir do validador e false para CNPJ inv√°lido.
 	 */
 	@Override
 	protected boolean verifica() {
@@ -45,9 +45,9 @@ public class Cnpj extends CadastroNacionalDePessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por concatenar o CNPJ a partir de sua m·scara padr„o.
+	 * M√©todo respons√°vel por concatenar o CNPJ a partir de sua m√°scara padr√£o.
 	 * 
-	 * @return CNPJ j· mascarado.
+	 * @return CNPJ j√° mascarado.
 	 */
 	@Override
 	public String imprime() {

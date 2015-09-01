@@ -1,7 +1,7 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe responsável por representar um tipo de logradouro para um determinado endereço.
+ * Classe responsÃ¡vel por representar um tipo de logradouro para um determinado endereÃ§o.
  * 
  * EX: Rua, Avenida, etc.
  * 

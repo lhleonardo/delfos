@@ -10,7 +10,7 @@ import br.com.estatistica.modelo.cadastro.Cpf;
 import br.com.estatistica.modelo.cadastro.Pesquisador;
 
 /**
- * Classe responsável por fazer a extração dos dados presentes no banco e tranformá-los
+ * Classe responsÃ¡vel por fazer a extraÃ§Ã£o dos dados presentes no banco e tranformÃ¡-los
  * em objetos
  * 
  * @author lhleonardo - Leonardo Braz
@@ -19,12 +19,12 @@ import br.com.estatistica.modelo.cadastro.Pesquisador;
 public class PesquisadorExtractor {
 
 	/**
-	 * Método que extrai as informações de um pesquisador no Banco de Dados e transforma
-	 * em um objeto manipulável
+	 * MÃ©todo que extrai as informaÃ§Ãµes de um pesquisador no Banco de Dados e transforma
+	 * em um objeto manipulÃ¡vel
 	 * 
 	 * @param rs
 	 *            resultado de pesquisa de query
-	 * @return Pesquisador pré moldado com as informações do banco de dados.
+	 * @return Pesquisador prÃ© moldado com as informaÃ§Ãµes do banco de dados.
 	 * @throws SQLException
 	 *             para erro de consulta
 	 */
@@ -40,8 +40,8 @@ public class PesquisadorExtractor {
 	}
 
 	/**
-	 * Método que realiza as mesmas operações do <code>extract</code>, entretanto é
-	 * utilizado para mais de uma extração de informações ao banco de dados
+	 * MÃ©todo que realiza as mesmas operaÃ§Ãµes do <code>extract</code>, entretanto Ã©
+	 * utilizado para mais de uma extraÃ§Ã£o de informaÃ§Ãµes ao banco de dados
 	 * 
 	 * @param rs
 	 * @return Lista de pesquisadores

@@ -4,10 +4,10 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JFrame;
 import javax.swing.JTable;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
@@ -59,16 +59,16 @@ public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
 	}
 
 	protected void btnExcluirActionPerformed(ActionEvent evt) {
-		// código para excluir da lista.
+		// cÃ³digo para excluir da lista.
 	}
 
 	protected void btnSalvarActionPerformed(ActionEvent evt) {
-		// código para adicionar a lista
+		// cÃ³digo para adicionar a lista
 	}
 
 	private void configuraComponentes() {
 		setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-		setTitle("Questionario para Coeficiente de Argumentação");
+		setTitle("Questionario para Coeficiente de ArgumentaÃ§Ã£o");
 
 		pnlPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder()));
 
@@ -80,7 +80,7 @@ public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
 		rbAlto.setText("Alto");
 
 		buttonGroup1.add(rbMedio);
-		rbMedio.setText("Médio");
+		rbMedio.setText("MÃ©dio");
 
 		buttonGroup1.add(rbBaixo);
 		rbBaixo.setText("Baixo");
@@ -89,7 +89,7 @@ public class FormQuestionarioCoeficienteArgumentacao extends JFrame {
 
 		jLabel5.setText("Alto:");
 
-		jLabel6.setText("Médio:");
+		jLabel6.setText("MÃ©dio:");
 
 		jLabel7.setText("Baixo:");
 

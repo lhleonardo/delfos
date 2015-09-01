@@ -1,7 +1,7 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Interface <b>Documento</b> respons·vel por realizar um contrato entre os documentos
+ * Interface <b>Documento</b> respons√°vel por realizar um contrato entre os documentos
  * que uma {@link Pessoa} pode ter.
  * 
  * @author lhleonardo
@@ -9,23 +9,23 @@ package br.com.estatistica.modelo.cadastro;
  */
 public interface Documento {
 	/**
-	 * MÈtodo respons·vel por informar o conte˙do do documento.
+	 * M√©todo respons√°vel por informar o conte√∫do do documento.
 	 * 
 	 * @return valor do Documento
 	 */
 	String getValor();
 
 	/**
-	 * MÈtodo respons·vel por validar os DÌgitos Verificadores de um documento.
+	 * M√©todo respons√°vel por validar os D√≠gitos Verificadores de um documento.
 	 * 
 	 * @return ...
 	 */
 	boolean isValido();
 
 	/**
-	 * MÈtodo respons·vel por mascarar um documento.
+	 * M√©todo respons√°vel por mascarar um documento.
 	 * 
-	 * @return Documento com sua m·scara especÌfica.
+	 * @return Documento com sua m√°scara espec√≠fica.
 	 */
 	String imprime();
 

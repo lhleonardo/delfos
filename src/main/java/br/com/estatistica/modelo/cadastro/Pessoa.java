@@ -3,7 +3,7 @@ package br.com.estatistica.modelo.cadastro;
 import java.util.Date;
 
 /**
- * Classe respons·vel por modelar as pessoas que ser„o salvas e manipuladas em funÁıes do
+ * Classe respons√°vel por modelar as pessoas que ser√£o salvas e manipuladas em fun√ß√µes do
  * software. <br>
  * Algumas classes que estendem de Pessoa: {@code Especialista}, {@code Pessoa}, etc...
  * 
@@ -23,7 +23,7 @@ public class Pessoa {
 
 	/**
 	 * 
-	 * MÈtodo de inicializaÁ„o da classe Pessoa
+	 * M√©todo de inicializa√ß√£o da classe Pessoa
 	 * 
 	 * @param id
 	 *            atributo identificador da pessoa
@@ -32,11 +32,11 @@ public class Pessoa {
 	 * @param tipoDocumento
 	 *            Tipo de Documento cadastrado na CNP(Cadastro Nacional de Pessoa)
 	 * @param rg
-	 *            n˙mero do RG
+	 *            n√∫mero do RG
 	 * @param dataNascimento
 	 *            data de nascimento
 	 * @param descricao
-	 *            descriÁ„o da pessoa
+	 *            descri√ß√£o da pessoa
 	 */
 	public Pessoa(String nome, Documento tipoDocumento, String rg, Date dataNascimento, String descricao) {
 		super();
@@ -60,7 +60,7 @@ public class Pessoa {
 	private String descricao;
 
 	/**
-	 * MÈtodo respons·vel por retornar a informaÁ„o:[id] da classe Pessoa.java
+	 * M√©todo respons√°vel por retornar a informa√ß√£o:[id] da classe Pessoa.java
 	 * 
 	 * @return id atributo identificador
 	 */
@@ -69,7 +69,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por definir um valor para o campo id, sendo informado pelo
+	 * M√©todo respons√°vel por definir um valor para o campo id, sendo informado pelo
 	 * parametro id
 	 * 
 	 * @param id
@@ -80,7 +80,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por retornar a informaÁ„o:[nome] da classe Pessoa.java
+	 * M√©todo respons√°vel por retornar a informa√ß√£o:[nome] da classe Pessoa.java
 	 * 
 	 * @return the nome do objeto
 	 */
@@ -89,7 +89,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por definir um valor para o campo nome, sendo informado pelo
+	 * M√©todo respons√°vel por definir um valor para o campo nome, sendo informado pelo
 	 * parametro nome
 	 * 
 	 * @param nome
@@ -100,7 +100,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por retornar a informaÁ„o:[dataNascimento] da classe
+	 * M√©todo respons√°vel por retornar a informa√ß√£o:[dataNascimento] da classe
 	 * Pessoa.java
 	 * 
 	 * @return the dataNascimento
@@ -110,7 +110,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por definir um valor para o campo dataNascimento, sendo
+	 * M√©todo respons√°vel por definir um valor para o campo dataNascimento, sendo
 	 * informado pelo parametro dataNascimento
 	 * 
 	 * @param dataNascimento
@@ -121,7 +121,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por retornar a informaÁ„o:[descricao] da classe Pessoa.java
+	 * M√©todo respons√°vel por retornar a informa√ß√£o:[descricao] da classe Pessoa.java
 	 * 
 	 * @return the descricao
 	 */
@@ -130,7 +130,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por definir um valor para o campo descricao, sendo informado
+	 * M√©todo respons√°vel por definir um valor para o campo descricao, sendo informado
 	 * pelo parametro descricao
 	 * 
 	 * @param descricao
@@ -141,7 +141,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por retornar a informaÁ„o:[tipoDocumento] da classe Pessoa.java
+	 * M√©todo respons√°vel por retornar a informa√ß√£o:[tipoDocumento] da classe Pessoa.java
 	 * 
 	 * @return the tipoDocumento
 	 */
@@ -150,7 +150,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por definir um valor para o campo tipoDocumento, sendo
+	 * M√©todo respons√°vel por definir um valor para o campo tipoDocumento, sendo
 	 * informado pelo parametro tipoDocumento
 	 * 
 	 * @param tipoDocumento
@@ -161,7 +161,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por retornar a informaÁ„o:[rg] da classe Pessoa.java
+	 * M√©todo respons√°vel por retornar a informa√ß√£o:[rg] da classe Pessoa.java
 	 * 
 	 * @return the rg
 	 */
@@ -170,7 +170,7 @@ public class Pessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por definir um valor para o campo rg, sendo informado pelo
+	 * M√©todo respons√°vel por definir um valor para o campo rg, sendo informado pelo
 	 * parametro rg
 	 * 
 	 * @param rg

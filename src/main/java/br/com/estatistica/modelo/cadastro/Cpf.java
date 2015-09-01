@@ -3,10 +3,10 @@ package br.com.estatistica.modelo.cadastro;
 public class Cpf extends CadastroNacionalDePessoa {
 	/**
 	 * 
-	 * MÈtodo de inicializaÁ„o da classe CPF
+	 * M√©todo de inicializa√ß√£o da classe CPF
 	 * 
 	 * @param valor
-	 *            - NumeraÁ„o do CPF sem m·scara.
+	 *            - Numera√ß√£o do CPF sem m√°scara.
 	 */
 	public Cpf(String valor) {
 		super(valor);
@@ -14,7 +14,7 @@ public class Cpf extends CadastroNacionalDePessoa {
 
 	/**
 	 * 
-	 * MÈtodo de inicializaÁ„o da classe CPF sem receber parametros para inicializaÁ„o.
+	 * M√©todo de inicializa√ß√£o da classe CPF sem receber parametros para inicializa√ß√£o.
 	 */
 
 	public Cpf() {
@@ -22,16 +22,16 @@ public class Cpf extends CadastroNacionalDePessoa {
 
 	/**
 	 * Constante que representa o peso relacionado ao CPF. <br>
-	 * Para mais informaÁıes, acesse o mÈtodo {@link #verifica()}
+	 * Para mais informa√ß√µes, acesse o m√©todo {@link #verifica()}
 	 */
 	private static final int[] peso = { 11, 10, 9, 8, 7, 6, 5, 4, 3, 2 };
 
 	/**
-	 * MÈtodo respons·vel por fazer a verificaÁ„o dos dÌgitos validadores de um CPF a
-	 * partir da funÁ„o {@link #calcularDigito(String, int[])} encontrado na classe
+	 * M√©todo respons√°vel por fazer a verifica√ß√£o dos d√≠gitos validadores de um CPF a
+	 * partir da fun√ß√£o {@link #calcularDigito(String, int[])} encontrado na classe
 	 * {@code CadastroNacionalDePessoa}.
 	 * 
-	 * @return true para CPF v·lido a partir do validador e false para CPF inv·lido.
+	 * @return true para CPF v√°lido a partir do validador e false para CPF inv√°lido.
 	 */
 	@Override
 	protected boolean verifica() {
@@ -43,9 +43,9 @@ public class Cpf extends CadastroNacionalDePessoa {
 	}
 
 	/**
-	 * MÈtodo respons·vel por concatenar o CPF a partir de sua m·scara padr„o.
+	 * M√©todo respons√°vel por concatenar o CPF a partir de sua m√°scara padr√£o.
 	 * 
-	 * @return CPF j· mascarado.
+	 * @return CPF j√° mascarado.
 	 */
 	@Override
 	public String imprime() {

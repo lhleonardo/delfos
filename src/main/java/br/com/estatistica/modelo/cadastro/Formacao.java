@@ -1,7 +1,7 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe responsável por representar uma determinada formação que determinada pessoa
+ * Classe responsÃ¡vel por representar uma determinada formaÃ§Ã£o que determinada pessoa
  * pode possuir.
  * 
  * @version 1.0

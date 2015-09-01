@@ -1,7 +1,7 @@
 package br.com.estatistica.modelo.cadastro;
 
 /**
- * Classe responsável por representar uma área de estudo que determinada pessoa pode
+ * Classe responsÃ¡vel por representar uma Ã¡rea de estudo que determinada pessoa pode
  * possuir.
  * 
  * @version 1.0
