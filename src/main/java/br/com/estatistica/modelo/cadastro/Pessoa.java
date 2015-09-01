@@ -1,6 +1,8 @@
 package br.com.estatistica.modelo.cadastro;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Classe responsável por modelar as pessoas que serão salvas e manipuladas em funções do
@@ -20,6 +22,9 @@ public class Pessoa {
 	private Documento tipoDocumento;
 	private String rg;
 	private Date dataNascimento;
+	private Endereco endereco;
+	private List<Formacao> formacoes;
+	private List<AreaEstudo> areasEstudo;
 
 	/**
 	 * 
@@ -55,6 +60,36 @@ public class Pessoa {
 		this.rg = rg;
 		this.dataNascimento = dataNascimento;
 		this.descricao = descricao;
+	}
+
+	public Pessoa(Integer id, String nome, Documento tipoDocumento, String rg, Date dataNascimento, Endereco endereco,
+	        List<Formacao> formacoes, List<AreaEstudo> areasEstudo, String descricao) {
+		this.id = id;
+		this.nome = nome;
+		this.tipoDocumento = tipoDocumento;
+		this.rg = rg;
+		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
+		this.formacoes = formacoes;
+		this.areasEstudo = areasEstudo;
+		this.descricao = descricao;
+	}
+
+	public Pessoa(String nome, Documento tipoDocumento, String rg, Date dataNascimento, Endereco endereco, List<Formacao> formacoes,
+	        List<AreaEstudo> areasEstudo, String descricao) {
+		this.nome = nome;
+		this.tipoDocumento = tipoDocumento;
+		this.rg = rg;
+		this.dataNascimento = dataNascimento;
+		this.endereco = endereco;
+		this.formacoes = formacoes;
+		this.areasEstudo = areasEstudo;
+		this.descricao = descricao;
+	}
+
+	public Pessoa() {
+		this.formacoes = new ArrayList<Formacao>();
+		this.areasEstudo = new ArrayList<AreaEstudo>();
 	}
 
 	private String descricao;
@@ -178,6 +213,30 @@ public class Pessoa {
 	 */
 	public void setRg(String rg) {
 		this.rg = rg;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
+	public List<Formacao> getFormacoes() {
+		return formacoes;
+	}
+
+	public void setFormacoes(List<Formacao> formacoes) {
+		this.formacoes = formacoes;
+	}
+
+	public List<AreaEstudo> getAreasEstudo() {
+		return areasEstudo;
+	}
+
+	public void setAreasEstudo(List<AreaEstudo> areasEstudo) {
+		this.areasEstudo = areasEstudo;
 	}
 
 }
