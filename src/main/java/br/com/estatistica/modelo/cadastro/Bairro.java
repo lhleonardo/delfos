@@ -1,5 +1,10 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Classe responsável por representar um bairro para um determinado endereço.
  * 
@@ -7,8 +12,13 @@ package br.com.estatistica.modelo.cadastro;
  * @author Leonardo Braz
  * @since 1.5
  */
+
+@Entity(name = "bairro")
+// cria persistencia de entidade para a tabela bairro
 public class Bairro {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String nome;
 	private String descricao;
