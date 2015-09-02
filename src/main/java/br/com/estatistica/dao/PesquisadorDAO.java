@@ -55,7 +55,9 @@ public class PesquisadorDAO implements DAO<Pesquisador> {
 		pst.setString(2, modelo.getTipoDocumento().getValor());
 		pst.setString(3, modelo.getRg());
 		pst.setDate(4, new Date(modelo.getDataNascimento().getTime()));
-		return pst.execute();
+		int rows = pst.executeUpdate();
+
+		return (rows > 0) ? true : false;
 	}
 
 	@Override
