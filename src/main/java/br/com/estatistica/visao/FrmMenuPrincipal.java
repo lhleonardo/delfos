@@ -1,5 +1,7 @@
 package br.com.estatistica.visao;
 
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 
 public class FrmMenuPrincipal extends javax.swing.JFrame {
@@ -147,7 +149,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 		layout.setVerticalGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING).addComponent(jPanel1,
 		        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
 
-		setSize(new java.awt.Dimension(613, 440));
+		setSize(new Dimension(613, 471));
 		setLocationRelativeTo(null);
 	}// </editor-fold>
 
