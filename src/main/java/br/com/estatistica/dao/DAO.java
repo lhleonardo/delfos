@@ -63,7 +63,7 @@ public interface DAO<T> {
 	 * @return T já com o filtro, caso não encontre nada retorna <code>null</code>.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
-	T findById(Integer id) throws SQLException, NullPointerException;
+	T getById(Integer id) throws SQLException, NullPointerException;
 
 	/**
 	 * Inicializa o componente de persistencia.

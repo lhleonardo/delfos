@@ -2,6 +2,7 @@ package br.com.estatistica.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import br.com.estatistica.modelo.cadastro.Usuario;
 public class UsuarioDAO implements DAO<Usuario> {
 
 	private static final String SQL_INSERT = "insert into usuario(login, descricao, id_pessoa, id_perfil_acesso) values (?,?,?,?)";
+	private static final String SQL_SELECT = null;
 	private Connection con;
 
 	@Override
@@ -55,8 +57,15 @@ public class UsuarioDAO implements DAO<Usuario> {
 	}
 
 	@Override
-	public Usuario findById(Integer id) throws SQLException, NullPointerException {
-		// TODO Auto-generated method stub
+	public Usuario getById(Integer id) throws SQLException, NullPointerException {
+		Usuario usuario;
+		try (PreparedStatement pst = con.prepareStatement(SQL_SELECT + " where id_usuario = ?")) {
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				usuario = UsuarioExtractor.extract(rs, con);
+			}
+		}
 		return null;
 	}
 
