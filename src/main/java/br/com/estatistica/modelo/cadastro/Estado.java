@@ -1,5 +1,8 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 /**
  * Classe responsável por representar um estado de determinada cidade.
  * 
@@ -7,11 +10,15 @@ package br.com.estatistica.modelo.cadastro;
  * @author Leonardo Braz
  * @since 1.5
  */
+@Entity
 public class Estado {
 
+	@Id
 	private int id;
 	private String nome;
+
 	private String uf;
+
 	private String descricao;
 
 	public Estado(int id, String nome, String uf, String descricao) {

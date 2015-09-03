@@ -1,10 +1,19 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity(name = "Usuario")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String login;
 	private String descricao;
+
 	private PerfilAcesso perfilAcesso;
 	private Pessoa pessoa;
 

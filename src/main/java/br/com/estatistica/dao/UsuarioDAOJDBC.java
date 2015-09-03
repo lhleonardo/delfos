@@ -8,7 +8,7 @@ import java.util.List;
 
 import br.com.estatistica.modelo.cadastro.Usuario;
 
-public class UsuarioDAO implements DAO<Usuario> {
+public class UsuarioDAOJDBC implements DAO<Usuario> {
 
 	private static final String SQL_INSERT = "insert into usuario(login, descricao, id_pessoa, id_perfil_acesso) values (?,?,?,?)";
 	private static final String SQL_SELECT = null;

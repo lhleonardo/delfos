@@ -6,11 +6,11 @@ import java.util.List;
 
 import br.com.estatistica.modelo.cadastro.Pessoa;
 
-public class PessoaDAO implements DAO<Pessoa> {
+public class PessoaDAOJDBC implements DAO<Pessoa> {
 
 	private Connection con;
 
-	public PessoaDAO(Connection con) {
+	public PessoaDAOJDBC(Connection con) {
 		this.con = con;
 	}
 
