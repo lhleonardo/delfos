@@ -12,6 +12,7 @@
 
 		<!-- Aqui são listadas todas as entidades -->
 		<class>br.com.estatistica.modelo.cadastro.Estado</class>
+		<class>br.com.estatistica.modelo.cadastro.PerfilAcesso</class>
 
 		<properties>
 			<!-- Propriedades JDBC -->
