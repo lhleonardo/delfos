@@ -1,5 +1,12 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 /**
  * Classe responsável por representar um endereço que reside determinada pessoa, contendo
  * suas informações para localização.
@@ -8,16 +15,29 @@ package br.com.estatistica.modelo.cadastro;
  * @author Leonardo Braz
  * @since 1.5
  */
+@Entity
 public class Endereco {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_endereco")
 	private int id;
 	private String logradouro;
-	private TipoLogradouro tipoLogradouro;
 	private String descricao;
 	private int numero;
 	private String cep;
+
+	@OneToOne
+	@Column(name = "id_tipo_logradouro")
+	private TipoLogradouro tipoLogradouro;
+	@OneToOne
+	@Column(name = "id_bairro")
 	private Bairro bairro;
+	@OneToOne
+	@Column(name = "id_cidade")
 	private Cidade cidade;
+	@OneToOne
+	@Column(name = "id_pessoa")
 	private Pessoa pessoa;
 
 	public Endereco(int id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, int numero, String cep, Bairro bairro,

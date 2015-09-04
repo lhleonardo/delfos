@@ -1,5 +1,11 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
  * Classe responsável por representar uma determinada formação que determinada pessoa
  * pode possuir.
@@ -8,8 +14,12 @@ package br.com.estatistica.modelo.cadastro;
  * @author Leonardo Braz
  * @since 1.5
  */
+@Entity
 public class Formacao {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_formacao")
 	private int id;
 	private String nome;
 	private String especializacao;

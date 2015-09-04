@@ -18,15 +18,12 @@ public class Estado {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_estado")
 	private int id;
-	@Column
 	private String nome;
-
-	@Column
-	private String uf;
-
-	@Column
 	private String descricao;
+	@Column(length = 3)
+	private String uf;
 
 	public Estado(int id, String nome, String uf, String descricao) {
 		this.id = id;

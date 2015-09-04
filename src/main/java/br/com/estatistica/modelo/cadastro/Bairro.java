@@ -1,5 +1,6 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,12 +14,13 @@ import javax.persistence.Id;
  * @since 1.5
  */
 
-@Entity(name = "bairro")
+@Entity
 // cria persistencia de entidade para a tabela bairro
 public class Bairro {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_bairro")
 	private int id;
 	private String nome;
 	private String descricao;

@@ -1,5 +1,6 @@
 package br.com.estatistica.modelo.cadastro;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,6 +11,7 @@ public class PerfilAcesso {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_perfil_acesso")
 	private Integer id;
 	private String nome;
 	private String descricao;
