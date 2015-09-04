@@ -10,6 +10,23 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+
+	<!-- Configurando o JDK da aplicação como 8 -->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+
 	<developers>
 		<developer>
 			<id>lhleonardo</id>
@@ -22,19 +39,14 @@
 
 	<dependencies>
 		<!-- dependências para utilização das bibliotecas de conexão com o MySQL -->
+		
+		
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.35</version>
+			<version>5.1.36</version>
 		</dependency>
 
-
-		<!-- dependências para utilização das bibliotecas do Hibernate -->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>5.0.0.CR1</version>
-		</dependency>
 
 		<!-- for JPA, use hibernate-entitymanager instead of hibernate-core -->
 		<dependency>
