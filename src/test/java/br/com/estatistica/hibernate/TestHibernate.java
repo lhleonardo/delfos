@@ -24,6 +24,7 @@ public class TestHibernate {
 
 		manager.persist(acesso);
 
+		manager.remove(acesso);
 		manager.close();
 	}
 
