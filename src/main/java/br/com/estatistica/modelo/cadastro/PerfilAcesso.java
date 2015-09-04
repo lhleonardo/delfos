@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class PerfilAcesso {
+public class PerfilAcesso implements Validador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,6 +53,13 @@ public class PerfilAcesso {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public void validate() {
+		if (this.getNome() == null || this.getDescricao() == null) {
+			throw new IllegalArgumentException("Nome e descrição não podem ser nulos.");
+		}
 	}
 
 }
