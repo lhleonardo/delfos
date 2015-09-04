@@ -14,7 +14,7 @@ import javax.persistence.Id;
  * @since 1.5
  */
 @Entity
-public class Estado {
+public class Estado implements Validador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -77,6 +77,11 @@ public class Estado {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public void validate() {
+
 	}
 
 }
