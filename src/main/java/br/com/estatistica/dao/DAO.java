@@ -45,15 +45,15 @@ public interface DAO<T> {
 	 */
 	List<T> getAll() throws SQLException;
 
-	/**
-	 * Método responsável por pesquisar os registros a partir de um nome.
-	 * 
-	 * @param nome
-	 *            Filtro da pesquisa.
-	 * @return Lista com filtro em nome.
-	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
-	 */
-	List<T> getByNome(String nome) throws SQLException, NullPointerException;
+	// /**
+	// * Método responsável por pesquisar os registros a partir de um nome.
+	// *
+	// * @param nome
+	// * Filtro da pesquisa.
+	// * @return Lista com filtro em nome.
+	// * @throws <code>RuntimeException</code> se algum problema ocorrer.
+	// */
+	// List<T> getByNome(String nome) throws IllegalArgumentException;
 
 	/**
 	 * Método responsável por pesquisar o registro pelo código.
@@ -63,7 +63,7 @@ public interface DAO<T> {
 	 * @return T já com o filtro, caso não encontre nada retorna <code>null</code>.
 	 * @throws <code>RuntimeException</code> se algum problema ocorrer.
 	 */
-	T getById(Integer id) throws SQLException, NullPointerException;
+	T find(Integer id) throws IllegalArgumentException;
 
 	/**
 	 * Inicializa o componente de persistencia.
