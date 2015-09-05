@@ -1,5 +1,7 @@
 package br.com.estatistica.dao;
 
+import java.util.Map;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -9,12 +11,12 @@ public class SimpleEntityManager {
 	private EntityManager entityManager;
 	private EntityManagerFactory factory;
 
-	public SimpleEntityManager(EntityManagerFactory factory) {
+	public SimpleEntityManager(EntityManagerFactory factory, Map<String, String> properties) {
 		this.factory = factory;
-		this.entityManager = factory.createEntityManager();
+		this.entityManager = factory.createEntityManager(properties);
 	}
 
-	public SimpleEntityManager(String persistenceUnitName) {
+	public SimpleEntityManager(String persistenceUnitName, Map<String, String> properties) {
 		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
 		this.entityManager = factory.createEntityManager();
 	}
