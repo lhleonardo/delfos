@@ -4,6 +4,15 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
 /**
  * Classe responsável por modelar as pessoas que serão salvas e manipuladas em funções do
  * software. <br>
@@ -17,13 +26,22 @@ import java.util.List;
 
 public class Pessoa {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_pessoa")
 	private Integer id;
 	private String nome;
+
 	private Documento tipoDocumento;
 	private String rg;
+	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
+
+	@OneToOne
 	private Endereco endereco;
+	@OneToMany
 	private List<Formacao> formacoes;
+	@OneToMany
 	private List<AreaEstudo> areasEstudo;
 
 	/**

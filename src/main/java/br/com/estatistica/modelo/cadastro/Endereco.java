@@ -28,16 +28,12 @@ public class Endereco {
 	private String cep;
 
 	@OneToOne
-	@Column(name = "id_tipo_logradouro")
 	private TipoLogradouro tipoLogradouro;
 	@OneToOne
-	@Column(name = "id_bairro")
 	private Bairro bairro;
 	@OneToOne
-	@Column(name = "id_cidade")
 	private Cidade cidade;
 	@OneToOne
-	@Column(name = "id_pessoa")
 	private Pessoa pessoa;
 
 	public Endereco(int id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, int numero, String cep, Bairro bairro,

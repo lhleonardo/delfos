@@ -18,11 +18,9 @@ public class Usuario {
 	private String descricao;
 
 	@OneToOne
-	@Column(name = "id_perfil_acesso")
 	private PerfilAcesso perfilAcesso;
 
 	@OneToOne
-	@Column(name = "id_pessoa")
 	private Pessoa pessoa;
 
 	public Usuario(int id, String login, String descricao, PerfilAcesso perfilAcesso, Pessoa pessoa) {

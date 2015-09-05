@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  * Classe responsável por representar uma cidade para um determinado endereço.
@@ -24,8 +24,7 @@ public class Cidade {
 	private String nome;
 	private String descricao;
 
-	@OneToOne
-	@Column(name = "id_estado")
+	@ManyToOne()
 	private Estado estado;
 
 	public Cidade(int id, String nome, String descricao, Estado estado) {
