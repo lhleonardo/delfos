@@ -27,16 +27,26 @@ public class SimpleEntityManager {
 		entityManager.getTransaction().commit();
 	}
 
+	public void remove(Object object) {
+		this.beginTransaction();
+		entityManager.remove(object);
+		this.commit();
+		this.close();
+	}
+
 	/**
 	 * THIS METHOD NEEDS TO BE ALWAYS CALLED
 	 */
 	public void close() {
-		entityManager.close();
-		factory.close();
+		if (entityManager.isOpen())
+			entityManager.close();
+		if (factory.isOpen())
+			factory.close();
 	}
 
 	public void rollBack() {
 		entityManager.getTransaction().rollback();
+		this.close();
 	}
 
 	public EntityManager getEntityManager() {

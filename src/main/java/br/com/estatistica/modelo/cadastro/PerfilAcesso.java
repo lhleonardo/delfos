@@ -31,7 +31,7 @@ public class PerfilAcesso implements Validador {
 		this.descricao = descricao;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

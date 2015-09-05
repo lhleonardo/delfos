@@ -19,7 +19,7 @@ public class Estado implements Validador {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_estado")
-	private int id;
+	private Integer id;
 	private String nome;
 	private String descricao;
 	@Column(length = 3)
@@ -43,7 +43,7 @@ public class Estado implements Validador {
 		this.setNome(nome);
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
