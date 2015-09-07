@@ -8,12 +8,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class Usuario {
+public class Usuario implements Identificator, Validador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_usuario")
-	private int id;
+	private Integer id;
 	private String login;
 	private String descricao;
 
@@ -37,11 +37,11 @@ public class Usuario {
 		this.pessoa = pessoa;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -75,6 +75,13 @@ public class Usuario {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	@Override
+	public void validate() {
+		if (this.getId() == null || this.login == null || this.descricao == null) {
+			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
+		}
 	}
 
 }

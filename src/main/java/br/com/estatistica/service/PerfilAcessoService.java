@@ -1,7 +1,7 @@
 package br.com.estatistica.service;
 
-import br.com.estatistica.dao.PerfilAcessoDAO;
-import br.com.estatistica.dao.SimpleEntityManager;
+import br.com.estatistica.daoHibernate.PerfilAcessoDAO;
+import br.com.estatistica.daoHibernate.SimpleEntityManager;
 import br.com.estatistica.modelo.cadastro.PerfilAcesso;
 
 public class PerfilAcessoService extends Service<PerfilAcesso> {

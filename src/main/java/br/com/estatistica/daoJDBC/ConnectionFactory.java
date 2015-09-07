@@ -1,4 +1,4 @@
-package br.com.estatistica.dao;
+package br.com.estatistica.daoJDBC;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

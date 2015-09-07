@@ -1,4 +1,4 @@
-package br.com.estatistica.dao;
+package br.com.estatistica.daoHibernate;
 
 import java.util.Map;
 

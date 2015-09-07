@@ -1,7 +1,7 @@
 package br.com.estatistica.service;
 
-import br.com.estatistica.dao.GenericDAO;
-import br.com.estatistica.dao.SimpleEntityManager;
+import br.com.estatistica.daoHibernate.GenericDAO;
+import br.com.estatistica.daoHibernate.SimpleEntityManager;
 import br.com.estatistica.modelo.cadastro.Validador;
 
 public abstract class Service<T extends Validador> {
