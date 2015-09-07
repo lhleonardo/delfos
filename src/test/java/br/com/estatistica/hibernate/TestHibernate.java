@@ -15,7 +15,7 @@ public class TestHibernate {
 
 	public static void main(String[] args) {
 		Map<String, String> properties = getProperties();
-		comService(properties);
+		semService(properties);
 
 	}
 
@@ -41,7 +41,11 @@ public class TestHibernate {
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("delfos", properties);
 		EntityManager manager = factory.createEntityManager();
 
+		manager.getTransaction().begin();
+
 		manager.persist(acesso);
+
+		manager.getTransaction().commit();
 
 		manager.close();
 	}

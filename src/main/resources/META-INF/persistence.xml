@@ -16,6 +16,8 @@
 		<class>br.com.estatistica.modelo.cadastro.Cidade</class>
 		<class>br.com.estatistica.modelo.cadastro.Bairro</class>
 		<class>br.com.estatistica.modelo.cadastro.Pessoa</class>
+		<class>br.com.estatistica.modelo.cadastro.Endereco</class>
+		<class>br.com.estatistica.modelo.cadastro.Usuario</class>
 
 		<properties>
 			<!-- Propriedades JDBC -->
@@ -23,8 +25,8 @@
 
 			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://200.129.130.190/delfos" />
 
-			<property name="javax.persistence.jdbc.user" value="root" />
-			<property name="javax.persistence.jdbc.password" value="delfos#123" />
+			<property name="javax.persistence.jdbc.user" value="hibernate" />
+			<property name="javax.persistence.jdbc.password" value="hibernate" />
 
 			<!-- Configurações específicas do Hibernate -->
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

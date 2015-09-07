@@ -33,7 +33,6 @@ public class Endereco {
 	private Bairro bairro;
 	@OneToOne
 	private Cidade cidade;
-	@OneToOne
 	private Pessoa pessoa;
 
 	public Endereco(int id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, int numero, String cep, Bairro bairro,

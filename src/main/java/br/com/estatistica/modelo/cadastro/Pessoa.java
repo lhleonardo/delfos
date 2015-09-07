@@ -37,12 +37,14 @@ public class Pessoa {
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-	@OneToOne
+	@OneToOne(mappedBy = "pessoa")
 	private Endereco endereco;
 	@OneToMany
 	private List<Formacao> formacoes;
 	@OneToMany
 	private List<AreaEstudo> areasEstudo;
+	@OneToOne(mappedBy = "Usuario")
+	private Usuario usuario;
 
 	/**
 	 * 
