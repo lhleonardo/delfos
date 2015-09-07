@@ -20,7 +20,6 @@ public class Usuario implements Identificator, Validador {
 	@OneToOne
 	private PerfilAcesso perfilAcesso;
 
-	@OneToOne
 	private Pessoa pessoa;
 
 	public Usuario(int id, String login, String descricao, PerfilAcesso perfilAcesso, Pessoa pessoa) {

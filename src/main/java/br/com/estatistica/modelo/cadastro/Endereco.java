@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 /**
@@ -33,6 +34,8 @@ public class Endereco {
 	private Bairro bairro;
 	@OneToOne
 	private Cidade cidade;
+	@OneToOne
+	@JoinColumn(name = "id_pessoa")
 	private Pessoa pessoa;
 
 	public Endereco(int id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, int numero, String cep, Bairro bairro,
