@@ -29,17 +29,17 @@ public class Endereco {
 	private String cep;
 
 	@OneToOne
+	@JoinColumn(name = "id_tipo_logradouro")
 	private TipoLogradouro tipoLogradouro;
 	@OneToOne
+	@JoinColumn(name = "id_bairro")
 	private Bairro bairro;
 	@OneToOne
+	@JoinColumn(name = "id_cidade")
 	private Cidade cidade;
-	@OneToOne
-	@JoinColumn(name = "id_pessoa")
-	private Pessoa pessoa;
 
 	public Endereco(int id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, int numero, String cep, Bairro bairro,
-	        Cidade cidade, Pessoa pessoa) {
+	        Cidade cidade) {
 		this.id = id;
 		this.logradouro = logradouro;
 		this.tipoLogradouro = tipoLogradouro;
@@ -48,7 +48,6 @@ public class Endereco {
 		this.cep = cep;
 		this.bairro = bairro;
 		this.cidade = cidade;
-		this.pessoa = pessoa;
 	}
 
 	public Endereco() {
@@ -117,14 +116,6 @@ public class Endereco {
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
 	}
 
 }

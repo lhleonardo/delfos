@@ -11,14 +11,14 @@ public class UsuarioDAO extends GenericDAOJDBC<Usuario> {
 		super(connection);
 	}
 
-	@Override
-	public void save(Usuario model) {
-		if (model.getId() == null) { 
-			this.insert(Usuario model);
-		} else { 
-			this.update(Usuario model);
-		}
-	}
+	// @Override
+	// public void save(Usuario model) {
+	// if (model.getId() == null) {
+	// this.insert(Usuario model);
+	// } else {
+	// this.update(Usuario model);
+	// }
+	// }
 
 	@Override
 	public void delete(Usuario model) {
@@ -42,6 +42,12 @@ public class UsuarioDAO extends GenericDAOJDBC<Usuario> {
 	public boolean isExist(Usuario model) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public void save(Usuario model) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

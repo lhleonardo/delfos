@@ -5,6 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -15,25 +16,23 @@ public class Usuario implements Identificator, Validador {
 	@Column(name = "id_usuario")
 	private Integer id;
 	private String login;
+	private String senha;
 	private String descricao;
 
 	@OneToOne
+	@JoinColumn(name = "id_perfil_acesso")
 	private PerfilAcesso perfilAcesso;
 
-	private Pessoa pessoa;
-
-	public Usuario(int id, String login, String descricao, PerfilAcesso perfilAcesso, Pessoa pessoa) {
+	public Usuario(int id, String login, String descricao, PerfilAcesso perfilAcesso) {
 		this.id = id;
 		this.login = login;
 		this.descricao = descricao;
 		this.perfilAcesso = perfilAcesso;
-		this.pessoa = pessoa;
 	}
 
-	public Usuario(String login, PerfilAcesso perfilAcesso, Pessoa pessoa) {
+	public Usuario(String login, PerfilAcesso perfilAcesso) {
 		this.login = login;
 		this.perfilAcesso = perfilAcesso;
-		this.pessoa = pessoa;
 	}
 
 	public Integer getId() {
@@ -52,6 +51,14 @@ public class Usuario implements Identificator, Validador {
 		this.login = login;
 	}
 
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+
 	public String getDescricao() {
 		return descricao;
 	}
@@ -66,14 +73,6 @@ public class Usuario implements Identificator, Validador {
 
 	public void setPerfilAcesso(PerfilAcesso perfilAcesso) {
 		this.perfilAcesso = perfilAcesso;
-	}
-
-	public Pessoa getPessoa() {
-		return pessoa;
-	}
-
-	public void setPessoa(Pessoa pessoa) {
-		this.pessoa = pessoa;
 	}
 
 	@Override

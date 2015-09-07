@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -23,7 +24,6 @@ import javax.persistence.TemporalType;
  * @since 1.0
  *
  */
-
 public class Pessoa {
 
 	@Id
@@ -38,13 +38,17 @@ public class Pessoa {
 	private Date dataNascimento;
 
 	@OneToOne(mappedBy = "Pessoa")
+	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
+
+	@OneToOne(mappedBy = "Pessoa")
+	@JoinColumn(name = "id_usuario")
+	private Usuario usuario;
+
 	@OneToMany
 	private List<Formacao> formacoes;
 	@OneToMany
 	private List<AreaEstudo> areasEstudo;
-	@OneToOne(mappedBy = "Pessoa")
-	private Usuario usuario;
 
 	/**
 	 * 

@@ -36,18 +36,12 @@ public class TestHibernate {
 	}
 
 	private static void semService(Map<String, String> properties) {
-		PerfilAcesso acesso = new PerfilAcesso("Administradores", "Perfil para os administradores do sistema");
 
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("delfos", properties);
 		EntityManager manager = factory.createEntityManager();
 
-		manager.getTransaction().begin();
-
-		manager.persist(acesso);
-
-		manager.getTransaction().commit();
-
 		manager.close();
+		factory.close();
 	}
 
 }
