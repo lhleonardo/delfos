@@ -7,8 +7,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import br.com.estatistica.daoHibernate.SimpleEntityManager;
-import br.com.estatistica.modelo.cadastro.PerfilAcesso;
+import br.com.estatistica.dao.SimpleEntityManager;
+import br.com.estatistica.modelos.PerfilAcesso;
 import br.com.estatistica.service.PerfilAcessoService;
 
 public class TestHibernate {

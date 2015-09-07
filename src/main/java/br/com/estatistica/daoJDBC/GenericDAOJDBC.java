@@ -3,7 +3,7 @@ package br.com.estatistica.daoJDBC;
 import java.sql.Connection;
 import java.util.List;
 
-import br.com.estatistica.modelo.cadastro.Identificator;
+import br.com.estatistica.modelos.Identificator;
 
 public abstract class GenericDAOJDBC<T extends Identificator> {
 

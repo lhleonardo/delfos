@@ -1,8 +1,8 @@
 package br.com.estatistica.service;
 
-import br.com.estatistica.daoHibernate.EstadoDAO;
-import br.com.estatistica.daoHibernate.SimpleEntityManager;
-import br.com.estatistica.modelo.cadastro.Estado;
+import br.com.estatistica.dao.EstadoDAO;
+import br.com.estatistica.dao.SimpleEntityManager;
+import br.com.estatistica.modelos.Estado;
 
 public class EstadoService extends Service<Estado> {
 
