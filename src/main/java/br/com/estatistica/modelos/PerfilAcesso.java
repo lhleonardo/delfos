@@ -58,6 +58,10 @@ public class PerfilAcesso implements Validador, Identificator {
 		this.permissoes.put(funcionalidade, acesso);
 	}
 
+	public void setPermissoes(Map<Funcionalidade, Boolean> permissoes) {
+		this.permissoes = permissoes;
+	}
+
 	public Map<Funcionalidade, Boolean> getPermissoes() {
 		return permissoes;
 	}

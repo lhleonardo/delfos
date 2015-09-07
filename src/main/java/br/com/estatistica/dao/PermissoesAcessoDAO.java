@@ -87,37 +87,37 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 		return permissoes;
 	}
 
-	@Override
+	@Deprecated
 	protected void insert(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
-	@Override
+	@Deprecated
 	protected void update(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
-	@Override
+	@Deprecated
 	public List<PerfilAcesso> getAll() throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
-	@Override
+	@Deprecated
 	public PerfilAcesso get(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
-	@Override
+	@Deprecated
 	public PerfilAcesso get(Integer idModel) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
-	@Override
+	@Deprecated
 	public PerfilAcesso get(String value) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
-	@Override
+	@Deprecated
 	public boolean isExist(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}

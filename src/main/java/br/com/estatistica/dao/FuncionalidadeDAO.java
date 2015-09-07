@@ -9,7 +9,7 @@ import br.com.estatistica.modelos.Funcionalidade;
 public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 
 	public FuncionalidadeDAO(Connection connection) {
-	    super(connection);
+		super(connection);
     }
 
 	@Override
