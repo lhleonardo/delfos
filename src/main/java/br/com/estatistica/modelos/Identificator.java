@@ -4,4 +4,6 @@ public interface Identificator {
 
 	Integer getId();
 
+	void validate();
+
 }

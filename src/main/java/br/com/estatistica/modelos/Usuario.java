@@ -22,6 +22,10 @@ public class Usuario implements Identificator, Validador {
 		this.perfilAcesso = perfilAcesso;
 	}
 
+	public Usuario() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -64,7 +68,7 @@ public class Usuario implements Identificator, Validador {
 
 	@Override
 	public void validate() {
-		if (this.getId() == null || this.login == null || this.descricao == null) {
+		if (this.getId() == null || this.login == null || this.descricao == null || this.perfilAcesso == null) {
 			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
 		}
 	}

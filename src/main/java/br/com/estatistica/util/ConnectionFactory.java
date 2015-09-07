@@ -1,11 +1,10 @@
-package br.com.estatistica.dao;
+package br.com.estatistica.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import br.com.estatistica.modelos.ModeloConexao;
-import br.com.estatistica.util.Mensagem;
 
 /**
  * Classe responsável pelas operações de conexão do banco de dados, como conectar e

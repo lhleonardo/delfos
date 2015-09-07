@@ -1,11 +1,15 @@
 package br.com.estatistica.modelos;
 
+import java.util.HashMap;
+import java.util.Map;
 
-public class PerfilAcesso implements Validador {
+public class PerfilAcesso implements Validador, Identificator {
 
 	private Integer id;
 	private String nome;
 	private String descricao;
+
+	private Map<Funcionalidade, Boolean> permissoes = new HashMap<Funcionalidade, Boolean>();
 
 	public PerfilAcesso(int id, String nome, String descricao) {
 		this.id = id;
@@ -20,6 +24,9 @@ public class PerfilAcesso implements Validador {
 	public PerfilAcesso(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
+	}
+
+	public PerfilAcesso() {
 	}
 
 	public Integer getId() {
@@ -44,6 +51,19 @@ public class PerfilAcesso implements Validador {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public void adicionaPermissao(Funcionalidade funcionalidade, Boolean acesso) {
+		funcionalidade.validate();
+		this.permissoes.put(funcionalidade, acesso);
+	}
+
+	public Map<Funcionalidade, Boolean> getPermissoes() {
+		return permissoes;
+	}
+
+	public boolean possuiPermissao(Funcionalidade funcionalidade) {
+		return permissoes.get(funcionalidade);
 	}
 
 	@Override
