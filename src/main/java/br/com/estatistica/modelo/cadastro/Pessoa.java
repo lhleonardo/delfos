@@ -24,7 +24,7 @@ import javax.persistence.TemporalType;
  * @since 1.0
  *
  */
-public class Pessoa {
+public class Pessoa implements Validador {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -262,5 +262,12 @@ public class Pessoa {
 	public void setAreasEstudo(List<AreaEstudo> areasEstudo) {
 		this.areasEstudo = areasEstudo;
 	}
+
+	@Override
+    public void validate() {
+		if (this.getId() == null || this.getNome() == null || this.getTipoDocumento().getValor() == null) { 
+			throw new NullPointerException("Informações obrigatórias estáo nulas.");
+		}
+    }
 
 }
