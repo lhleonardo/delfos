@@ -1,11 +1,6 @@
 package br.com.estatistica.modelos;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
 /**
  * Classe responsável por representar uma cidade para um determinado endereço.
@@ -17,14 +12,10 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Cidade {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_cidade", nullable = true)
 	private int id;
 	private String nome;
 	private String descricao;
 
-	@ManyToOne()
 	private Estado estado;
 
 	public Cidade(int id, String nome, String descricao, Estado estado) {

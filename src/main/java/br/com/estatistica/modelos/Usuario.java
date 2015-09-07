@@ -1,26 +1,13 @@
 package br.com.estatistica.modelos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 
-@Entity
 public class Usuario implements Identificator, Validador {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_usuario")
 	private Integer id;
 	private String login;
 	private String senha;
 	private String descricao;
 
-	@OneToOne
-	@JoinColumn(name = "id_perfil_acesso")
 	private PerfilAcesso perfilAcesso;
 
 	public Usuario(int id, String login, String descricao, PerfilAcesso perfilAcesso) {

@@ -4,16 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
-
 /**
  * Classe responsável por modelar as pessoas que serão salvas e manipuladas em funções do
  * software. <br>
@@ -26,28 +16,18 @@ import javax.persistence.TemporalType;
  */
 public class Pessoa implements Validador {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_pessoa")
 	private Integer id;
 	private String nome;
 
 	private Documento tipoDocumento;
 	private String rg;
-	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-	@OneToOne(mappedBy = "Pessoa")
-	@JoinColumn(name = "id_endereco")
 	private Endereco endereco;
 
-	@OneToOne(mappedBy = "Pessoa")
-	@JoinColumn(name = "id_usuario")
 	private Usuario usuario;
 
-	@OneToMany
 	private List<Formacao> formacoes;
-	@OneToMany
 	private List<AreaEstudo> areasEstudo;
 
 	/**

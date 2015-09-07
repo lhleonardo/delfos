@@ -2,7 +2,7 @@ package br.com.estatistica.modelos;
 
 public class TipoPergunta {
 
-	private int id;
+	private Integer id;
 	private String nome;
 	private String descricao;
 
@@ -25,11 +25,11 @@ public class TipoPergunta {
 
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

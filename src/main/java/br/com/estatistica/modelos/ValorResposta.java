@@ -2,7 +2,7 @@ package br.com.estatistica.modelos;
 
 public class ValorResposta {
 
-	private int id;
+	private Integer id;
 	private double valor;
 	private Pergunta pergunta;
 	private Resposta resposta;
@@ -15,7 +15,7 @@ public class ValorResposta {
 		this.tipo = tipo;
 	}
 
-	public ValorResposta(int id, double valor, Pergunta pergunta, Resposta resposta, TipoReposta tipo) {
+	public ValorResposta(Integer id, double valor, Pergunta pergunta, Resposta resposta, TipoReposta tipo) {
 		this.id = id;
 		this.valor = valor;
 		this.pergunta = pergunta;
@@ -26,11 +26,11 @@ public class ValorResposta {
 	public ValorResposta() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

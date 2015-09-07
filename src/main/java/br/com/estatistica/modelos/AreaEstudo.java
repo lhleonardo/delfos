@@ -1,10 +1,5 @@
 package br.com.estatistica.modelos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Classe responsável por representar uma área de estudo que determinada pessoa pode
@@ -14,12 +9,8 @@ import javax.persistence.Id;
  * @author Leonardo Braz
  * @since 1.5
  */
-@Entity(name = "Area_estudo")
 public class AreaEstudo {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_area_estudo")
 	private int id;
 	private String nome;
 	private String descricao;

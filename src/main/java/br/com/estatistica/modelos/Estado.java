@@ -1,10 +1,5 @@
 package br.com.estatistica.modelos;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
 /**
  * Classe responsável por representar um estado de determinada cidade.
@@ -13,16 +8,11 @@ import javax.persistence.Id;
  * @author Leonardo Braz
  * @since 1.5
  */
-@Entity
 public class Estado implements Validador {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_estado")
 	private Integer id;
 	private String nome;
 	private String descricao;
-	@Column(length = 3)
 	private String uf;
 
 	public Estado(int id, String nome, String uf, String descricao) {
