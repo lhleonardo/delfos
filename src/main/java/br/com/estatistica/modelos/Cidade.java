@@ -1,7 +1,5 @@
 package br.com.estatistica.modelos;
 
-import javax.persistence.Entity;
-
 /**
  * Classe responsável por representar uma cidade para um determinado endereço.
  * 
@@ -9,7 +7,6 @@ import javax.persistence.Entity;
  * @author Leonardo Braz
  * @since 1.5
  */
-@Entity
 public class Cidade {
 
 	private int id;
