@@ -1,47 +1,19 @@
 package br.com.estatistica.hibernate;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import br.com.estatistica.dao.SimpleEntityManager;
-import br.com.estatistica.modelos.PerfilAcesso;
-import br.com.estatistica.service.PerfilAcessoService;
+import br.com.estatistica.modelos.Estado;
+import br.com.estatistica.service.EstadoService;
 
 public class TestHibernate {
 
 	public static void main(String[] args) {
-		Map<String, String> properties = getProperties();
-		semService(properties);
+		SimpleEntityManager simpleEntityManager = new SimpleEntityManager();
+		EstadoService service = new EstadoService(simpleEntityManager);
 
-	}
+		Estado estado = new Estado("Rondônia", "RO");
 
-	private static Map<String, String> getProperties() {
-		Map<String, String> properties = new HashMap<String, String>();
-		properties.put("javax.persistence.jdbc.user", "root");
-		properties.put("javax.persistence.jdbc.password", "delfos#123");
-		return properties;
-	}
+		service.save(estado);
 
-	private static void comService(Map<String, String> properties) {
-		SimpleEntityManager manager = new SimpleEntityManager("delfos", properties);
-		PerfilAcessoService service = new PerfilAcessoService(manager);
-
-		PerfilAcesso perfil = new PerfilAcesso("Administrador", "Perfil para administradores do Sistema");
-
-		service.save(perfil);
-	}
-
-	private static void semService(Map<String, String> properties) {
-
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("delfos", properties);
-		EntityManager manager = factory.createEntityManager();
-
-		manager.close();
-		factory.close();
 	}
 
 }

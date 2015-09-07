@@ -1,25 +1,13 @@
 package br.com.estatistica.dao;
 
-import java.util.Map;
-
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
+import br.com.estatistica.util.JPAUtil;
 
 public class SimpleEntityManager {
 
-	private EntityManager entityManager;
-	private EntityManagerFactory factory;
+	private EntityManager entityManager = new JPAUtil().getEntityManager();
 
-	public SimpleEntityManager(EntityManagerFactory factory, Map<String, String> properties) {
-		this.factory = factory;
-		this.entityManager = factory.createEntityManager(properties);
-	}
-
-	public SimpleEntityManager(String persistenceUnitName, Map<String, String> properties) {
-		factory = Persistence.createEntityManagerFactory(persistenceUnitName);
-		this.entityManager = factory.createEntityManager();
-	}
 
 	public void beginTransaction() {
 		entityManager.getTransaction().begin();
@@ -42,8 +30,6 @@ public class SimpleEntityManager {
 	public void close() {
 		if (entityManager.isOpen())
 			entityManager.close();
-		if (factory.isOpen())
-			factory.close();
 	}
 
 	public void rollBack() {

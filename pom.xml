@@ -33,14 +33,29 @@
 			<name>Leonardo Henrique de Braz</name>
 			<email>lhleonardo@hotmail.com</email>
 		</developer>
+
+		<developer>
+			<id>Andrewld</id>
+			<name>André Honório</name>
+			<email>andrehas7@gmail.com</email>
+		</developer>
+
+		<!-- ... -->
 	</developers>
 
 	<!-- Especificação de todas as dependências que serão utilizadas no projeto. -->
 
 	<dependencies>
 		<!-- dependências para utilização das bibliotecas de conexão com o MySQL -->
-		
-		
+
+
+		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.4</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
