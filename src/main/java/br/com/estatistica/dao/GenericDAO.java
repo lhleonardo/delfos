@@ -243,6 +243,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	public void close() throws SQLException {
 		if (!this.getConnection().isClosed()) {
 			this.connection.close();
+			System.out.println("Desconectado do banco.");
 		}
 	}
 

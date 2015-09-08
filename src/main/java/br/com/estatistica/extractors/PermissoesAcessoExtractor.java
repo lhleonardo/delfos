@@ -10,7 +10,7 @@ import java.util.Map;
 import br.com.estatistica.dao.FuncionalidadeDAO;
 import br.com.estatistica.modelos.Funcionalidade;
 
-public class PermissoesAcessoExtractor implements Extractable<Map<Funcionalidade, Boolean>> {
+public class PermissoesAcessoExtractor extends Extractable<Map<Funcionalidade, Boolean>> {
 
 	public Map<Funcionalidade, Boolean> extract(ResultSet resultSet, Connection con) throws SQLException {
 		Map<Funcionalidade, Boolean> extracted = new HashMap<Funcionalidade, Boolean>();
@@ -31,4 +31,10 @@ public class PermissoesAcessoExtractor implements Extractable<Map<Funcionalidade
 	public List<Map<Funcionalidade, Boolean>> extractAll(ResultSet rs, Connection con) {
 		throw new UnsupportedOperationException("Operação não suportada.");
 	}
+
+	@Override
+	protected Map<Funcionalidade, Boolean> extractModel(ResultSet rs, Connection con) throws SQLException {
+		throw new UnsupportedOperationException("Operação não suportada.");
+	}
+
 }

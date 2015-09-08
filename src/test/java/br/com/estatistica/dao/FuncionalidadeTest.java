@@ -2,8 +2,6 @@ package br.com.estatistica.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -39,12 +37,9 @@ public class FuncionalidadeTest {
 	}
 
 	private static void buscaTodasAsFuncionalidades(FuncionalidadeDAO fDao) throws SQLException {
-		List<Funcionalidade> funcionalidades = new ArrayList<Funcionalidade>();
 
-		funcionalidades.addAll(fDao.getAll());
-
-		for (Funcionalidade funcionalidade : funcionalidades) {
-			JOptionPane.showMessageDialog(null, funcionalidade);
+		for (Funcionalidade funcionalidade : fDao.getAll()) {
+			System.out.println(funcionalidade);
 		}
 
 	}
