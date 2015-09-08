@@ -46,8 +46,8 @@ public class Funcionalidade implements Identificator {
 
 	@Override
 	public void validate() {
-		if (this.getNome() == null || this.getId() == null) {
-			throw new NullPointerException("Os campos ID e Nome são de preenchimento obrigatório.");
+		if (this.getNome() == null) {
+			throw new NullPointerException("O campo Nome é de preenchimento obrigatório.");
 		}
 	}
 

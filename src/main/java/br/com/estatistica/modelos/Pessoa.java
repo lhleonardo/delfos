@@ -243,11 +243,19 @@ public class Pessoa implements Validador {
 		this.areasEstudo = areasEstudo;
 	}
 
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
-    public void validate() {
-		if (this.getId() == null || this.getNome() == null || this.getTipoDocumento().getValor() == null) { 
+	public void validate() {
+		if (this.getId() == null || this.getNome() == null || this.getTipoDocumento().getValor() == null) {
 			throw new NullPointerException("Informações obrigatórias estáo nulas.");
 		}
-    }
+	}
 
 }
