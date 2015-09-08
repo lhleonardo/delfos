@@ -2,15 +2,21 @@ package br.com.estatistica.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import br.com.estatistica.extractors.FuncionalidadeExtractor;
 import br.com.estatistica.modelos.Funcionalidade;
 
 public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 
 	private static final String SQL_INSERT = "INSERT INTO Funcionalidade(nome, descricao) VALUES (?,?);";
 	private static final String SQL_UPDATE = "UPDATE Funcionalidade SET nome = ?, descricao = ? WHERE id_funcionalidade = ?;";
+	private static final String SQL_DELETE = "DELETE FROM Funcionalidade WHERE id_funcionalidade = ?";
+	private static final String SQL_SELECT = "SELECT * FROM Funcionalidade";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_funcionalidade = ?";
+	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE nome LIKE ? AND descricao LIKE ?";
 
 	public FuncionalidadeDAO(Connection connection) {
 		super(connection);
@@ -37,8 +43,10 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 
 	@Override
 	public void delete(Funcionalidade model) throws SQLException {
-		// TODO Auto-generated method stub
-
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
+			pst.setInt(1, model.getId());
+			pst.executeUpdate();
+		}
 	}
 
 	@Override
@@ -49,14 +57,30 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 
 	@Override
 	public Funcionalidade get(Funcionalidade model) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Funcionalidade funcionalidade = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
+			pst.setString(1, model.getNome());
+			pst.setString(2, model.getDescricao());
+			ResultSet resultSet = pst.executeQuery();
+
+			funcionalidade = new FuncionalidadeExtractor().extract(resultSet, null);
+		}
+
+		return funcionalidade;
 	}
 
 	@Override
 	public Funcionalidade get(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Funcionalidade funcionalidade = null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+			pst.setInt(1, idModel);
+			ResultSet resultSet = pst.executeQuery();
+
+			funcionalidade = new FuncionalidadeExtractor().extract(resultSet, null);
+
+		}
+		return funcionalidade;
 	}
 
 	@Override

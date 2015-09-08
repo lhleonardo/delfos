@@ -2,6 +2,7 @@ package br.com.estatistica.modelos;
 
 public class Funcionalidade implements Identificator {
 
+
 	private Integer id;
 	private String nome;
 	private String descricao;
@@ -49,6 +50,11 @@ public class Funcionalidade implements Identificator {
 		if (this.getNome() == null) {
 			throw new NullPointerException("O campo Nome é de preenchimento obrigatório.");
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "Funcionalidade (id=" + id + ", nome=" + nome + ", descricao=" + descricao + ")";
 	}
 
 }

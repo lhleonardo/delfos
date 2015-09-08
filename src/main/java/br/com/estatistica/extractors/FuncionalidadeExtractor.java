@@ -11,8 +11,18 @@ public class FuncionalidadeExtractor implements Extractable<Funcionalidade> {
 
 	@Override
 	public Funcionalidade extract(ResultSet rs, Connection con) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Funcionalidade funcionalidade = new Funcionalidade();
+
+		if (rs.next()) {
+			funcionalidade.setId(rs.getInt("id_funcionalidade"));
+			funcionalidade.setNome(rs.getString("nome"));
+			funcionalidade.setDescricao(rs.getString("descricao"));
+
+			return funcionalidade;
+		} else {
+			return null;
+		}
+
 	}
 
 	@Override
