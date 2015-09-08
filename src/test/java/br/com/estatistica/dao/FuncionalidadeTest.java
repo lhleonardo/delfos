@@ -12,9 +12,7 @@ import br.com.estatistica.util.ConnectionFactory;
 public class FuncionalidadeTest {
 
 	public static void main(String[] args) {
-
 		rodaTeste();
-
 	}
 
 	protected static void rodaTeste() {
