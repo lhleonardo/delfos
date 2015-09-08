@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.extractors.FuncionalidadeExtractor;
@@ -17,6 +18,7 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 	private static final String SQL_SELECT = "SELECT * FROM Funcionalidade";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_funcionalidade = ?";
 	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE nome LIKE ? AND descricao LIKE ?";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?;";
 
 	public FuncionalidadeDAO(Connection connection) {
 		super(connection);
@@ -51,8 +53,16 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 
 	@Override
 	public List<Funcionalidade> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Funcionalidade> funcionalidades = new ArrayList<Funcionalidade>();
+		
+		try(PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+			ResultSet resultSet = pst.executeQuery();
+			
+			funcionalidades.addAll(new FuncionalidadeExtractor().extractAll(resultSet, null));
+
+		}
+		
+		return funcionalidades;
 	}
 
 	@Override
@@ -85,14 +95,21 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 
 	@Override
 	public Funcionalidade get(String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Funcionalidade func = null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
+			pst.setString(1, "%" + value + "%");
+			ResultSet resultSet = pst.executeQuery();
+
+			func = new FuncionalidadeExtractor().extract(resultSet, null);
+		}
+
+		return func;
 	}
 
 	@Override
 	public boolean isExist(Funcionalidade model) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+
+		return this.get(model) != null;
 	}
 
 }

@@ -3,6 +3,7 @@ package br.com.estatistica.extractors;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.modelos.Funcionalidade;
@@ -27,8 +28,17 @@ public class FuncionalidadeExtractor implements Extractable<Funcionalidade> {
 
 	@Override
 	public List<Funcionalidade> extractAll(ResultSet rs, Connection con) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Funcionalidade> funcionalidades = new ArrayList<Funcionalidade>();
+
+		while (rs.next()) {
+			Funcionalidade funcionalidade = this.extract(rs, null);
+			if (funcionalidade != null) {
+				funcionalidades.add(funcionalidade);
+
+			}
+		}
+
+		return funcionalidades;
 	}
 
 }
