@@ -18,6 +18,7 @@ public class FuncionalidadeExtractor implements Extractable<Funcionalidade> {
 			funcionalidade.setId(rs.getInt("id_funcionalidade"));
 			funcionalidade.setNome(rs.getString("nome"));
 			funcionalidade.setDescricao(rs.getString("descricao"));
+			funcionalidade.setChave(rs.getString("chave"));
 
 			return funcionalidade;
 		} else {

@@ -60,7 +60,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 			return resultSet.next();
 		}
 	}
-	
+
 	@Override
 	public void delete(PerfilAcesso model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
@@ -119,6 +119,11 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 
 	@Deprecated
 	public boolean isExist(PerfilAcesso model) throws SQLException {
+		throw new UnsupportedOperationException("Operação não disponível.");
+	}
+
+	@Deprecated
+	public boolean isExist(Integer idModel) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 

@@ -130,4 +130,9 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 		return perfil;
 	}
 
+	@Override
+	public boolean isExist(Integer idModel) throws SQLException {
+		return this.get(idModel) != null;
+	}
+
 }

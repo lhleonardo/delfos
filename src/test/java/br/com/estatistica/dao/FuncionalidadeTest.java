@@ -2,7 +2,8 @@ package br.com.estatistica.dao;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -14,36 +15,71 @@ public class FuncionalidadeTest {
 
 	public static void main(String[] args) {
 
-		// Funcionalidade func = new Funcionalidade("Cadastro de Usuario",
-		// "Cadastrar usuários que estarão logados no sistema");
+		rodaTeste();
 
+	}
+
+	protected static void rodaTeste() {
 		ModeloConexao modelo = new ModeloConexao();
 
 		Connection connection = new ConnectionFactory(modelo).getConnection();
 
 		try (FuncionalidadeDAO fDao = new FuncionalidadeDAO(connection)) {
 
-			// fDao.save(func);
+			// insereFuncionalidade(fDao, 2);
 
-			Scanner scanner = new Scanner(System.in);
+			// excluiFuncionalidade(fDao);
 
-			System.out.println("Informe o ID da funcionalidade:");
-
-			Integer id = scanner.nextInt();
-
-			System.out.println(id);
-
-			 Funcionalidade func = fDao.get(id);
-
-			System.out.println("Funcionalidade: " + func.getId() + '\n' + func.getNome() + '\n' +
-			 func.getDescricao());
-
-			// JOptionPane.showMessageDialog(null, func);
+			buscaTodasAsFuncionalidades(fDao);
 
 		} catch (SQLException | RuntimeException e) {
 
 			JOptionPane.showMessageDialog(null, "Algo de errado aconteceu.\nDetalhes: " + e.getMessage());
 		}
+	}
 
+	private static void buscaTodasAsFuncionalidades(FuncionalidadeDAO fDao) throws SQLException {
+		List<Funcionalidade> funcionalidades = new ArrayList<Funcionalidade>();
+
+		funcionalidades.addAll(fDao.getAll());
+
+		for (Funcionalidade funcionalidade : funcionalidades) {
+			JOptionPane.showMessageDialog(null, funcionalidade);
+		}
+
+	}
+
+	protected static void insereFuncionalidade(FuncionalidadeDAO fDao, int iteracoes) throws SQLException {
+
+		for (int i = 0; i < iteracoes; i++) {
+
+			Funcionalidade func = new Funcionalidade();
+			func.setNome(JOptionPane.showInputDialog("Informe o nome para a funcionalidade: "));
+			func.setDescricao(JOptionPane.showInputDialog("Informe a descrição para a funcionalidade: "));
+			func.setChave(JOptionPane.showInputDialog("Informe a chave de identificação para a funcionalidade: "));
+
+			JOptionPane.showMessageDialog(null, "Prévia de Registro: \n" + func);
+
+			fDao.save(func);
+		}
+
+	}
+
+	protected static void excluiFuncionalidade(FuncionalidadeDAO fDao) throws SQLException {
+		Integer id = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do registro que será excluído:"));
+
+		System.out.println(id);
+
+		Funcionalidade func = fDao.get(id);
+
+		System.out.println("Funcionalidade: " + func.getId() + '\n' + func.getNome() + '\n' + func.getDescricao());
+
+		System.out.println("Excluíndo determinada funcionalidade do banco...");
+
+		fDao.delete(func);
+
+		boolean exist = !fDao.isExist(func);
+
+		System.out.println("Resultado da exclusão: " + exist);
 	}
 }

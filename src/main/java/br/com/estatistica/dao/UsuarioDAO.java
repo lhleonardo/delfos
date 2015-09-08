@@ -167,4 +167,9 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
 		return usuario;
 	}
+
+	@Override
+	public boolean isExist(Integer idModel) throws SQLException {
+		return this.get(idModel) != null;
+	}
 }

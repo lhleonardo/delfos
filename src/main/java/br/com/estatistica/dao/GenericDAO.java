@@ -9,14 +9,42 @@ import javax.swing.JOptionPane;
 
 import br.com.estatistica.modelos.Identificator;
 
+/**
+ * Classe responsável por ser a gerenciadora de todos os DAO's do sistema, estabelecendo
+ * um contrato e padrões entre eles.
+ * 
+ * @author Leonardo Braz
+ * @since 1.6
+ *
+ * @param <T>
+ *            Classe do tipo identificadora.
+ */
 public abstract class GenericDAO<T extends Identificator> implements AutoCloseable {
 
 	private Connection connection;
 
+	/**
+	 * Construtor responsável por inicializar a instância de um DAO para determinado
+	 * CRUD.
+	 * 
+	 * @param connection
+	 *            conexão válida com o banco de dados
+	 */
 	public GenericDAO(Connection connection) {
 		this.connection = connection;
 	}
 
+	/**
+	 * Método responsável por salvar determinado registro no banco de dados.<br>
+	 * O método tem o objetivo de simplificar as operações de inserção e atualização de
+	 * dados no banco.
+	 * 
+	 * @param model
+	 *            modelo com as informações que serão salvas. Caso possua identificador
+	 *            nulo, será realizado a operação presente no método insert. Caso
+	 *            contrário, será atualizado o valor do registro no banco de dados.
+	 * @throws SQLException
+	 */
 	public void save(T model) throws SQLException {
 		model.validate();
 		if (model.getId() == null) {
@@ -43,6 +71,8 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	public abstract T get(String value) throws SQLException;
 
 	public abstract boolean isExist(T model) throws SQLException;
+
+	public abstract boolean isExist(Integer idModel) throws SQLException;
 
 	protected void executeBath(List<String> operacoes) throws SQLException {
 		if (!operacoes.isEmpty()) {
