@@ -1,8 +1,8 @@
 package br.com.estatistica.modelos;
 
-public class Pergunta {
+public class Pergunta implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String descricao;
 	private String observacao;
 	private Questionario questionario;
@@ -36,7 +36,7 @@ public class Pergunta {
 	public Pergunta() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -82,6 +82,14 @@ public class Pergunta {
 
 	public void setTipoCampo(TipoCampo tipoCampo) {
 		this.tipoCampo = tipoCampo;
+	}
+
+	
+
+	@Override
+	public void validate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
