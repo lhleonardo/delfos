@@ -14,7 +14,7 @@ import java.util.List;
  * @since 1.0
  *
  */
-public class Pessoa implements Validador {
+public class Pessoa implements Identificator {
 
 	private Integer id;
 	private String nome;
@@ -22,6 +22,9 @@ public class Pessoa implements Validador {
 	private Documento tipoDocumento;
 	private String rg;
 	private Date dataNascimento;
+	private String descricao;
+
+	private String email;
 
 	private Endereco endereco;
 
@@ -95,8 +98,6 @@ public class Pessoa implements Validador {
 		this.formacoes = new ArrayList<Formacao>();
 		this.areasEstudo = new ArrayList<AreaEstudo>();
 	}
-
-	private String descricao;
 
 	/**
 	 * Método responsável por retornar a informação:[id] da classe Pessoa.java
@@ -249,6 +250,14 @@ public class Pessoa implements Validador {
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Override
