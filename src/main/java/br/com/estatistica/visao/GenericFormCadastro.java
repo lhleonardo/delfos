@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class TestGridBad extends JFrame {
+public class GenericFormCadastro extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel_2;
@@ -25,7 +25,7 @@ public class TestGridBad extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TestGridBad frame = new TestGridBad();
+					GenericFormCadastro frame = new GenericFormCadastro();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,8 +37,12 @@ public class TestGridBad extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TestGridBad() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public GenericFormCadastro() {
+		initComponents();
+	}
+
+	protected void initComponents() {
+	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 565, 442);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -95,5 +99,5 @@ public class TestGridBad extends JFrame {
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.CENTER);
-	}
+    }
 }

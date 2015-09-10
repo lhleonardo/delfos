@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GenericForm extends JFrame {
+public class GenericFormNaoUsar extends JFrame {
 
 	private JPanel contentPane;
 	private JPanel panel;
@@ -21,7 +21,7 @@ public class GenericForm extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GenericForm frame = new GenericForm();
+					GenericFormNaoUsar frame = new GenericFormNaoUsar();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,7 +33,7 @@ public class GenericForm extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GenericForm() {
+	public GenericFormNaoUsar() {
 		getContentPane().setLayout(null);
 
 		panel = new JPanel();
