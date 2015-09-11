@@ -32,6 +32,7 @@ public class Pergunta implements Identificator {
 		this.tipoPergunta = tipoPergunta;
 		this.tipoCampo = tipoCampo;
 	}
+	
 
 	public Pergunta() {
 	}
@@ -88,8 +89,9 @@ public class Pergunta implements Identificator {
 
 	@Override
 	public void validate() {
-		// TODO Auto-generated method stub
-		
+		if (this.getId() == null || this.descricao == null || this.observacao == null || this.questionario == null || this.tipoCampo == null || this.tipoPergunta == null) {
+			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
+		}		
 	}
 
 }
