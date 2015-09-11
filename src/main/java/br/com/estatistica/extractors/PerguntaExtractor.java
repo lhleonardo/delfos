@@ -3,8 +3,11 @@ package br.com.estatistica.extractors;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.modelos.Usuario;
 
 public class PerguntaExtractor extends Extractable<Pergunta> {
 	
@@ -25,7 +28,18 @@ public class PerguntaExtractor extends Extractable<Pergunta> {
 
 	
 return pergunta;
-}
+	}
+ 
+public List<Pergunta> extractAll(ResultSet rs, Connection con) throws SQLException {
+		List<Pergunta> perguntas = new ArrayList<Pergunta>();
+
+		while (rs.next() && con != null) {
+			usuarios.add(extractModel(rs, con));
+		}
+
+		return usuarios;
+	}
+
 
 	}
 
