@@ -3,6 +3,7 @@ package br.com.estatistica.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.modelos.Especialista;
@@ -14,6 +15,7 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 	private static final String SQL_INSERT = "INSERT INTO Pessoa(nome, descricao, cpf, rg, e-mail, is_pesquisador,is_especialista,id_endereco,id_usuario) VALUES(?,?,?,?,?,?,?,?,?);";
 	private static final String SQL_UPDATE = "UPDATE Pessoa SET nome = ?, descricao = ?, cpf = ?, rg = ?, e-mail = ?, is_pesquisador = ?, is_especialista = ?, id_endereco = ?, id_usuario = ? WHERE id_pessoa = ?";
 	private static final String SQL_DELETE = "DELETE FROM Pessoa WHERE id_pessoa = ?";
+	private static final String SQL_SELECT = "";
 
 	public PessoaDAO(Connection connection) {
 		super(connection);
@@ -62,6 +64,11 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 
 	@Override
 	public List<Pessoa> getAll() throws SQLException {
+		List<Pessoa> pessoas = new ArrayList<>();
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+
+		}
 
 		return null;
 	}

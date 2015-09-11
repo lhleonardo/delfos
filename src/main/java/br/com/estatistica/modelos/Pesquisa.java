@@ -5,9 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-public class Pesquisa {
+public class Pesquisa implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String descricao;
 	private Date data;
 	private List<Pesquisador> responsaveis;
@@ -53,11 +53,11 @@ public class Pesquisa {
 		this.data = Calendar.getInstance().getTime();
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -99,6 +99,13 @@ public class Pesquisa {
 
 	public void setLimiteDeEspecialistas(int limite) {
 		this.LIMITE_DE_ESPECIALISTAS = limite;
+	}
+
+
+	@Override
+	public void validate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
