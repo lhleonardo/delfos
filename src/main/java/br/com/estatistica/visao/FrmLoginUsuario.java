@@ -113,13 +113,14 @@ public class FrmLoginUsuario extends JFrame {
 	protected ActionListener btnCancelarActionPerformed() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
+				JOptionPane.showMessageDialog(null, "asdfasdf");
 			}
 		};
 	}
 
 	protected ActionListener btnEntrarActionPerformed() {
 		return new ActionListener() {
+
 			private UsuarioDAO uDao;
 
 			@SuppressWarnings("deprecation")
@@ -128,11 +129,12 @@ public class FrmLoginUsuario extends JFrame {
 					Connection connection = new ConnectionFactory().getConnection();
 					uDao = new UsuarioDAO(connection);
 					try {
+						System.out.println("FrmLoginUsuario.btnEntrarActionPerformed().new ActionListener() {...}.actionPerformed()");
 						if (uDao.autentica(txtUsuario.getText(), txtSenha.getText())) {
 							// chamaMenuPrincipal(uDao);
-							JOptionPane.showMessageDialog(getParent(), "Validado!");
+							JOptionPane.showMessageDialog(null, "Validado!");
 						} else {
-							JOptionPane.showMessageDialog(getParent(), "Usuário ou senha incorretos.");
+							JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
 						}
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
