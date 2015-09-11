@@ -6,7 +6,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
@@ -28,6 +27,8 @@ public class FrmLoginUsuario extends JFrame {
 	private JTextField txtUsuario;
 	private JPasswordField txtSenha;
 
+	private static final UsuarioDAO uDao;
+
 	/**
 	 * Launch the application.
 	 */
@@ -42,6 +43,11 @@ public class FrmLoginUsuario extends JFrame {
 				}
 			}
 		});
+	}
+
+	static {
+		uDao = new UsuarioDAO(new ConnectionFactory().getConnection());
+
 	}
 
 	/**
@@ -121,17 +127,13 @@ public class FrmLoginUsuario extends JFrame {
 	protected ActionListener btnEntrarActionPerformed() {
 		return new ActionListener() {
 
-			private UsuarioDAO uDao;
-
-			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				if (validaCampos()) {
-					Connection connection = new ConnectionFactory().getConnection();
-					uDao = new UsuarioDAO(connection);
 					try {
 						System.out.println("FrmLoginUsuario.btnEntrarActionPerformed().new ActionListener() {...}.actionPerformed()");
 						if (uDao.autentica(txtUsuario.getText(), txtSenha.getText())) {
-							// chamaMenuPrincipal(uDao);
+
+							chamaMenuPrincipal(uDao);
 							JOptionPane.showMessageDialog(null, "Validado!");
 						} else {
 							JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
@@ -140,6 +142,8 @@ public class FrmLoginUsuario extends JFrame {
 						// TODO Auto-generated catch block
 						JOptionPane.showMessageDialog(getParent(), "Algo aconteceu.\nDetalhes: " + e.getMessage());
 					}
+				} else {
+					JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios antes de continuar.");
 				}
 
 			}
@@ -154,9 +158,8 @@ public class FrmLoginUsuario extends JFrame {
 		};
 	}
 
-	@SuppressWarnings("deprecation")
 	protected boolean validaCampos() {
 		// TODO Auto-generated method stub
-		return (!txtUsuario.getText().isEmpty() && txtSenha.getText().isEmpty());
+		return (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty());
 	}
 }
