@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 import br.com.estatistica.modelos.ModeloConexao;
+import br.com.estatistica.modelos.Usuario;
 
 /**
  * Classe responsável pelas operações de conexão do banco de dados, como conectar e
@@ -15,6 +16,8 @@ import br.com.estatistica.modelos.ModeloConexao;
  * @version 1.0
  */
 public class ConnectionFactory {
+
+	private static Usuario usuarioConectado = null;
 
 	/**
 	 * Classe manipuladora do modelo de conexões, que será responsável por trazer as
@@ -63,8 +66,7 @@ public class ConnectionFactory {
 
 		} catch (SQLException e) {
 			// erro SQL
-			Mensagem.informa("Não foi possível conectar-se ao banco de dados pelo devido motivo: \n"
-			        + e.getMessage());
+			Mensagem.informa("Não foi possível conectar-se ao banco de dados pelo devido motivo: \n" + e.getMessage());
 		} catch (ClassNotFoundException e) {
 			// não encontrou a classe do conector
 			Mensagem.informa("Não foi possível conectar-se ao banco de dados pois a classe \n" + modelo.getDriver()
@@ -91,11 +93,17 @@ public class ConnectionFactory {
 				resultado = true;
 			}
 		} catch (SQLException ex) {
-			Mensagem.informa("Não foi possivel desconectar-se ao banco de dados pelo devido motivo: \n"
-			        + ex.getMessage());
+			Mensagem.informa("Não foi possivel desconectar-se ao banco de dados pelo devido motivo: \n" + ex.getMessage());
 			resultado = false;
 		}
 		return resultado;
 	}
 
+	public static Usuario getUsuarioConectado() {
+		return usuarioConectado;
+	}
+
+	public static void setUsuarioConectado(Usuario usuarioConectado) {
+		ConnectionFactory.usuarioConectado = usuarioConectado;
+	}
 }

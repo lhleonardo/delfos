@@ -37,12 +37,17 @@ public class GenericFormCadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GenericFormCadastro() {
-		initComponents();
+	public GenericFormCadastro(String nameFrame) {
+		initComponents(nameFrame);
 	}
 
-	protected void initComponents() {
-	    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public GenericFormCadastro() {
+		initComponents("Default crud");
+	}
+
+	protected void initComponents(String nameFrame) {
+		setTitle(nameFrame);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 565, 442);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -73,17 +78,17 @@ public class GenericFormCadastro extends JFrame {
 		JLabel label = new JLabel("֍");
 		label.setForeground(new Color(220, 220, 220));
 		label.setFont(new Font("Arial", Font.PLAIN, 46));
-		label.setBounds(10, 11, 53, 52);
+		label.setBounds(20, 35, 53, 52);
 		panel_2.add(label);
 
 		JLabel label_1 = new JLabel("Delfos");
 		label_1.setForeground(new Color(220, 220, 220));
 		label_1.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		label_1.setBounds(57, 28, 60, 40);
+		label_1.setBounds(67, 52, 60, 40);
 		panel_2.add(label_1);
 
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(10, 66, 124, 1);
+		panel_4.setBounds(3, 103, 124, 1);
 		panel_2.add(panel_4);
 
 		JPanel panel_3 = new JPanel();
