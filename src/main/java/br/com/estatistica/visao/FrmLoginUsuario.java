@@ -51,7 +51,7 @@ public class FrmLoginUsuario extends JFrame {
 		setTitle("Autenticação de usuário");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 325, 309);
+		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -63,50 +63,59 @@ public class FrmLoginUsuario extends JFrame {
 		panel.setLayout(null);
 
 		JLabel label = new JLabel("֍");
-		label.setBounds(101, 11, 46, 54);
+		label.setBounds(165, 36, 46, 54);
 		label.setForeground(new Color(220, 220, 220));
 		label.setFont(new Font("Arial", Font.PLAIN, 46));
 		panel.add(label);
 
 		JLabel label_1 = new JLabel("Delfos");
-		label_1.setBounds(152, 39, 56, 26);
+		label_1.setBounds(214, 58, 97, 26);
 		label_1.setForeground(new Color(220, 220, 220));
-		label_1.setFont(new Font("Calibri Light", Font.BOLD, 20));
+		label_1.setFont(new Font("Calibri Light", Font.BOLD, 30));
 		panel.add(label_1);
 
-		JLabel lblUsurio = new JLabel("Usuário:");
+		JLabel lblUsurio = new JLabel("Usuário");
 		lblUsurio.setForeground(new Color(220, 220, 220));
 		lblUsurio.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		lblUsurio.setBounds(22, 117, 79, 26);
+		lblUsurio.setBounds(206, 143, 79, 26);
 		panel.add(lblUsurio);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		txtUsuario.setBounds(111, 121, 180, 20);
+		txtUsuario.setBounds(102, 168, 282, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
-		JLabel lblSenha = new JLabel("Senha:");
+		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(new Color(220, 220, 220));
 		lblSenha.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		lblSenha.setBounds(34, 160, 67, 26);
+		lblSenha.setBounds(206, 199, 67, 26);
 		panel.add(lblSenha);
 
 		txtSenha = new JPasswordField();
 		txtSenha.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		txtSenha.setBounds(111, 164, 180, 20);
+		txtSenha.setBounds(102, 228, 282, 20);
 		panel.add(txtSenha);
 
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(btnEntrarActionPerformed());
-		btnEntrar.setFont(new Font("Calibri Light", Font.BOLD, 18));
-		btnEntrar.setBounds(22, 221, 89, 39);
+		btnEntrar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
+		btnEntrar.setBounds(266, 284, 118, 31);
 		panel.add(btnEntrar);
 
-		JButton btnSair = new JButton("Sair");
-		btnSair.setFont(new Font("Calibri Light", Font.BOLD, 18));
-		btnSair.setBounds(202, 221, 89, 39);
-		panel.add(btnSair);
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(btnCancelarActionPerformed());
+		btnCancelar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
+		btnCancelar.setBounds(102, 284, 118, 31);
+		panel.add(btnCancelar);
+	}
+
+	protected ActionListener btnCancelarActionPerformed() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		};
 	}
 
 	protected ActionListener btnEntrarActionPerformed() {
