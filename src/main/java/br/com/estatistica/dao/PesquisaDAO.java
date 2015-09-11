@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
 
-import br.com.estatistica.modelos.Identificator;
+import br.com.estatistica.modelos.Pesquisa;
 
-public class PesquisaDAO extends GenericDAO {
+public class PesquisaDAO extends GenericDAO<Pesquisa> {
 
 	public PesquisaDAO(Connection connection) {
 		super(connection);
@@ -14,49 +14,49 @@ public class PesquisaDAO extends GenericDAO {
 	}
 
 	@Override
-	protected void insert(Identificator model) throws SQLException {
+	protected void insert(Pesquisa model) throws SQLException {
+		
+		
+	}
+
+	@Override
+	protected void update(Pesquisa model) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	protected void update(Identificator model) throws SQLException {
+	public void delete(Pesquisa model) throws SQLException {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void delete(Identificator model) throws SQLException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List getAll() throws SQLException {
+	public List<Pesquisa> getAll() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Identificator get(Identificator model) throws SQLException {
+	public Pesquisa get(Pesquisa model) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Identificator get(Integer idModel) throws SQLException {
+	public Pesquisa get(Integer idModel) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Identificator get(String value) throws SQLException {
+	public Pesquisa get(String value) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isExist(Identificator model) throws SQLException {
+	public boolean isExist(Pesquisa model) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -66,11 +66,5 @@ public class PesquisaDAO extends GenericDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	
-
-	
-
-	
 
 }
