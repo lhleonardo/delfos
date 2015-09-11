@@ -11,17 +11,15 @@ import javax.swing.JOptionPane;
 
 import br.com.estatistica.extractors.PerguntaExtractor;
 import br.com.estatistica.modelos.Pergunta;
-import br.com.estatistica.modelos.Usuario;
 
 	public class PerguntaDAO extends GenericDAO<Pergunta> {
-		private static final String SQL_SELECT = "SELECT * FROM Usuario";
+		private static final String SQL_SELECT = "SELECT * FROM Pergunta";
 		private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 		private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-		private static final String SQL_SELECT_BY_LOGIN = SQL_SELECT + " WHERE login = ?";
-		private static final String SQL_SELECT_BY_LOGIN_AND_SENHA = SQL_SELECT_BY_LOGIN + " AND senha = ?";
-		private static final String SQL_INSERT = "INSERT INTO Pergunta(descricao,observacao,questionario,tipopergunta, tipocampo) VALUES(?,?,?,?)";
-		private static final String SQL_UPDATE = "UPDATE Usuario SET login = ?, senha = ?, descricao = ?, id_perfil_usuario = ? WHERE id_usuario =?";
-		private static final String SQL_DELETE = "DELETE FROM Usuario WHERE id_usuario = ?";
+		private static final String SQL_INSERT = "INSERT INTO Pergunta(id_pergunta, descricao,observacao,questionario,tipopergunta, tipocampo) VALUES(?,?,?,?)";
+		private static final String SQL_UPDATE = "UPDATE Pergunta SET descricao = ?, observacao = ?, questionario = ?, tipopergunta = ?, tipocampo = ? WHERE id_pergunta =?";
+		private static final String SQL_DELETE = "DELETE FROM Pergunta WHERE id_usuario = ?";
+	
 		
 		public PerguntaDAO(Connection connection) {
 			super(connection);
@@ -29,13 +27,12 @@ import br.com.estatistica.modelos.Usuario;
 		}
 
 		@Override
+		//arrumar nomes
 		protected void insert(Pergunta model) throws SQLException {
 			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
-				pst.setString(1, model.getDescricao());
+				pst.setInt(1, model.getId());
 				pst.setString(2, model.getObservacao());
-				pst.setString(3, model.getQuestionario());
-				pst.set(4, model.getTipoPergunta());
-				pst.set(5, model.getTipoCampo());
+				pst.setString(2, model.getDescricao());
 				pst.executeUpdate();
 			}
 		}
@@ -79,16 +76,48 @@ import br.com.estatistica.modelos.Usuario;
 
 		@Override
 		public Pergunta get(Pergunta model) throws SQLException {
-			
-			return null;
+			Pergunta pergunta = null;
+			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
+				pst.setInt(1, model.getId());
+				pst.setString(2, model.getDescricao());
+				pst.setString(3, model.getObservacao());
+				ResultSet resultSet = pst.executeQuery();
+
+				pergunta = new PerguntaExtractor().extract(resultSet, super.getConnection());
+
+			}
+
+			return pergunta;
 		}
+		
 
 		@Override
 		public Pergunta get(Integer idModel) throws SQLException {
-		
-			return null;
+			Pergunta pergunta = null;
+
+			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+				pst.setInt(1, idModel);
+				ResultSet rs = pst.executeQuery();
+
+				pergunta = new PerguntaExtractor().extract(rs, super.getConnection());
+
+			}
+
+			return pergunta;
+		}
+		public void save(Pergunta model) throws SQLException {
+			model.validate();
+			if (model.getId() == null) {
+				this.insert(model);
+			} else {
+				this.update(model);
+			}
+
+			JOptionPane.showMessageDialog(null, "Salvo com sucesso.");
 		}
 
+
+			
 		@Override
 		public Pergunta get(String value) throws SQLException {
 			
@@ -97,14 +126,15 @@ import br.com.estatistica.modelos.Usuario;
 
 		@Override
 		public boolean isExist(Pergunta model) throws SQLException {
-			
-			return false;
+			return this.get(model) != null;
 		}
+		
+		
 
 		@Override
 		public boolean isExist(Integer idModel) throws SQLException {
+			return this.get(idModel) != null;
 			
-			return false;
 		}
 		
 	}

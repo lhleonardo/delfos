@@ -3,12 +3,8 @@ package br.com.estatistica.extractors;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
-import br.com.estatistica.dao.PerfilAcessoDAO;
 import br.com.estatistica.modelos.Pergunta;
-import br.com.estatistica.modelos.Usuario;
 
 public class PerguntaExtractor extends Extractable<Pergunta> {
 	
@@ -18,19 +14,14 @@ public class PerguntaExtractor extends Extractable<Pergunta> {
 		} else
 			return null;
 	}
+	;
 	//arrumar questionario, tipo pergunta, tipo campo
 	@Override
-	protected Pergunta extractModel(ResultSet rs, Connection con){
+	protected Pergunta extractModel(ResultSet rs, Connection con) throws SQLException{
 	Pergunta pergunta = new Pergunta();
 	pergunta.setId(rs.getInt("id_usuario"));
-	try {
-		pergunta.setDescricao(rs.getString("Descricao"));
-	} catch (SQLException e) {
-		
-		e.printStackTrace();
-	}
+	pergunta.setDescricao(rs.getString("Descricao"));
 
-	
 
 	
 return pergunta;
