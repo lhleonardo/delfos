@@ -105,5 +105,6 @@ public class ConnectionFactory {
 
 	public static void setUsuarioConectado(Usuario usuarioConectado) {
 		ConnectionFactory.usuarioConectado = usuarioConectado;
+		System.out.println("setou usuário");
 	}
 }
