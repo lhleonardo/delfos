@@ -46,13 +46,14 @@ public class GenericFormCadastro extends JFrame {
 	}
 
 	public GenericFormCadastro() {
+		setResizable(false);
 		initComponents("Default crud");
 	}
 
 	protected void initComponents(String nameFrame) {
 		setTitle(nameFrame);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 565, 442);
+		setBounds(100, 100, 900, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -105,8 +106,5 @@ public class GenericFormCadastro extends JFrame {
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 1;
 		panel.add(panel_3, gbc_panel_3);
-
-		JPanel panel_1 = new JPanel();
-		contentPane.add(panel_1, BorderLayout.CENTER);
     }
 }
