@@ -2,12 +2,16 @@ package br.com.estatistica.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import br.com.estatistica.extractors.PerguntaExtractor;
 import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.modelos.Usuario;
 
 	public class PerguntaDAO extends GenericDAO<Pergunta> {
 		private static final String SQL_SELECT = "SELECT * FROM Usuario";
@@ -58,12 +62,19 @@ import br.com.estatistica.modelos.Pergunta;
 			}
 		}
 			
-		}
+		
 
 		@Override
 		public List<Pergunta> getAll() throws SQLException {
-			
-			return null;
+			List<Pergunta> perguntas = new ArrayList<Pergunta>();
+			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+				ResultSet resultSet = pst.executeQuery();
+
+				perguntas.addAll(new PerguntaExtractor().extractAll(resultSet, super.getConnection()));
+
+			}
+
+			return perguntas;
 		}
 
 		@Override
@@ -81,7 +92,7 @@ import br.com.estatistica.modelos.Pergunta;
 		@Override
 		public Pergunta get(String value) throws SQLException {
 			
-			return Pergunta;
+			return null;
 		}
 
 		@Override
