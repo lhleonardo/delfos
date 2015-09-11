@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Pesquisa implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String descricao;
 	private Date data;
 	private List<Pesquisador> responsaveis;
@@ -57,7 +57,7 @@ public class Pesquisa implements Identificator {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
