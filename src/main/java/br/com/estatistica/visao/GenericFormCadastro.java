@@ -15,6 +15,10 @@ import javax.swing.border.EmptyBorder;
 
 public class GenericFormCadastro extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel_2;
 
