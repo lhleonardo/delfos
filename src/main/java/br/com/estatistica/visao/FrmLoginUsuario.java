@@ -28,6 +28,7 @@ public class FrmLoginUsuario extends JFrame {
 	private JPasswordField txtSenha;
 
 	private static final UsuarioDAO uDao;
+	private Usuario usuario;
 
 	/**
 	 * Launch the application.
@@ -128,38 +129,39 @@ public class FrmLoginUsuario extends JFrame {
 		return new ActionListener() {
 
 			public void actionPerformed(ActionEvent arg0) {
-				if (validaCampos()) {
-					try {
-						System.out.println("FrmLoginUsuario.btnEntrarActionPerformed().new ActionListener() {...}.actionPerformed()");
-						if (uDao.autentica(txtUsuario.getText(), txtSenha.getText())) {
-
-							chamaMenuPrincipal(uDao);
-							JOptionPane.showMessageDialog(null, "Validado!");
-						} else {
-							JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
-						}
-					} catch (SQLException e) {
-						// TODO Auto-generated catch block
-						JOptionPane.showMessageDialog(getParent(), "Algo aconteceu.\nDetalhes: " + e.getMessage());
-					}
-				} else {
-					JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios antes de continuar.");
-				}
+				autenticaUsuario();
 
 			}
 
-			protected void chamaMenuPrincipal(UsuarioDAO uDao) throws SQLException {
-				Usuario user = uDao.get(txtUsuario.getText());
-				ConnectionFactory.setUsuarioConectado(user);
-				FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
-				menuPrincipal.configPermissoes(user);
-				menuPrincipal.setVisible(true);
-			}
 		};
 	}
 
 	protected boolean validaCampos() {
 		// TODO Auto-generated method stub
 		return (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty());
+	}
+
+	protected void autenticaUsuario() {
+		if (validaCampos()) {
+			try {
+				if (uDao.autentica(txtUsuario.getText(), txtSenha.getText())) {
+					this.chamaMenuPrincipal(uDao.get(new Usuario(txtUsuario.getText(), txtSenha.getText())));
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
+				}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(getParent(), "Algo aconteceu.\nDetalhes: " + e.getMessage());
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios antes de continuar.");
+		}
+	}
+
+	protected void chamaMenuPrincipal(Usuario usuario) throws SQLException {
+		ConnectionFactory.setUsuarioConectado(usuario);
+		System.out.println("Criou o usuário e setou pro ConnectionFactory");
+		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
+		menuPrincipal.configPermissoes(usuario);
+		menuPrincipal.setVisible(true);
 	}
 }

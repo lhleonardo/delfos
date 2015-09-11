@@ -1,6 +1,5 @@
 package br.com.estatistica.modelos;
 
-
 public class Usuario implements Identificator, Validador {
 
 	private Integer id;
@@ -10,16 +9,21 @@ public class Usuario implements Identificator, Validador {
 
 	private PerfilAcesso perfilAcesso;
 
-	public Usuario(int id, String login, String descricao, PerfilAcesso perfilAcesso) {
+	public Usuario(int id, String login, String senha, String descricao, PerfilAcesso perfilAcesso) {
 		this.id = id;
 		this.login = login;
 		this.descricao = descricao;
 		this.perfilAcesso = perfilAcesso;
 	}
 
-	public Usuario(String login, PerfilAcesso perfilAcesso) {
+	public Usuario(String login, String senha, PerfilAcesso perfilAcesso) {
 		this.login = login;
 		this.perfilAcesso = perfilAcesso;
+	}
+
+	public Usuario(String login, String senha) {
+		this.login = login;
+		this.senha = senha;
 	}
 
 	public Usuario() {
@@ -68,7 +72,7 @@ public class Usuario implements Identificator, Validador {
 
 	@Override
 	public void validate() {
-		if (this.getId() == null || this.login == null || this.descricao == null || this.perfilAcesso == null) {
+		if (this.login == null || this.descricao == null || this.perfilAcesso == null) {
 			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
 		}
 	}

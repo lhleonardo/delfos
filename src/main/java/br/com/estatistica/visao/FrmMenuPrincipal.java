@@ -43,6 +43,7 @@ public class FrmMenuPrincipal extends JFrame {
 
 	public void configPermissoes(Usuario usuario) {
 		// cria os menus a partir da permissão do usuário.
+		System.out.println("Configurou permissões");
 	}
 
 }

@@ -43,7 +43,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		setResizable(false);
 
 		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
+		getContentPane().add(panel, BorderLayout.SOUTH);
 		panel.setLayout(null);
 
 		JLabel lblId = new JLabel("ID");
