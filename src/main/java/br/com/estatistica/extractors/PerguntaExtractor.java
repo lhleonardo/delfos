@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.modelos.Pergunta;
-import br.com.estatistica.modelos.Usuario;
+
 
 public class PerguntaExtractor extends Extractable<Pergunta> {
 	
@@ -34,10 +34,10 @@ public List<Pergunta> extractAll(ResultSet rs, Connection con) throws SQLExcepti
 		List<Pergunta> perguntas = new ArrayList<Pergunta>();
 
 		while (rs.next() && con != null) {
-			usuarios.add(extractModel(rs, con));
+			perguntas.add(extractModel(rs, con));
 		}
 
-		return usuarios;
+		return perguntas;
 	}
 
 
