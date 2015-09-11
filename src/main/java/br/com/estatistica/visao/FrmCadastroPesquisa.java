@@ -43,7 +43,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		setResizable(false);
 
 		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.SOUTH);
+		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
 		JLabel lblId = new JLabel("ID");
@@ -66,7 +66,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		textField_1.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
-		lblNewLabel.setBounds(11, 170, 117, 14);
+		lblNewLabel.setBounds(11, 170, 187, 14);
 		panel.add(lblNewLabel);
 		
 		textField_2 = new JTextField();
