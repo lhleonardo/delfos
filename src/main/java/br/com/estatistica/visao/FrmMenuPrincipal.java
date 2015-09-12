@@ -17,6 +17,7 @@ import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
 import br.com.estatistica.modelos.Usuario;
+import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmMenuPrincipal extends JFrame {
@@ -59,7 +60,20 @@ public class FrmMenuPrincipal extends JFrame {
 
 		menuBar.add(mnCadastro);
 
+		mnCadastro = aplicaRegraDePermissao(ConnectionFactory.getUsuarioConectado());
+
 		setContentPane(contentPane);
+	}
+
+	private JMenu aplicaRegraDePermissao(Usuario usuario) {
+		JMenu resultado = new JMenu("Cadastro");
+
+		for (JMenuItem mnItem : funcoes.keySet()) {
+			// TODO: Carregar as configurações do banco e definir a visibilidade do
+			// JMenuItem
+		}
+
+		return resultado;
 	}
 
 	private JMenu criaMenuCadastro() {
