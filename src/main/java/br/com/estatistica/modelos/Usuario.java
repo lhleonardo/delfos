@@ -73,7 +73,7 @@ public class Usuario implements Identificator, Validador {
 	@Override
 	public void validate() {
 		if (this.login == null || this.descricao == null || this.perfilAcesso == null) {
-			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
+			throw new NullPointerException("Login, descrição ou perfil de acesso não podem ser nulo.");
 		}
 	}
 
