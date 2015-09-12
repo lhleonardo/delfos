@@ -80,11 +80,13 @@ public class FrmMenuPrincipal extends JFrame {
 		mnCadastro.add(mnItemCadastroUsuario);
 		this.addFuncao(mnItemCadastroUsuario, FrmCadastroUsuario.class.getSimpleName());
 
-		JMenuItem mntmCadastroDePerfil = new JMenuItem("Cadastro de Perfil de Acesso");
-		mnCadastro.add(mntmCadastroDePerfil);
+		JMenuItem mnItemCadastroPerfil = new JMenuItem("Cadastro de Perfil de Acesso");
+		mnCadastro.add(mnItemCadastroPerfil);
+		this.addFuncao(mnItemCadastroPerfil, FrmCadastroPerfil.class.getSimpleName());
 
-		JMenuItem mntmCadastroDeFuncionalidade = new JMenuItem("Cadastro de Funcionalidade");
-		mnCadastro.add(mntmCadastroDeFuncionalidade);
+		JMenuItem mnItemCadastroFuncionalidade = new JMenuItem("Cadastro de Funcionalidade");
+		mnCadastro.add(mnItemCadastroFuncionalidade);
+		this.addFuncao(mnItemCadastroFuncionalidade, FrmCadastroFuncionalidade.class.getSimpleName());
 
 		JMenu mnLocalizao = new JMenu("Localização");
 		mnCadastro.add(mnLocalizao);
