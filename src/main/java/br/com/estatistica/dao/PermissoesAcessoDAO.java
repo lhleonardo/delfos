@@ -9,11 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JOptionPane;
-
 import br.com.estatistica.extractors.PermissoesAcessoExtractor;
 import br.com.estatistica.modelos.Funcionalidade;
 import br.com.estatistica.modelos.PerfilAcesso;
+import br.com.estatistica.util.Mensagem;
 
 public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 
@@ -44,7 +43,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 
 			super.executeBath(operacoes);
 
-			JOptionPane.showMessageDialog(null, "Salvo com sucesso.");
+			Mensagem.informa(null, "Salvo com sucesso.");
 
 		} else {
 			throw new IllegalArgumentException("Devem ser informadas as permissões para esse perfil.");
@@ -68,7 +67,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 			int executeUpdate = pst.executeUpdate();
 
 			if (executeUpdate > 0) {
-				JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
+				Mensagem.informa(null, "Excluído com sucesso.");
 			}
 		}
 

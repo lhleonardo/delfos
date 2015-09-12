@@ -5,9 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import br.com.estatistica.modelos.Identificator;
+import br.com.estatistica.util.Mensagem;
 
 /**
  * Classe responsável por ser a gerenciadora de todos os DAO's do sistema, estabelecendo
@@ -64,7 +63,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 			this.update(model);
 		}
 
-		JOptionPane.showMessageDialog(null, "Salvo com sucesso.");
+		Mensagem.informa(null, "Salvo com sucesso.");
 	}
 
 	/**

@@ -65,12 +65,9 @@ public class ConnectionFactory {
 			System.out.println("Conectado.");
 
 		} catch (SQLException e) {
-			// erro SQL
-			Mensagem.informa("Não foi possível conectar-se ao banco de dados pelo devido motivo: \n" + e.getMessage());
+			Mensagem.erro(null, e);
 		} catch (ClassNotFoundException e) {
-			// não encontrou a classe do conector
-			Mensagem.informa("Não foi possível conectar-se ao banco de dados pois a classe \n" + modelo.getDriver()
-			        + " \nnão foi encontrada.");
+			Mensagem.erro(null, e);
 		}
 		return con;
 
@@ -93,7 +90,7 @@ public class ConnectionFactory {
 				resultado = true;
 			}
 		} catch (SQLException ex) {
-			Mensagem.informa("Não foi possivel desconectar-se ao banco de dados pelo devido motivo: \n" + ex.getMessage());
+			Mensagem.erro(null, ex);
 			resultado = false;
 		}
 		return resultado;

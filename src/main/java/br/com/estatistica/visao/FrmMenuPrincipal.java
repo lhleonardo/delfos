@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,18 +27,27 @@ import br.com.estatistica.util.Mensagem;
 
 public class FrmMenuPrincipal extends JFrame {
 
+	private static final long serialVersionUID = 1L;
+
 	private JPanel contentPane;
 
 	private Map<JMenuItem, String> funcoes = new HashMap<JMenuItem, String>();
 
-	/**
-	 * Launch the application.
-	 */
+	private Connection connection;
+
+	public Map<JMenuItem, String> getFuncoes() {
+		return funcoes;
+	}
+
+	public Connection getConnection() {
+		return connection;
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmMenuPrincipal frame = new FrmMenuPrincipal();
+					FrmMenuPrincipal frame = new FrmMenuPrincipal(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,10 +56,7 @@ public class FrmMenuPrincipal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public FrmMenuPrincipal() {
+	public FrmMenuPrincipal(Connection connection) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();

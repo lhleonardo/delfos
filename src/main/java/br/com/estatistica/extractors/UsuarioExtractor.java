@@ -17,7 +17,7 @@ public class UsuarioExtractor extends Extractable<Usuario> {
 			return extractModel(rs, con);
 		} else
 			System.out.println("UsuarioExtractor.extract(return null)");
-			return null;
+		return null;
 	}
 
 	@Override

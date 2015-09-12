@@ -7,10 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
-
 import br.com.estatistica.extractors.PerfilAcessoExtractor;
 import br.com.estatistica.modelos.PerfilAcesso;
+import br.com.estatistica.util.Mensagem;
 
 public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 
@@ -65,7 +64,7 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
+			Mensagem.informa(null, "Excluído com sucesso");
 		}
 	}
 

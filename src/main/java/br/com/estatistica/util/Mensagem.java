@@ -1,27 +1,44 @@
 package br.com.estatistica.util;
 
-import java.util.ArrayList;
+import java.awt.Component;
 
 import javax.swing.JOptionPane;
 
 public class Mensagem {
 
-	public static void informa(String texto) {
-		JOptionPane.showMessageDialog(null, texto);
+	public static void informa(Component parent, String texto) {
+		JOptionPane.showMessageDialog(null, "Temos uma mensagem para você: " + texto, "Informação...", JOptionPane.INFORMATION_MESSAGE);
 	}
 
-	public static String entrada(String texto) {
-		return JOptionPane.showInputDialog(texto);
+	public static void aviso(Component parent, String texto) {
+		JOptionPane.showMessageDialog(parent, "Opa, o sistema encontrou uma coisa estranha...\nInformações: " + texto, "Aviso...",
+		        JOptionPane.WARNING_MESSAGE);
 	}
 
-	public static String entradaComBotoesPersonalizados(String titulo,
-			String texto, ArrayList<Object> opcoes) {
-		return (String) JOptionPane.showInputDialog(null, texto, titulo,
-				JOptionPane.QUESTION_MESSAGE, null, opcoes.toArray(), null);
+	public static void erro(Component parent, Throwable causa) {
+		Mensagem.erro(parent, causa.getMessage());
+	}
+
+	public static void erro(Component parent, String causa) {
+		JOptionPane.showMessageDialog(parent, "Um erro inesperado foi encontrado :(\nCausa: " + causa, "Falha interna",
+		        JOptionPane.ERROR_MESSAGE);
+	}
+
+	public static String entrada(Component parent, String texto) {
+		return JOptionPane.showInputDialog(parent, "Precisamos de sua ajuda, não sabemos como resolver :/\n\n" + texto, "Entrada de dados",
+		        JOptionPane.QUESTION_MESSAGE);
+	}
+
+	public static int confirma(Component parent, String texto) {
+		return confirma(parent, texto, JOptionPane.YES_NO_OPTION);
+	}
+
+	public static int confirma(Component parent, String texto, int tipoDeMensagem) {
+		return JOptionPane.showConfirmDialog(parent, texto, "Confirmação", tipoDeMensagem);
 	}
 
 	public static void confirmaSaidaDoPrograma() {
-		int confirmDialog = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Confirmação", JOptionPane.YES_NO_OPTION);
+		int confirmDialog = confirma(null, "Deseja realmente sair?");
 		if (confirmDialog == JOptionPane.YES_OPTION) {
 			System.exit(0);
 		}

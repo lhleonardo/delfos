@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import br.com.estatistica.extractors.UsuarioExtractor;
 import br.com.estatistica.modelos.PerfilAcesso;
 import br.com.estatistica.modelos.Usuario;
+import br.com.estatistica.util.Mensagem;
 
 public class UsuarioDAO extends GenericDAO<Usuario> {
 
@@ -35,7 +36,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 				pst.setInt(1, model.getId());
 				int linhasAfetadas = pst.executeUpdate();
 				if (linhasAfetadas > 0) {
-					JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
+					Mensagem.informa(null, "Excluído com sucesso.");
 				}
 			}
 		}

@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.Connection;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -21,6 +22,8 @@ public class GenericFormCadastro extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel_2;
+
+	private Connection connection;
 
 	/**
 	 * Launch the application.
@@ -41,17 +44,18 @@ public class GenericFormCadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GenericFormCadastro(String nameFrame) {
+	public GenericFormCadastro(String nameFrame, Connection connection) {
 		initComponents(nameFrame);
+		this.connection = connection;
 	}
 
 	public GenericFormCadastro() {
-		setResizable(false);
 		initComponents("Default crud");
 	}
 
 	protected void initComponents(String nameFrame) {
 		setTitle(nameFrame);
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 500);
 		contentPane = new JPanel();
@@ -106,5 +110,25 @@ public class GenericFormCadastro extends JFrame {
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 1;
 		panel.add(panel_3, gbc_panel_3);
-    }
+
+	}
+
+	public Connection getConnection() {
+		return connection;
+	}
+
+	@Override
+	protected void finalize() throws Throwable {
+		if (!this.connection.isClosed()) {
+			connection.close();
+		}
+
+		if (this.connection != null) {
+			this.connection = null;
+		}
+
+		System.gc();
+		super.finalize();
+	}
+
 }

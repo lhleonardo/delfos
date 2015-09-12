@@ -28,7 +28,7 @@ public class ModeloConexao {
 			this.setUsuario(manipulador.getProp().getProperty("database.usuario"));
 			this.setSenha(manipulador.getProp().getProperty("database.senha"));
 		} catch (IOException e) {
-			Mensagem.entrada(e.getMessage());
+			Mensagem.erro(null, e);
 		}
 	}
 
