@@ -56,6 +56,7 @@ public class FrmMenuPrincipal extends JFrame {
 		setJMenuBar(menuBar);
 
 		JMenu mnCadastro = criaMenuCadastro();
+
 		menuBar.add(mnCadastro);
 
 		setContentPane(contentPane);
