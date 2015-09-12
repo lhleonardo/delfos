@@ -1,8 +1,8 @@
 package br.com.estatistica.modelos;
 
-public class Pergunta {
+public class Pergunta implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String descricao;
 	private String observacao;
 	private Questionario questionario;
@@ -32,11 +32,12 @@ public class Pergunta {
 		this.tipoPergunta = tipoPergunta;
 		this.tipoCampo = tipoCampo;
 	}
+	
 
 	public Pergunta() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -82,6 +83,15 @@ public class Pergunta {
 
 	public void setTipoCampo(TipoCampo tipoCampo) {
 		this.tipoCampo = tipoCampo;
+	}
+
+	
+
+	@Override
+	public void validate() {
+		if (this.getId() == null || this.descricao == null || this.observacao == null || this.questionario == null || this.tipoCampo == null || this.tipoPergunta == null) {
+			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
+		}		
 	}
 
 }
