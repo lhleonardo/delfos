@@ -88,11 +88,14 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 	public PerfilAcesso get(Integer idModel) throws SQLException {
 		PerfilAcesso perfil = null;
 
+		System.out.println("PerfilAcessoDAO.get()");
+
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
 			ResultSet resultSet = pst.executeQuery();
 
-			perfil = new PerfilAcessoExtractor().extract(resultSet, null);
+			System.out.println("PerfilAcessoDAO.get(vai entrar no extrator de perfil)");
+			perfil = new PerfilAcessoExtractor().extract(resultSet, super.getConnection());
 		}
 
 		return perfil;

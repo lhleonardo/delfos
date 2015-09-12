@@ -77,4 +77,16 @@ public class PerfilAcesso implements Validador, Identificator {
 		}
 	}
 
+	@Override
+	public String toString() {
+
+		StringBuffer permissoes = new StringBuffer();
+
+		for (Funcionalidade f : this.getPermissoes().keySet()) {
+			System.out.println(f + "\nAcesso: " + this.getPermissoes().get(f) + "\n");
+		}
+
+		return "PerfilAcesso (id=" + id + ", nome=" + nome + ", descricao=" + descricao + ", permissões: " + permissoes + ")";
+	}
+
 }

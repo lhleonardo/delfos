@@ -77,12 +77,21 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 	public Map<Funcionalidade, Boolean> getAll(PerfilAcesso model) throws SQLException {
 		Map<Funcionalidade, Boolean> permissoes = new HashMap<Funcionalidade, Boolean>();
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_PERFIL)) {
-			pst.setInt(1, model.getId());
-			ResultSet resultSet = pst.executeQuery();
+		System.out.println("PermissoesAcessoDAO.getAll()");
 
-			permissoes = new PermissoesAcessoExtractor().extract(resultSet, super.getConnection());
-		}
+		if (model.getId() != null) {
+			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_PERFIL)) {
+				System.out.println("PermissoesAcessoDAO.getAll(passo 1)");
+				pst.setInt(1, model.getId());
+				System.out.println("PermissoesAcessoDAO.getAll(passo 2)");
+				ResultSet resultSet = pst.executeQuery();
+
+				System.out.println("PermissoesAcessoDAO.getAll(vai extrair as permissões)");
+				permissoes = new PermissoesAcessoExtractor().extract(resultSet, getConnection());
+			}
+		} else
+			throw new NullPointerException(
+			        "O perfil de acesso informado para realizar a associação com as permissões é inválido ou inexistente.");
 
 		return permissoes;
 	}

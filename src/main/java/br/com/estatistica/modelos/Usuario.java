@@ -77,4 +77,9 @@ public class Usuario implements Identificator, Validador {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return "Código: " + this.getId() + "\nLogin: " + this.getLogin() + "\nPerfil de Acesso: " + this.getPerfilAcesso().getNome();
+	}
+
 }
