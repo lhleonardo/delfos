@@ -2,8 +2,10 @@ package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -20,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import br.com.estatistica.dao.UsuarioDAO;
 import br.com.estatistica.modelos.Usuario;
 import br.com.estatistica.util.ConnectionFactory;
+import br.com.estatistica.util.Mensagem;
 
 public class FrmLoginUsuario extends JFrame {
 
@@ -55,8 +58,14 @@ public class FrmLoginUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmLoginUsuario() {
+		initComponents();
+	}
+
+	protected void initComponents() {
 		setTitle("Autenticação de usuário");
+
 		setResizable(false);
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 500, 400);
 		contentPane = new JPanel();
@@ -115,29 +124,33 @@ public class FrmLoginUsuario extends JFrame {
 		btnCancelar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
 		btnCancelar.setBounds(102, 284, 118, 31);
 		panel.add(btnCancelar);
+
+		centralizarComponente();
+	}
+
+	public void centralizarComponente() {
+		Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension dw = getSize();
+		setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
 	}
 
 	protected ActionListener btnCancelarActionPerformed() {
 		return new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "asdfasdf");
+				Mensagem.confirmaSaidaDoPrograma();
 			}
 		};
 	}
 
 	protected ActionListener btnEntrarActionPerformed() {
 		return new ActionListener() {
-
 			public void actionPerformed(ActionEvent arg0) {
 				autenticaUsuario();
-
 			}
-
 		};
 	}
 
 	protected boolean validaCampos() {
-		// TODO Auto-generated method stub
 		return (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty());
 	}
 
@@ -159,9 +172,10 @@ public class FrmLoginUsuario extends JFrame {
 
 	protected void chamaMenuPrincipal(Usuario usuario) throws SQLException {
 		ConnectionFactory.setUsuarioConectado(usuario);
-		System.out.println("Criou o usuário e setou pro ConnectionFactory");
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
 		menuPrincipal.configPermissoes(usuario);
 		menuPrincipal.setVisible(true);
+		dispose();
 	}
 }

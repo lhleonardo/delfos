@@ -20,4 +20,11 @@ public class Mensagem {
 				JOptionPane.QUESTION_MESSAGE, null, opcoes.toArray(), null);
 	}
 
+	public static void confirmaSaidaDoPrograma() {
+		int confirmDialog = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Confirmação", JOptionPane.YES_NO_OPTION);
+		if (confirmDialog == JOptionPane.YES_OPTION) {
+			System.exit(0);
+		}
+	}
+
 }
