@@ -26,26 +26,25 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Override
-	protected void insert(PerfilAcesso model) throws SQLException {
+	protected Integer insert(PerfilAcesso model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
 			pst.executeUpdate();
 
-			ResultSet keys = pst.getGeneratedKeys();
-			if (keys.next()) {
+			model.setId(super.getGeneratedKeys(pst.getGeneratedKeys(), "id_perfil_acesso"));
 
-				model.setId(keys.getInt("id_perfil_acesso"));
-
-				try (PermissoesAcessoDAO daoPermissao = new PermissoesAcessoDAO(super.getConnection())) {
-					daoPermissao.save(model);
-				}
+			try (PermissoesAcessoDAO daoPermissao = new PermissoesAcessoDAO(super.getConnection())) {
+				daoPermissao.save(model);
 			}
+
+			return model.getId();
 		}
+
 	}
 
 	@Override
-	protected void update(PerfilAcesso model) throws SQLException {
+	protected Integer update(PerfilAcesso model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
@@ -55,17 +54,23 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 			try (PermissoesAcessoDAO daoPermissao = new PermissoesAcessoDAO(super.getConnection())) {
 				daoPermissao.save(model);
 			}
+			return null;
 		}
 
 	}
 
 	@Override
-	public void delete(PerfilAcesso model) throws SQLException {
+	public boolean delete(PerfilAcesso model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
-			Mensagem.informa(null, "Excluído com sucesso");
+			if (this.get(model.getId()) == null) {
+				Mensagem.informa(null, "Excluído com sucesso");
+				return true;
+			} else
+				return false;
 		}
+
 	}
 
 	@Override

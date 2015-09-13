@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.estatistica.dao.BairroDAO;
 import br.com.estatistica.modelos.Bairro;
+import br.com.estatistica.util.Mensagem;
 
 public class FrmCadastroBairros extends GenericFormCadastro {
 	private static final long serialVersionUID = 1L;
@@ -148,31 +151,52 @@ public class FrmCadastroBairros extends GenericFormCadastro {
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	protected void btnCancelarActionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		limpaCampos();
 	}
 
 	protected void btnExcluirActionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		try (BairroDAO bDao = new BairroDAO(getConnection())) {
+			Bairro bairro = criaModelo();
+			if (bairro.getId() != null) {
+				bDao.delete(bairro);
+			} else {
+				Mensagem.aviso(this, "É necessário que informe o código do Bairro para realizar a exclusão.");
+			}
+		} catch (SQLException ex) {
+			Mensagem.erro(this, ex);
+		}
 	}
 
 	protected void btnSalvarActionPerformed(ActionEvent e) {
+		try (BairroDAO bDao = new BairroDAO(getConnection())) {
+			Bairro bairro = criaModelo();
+			Integer codigo = bDao.save(bairro);
+			txtCodigo.setText(String.valueOf(codigo));
+		} catch (SQLException e1) {
+			Mensagem.erro(this, e1);
+		}
+	}
+
+	private Bairro criaModelo() {
 		Bairro bairro = new Bairro();
 		bairro.setId((txtCodigo.getText().isEmpty()) ? null : Integer.parseInt(txtCodigo.getText()));
 		bairro.setNome(txtNome.getText());
 		bairro.setDescricao(txtNome.getText());
+		return bairro;
 	}
 
 	protected void btnNovoActionPerformed(ActionEvent e) {
+		limpaCampos();
+		txtNome.requestFocus();
+	}
+
+	private void limpaCampos() {
 		txtCodigo.setText("");
 		txtNome.setText("");
 		txtDescricao.setText("");
-		txtNome.requestFocus();
 	}
 }
