@@ -3,6 +3,8 @@ package br.com.estatistica.visao;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.sql.Connection;
@@ -15,6 +17,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import br.com.estatistica.util.ManipuladorDeComponentes;
 
 public class FrmCadastroPessoa extends GenericFormCadastro {
 	/**
@@ -220,6 +224,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		panel.add(panel_3);
 
 		btnNovo = new JButton("Novo");
+		btnNovo.addActionListener(btnNovoActionPerformed());
 		btnNovo.setBounds(0, 0, 89, 42);
 		panel_3.add(btnNovo);
 
@@ -242,5 +247,13 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		chckbxPesquisador = new JCheckBox("Pesquisador");
 		chckbxPesquisador.setBounds(116, 98, 97, 23);
 		panel.add(chckbxPesquisador);
+	}
+
+	public ActionListener btnNovoActionPerformed() {
+		return new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManipuladorDeComponentes.limpaTextComponent(getContentPane());
+			}
+		};
 	}
 }
