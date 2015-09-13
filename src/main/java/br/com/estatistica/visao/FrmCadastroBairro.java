@@ -18,7 +18,7 @@ import br.com.estatistica.dao.BairroDAO;
 import br.com.estatistica.modelos.Bairro;
 import br.com.estatistica.util.Mensagem;
 
-public class FrmCadastroBairros extends GenericFormCadastro {
+public class FrmCadastroBairro extends GenericFormCadastro {
 	private static final long serialVersionUID = 1L;
 
 	private JTextField txtCodigo;
@@ -40,7 +40,7 @@ public class FrmCadastroBairros extends GenericFormCadastro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmCadastroBairros frame = new FrmCadastroBairros(null);
+					FrmCadastroBairro frame = new FrmCadastroBairro(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -49,7 +49,7 @@ public class FrmCadastroBairros extends GenericFormCadastro {
 		});
 	}
 
-	public FrmCadastroBairros(Connection connection) {
+	public FrmCadastroBairro(Connection connection) {
 		super("Cadastro de Bairros", null);
 
 		initComponents();

@@ -11,8 +11,15 @@ public class BairroExtractor extends Extractable<Bairro> {
 
 	@Override
 	protected Bairro extractModel(ResultSet rs, Connection con) throws SQLException {
-
-		return null;
+		if (rs.next()) {
+			Bairro bairro = new Bairro();
+			bairro.setId(rs.getInt("id_bairro"));
+			bairro.setNome(rs.getString("nome"));
+			bairro.setDescricao(rs.getString("descricao"));
+			return bairro;
+		} else {
+			return null;
+		}
 	}
 
 }
