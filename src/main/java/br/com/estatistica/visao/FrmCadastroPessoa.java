@@ -103,6 +103,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		txtCpfCnpj.addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusLost(FocusEvent arg0) {
+
 			}
 		});
 		txtCpfCnpj.setBounds(10, 71, 96, 20);
@@ -212,7 +213,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		scrollPaneEndereco = new JScrollPane(txtDescricaoEndereco);
 		scrollPaneEndereco.setBounds(10, 103, 488, 46);
 		panel_1.add(scrollPaneEndereco);
-		tabbedPane.addTab("New tab2", null, panel_2, null);
+		tabbedPane.addTab("[...]", null, panel_2, null);
 
 		btnPesquisaPessoa = new JButton("...");
 		btnPesquisaPessoa.setBounds(52, 25, 25, 23);
