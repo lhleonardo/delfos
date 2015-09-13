@@ -144,6 +144,15 @@ public class FrmLoginUsuario extends JFrame {
 		return (!txtUsuario.getText().isEmpty() && !new String(txtSenha.getPassword()).isEmpty());
 	}
 
+	protected void chamaMenuPrincipal(Usuario usuario) throws SQLException {
+		ConnectionFactory.setUsuarioConectado(usuario);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal(uDao.getConnection());
+		menuPrincipal.configPermissoes(usuario);
+		menuPrincipal.setVisible(true);
+		dispose();
+	}
+
 	protected void autenticaUsuario() {
 		if (verificaCampoObrigatorio()) {
 			try {
@@ -161,15 +170,6 @@ public class FrmLoginUsuario extends JFrame {
 		} else {
 			Mensagem.aviso(this, "Preencha os campos obrigatórios antes de continuar.");
 		}
-	}
-
-	protected void chamaMenuPrincipal(Usuario usuario) throws SQLException {
-		ConnectionFactory.setUsuarioConectado(usuario);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal(uDao.getConnection());
-		menuPrincipal.configPermissoes(usuario);
-		menuPrincipal.setVisible(true);
-		dispose();
 	}
 
 	public Usuario getUsuario() {

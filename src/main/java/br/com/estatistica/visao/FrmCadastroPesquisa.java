@@ -1,18 +1,22 @@
 package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.sql.Connection;
 
+import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JEditorPane;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
 import javax.swing.border.LineBorder;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -24,7 +28,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmCadastroPesquisa frame = new FrmCadastroPesquisa();
+					FrmCadastroPesquisa frame = new FrmCadastroPesquisa(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,9 +40,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
 	 * Create the frame.
 	 */
-	public FrmCadastroPesquisa() {
-		super();
-		setTitle("Cadastro de Pesquisas");
+	public FrmCadastroPesquisa(Connection connection) {
+		super("Cadastro de Pesquisas", connection);
 
 		setResizable(false);
 
@@ -64,28 +67,28 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		textField_1.setBounds(50, 27, 354, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-		
+
 		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
 		lblNewLabel.setBounds(11, 170, 187, 14);
 		panel.add(lblNewLabel);
-		
+
 		textField_2 = new JTextField();
 		textField_2.setBounds(11, 195, 46, 20);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
-		
+
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
-		
+
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(109, 428, 89, 23);
 		panel.add(btnCancelar);
-		
+
 		JLabel lblDescrio = new JLabel("Descrição");
 		lblDescrio.setBounds(11, 58, 64, 14);
 		panel.add(lblDescrio);
-		
+
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		editorPane.setBounds(10, 84, 282, 75);

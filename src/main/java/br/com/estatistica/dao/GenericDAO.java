@@ -253,7 +253,6 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 		if (this.connection != null) {
 			this.connection = null;
 		}
-		System.gc();
 		super.finalize();
 	}
 

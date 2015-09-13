@@ -22,7 +22,6 @@ import javax.swing.border.EmptyBorder;
 
 import br.com.estatistica.modelos.Funcionalidade;
 import br.com.estatistica.modelos.Usuario;
-import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmMenuPrincipal extends JFrame {
@@ -34,6 +33,8 @@ public class FrmMenuPrincipal extends JFrame {
 	private Map<JMenuItem, String> funcoes = new HashMap<JMenuItem, String>();
 
 	private Connection connection;
+
+	private JMenu mnCadastro;
 
 	public Map<JMenuItem, String> getFuncoes() {
 		return funcoes;
@@ -57,23 +58,25 @@ public class FrmMenuPrincipal extends JFrame {
 	}
 
 	public FrmMenuPrincipal(Connection connection) {
+		this.connection = connection;
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setExtendedState(Frame.MAXIMIZED_BOTH);
 
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 
-		JMenu mnCadastro = criaMenuCadastro();
+		mnCadastro = criaMenuCadastro();
 
 		menuBar.add(mnCadastro);
 
-		aplicaRegraDePermissao(ConnectionFactory.getUsuarioConectado(), mnCadastro);
-
 		setContentPane(contentPane);
+
+		setExtendedState(Frame.MAXIMIZED_BOTH);
 	}
 
 	private void aplicaRegraDePermissao(Usuario usuario, JMenu jMenuBar) {
@@ -93,11 +96,6 @@ public class FrmMenuPrincipal extends JFrame {
 	}
 
 	private List<JMenuItem> getMenuItems(Object obj) {
-		// if (obj instanceof JMenuBar) {
-		// for (Component c : ((JMenuBar) obj).getComponents()) {
-		// getMenuItems(c);
-		// }
-		// }
 		List<JMenuItem> menus = new ArrayList<JMenuItem>();
 
 		if (obj instanceof JMenu) {
@@ -109,7 +107,6 @@ public class FrmMenuPrincipal extends JFrame {
 		}
 
 		return menus;
-
 	}
 
 	private JMenu criaMenuCadastro() {
@@ -117,32 +114,30 @@ public class FrmMenuPrincipal extends JFrame {
 		JMenu mnCadastro = new JMenu("Cadastro");
 
 		JMenuItem mnItemCadastroPessoa = new JMenuItem("Cadastro de Pessoa");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
+		mnItemCadastroPessoa.addActionListener(abreForm(new FrmCadastroPessoa(getConnection())));
 		mnCadastro.add(mnItemCadastroPessoa);
 		this.addFuncao(mnItemCadastroPessoa, FrmCadastroPessoa.class.getSimpleName());
 
 		JMenuItem mnItemCadastroPesquisa = new JMenuItem("Cadastro de Pesquisa");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPesquisa.class));
+		mnItemCadastroPesquisa.addActionListener(abreForm(new FrmCadastroPesquisa(getConnection())));
 		mnCadastro.add(mnItemCadastroPesquisa);
 		this.addFuncao(mnItemCadastroPesquisa, FrmCadastroPesquisa.class.getSimpleName());
 
 		JMenuItem mnItemCadastroQuestionario = new JMenuItem("Cadastro de Questionários");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroQuestionario.class));
+		mnItemCadastroQuestionario.addActionListener(abreForm(new FrmCadastroQuestionario(getConnection())));
 		mnCadastro.add(mnItemCadastroQuestionario);
 		this.addFuncao(mnItemCadastroQuestionario, FrmCadastroQuestionario.class.getSimpleName());
 
 		JMenuItem mnItemCadastroUsuario = new JMenuItem("Cadastro de Usuário");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroUsuario.class));
+		mnItemCadastroUsuario.addActionListener(abreForm(new FrmCadastroUsuario(getConnection())));
 		mnCadastro.add(mnItemCadastroUsuario);
 		this.addFuncao(mnItemCadastroUsuario, FrmCadastroUsuario.class.getSimpleName());
 
 		JMenuItem mnItemCadastroPerfil = new JMenuItem("Cadastro de Perfil de Acesso");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPerfilAcesso.class));
 		mnCadastro.add(mnItemCadastroPerfil);
 		this.addFuncao(mnItemCadastroPerfil, FrmCadastroPerfilAcesso.class.getSimpleName());
 
 		JMenuItem mnItemCadastroFuncionalidade = new JMenuItem("Cadastro de Funcionalidade");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroFuncionalidade.class));
 		mnCadastro.add(mnItemCadastroFuncionalidade);
 		this.addFuncao(mnItemCadastroFuncionalidade, FrmCadastroFuncionalidade.class.getSimpleName());
 
@@ -150,17 +145,14 @@ public class FrmMenuPrincipal extends JFrame {
 		mnCadastro.add(mnLocalizao);
 
 		JMenuItem mntmCadastroDeCidades = new JMenuItem("Cadastro de Cidades");
-		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeCidades);
 		this.addFuncao(mntmCadastroDeCidades, FrmCadastroCidades.class.getSimpleName());
 
 		JMenuItem mntmCadastroDeEstados = new JMenuItem("Cadastro de Estados");
-		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeEstados);
 		this.addFuncao(mntmCadastroDeEstados, FrmCadastroEstados.class.getSimpleName());
 
 		JMenuItem mntmCadastroDeBairros = new JMenuItem("Cadastro de Bairros");
-		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeBairros);
 		this.addFuncao(mntmCadastroDeBairros, FrmCadastroBairros.class.getSimpleName());
 
@@ -174,16 +166,14 @@ public class FrmMenuPrincipal extends JFrame {
 		return mnCadastro;
 	}
 
-	protected ActionListener chamaTelaParaItemDeMenu(Class<? extends JFrame> classe) {
+	private ActionListener abreForm(JFrame form) {
+		// TODO Auto-generated method stub
 		return new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					JFrame frame = classe.newInstance();
-					frame.setVisible(true);
-				} catch (InstantiationException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				form.setVisible(true);
 			}
 		};
 	}
@@ -202,6 +192,7 @@ public class FrmMenuPrincipal extends JFrame {
 
 	public void configPermissoes(Usuario usuario) {
 		// cria os menus a partir da permissão do usuário.
+		aplicaRegraDePermissao(usuario, mnCadastro);
 	}
 
 }

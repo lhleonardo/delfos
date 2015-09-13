@@ -43,10 +43,6 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-
 	public FrmCadastroFuncionalidade() {
 		super("Cadastro de Funcionalidade", new ConnectionFactory().getConnection());
 		preparaTela();
@@ -88,28 +84,28 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 		lblDescricao.setBounds(10, 51, 46, 14);
 		panel.add(lblDescricao);
 
-		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 300, 499, 42);
-		panel.add(panel_1);
-		panel_1.setLayout(null);
+		JPanel panelBotoes = new JPanel();
+		panelBotoes.setBounds(10, 300, 499, 42);
+		panel.add(panelBotoes);
+		panelBotoes.setLayout(null);
 
 		btnNovo = new JButton("Novo");
 		btnNovo.addActionListener(btnNovoActionPerformed());
 		btnNovo.setBounds(0, 0, 89, 42);
-		panel_1.add(btnNovo);
+		panelBotoes.add(btnNovo);
 
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(btnSalvarActionPerformed());
 		btnSalvar.setBounds(88, 0, 89, 42);
-		panel_1.add(btnSalvar);
+		panelBotoes.add(btnSalvar);
 
 		btnExcluir = new JButton("Excluir");
 		btnExcluir.setBounds(176, 0, 89, 42);
-		panel_1.add(btnExcluir);
+		panelBotoes.add(btnExcluir);
 
 		btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(391, 0, 108, 42);
-		panel_1.add(btnCancelar);
+		panelBotoes.add(btnCancelar);
 
 		btnPesquisar = new JButton("...");
 		btnPesquisar.setToolTipText("Pesquisar registro existente");
