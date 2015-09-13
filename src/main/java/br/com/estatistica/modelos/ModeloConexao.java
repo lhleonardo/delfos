@@ -19,7 +19,7 @@ public class ModeloConexao {
 	public ManipuladorDePropriedades manipulador;
 
 	public ModeloConexao() {
-		this.manipulador = new ManipuladorDePropriedades("src/main/resources/delfos.properties");
+		this.manipulador = new ManipuladorDePropriedades("src//main//resources//delfos.properties");
 
 		try {
 			this.setCaminhoDatabase(manipulador.getProp().getProperty("database.nomeDatabase"));

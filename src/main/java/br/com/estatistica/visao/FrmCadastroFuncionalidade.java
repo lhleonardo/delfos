@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -13,7 +14,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.estatistica.dao.FuncionalidadeDAO;
+import br.com.estatistica.modelos.Funcionalidade;
 import br.com.estatistica.util.ConnectionFactory;
+import br.com.estatistica.util.Mensagem;
 
 public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 	private static final long serialVersionUID = 1L;
@@ -26,6 +30,8 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 	private JButton btnPesquisar;
 	private JButton btnCancelar;
 	private JScrollPane scroll;
+	private JLabel lblNewLabel;
+	private JTextField txtChave;
 
 	/**
 	 * Launch the application.
@@ -81,7 +87,7 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 		txtNome.setColumns(10);
 
 		JLabel lblDescricao = new JLabel("Descricao");
-		lblDescricao.setBounds(10, 51, 46, 14);
+		lblDescricao.setBounds(10, 99, 46, 14);
 		panel.add(lblDescricao);
 
 		JPanel panelBotoes = new JPanel();
@@ -100,6 +106,7 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 		panelBotoes.add(btnSalvar);
 
 		btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(btnExcluirActionPerformed());
 		btnExcluir.setBounds(176, 0, 89, 42);
 		panelBotoes.add(btnExcluir);
 
@@ -115,18 +122,68 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 		txtDescricao = new JTextArea();
 		txtDescricao.setLineWrap(true);
 		scroll = new JScrollPane(txtDescricao);
-		scroll.setBounds(10, 76, 499, 213);
+		scroll.setBounds(10, 113, 499, 176);
 		panel.add(scroll);
+
+		lblNewLabel = new JLabel("Chave");
+		lblNewLabel.setBounds(10, 53, 46, 14);
+		panel.add(lblNewLabel);
+
+		txtChave = new JTextField();
+		txtChave.setBounds(10, 68, 498, 20);
+		panel.add(txtChave);
+		txtChave.setColumns(10);
 
 		setLocationRelativeTo(null);
 	}
 
-	protected ActionListener btnSalvarActionPerformed() {
-		return new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+	public ActionListener btnExcluirActionPerformed() {
+		Funcionalidade funcionalidade = criaFuncionalidade();
 
-			}
-		};
+		try (FuncionalidadeDAO fdDao = new FuncionalidadeDAO(getConnection())) {
+			return new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						fdDao.delete(funcionalidade);
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						Mensagem.erro(null, e1);
+					}
+				}
+			};
+		} catch (SQLException e) {
+			Mensagem.erro(this, e);
+		}
+		return null;
+	}
+
+	protected ActionListener btnSalvarActionPerformed() {
+		Funcionalidade func = criaFuncionalidade();
+
+		try (FuncionalidadeDAO fDao = new FuncionalidadeDAO(getConnection())) {
+			return new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						fDao.save(func);
+					} catch (SQLException e) {
+						Mensagem.erro(null, e);
+					}
+				}
+			};
+		} catch (SQLException e) {
+			Mensagem.erro(this, e);
+		}
+
+		return null;
+	}
+
+	public Funcionalidade criaFuncionalidade() {
+		Funcionalidade func = new Funcionalidade();
+		func.setId(Integer.parseInt(this.txtCodigo.getText()));
+		func.setNome(this.txtNome.getText());
+		func.setDescricao(this.txtDescricao.getText());
+		func.setChave(this.txtChave.getText());
+		return func;
 	}
 
 	protected ActionListener btnNovoActionPerformed() {
@@ -141,7 +198,6 @@ public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 		txtCodigo.setText("");
 		txtNome.setText("");
 		txtDescricao.setText("");
-
 	}
 
 }
