@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class GenericFormCadastro extends JFrame {
+public abstract class GenericFormCadastro extends JFrame {
 
 	/**
 	 * 
@@ -32,8 +32,6 @@ public class GenericFormCadastro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					GenericFormCadastro frame = new GenericFormCadastro();
-					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

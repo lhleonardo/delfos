@@ -1,6 +1,5 @@
 package br.com.estatistica.modelos;
 
-
 /**
  * Classe responsável por representar um bairro para um determinado endereço.
  * 
@@ -9,9 +8,9 @@ package br.com.estatistica.modelos;
  * @since 1.5
  */
 
-public class Bairro {
+public class Bairro implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String nome;
 	private String descricao;
 
@@ -33,11 +32,14 @@ public class Bairro {
 		this.nome = nome;
 	}
 
-	public int getId() {
+	public Bairro() {
+	}
+
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -55,6 +57,13 @@ public class Bairro {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public void validate() {
+		if (this.getNome().isEmpty()) {
+			throw new IllegalArgumentException("É necessário que o nome do bairro seja informado.");
+		}
 	}
 
 }

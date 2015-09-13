@@ -28,31 +28,34 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 	}
 
 	@Override
-	protected void insert(Funcionalidade model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
+	protected Integer insert(Funcionalidade model) throws SQLException {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
 			pst.setString(3, model.getChave());
 			pst.executeUpdate();
+			return super.getGeneratedKeys(pst.getGeneratedKeys(), "id_funcionalidade");
 		}
 	}
 
 	@Override
-	protected void update(Funcionalidade model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
+	protected Integer update(Funcionalidade model) throws SQLException {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
 			pst.setString(3, model.getChave());
 			pst.setInt(4, model.getId());
 			pst.executeUpdate();
+			return super.getGeneratedKeys(pst.getGeneratedKeys(), "id_funcionalidade");
 		}
 	}
 
 	@Override
-	public void delete(Funcionalidade model) throws SQLException {
+	public boolean delete(Funcionalidade model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
+			return this.get(model.getId()) == null;
 		}
 	}
 

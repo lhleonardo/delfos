@@ -1,6 +1,7 @@
 package br.com.estatistica.dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -55,15 +56,17 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 *             caso ocorra algum erro em instruções ao banco de dados.
 	 */
-	public void save(T model) throws SQLException {
+	public Integer save(T model) throws SQLException {
 		model.validate();
+		Integer chavesGeradas = null;
 		if (model.getId() == null) {
-			this.insert(model);
+			chavesGeradas = this.insert(model);
 		} else {
-			this.update(model);
+			chavesGeradas = this.update(model);
 		}
 
 		Mensagem.informa(null, "Salvo com sucesso.");
+		return chavesGeradas;
 	}
 
 	/**
@@ -78,11 +81,12 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * 
 	 * @param model
 	 *            Modelo de dados com as informações que serão inseridas no banco.
+	 * @return
 	 * @throws SQLException
 	 *             caso ocorra algum erro em instruções ao banco de dados.
 	 * 
 	 */
-	protected abstract void insert(T model) throws SQLException;
+	protected abstract Integer insert(T model) throws SQLException;
 
 	/**
 	 * Método auxiliar responsável por realizar a atualização de determinado registro
@@ -99,7 +103,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 *            dados.
 	 * @throws SQLException
 	 */
-	protected abstract void update(T model) throws SQLException;
+	protected abstract Integer update(T model) throws SQLException;
 
 	/**
 	 * Método auxiliar responsável por realizar a <b>exclusão</b> de determinado registro
@@ -116,7 +120,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 *            dados.
 	 * @throws SQLException
 	 */
-	public abstract void delete(T model) throws SQLException;
+	public abstract boolean delete(T model) throws SQLException;
 
 	/**
 	 * Método responsável por retornar <b>todos</b> os registros no banco de dados para
@@ -254,6 +258,24 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 			this.connection = null;
 		}
 		super.finalize();
+	}
+
+	/**
+	 * Método responsável por retornar a chave primária gerada pelo auto incremento do
+	 * banco de dados.
+	 * 
+	 * @param keys
+	 *            ResultSet de chaves geradas
+	 * @param nomeDoCampo
+	 *            nome do campo
+	 * @return chave primária gerada.
+	 * @throws SQLException
+	 */
+	protected Integer getGeneratedKeys(ResultSet keys, String nomeDoCampo) throws SQLException {
+		if (keys.next()) {
+			return keys.getInt(nomeDoCampo);
+		}
+		return null;
 	}
 
 }
