@@ -3,6 +3,7 @@ package br.com.estatistica.visao;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 import java.sql.Connection;
 
 import javax.swing.JButton;
@@ -12,12 +13,25 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.LineBorder;
+import javax.swing.AbstractAction;
+
+import java.awt.event.ActionEvent;
+
+import javax.swing.Action;
+
+import br.com.estatistica.dao.PesquisaDAO;
+import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.util.ConnectionFactory;
+import br.com.estatistica.dao.*;
+
+import java.awt.event.ActionListener;
 
 public class FrmCadastroQuestionario extends GenericFormCadastro {
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
+	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -54,12 +68,12 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 		panel.add(lblId);
 
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
-
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(109, 428, 89, 23);
-		panel.add(btnCancelar);
 
 		JLabel lblDescrio = new JLabel("Descrição");
 		lblDescrio.setBounds(11, 58, 64, 14);
@@ -98,11 +112,33 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 		panel.add(lblPesquisa);
 
 		JButton btnNewButton = new JButton("Lupa");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnNewButton.setBounds(68, 200, 89, 23);
 		panel.add(btnNewButton);
 
 		JButton button = new JButton("+");
 		button.setBounds(208, 166, 41, 23);
 		panel.add(button);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				dispose();
+				Toolkit.getDefaultToolkit().beep();
+			}
+		});
+		btnCancelar.setBounds(109, 428, 89, 23);
+		panel.add(btnCancelar);
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }
