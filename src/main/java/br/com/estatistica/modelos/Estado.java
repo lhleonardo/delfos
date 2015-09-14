@@ -1,6 +1,5 @@
 package br.com.estatistica.modelos;
 
-
 /**
  * Classe responsável por representar um estado de determinada cidade.
  * 
@@ -8,10 +7,11 @@ package br.com.estatistica.modelos;
  * @author Leonardo Braz
  * @since 1.5
  */
-public class Estado implements Validador {
+public class Estado implements Identificator {
 
 	private Integer id;
 	private String nome;
+	private String codIbge;
 	private String descricao;
 	private String uf;
 
@@ -33,11 +33,14 @@ public class Estado implements Validador {
 		this.setNome(nome);
 	}
 
+	public Estado() {
+	}
+
 	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -72,6 +75,14 @@ public class Estado implements Validador {
 	@Override
 	public void validate() {
 
+	}
+
+	public String getCodIbge() {
+		return codIbge;
+	}
+
+	public void setCodIbge(String codIbge) {
+		this.codIbge = codIbge;
 	}
 
 }
