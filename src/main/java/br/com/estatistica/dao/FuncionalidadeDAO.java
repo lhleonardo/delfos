@@ -34,7 +34,7 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 			pst.setString(2, model.getDescricao());
 			pst.setString(3, model.getChave());
 			pst.executeUpdate();
-			return super.getGeneratedKeys(pst.getGeneratedKeys(), "id_funcionalidade");
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
 
@@ -46,7 +46,7 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 			pst.setString(3, model.getChave());
 			pst.setInt(4, model.getId());
 			pst.executeUpdate();
-			return super.getGeneratedKeys(pst.getGeneratedKeys(), "id_funcionalidade");
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
 
@@ -103,13 +103,13 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 	}
 
 	@Override
-	public Funcionalidade get(String value) throws SQLException {
-		Funcionalidade func = null;
+	public List<Funcionalidade> get(String value) throws SQLException {
+		List<Funcionalidade> func = new ArrayList<>();
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
 			pst.setString(1, "%" + value + "%");
 			ResultSet resultSet = pst.executeQuery();
 
-			func = extractor.extract(resultSet, null);
+			func.addAll(extractor.extractAll(resultSet, null));
 		}
 
 		return func;

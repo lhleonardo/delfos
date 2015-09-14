@@ -50,7 +50,7 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 	}
 
 	public FrmCadastroBairro(Connection connection) {
-		super("Cadastro de Bairros", null);
+		super("Cadastro de Bairros", connection);
 
 		initComponents();
 
@@ -151,7 +151,8 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent e) {
-
+		FrmPesquisaBairro pesquisaBairro = new FrmPesquisaBairro(getConnection());
+		pesquisaBairro.setVisible(true);
 	}
 
 	protected void btnCancelarActionPerformed(ActionEvent e) {

@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 
 import br.com.estatistica.modelos.Funcionalidade;
 import br.com.estatistica.modelos.Usuario;
+import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmMenuPrincipal extends JFrame {
@@ -146,13 +147,18 @@ public class FrmMenuPrincipal extends JFrame {
 
 		JMenuItem mntmCadastroDeCidades = new JMenuItem("Cadastro de Cidades");
 		mnLocalizao.add(mntmCadastroDeCidades);
-		this.addFuncao(mntmCadastroDeCidades, FrmCadastroCidades.class.getSimpleName());
+		this.addFuncao(mntmCadastroDeCidades, FrmCadastroCidade.class.getSimpleName());
 
 		JMenuItem mntmCadastroDeEstados = new JMenuItem("Cadastro de Estados");
 		mnLocalizao.add(mntmCadastroDeEstados);
 		this.addFuncao(mntmCadastroDeEstados, FrmCadastroEstado.class.getSimpleName());
 
 		JMenuItem mntmCadastroDeBairros = new JMenuItem("Cadastro de Bairros");
+		mntmCadastroDeBairros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				mntmCadastroDeBairrosActionPerformed(arg0);
+			}
+		});
 		mnLocalizao.add(mntmCadastroDeBairros);
 		this.addFuncao(mntmCadastroDeBairros, FrmCadastroBairro.class.getSimpleName());
 
@@ -195,4 +201,9 @@ public class FrmMenuPrincipal extends JFrame {
 		aplicaRegraDePermissao(usuario, mnCadastro);
 	}
 
+	protected void mntmCadastroDeBairrosActionPerformed(ActionEvent arg0) {
+		FrmCadastroBairro bairro = new FrmCadastroBairro(new ConnectionFactory().getConnection());
+		bairro.setVisible(true);
+
+	}
 }

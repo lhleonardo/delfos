@@ -27,11 +27,13 @@ public class BairroDAO extends GenericDAO<Bairro> {
 
 	@Override
 	protected Integer insert(Bairro model) throws SQLException {
+		System.out.println("Tá dentro do metodo insert");
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getNome());
+			System.out.println("Tá setando a descrição");
 			pst.setString(2, model.getDescricao());
 			pst.executeUpdate();
-			return super.getGeneratedKeys(pst.getGeneratedKeys(), "id_bairro");
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 
 	}
@@ -43,7 +45,7 @@ public class BairroDAO extends GenericDAO<Bairro> {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
 			pst.executeUpdate();
-			return super.getGeneratedKeys(pst.getGeneratedKeys(), "id_bairro");
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 
 	}
@@ -99,15 +101,15 @@ public class BairroDAO extends GenericDAO<Bairro> {
 	}
 
 	@Override
-	public Bairro get(String value) throws SQLException {
-		Bairro bairro = null;
+	public List<Bairro> get(String value) throws SQLException {
+		List<Bairro> bairros = new ArrayList<>();
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
 			pst.setString(1, value);
-			bairro = EXTRACTOR.extract(pst.executeQuery(), null);
+			bairros.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
 		}
 
-		return bairro;
+		return bairros;
 	}
 
 	@Override

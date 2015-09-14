@@ -13,7 +13,7 @@ public class UsuarioTest {
 		Connection con = new ConnectionFactory().getConnection();
 		try (UsuarioDAO usuarioDAO = new UsuarioDAO(con)) {
 
-			Usuario resultado = usuarioDAO.get("lhleonardo");
+			Usuario resultado = (Usuario) usuarioDAO.get("lhleonardo");
 			System.out.println(resultado);
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());

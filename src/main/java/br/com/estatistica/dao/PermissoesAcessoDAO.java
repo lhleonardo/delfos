@@ -26,7 +26,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Override
-	public void save(PerfilAcesso model) throws SQLException {
+	public Integer save(PerfilAcesso model) throws SQLException {
 		if (!model.getPermissoes().isEmpty()) {
 
 			for (Funcionalidade funcionalidade : model.getPermissoes().keySet()) {
@@ -48,6 +48,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 		} else {
 			throw new IllegalArgumentException("Devem ser informadas as permissões para esse perfil.");
 		}
+		return null;
 	}
 
 	private boolean isExist(PerfilAcesso model, Funcionalidade funcionalidade) throws SQLException {
@@ -61,13 +62,16 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Override
-	public void delete(PerfilAcesso model) throws SQLException {
+	public boolean delete(PerfilAcesso model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			int executeUpdate = pst.executeUpdate();
 
 			if (executeUpdate > 0) {
 				Mensagem.informa(null, "Excluído com sucesso.");
+				return true;
+			} else {
+				return false;
 			}
 		}
 
@@ -96,12 +100,12 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Deprecated
-	protected void insert(PerfilAcesso model) throws SQLException {
+	protected Integer insert(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
 	@Deprecated
-	protected void update(PerfilAcesso model) throws SQLException {
+	protected Integer update(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 
@@ -121,7 +125,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Deprecated
-	public PerfilAcesso get(String value) throws SQLException {
+	public List<PerfilAcesso> get(String value) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 

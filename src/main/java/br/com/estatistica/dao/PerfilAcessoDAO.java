@@ -32,7 +32,7 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 			pst.setString(2, model.getDescricao());
 			pst.executeUpdate();
 
-			model.setId(super.getGeneratedKeys(pst.getGeneratedKeys(), "id_perfil_acesso"));
+			model.setId(super.getGeneratedKeys(pst.getGeneratedKeys()));
 
 			try (PermissoesAcessoDAO daoPermissao = new PermissoesAcessoDAO(super.getConnection())) {
 				daoPermissao.save(model);
@@ -124,14 +124,14 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Override
-	public PerfilAcesso get(String value) throws SQLException {
-		PerfilAcesso perfil = null;
+	public List<PerfilAcesso> get(String value) throws SQLException {
+		List<PerfilAcesso> perfil = new ArrayList<>();
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
 			pst.setString(1, value);
 			ResultSet resultSet = pst.executeQuery();
 
-			perfil = new PerfilAcessoExtractor().extract(resultSet, super.getConnection());
+			perfil.addAll(new PerfilAcessoExtractor().extractAll(resultSet, super.getConnection()));
 		}
 
 		return perfil;

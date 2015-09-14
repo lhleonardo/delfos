@@ -179,7 +179,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 *         <b>(null).</b>
 	 * @throws SQLException
 	 */
-	public abstract T get(String value) throws SQLException;
+	public abstract List<T> get(String value) throws SQLException;
 
 	/**
 	 * Método responsável por verificar se determinado registro está presente no banco de
@@ -271,9 +271,9 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @return chave primária gerada.
 	 * @throws SQLException
 	 */
-	protected Integer getGeneratedKeys(ResultSet keys, String nomeDoCampo) throws SQLException {
+	protected Integer getGeneratedKeys(ResultSet keys) throws SQLException {
 		if (keys.next()) {
-			return keys.getInt(nomeDoCampo);
+			return keys.getInt(1);
 		}
 		return null;
 	}

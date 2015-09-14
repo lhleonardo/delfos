@@ -23,21 +23,21 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	}
 
 	@Override
-	protected void insert(Pesquisa model) throws SQLException {
-		
-		
-	}
-
-	@Override
-	protected void update(Pesquisa model) throws SQLException {
-		// TODO Auto-generated method stub
+	protected Integer insert(Pesquisa model) throws SQLException {
+		return null;
 		
 	}
 
 	@Override
-	public void delete(Pesquisa model) throws SQLException {
+	protected Integer update(Pesquisa model) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		return null;
+	}
+
+	@Override
+	public boolean delete(Pesquisa model) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 	@Override
@@ -58,11 +58,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 		return null;
 	}
 
-	@Override
-	public Pesquisa get(String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 	@Override
 	public boolean isExist(Pesquisa model) throws SQLException {
@@ -74,6 +70,12 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	public boolean isExist(Integer idModel) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Pesquisa> get(String value) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
