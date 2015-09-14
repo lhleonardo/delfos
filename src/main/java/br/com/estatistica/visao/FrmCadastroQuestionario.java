@@ -19,6 +19,11 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.Action;
 
+import br.com.estatistica.dao.PesquisaDAO;
+import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.util.ConnectionFactory;
+import br.com.estatistica.dao.*;
+
 import java.awt.event.ActionListener;
 
 public class FrmCadastroQuestionario extends GenericFormCadastro {
@@ -63,6 +68,10 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 		panel.add(lblId);
 
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
 

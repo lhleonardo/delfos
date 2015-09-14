@@ -25,7 +25,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	}
 	
 	@Override
-	protected Integer insert(Pesquisa model) throws SQLException {
+	public Integer insert(Pesquisa model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
 			
 			java.sql.Date dataSQL = new java.sql.Date(new java.util.Date().getTime());//Cria Objeto Data do Java.sql e utiliza o método getTime do Objeto Java.util
