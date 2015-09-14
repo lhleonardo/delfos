@@ -12,10 +12,15 @@ import br.com.estatistica.modelos.Estado;
 
 public class EstadoDAO extends GenericDAO<Estado> {
 
+	private static final EstadoExtractor EXTRACTOR = new EstadoExtractor();
 	private static final String SQL_INSERT = "INSERT INTO Estado(nome,uf,cod_ibge,descricao) VALUES (?,?,?,?);";
 	private static final String SQL_UPDATE = "UPDATE Estado SET nome = ?, uf = ?, cod_ibge = ?, descricao = ? WHERE id_estado = ?;";
 	private static final String SQL_DELETE = "DELETE FROM Estado WHERE id_estado = ?;";
-	private static final String SQL_SELECT = "SELECT * FROM Bairro";
+	private static final String SQL_SELECT = "SELECT * FROM Estado";
+	private static final String SQL_SELECT_BY_ALL = SQL_SELECT
+	        + " WHERE id_estado = ? OR nome LIKE ? OR uf =  ? OR descricao LIKE ? OR cod_ibge = ?;";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_estado = ?;";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 
 	public EstadoDAO(Connection connection) {
 		super(connection);
@@ -62,7 +67,7 @@ public class EstadoDAO extends GenericDAO<Estado> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
-			estados = new ArrayList<>(new EstadoExtractor().extractAll(resultSet, null));
+			estados = new ArrayList<>(EXTRACTOR.extractAll(resultSet, null));
 		}
 
 		return estados;
@@ -70,32 +75,57 @@ public class EstadoDAO extends GenericDAO<Estado> {
 
 	@Override
 	public Estado get(Estado model) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Estado estado = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
+			pst.setInt(1, model.getId());
+			pst.setString(2, model.getNome());
+			pst.setString(3, model.getUf());
+			pst.setString(4, model.getDescricao());
+			pst.setString(5, model.getCodIbge());
+
+			estado = EXTRACTOR.extract(pst.executeQuery(), null);
+		}
+
+		return estado;
 	}
 
 	@Override
 	public Estado get(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Estado estado = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+			pst.setInt(1, idModel);
+			ResultSet resultSet = pst.executeQuery();
+
+			estado = EXTRACTOR.extract(resultSet, null);
+		}
+
+		return estado;
 	}
 
 	@Override
 	public List<Estado> get(String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Estado> estados = new ArrayList<>();
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
+			pst.setString(1, "%" + value + "%");
+			ResultSet resultSet = pst.executeQuery();
+
+			estados.addAll(EXTRACTOR.extractAll(resultSet, null));
+		}
+
+		return estados;
 	}
 
 	@Override
 	public boolean isExist(Estado model) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		return this.get(model) != null;
 	}
 
 	@Override
 	public boolean isExist(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		return this.get(idModel) != null;
 	}
 
 }

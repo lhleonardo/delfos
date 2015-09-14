@@ -1,6 +1,6 @@
 package br.com.estatistica.modelos;
 
-public class Usuario implements Identificator, Validador {
+public class Usuario implements Identificator {
 
 	private Integer id;
 	private String login;

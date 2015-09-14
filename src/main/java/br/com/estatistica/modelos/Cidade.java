@@ -7,11 +7,12 @@ package br.com.estatistica.modelos;
  * @author Leonardo Braz
  * @since 1.5
  */
-public class Cidade {
+public class Cidade implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String nome;
 	private String descricao;
+	private String codigoIbge;
 
 	private Estado estado;
 
@@ -33,11 +34,11 @@ public class Cidade {
 		this.estado = estado;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -63,6 +64,21 @@ public class Cidade {
 
 	public void setEstado(Estado estado) {
 		this.estado = estado;
+	}
+
+	@Override
+	public void validate() {
+		if (this.getNome().isEmpty() || this.getEstado() == null) {
+			throw new IllegalArgumentException("O campo nome e as informações do estado são de preenchimento obrigatório.");
+		}
+	}
+
+	public String getCodigoIbge() {
+		return codigoIbge;
+	}
+
+	public void setCodigoIbge(String codigoIbge) {
+		this.codigoIbge = codigoIbge;
 	}
 
 }
