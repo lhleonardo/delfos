@@ -9,7 +9,6 @@ import java.util.List;
 import br.com.estatistica.modelos.Especialista;
 import br.com.estatistica.modelos.Pesquisador;
 import br.com.estatistica.modelos.Pessoa;
-import br.com.estatistica.util.Mensagem;
 
 public class PessoaDAO extends GenericDAO<Pessoa> {
 
@@ -63,13 +62,8 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
 
-			if (this.get(model.getId()) == null) {
-				Mensagem.informa(null, "Excluído com sucesso.");
-				return true;
-			} else {
-				Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
-				return false;
-			}
+			return super.verificaSeORegistroFoiApagado(model.getId());
+
 		}
 	}
 
@@ -95,7 +89,6 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 
 	@Override
 	public boolean isExist(Pessoa model) throws SQLException {

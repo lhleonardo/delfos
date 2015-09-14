@@ -7,19 +7,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.estatistica.extractors.BairroExtractor;
 import br.com.estatistica.modelos.Bairro;
 
 public class BairroDAO extends GenericDAO<Bairro> {
 
 	private static final BairroExtractor EXTRACTOR = new BairroExtractor();
 
-	private static final String SQL_INSERT = "INSERT INTO Bairro(nome, descricao) VALUES (?,?);";
-	private static final String SQL_UPDATE = "UPDATE Bairro SET nome = ?, descricao = ? WHERE id_bairro = ?;";
-	private static final String SQL_DELETE = "DELETE FROM Bairro WHERE id_bairro = ?;";
-	private static final String SQL_SELECT = "SELECT * FROM Bairro;";
-	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE id_bairro = ? OR nome LIKE ? OR descricao LIKE ?;";
-	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_bairro = ?;";
-	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?;";
+	private static final String SQL_INSERT = "INSERT INTO Bairro(nome, descricao) VALUES (?,?)";
+	private static final String SQL_UPDATE = "UPDATE Bairro SET nome = ?, descricao = ? WHERE id_bairro = ?";
+	private static final String SQL_DELETE = "DELETE FROM Bairro WHERE id_bairro = ?";
+	private static final String SQL_SELECT = "SELECT * FROM Bairro";
+	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE id_bairro = ? OR nome LIKE ? OR descricao LIKE ?";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_bairro = ?";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 
 	public BairroDAO(Connection connection) {
 		super(connection);
@@ -55,19 +56,19 @@ public class BairroDAO extends GenericDAO<Bairro> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
-			return this.get(model.getId()) == null;
+			return verificaSeORegistroFoiApagado(model.getId());
 
 		}
 	}
 
 	@Override
 	public List<Bairro> getAll() throws SQLException {
-		List<Bairro> bairros = new ArrayList<Bairro>();
+		List<Bairro> bairros = null;
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
-			bairros.addAll(EXTRACTOR.extractAll(resultSet, null));
+			bairros = new ArrayList<>(EXTRACTOR.extractAll(resultSet, null));
 		}
 
 		return bairros;

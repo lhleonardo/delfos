@@ -278,4 +278,14 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 		return null;
 	}
 
+	public boolean verificaSeORegistroFoiApagado(Integer id) throws SQLException {
+		if (isExist(id) == false) {
+			Mensagem.informa(null, "Excluído com sucesso.");
+			return true;
+		} else {
+			Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
+			return false;
+		}
+	}
+
 }

@@ -60,6 +60,11 @@ public class Bairro implements Identificator {
 	}
 
 	@Override
+	public String toString() {
+		return "Bairro (id=" + id + ", nome=" + nome + ", descricao=" + descricao + ")";
+	}
+
+	@Override
 	public void validate() {
 		if (this.getNome().isEmpty()) {
 			throw new IllegalArgumentException("É necessário que o nome do bairro seja informado.");
