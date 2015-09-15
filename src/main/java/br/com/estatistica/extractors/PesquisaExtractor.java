@@ -13,6 +13,7 @@ public class PesquisaExtractor extends Extractable<Pesquisa> {
 		Pesquisa pesq = new Pesquisa();
 		pesq.setId(rs.getInt("id_pesquisa"));
 		pesq.setDescricao(rs.getString("descricao"));
+		pesq.setData(rs.getDate("data"));
 		pesq.setLimiteDeEspecialistas(rs.getInt("limite_de_especialistas"));
 
 		return pesq;
