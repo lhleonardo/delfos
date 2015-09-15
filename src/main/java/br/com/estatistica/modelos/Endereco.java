@@ -1,28 +1,27 @@
 package br.com.estatistica.modelos;
 
-
 /**
  * Classe responsável por representar um endereço que reside determinada pessoa, contendo
  * suas informações para localização.
- * 
+ *
  * @version 1.0
  * @author Leonardo Braz
  * @since 1.5
  */
-public class Endereco {
+public class Endereco implements Identificator {
 
-	private int id;
+	private Integer id;
 	private String logradouro;
 	private String descricao;
-	private int numero;
+	private String numero;
 	private String cep;
 
 	private TipoLogradouro tipoLogradouro;
 	private Bairro bairro;
 	private Cidade cidade;
 
-	public Endereco(int id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, int numero, String cep, Bairro bairro,
-	        Cidade cidade) {
+	public Endereco(Integer id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, String numero, String cep,
+			Bairro bairro, Cidade cidade) {
 		this.id = id;
 		this.logradouro = logradouro;
 		this.tipoLogradouro = tipoLogradouro;
@@ -37,16 +36,17 @@ public class Endereco {
 		super();
 	}
 
-	public int getId() {
-		return id;
+	@Override
+	public Integer getId() {
+		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
 	public String getLogradouro() {
-		return logradouro;
+		return this.logradouro;
 	}
 
 	public void setLogradouro(String logradouro) {
@@ -54,7 +54,7 @@ public class Endereco {
 	}
 
 	public TipoLogradouro getTipoLogradouro() {
-		return tipoLogradouro;
+		return this.tipoLogradouro;
 	}
 
 	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
@@ -62,23 +62,23 @@ public class Endereco {
 	}
 
 	public String getDescricao() {
-		return descricao;
+		return this.descricao;
 	}
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public int getNumero() {
-		return numero;
+	public String getNumero() {
+		return this.numero;
 	}
 
-	public void setNumero(int numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 
 	public String getCep() {
-		return cep;
+		return this.cep;
 	}
 
 	public void setCep(String cep) {
@@ -86,7 +86,7 @@ public class Endereco {
 	}
 
 	public Bairro getBairro() {
-		return bairro;
+		return this.bairro;
 	}
 
 	public void setBairro(Bairro bairro) {
@@ -94,11 +94,20 @@ public class Endereco {
 	}
 
 	public Cidade getCidade() {
-		return cidade;
+		return this.cidade;
 	}
 
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
+	}
+
+	@Override
+	public void validate() {
+		if (this.getLogradouro().isEmpty() || this.getTipoLogradouro() == null || this.getNumero().isEmpty() || this.getCidade() == null
+				|| this.getBairro() == null) {
+			throw new IllegalArgumentException(
+					"As informações de logradouro, tipo de logradouro, número residencial, cidade e bairro são de preenchimento obrigatório.\nPreencha os campos corretamente e tente novamente.");
+		}
 	}
 
 }

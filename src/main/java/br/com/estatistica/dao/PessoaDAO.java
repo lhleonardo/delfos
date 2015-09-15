@@ -62,7 +62,7 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
 
-			return super.verificaSeORegistroFoiApagado(model.getId());
+			return super.confereExclusao(model.getId());
 
 		}
 	}

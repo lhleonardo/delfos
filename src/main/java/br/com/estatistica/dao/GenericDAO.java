@@ -278,7 +278,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 		return null;
 	}
 
-	public boolean verificaSeORegistroFoiApagado(Integer id) throws SQLException {
+	public boolean confereExclusao(Integer id) throws SQLException {
 		if (isExist(id) == false) {
 			Mensagem.informa(null, "Excluído com sucesso.");
 			return true;

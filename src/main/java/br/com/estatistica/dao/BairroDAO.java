@@ -56,7 +56,7 @@ public class BairroDAO extends GenericDAO<Bairro> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
-			return verificaSeORegistroFoiApagado(model.getId());
+			return confereExclusao(model.getId());
 
 		}
 	}

@@ -56,7 +56,7 @@ public class EstadoDAO extends GenericDAO<Estado> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 			pst.setInt(1, model.getId());
 			pst.executeUpdate();
-			return super.verificaSeORegistroFoiApagado(model.getId());
+			return super.confereExclusao(model.getId());
 		}
 	}
 
