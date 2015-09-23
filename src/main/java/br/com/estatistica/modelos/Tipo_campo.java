@@ -1,21 +1,21 @@
 package br.com.estatistica.modelos;
 
-public class TipoCampo implements Identificator{
+public class Tipo_campo implements Identificator{
 
 	private Integer id;
 	private String nome;
 	private String descricao;
 
-	public TipoCampo(String nome) {
+	public Tipo_campo(String nome) {
 		this.nome = nome;
 	}
 
-	public TipoCampo(String nome, String descricao) {
+	public Tipo_campo(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
 
-	public TipoCampo(int id, String nome, String descricao) {
+	public Tipo_campo(int id, String nome, String descricao) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
