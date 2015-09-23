@@ -1,27 +1,27 @@
 package br.com.estatistica.modelos;
 
-public class TipoPergunta implements Identificator{
+public class Tipo_Pergunta implements Identificator{
 
 	private Integer id;
 	private String nome;
 	private String descricao;
 
-	public TipoPergunta(String nome) {
+	public Tipo_Pergunta(String nome) {
 		this.nome = nome;
 	}
 
-	public TipoPergunta(String nome, String descricao) {
+	public Tipo_Pergunta(String nome, String descricao) {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
 
-	public TipoPergunta(int id, String nome, String descricao) {
+	public Tipo_Pergunta(int id, String nome, String descricao) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
 	}
 
-	public TipoPergunta() {
+	public Tipo_Pergunta() {
 
 	}
 

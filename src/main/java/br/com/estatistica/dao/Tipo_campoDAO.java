@@ -10,24 +10,24 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.estatistica.extractors.TipoCampoExtractor;
-import br.com.estatistica.modelos.TipoCampo;
+import br.com.estatistica.modelos.Tipo_campo;
 
-public class TipoCampoDAO extends GenericDAO<TipoCampo> {
+public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 
-	private static final String SQL_SELECT = "SELECT * FROM TipoCampo";
+	private static final String SQL_SELECT = "SELECT * FROM Tipo_campo";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_INSERT = "INSERT INTO TipoCampo(id_TipoCampo, descricao,nome) VALUES(?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE TipoCampo SET descricao = ?, nome = ?, WHERE id_tipopergunta =?";
-	private static final String SQL_DELETE = "DELETE FROM TipoCampoWHERE id_usuario = ?";
+	private static final String SQL_INSERT = "INSERT INTO Tipo_campo(id_Tipo_campo, descricao,nome) VALUES(?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE TipoCampo SET descricao = ?, nome = ?, WHERE id_Tipo_campo =?";
+	private static final String SQL_DELETE = "DELETE FROM Tipo_campoWHERE id_usuario = ?";
 
-	public TipoCampoDAO(Connection connection) {
+	public Tipo_campoDAO(Connection connection) {
 		super(connection);
 
 	}
 
 	@Override
-	protected Integer insert(TipoCampo model) throws SQLException {
+	protected Integer insert(Tipo_campo model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getDescricao());
@@ -38,7 +38,7 @@ public class TipoCampoDAO extends GenericDAO<TipoCampo> {
 	}
 
 	@Override
-	protected Integer update(TipoCampo model) throws SQLException {
+	protected Integer update(Tipo_campo model) throws SQLException {
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
 			pst.executeUpdate();
@@ -47,7 +47,7 @@ public class TipoCampoDAO extends GenericDAO<TipoCampo> {
 	}
 
 	@Override
-	public boolean delete(TipoCampo model) throws SQLException {
+	public boolean delete(Tipo_campo model) throws SQLException {
 		if (model.getId() != null) {
 			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
@@ -62,8 +62,8 @@ public class TipoCampoDAO extends GenericDAO<TipoCampo> {
 	}
 
 	@Override
-	public List<TipoCampo> getAll() throws SQLException {
-		List<TipoCampo> tiposcampos = new ArrayList<TipoCampo>();
+	public List<Tipo_campo> getAll() throws SQLException {
+		List<Tipo_campo> tiposcampos = new ArrayList<Tipo_campo>();
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
@@ -75,8 +75,8 @@ public class TipoCampoDAO extends GenericDAO<TipoCampo> {
 	}
 
 	@Override
-	public TipoCampo get(TipoCampo model) throws SQLException {
-		TipoCampo tipocampo = null;
+	public Tipo_campo get(Tipo_campo model) throws SQLException {
+		Tipo_campo tipocampo = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getDescricao());
@@ -91,8 +91,8 @@ public class TipoCampoDAO extends GenericDAO<TipoCampo> {
 	}
 
 	@Override
-	public TipoCampo get(Integer idModel) throws SQLException {
-		TipoCampo tipocampo = null;
+	public Tipo_campo get(Integer idModel) throws SQLException {
+		Tipo_campo tipocampo = null;
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
@@ -107,12 +107,12 @@ public class TipoCampoDAO extends GenericDAO<TipoCampo> {
 	}
 
 	@Override
-	public List<TipoCampo> get(String value) throws SQLException {
+	public List<Tipo_campo> get(String value) throws SQLException {
 		return null;
 	}
 
 	@Override
-	public boolean isExist(TipoCampo model) throws SQLException {
+	public boolean isExist(Tipo_campo model) throws SQLException {
 		return this.get(model) != null;
 	}
 

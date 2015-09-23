@@ -6,11 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.estatistica.modelos.TipoPergunta;
+import br.com.estatistica.modelos.Tipo_Pergunta;
 
-public class TipoPerguntaExtractor extends Extractable<TipoPergunta>{
+public class TipoPerguntaExtractor extends Extractable<Tipo_Pergunta>{
 	
-	public TipoPergunta extract(ResultSet rs, Connection con) throws SQLException {
+	public Tipo_Pergunta extract(ResultSet rs, Connection con) throws SQLException {
 		if (rs.next()) {
 			return extractModel(rs, con);
 		} else
@@ -18,8 +18,8 @@ public class TipoPerguntaExtractor extends Extractable<TipoPergunta>{
 	}
 
 	@Override
-	protected TipoPergunta extractModel(ResultSet rs, Connection con) throws SQLException{
-	TipoPergunta tipopergunta = new TipoPergunta();
+	protected Tipo_Pergunta extractModel(ResultSet rs, Connection con) throws SQLException{
+	Tipo_Pergunta tipopergunta = new Tipo_Pergunta();
 	tipopergunta.setId(rs.getInt("id_tipopergunta"));
 	tipopergunta.setDescricao(rs.getString("Descricao"));
 
@@ -27,8 +27,8 @@ public class TipoPerguntaExtractor extends Extractable<TipoPergunta>{
 	
 }
 
-public List<TipoPergunta> extractAll(ResultSet rs, Connection con) throws SQLException {
-	List<TipoPergunta> tipoperguntas = new ArrayList<TipoPergunta>();
+public List<Tipo_Pergunta> extractAll(ResultSet rs, Connection con) throws SQLException {
+	List<Tipo_Pergunta> tipoperguntas = new ArrayList<Tipo_Pergunta>();
 
 	while (rs.next() && con != null) {
 		tipoperguntas.add(extractModel(rs, con));

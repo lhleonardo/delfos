@@ -10,14 +10,14 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.estatistica.extractors.TipoPerguntaExtractor;
-import br.com.estatistica.modelos.TipoPergunta;
+import br.com.estatistica.modelos.Tipo_Pergunta;
 
-public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
+public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 
 	private static final String SQL_SELECT = "SELECT * FROM Tipo_Pergunta";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_INSERT = "INSERT INTO Tipo_Pergunta(id_tipopergunta, descricao) VALUES(?,?)";
+	private static final String SQL_INSERT = "INSERT INTO Tipo_Pergunta(id_tipo_pergunta,nome, descricao) VALUES(?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Tipo_Pergunta SET descricao = ?";
 	private static final String SQL_DELETE = "DELETE FROM Tipo_Pergunta WHERE id_usuario = ?";
 	
@@ -27,7 +27,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	protected Integer insert(TipoPergunta model) throws SQLException {
+	protected Integer insert(Tipo_Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getDescricao());
@@ -38,7 +38,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	protected Integer update(TipoPergunta model) throws SQLException {
+	protected Integer update(Tipo_Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
 			pst.executeUpdate();
 			return null;
@@ -47,7 +47,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	public boolean delete(TipoPergunta model) throws SQLException {
+	public boolean delete(Tipo_Pergunta model) throws SQLException {
 		if (model.getId() != null) {
 			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
@@ -61,8 +61,8 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	public List<TipoPergunta> getAll() throws SQLException {
-		List<TipoPergunta> tipoperguntas = new ArrayList<TipoPergunta>();
+	public List<Tipo_Pergunta> getAll() throws SQLException {
+		List<Tipo_Pergunta> tipoperguntas = new ArrayList<Tipo_Pergunta>();
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 			
@@ -74,8 +74,8 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	public TipoPergunta get(TipoPergunta model) throws SQLException {
-		TipoPergunta tipopergunta = null;
+	public Tipo_Pergunta get(Tipo_Pergunta model) throws SQLException {
+		Tipo_Pergunta tipopergunta = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getDescricao());
@@ -90,8 +90,8 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	public TipoPergunta get(Integer idModel) throws SQLException {
-		TipoPergunta tipopergunta = null;
+	public Tipo_Pergunta get(Integer idModel) throws SQLException {
+		Tipo_Pergunta tipopergunta = null;
 		
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
@@ -105,13 +105,13 @@ public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	}
 	
 	@Override
-	public List<TipoPergunta> get(String value) throws SQLException {
+	public List<Tipo_Pergunta> get(String value) throws SQLException {
 
 		return null;
 	}
 	
 	@Override
-	public boolean isExist(TipoPergunta model) throws SQLException {
+	public boolean isExist(Tipo_Pergunta model) throws SQLException {
 
 		return this.get(model) != null;
 	}
