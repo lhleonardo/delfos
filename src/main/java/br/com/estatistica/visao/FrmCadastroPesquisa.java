@@ -97,22 +97,26 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 				try{
 					valor = Integer.parseInt(textField_2.getText());
 					System.out.println(valor);
+
+					try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
+						
+						Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
+						pesquisaDAO.insert(p1);
+					}
+					catch(Exception e1){
+						System.out.println("Falha ao salvar no banco");
+					}
+					Toolkit.getDefaultToolkit().beep();
+
 				}
 				catch( NumberFormatException e1){
 					e1.getMessage();
 					System.out.println(e1);
 				}
-				try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
-					
-					Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
-					pesquisaDAO.insert(p1);
-				}
-				catch(Exception e1){
-					
-				}
-				Toolkit.getDefaultToolkit().beep();
-
+				
 			}
+			
+			
 		});
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
