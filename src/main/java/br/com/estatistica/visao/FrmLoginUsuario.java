@@ -23,6 +23,7 @@ import br.com.estatistica.dao.UsuarioDAO;
 import br.com.estatistica.modelos.Usuario;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
+import javax.swing.ImageIcon;
 
 public class FrmLoginUsuario extends JFrame {
 
@@ -78,14 +79,9 @@ public class FrmLoginUsuario extends JFrame {
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JLabel label = new JLabel("֍");
-		label.setBounds(165, 36, 46, 54);
-		label.setForeground(new Color(220, 220, 220));
-		label.setFont(new Font("Arial", Font.PLAIN, 46));
-		panel.add(label);
-
-		JLabel label_1 = new JLabel("Delfos");
-		label_1.setBounds(214, 58, 97, 26);
+		JLabel label_1 = new JLabel("");
+		label_1.setIcon(new ImageIcon(FrmLoginUsuario.class.getResource("/br/com/estatistica/util/icons/Logo-vers-1(16-09)min3.png")));
+		label_1.setBounds(145, 31, 193, 101);
 		label_1.setForeground(new Color(220, 220, 220));
 		label_1.setFont(new Font("Calibri Light", Font.BOLD, 30));
 		panel.add(label_1);
@@ -93,36 +89,36 @@ public class FrmLoginUsuario extends JFrame {
 		JLabel lblUsurio = new JLabel("Usuário");
 		lblUsurio.setForeground(new Color(220, 220, 220));
 		lblUsurio.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		lblUsurio.setBounds(206, 143, 79, 26);
+		lblUsurio.setBounds(208, 143, 68, 26);
 		panel.add(lblUsurio);
 
 		txtUsuario = new JTextField();
 		txtUsuario.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		txtUsuario.setBounds(102, 168, 282, 20);
+		txtUsuario.setBounds(101, 168, 282, 20);
 		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
 
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(new Color(220, 220, 220));
 		lblSenha.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		lblSenha.setBounds(206, 199, 67, 26);
+		lblSenha.setBounds(215, 207, 53, 20);
 		panel.add(lblSenha);
 
 		txtSenha = new JPasswordField();
 		txtSenha.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		txtSenha.setBounds(102, 228, 282, 20);
+		txtSenha.setBounds(101, 228, 282, 20);
 		panel.add(txtSenha);
 
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(btnEntrarActionPerformed());
 		btnEntrar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
-		btnEntrar.setBounds(266, 284, 118, 31);
+		btnEntrar.setBounds(265, 284, 118, 31);
 		panel.add(btnEntrar);
 
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(btnCancelarActionPerformed());
 		btnCancelar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
-		btnCancelar.setBounds(102, 284, 118, 31);
+		btnCancelar.setBounds(101, 284, 118, 31);
 		panel.add(btnCancelar);
 
 		centralizarComponente();

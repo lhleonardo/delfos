@@ -8,6 +8,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -63,7 +64,7 @@ public class GenericFormCadastro extends JFrame {
 		panel.setBackground(Color.DARK_GRAY);
 		contentPane.add(panel, BorderLayout.WEST);
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[] { 21, 83, 21, 0 };
+		gbl_panel.columnWidths = new int[] {30, 110, 30, 0};
 		gbl_panel.rowHeights = new int[] { 0, 0, 23, 0, 0 };
 		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
@@ -80,20 +81,15 @@ public class GenericFormCadastro extends JFrame {
 		gbc_panel_2.gridy = 0;
 		panel.add(panel_2, gbc_panel_2);
 
-		JLabel label = new JLabel("֍");
-		label.setForeground(new Color(220, 220, 220));
-		label.setFont(new Font("Arial", Font.PLAIN, 46));
-		label.setBounds(20, 35, 53, 52);
-		panel_2.add(label);
-
-		JLabel label_1 = new JLabel("Delfos");
+		JLabel label_1 = new JLabel();
+		label_1.setIcon(new ImageIcon(GenericFormCadastro.class.getResource("/br/com/estatistica/util/icons/Logo-vers-1(16-09)min.png")));
 		label_1.setForeground(new Color(220, 220, 220));
 		label_1.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		label_1.setBounds(67, 52, 60, 40);
+		label_1.setBounds(13, 11, 143, 81);
 		panel_2.add(label_1);
 
 		JPanel panel_4 = new JPanel();
-		panel_4.setBounds(3, 103, 124, 1);
+		panel_4.setBounds(3, 103, 187, 1);
 		panel_2.add(panel_4);
 
 		JPanel panel_3 = new JPanel();
