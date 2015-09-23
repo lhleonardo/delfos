@@ -160,7 +160,7 @@ public class FrmMenuPrincipal extends JFrame {
 		JMenuItem mntmCadastroDeBairros = new JMenuItem("Cadastro de Bairros");
 		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeBairros);
-		this.addFuncao(mntmCadastroDeBairros, FrmCadastroBairros.class.getSimpleName());
+		this.addFuncao(mntmCadastroDeBairros, FrmCadastroBairro.class.getSimpleName());
 
 		JSeparator separator = new JSeparator();
 		mnCadastro.add(separator);
