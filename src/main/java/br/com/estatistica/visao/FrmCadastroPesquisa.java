@@ -2,6 +2,7 @@ package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Toolkit;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -9,8 +10,18 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.border.BevelBorder;
+
 import java.awt.Color;
+
 import javax.swing.border.LineBorder;
+
+import br.com.estatistica.dao.PesquisaDAO;
+import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.util.ConnectionFactory;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.Connection;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -79,10 +90,31 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		textField_2.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Connection con = new ConnectionFactory().getConnection();
+				
+				try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
+					
+					Pesquisa p1 = new Pesquisa(textField_1.getText(), null, null);
+					pesquisaDAO.insert(p1);
+				}
+				catch(Exception e1){
+					
+				}
+				
+				Toolkit.getDefaultToolkit().beep();
+			}
+		});
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
 		btnCancelar.setBounds(109, 428, 89, 23);
 		panel.add(btnCancelar);
 		
