@@ -93,17 +93,25 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Connection con = new ConnectionFactory().getConnection();
-				
+				Integer valor = 0;
+				try{
+					valor = Integer.parseInt(textField_2.getText());
+					System.out.println(valor);
+				}
+				catch( NumberFormatException e1){
+					e1.getMessage();
+					System.out.println(e1);
+				}
 				try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
 					
-					Pesquisa p1 = new Pesquisa(textField_1.getText(), null, null);
+					Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
 					pesquisaDAO.insert(p1);
 				}
 				catch(Exception e1){
 					
 				}
-				
 				Toolkit.getDefaultToolkit().beep();
+
 			}
 		});
 		btnSalvar.setBounds(10, 428, 89, 23);
