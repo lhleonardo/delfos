@@ -13,6 +13,7 @@ import br.com.estatistica.util.Mensagem;
 
 public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 
+	private static final PerfilAcessoExtractor EXTRACTOR = new PerfilAcessoExtractor();
 	private static final String SQL_SELECT = "SELECT * FROM Perfil_acesso";
 	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE nome LIKE ? AND descricao LIKE ?";
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
@@ -67,12 +68,13 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 			if (this.get(model.getId()) == null) {
 				Mensagem.informa(null, "Excluído com sucesso");
 				return true;
-			} else
+			} else {
 				return false;
+			}
 		}
-
+		
 	}
-
+	
 	@Override
 	public PerfilAcesso get(PerfilAcesso model) throws SQLException {
 		PerfilAcesso perfil = null;
@@ -82,7 +84,7 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 			pst.setString(2, model.getDescricao());
 			ResultSet resultSet = pst.executeQuery();
 
-			perfil = new PerfilAcessoExtractor().extract(resultSet, null);
+			perfil = EXTRACTOR.extract(resultSet, null);
 
 		}
 		return perfil;
@@ -99,7 +101,7 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 			ResultSet resultSet = pst.executeQuery();
 
 			System.out.println("PerfilAcessoDAO.get(vai entrar no extrator de perfil)");
-			perfil = new PerfilAcessoExtractor().extract(resultSet, super.getConnection());
+			perfil = EXTRACTOR.extract(resultSet, super.getConnection());
 		}
 
 		return perfil;
@@ -112,7 +114,7 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
-			perfis.addAll(new PerfilAcessoExtractor().extractAll(resultSet, getConnection()));
+			perfis.addAll(EXTRACTOR.extractAll(resultSet, this.getConnection()));
 		}
 
 		return perfis;
@@ -125,16 +127,16 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 
 	@Override
 	public List<PerfilAcesso> get(String value) throws SQLException {
-		List<PerfilAcesso> perfil = new ArrayList<>();
+		List<PerfilAcesso> perfis = new ArrayList<>();
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
 			pst.setString(1, value);
 			ResultSet resultSet = pst.executeQuery();
 
-			perfil.addAll(new PerfilAcessoExtractor().extractAll(resultSet, super.getConnection()));
+			perfis.addAll(EXTRACTOR.extractAll(resultSet, super.getConnection()));
 		}
 
-		return perfil;
+		return perfis;
 	}
 
 	@Override

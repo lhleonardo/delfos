@@ -7,9 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import br.com.estatistica.extractors.PerguntaExtractor;
 import br.com.estatistica.modelos.Pergunta;
-import br.com.estatistica.util.Mensagem;
 
 public class PerguntaDAO extends GenericDAO<Pergunta> {
 	private static final String SQL_SELECT = "SELECT * FROM Pergunta";
@@ -19,20 +20,22 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	private static final String SQL_UPDATE = "UPDATE Pergunta SET descricao = ?, observacao = ?, questionario = ?, tipopergunta = ?, tipocampo = ? WHERE id_pergunta =?";
 	private static final String SQL_DELETE = "DELETE FROM Pergunta WHERE id_usuario = ?";
 
+	// TODO: Arrumar implementação de acordo com a padronização de DAO's
+
 	public PerguntaDAO(Connection connection) {
 		super(connection);
 
 	}
 
 	@Override
-	// arrumar nomes
 	protected Integer insert(Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getObservacao());
-			pst.setString(2, model.getDescricao());
+			pst.setString(3, model.getDescricao());
+
 			pst.executeUpdate();
-			return super.getGeneratedKeys(pst.getGeneratedKeys());
+			return null;
 		}
 	}
 
@@ -40,7 +43,7 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	protected Integer update(Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
 			pst.executeUpdate();
-			return super.getGeneratedKeys(pst.getGeneratedKeys());
+			return null;
 		}
 	}
 
@@ -51,11 +54,11 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 				pst.setInt(1, model.getId());
 				int linhasAfetadas = pst.executeUpdate();
 				if (linhasAfetadas > 0) {
-					Mensagem.informa(null, "Excluído com sucesso.");
+					JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
 				}
 			}
 		}
-		return this.get(model.getId()) == null;
+		return false;
 	}
 
 	@Override
@@ -102,7 +105,11 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 		return pergunta;
 	}
 
+	@Override
+	public List<Pergunta> get(String value) throws SQLException {
 
+		return null;
+	}
 
 	@Override
 	public boolean isExist(Pergunta model) throws SQLException {
@@ -113,12 +120,6 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	public boolean isExist(Integer idModel) throws SQLException {
 		return this.get(idModel) != null;
 
-	}
-
-	@Override
-	public List<Pergunta> get(String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }

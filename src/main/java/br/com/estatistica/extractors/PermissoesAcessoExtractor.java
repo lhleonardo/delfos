@@ -12,19 +12,20 @@ import br.com.estatistica.modelos.Funcionalidade;
 
 public class PermissoesAcessoExtractor extends Extractable<Map<Funcionalidade, Boolean>> {
 
+	private FuncionalidadeDAO fDao;
+	
+	@Override
 	public Map<Funcionalidade, Boolean> extract(ResultSet resultSet, Connection con) throws SQLException {
 		Map<Funcionalidade, Boolean> extracted = new HashMap<Funcionalidade, Boolean>();
 
 		System.out.println("PermissoesAcessoExtractor.extract()");
-		try (FuncionalidadeDAO fDao = new FuncionalidadeDAO(con)) {
+		this.fDao = new FuncionalidadeDAO(con);
 
-			System.out.println("PermissoesAcessoExtractor.extract(vai entrar no while)");
-			while (resultSet.next()) {
-				System.out.println("PermissoesAcessoExtractor.extract(entrou no while)");
-				Funcionalidade func = fDao.get(resultSet.getInt("id_funcionalidade"));
-				extracted.put(func, resultSet.getBoolean("acesso"));
-			}
-
+		System.out.println("PermissoesAcessoExtractor.extract(vai entrar no while)");
+		while (resultSet.next()) {
+			System.out.println("PermissoesAcessoExtractor.extract(entrou no while)");
+			Funcionalidade func = this.fDao.get(resultSet.getInt("id_funcionalidade"));
+			extracted.put(func, resultSet.getBoolean("acesso"));
 		}
 
 		return extracted;

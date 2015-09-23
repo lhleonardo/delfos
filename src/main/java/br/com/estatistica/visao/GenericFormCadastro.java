@@ -7,14 +7,13 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.sql.Connection;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public abstract class GenericFormCadastro extends JFrame {
+public class GenericFormCadastro extends JFrame {
 
 	/**
 	 * 
@@ -23,8 +22,6 @@ public abstract class GenericFormCadastro extends JFrame {
 	private JPanel contentPane;
 	private JPanel panel_2;
 
-	private Connection connection;
-
 	/**
 	 * Launch the application.
 	 */
@@ -32,6 +29,8 @@ public abstract class GenericFormCadastro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					GenericFormCadastro frame = new GenericFormCadastro();
+					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -42,19 +41,18 @@ public abstract class GenericFormCadastro extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GenericFormCadastro(String nameFrame, Connection connection) {
+	public GenericFormCadastro(String nameFrame) {
 		initComponents(nameFrame);
-		this.connection = connection;
 	}
 
 	public GenericFormCadastro() {
+		setResizable(false);
 		initComponents("Default crud");
 	}
 
 	protected void initComponents(String nameFrame) {
 		setTitle(nameFrame);
-		setResizable(false);
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 900, 500);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -108,25 +106,5 @@ public abstract class GenericFormCadastro extends JFrame {
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 1;
 		panel.add(panel_3, gbc_panel_3);
-
-	}
-
-	public Connection getConnection() {
-		return connection;
-	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		if (!this.connection.isClosed()) {
-			connection.close();
-		}
-
-		if (this.connection != null) {
-			this.connection = null;
-		}
-
-		System.gc();
-		super.finalize();
-	}
-
+    }
 }

@@ -3,7 +3,7 @@ package br.com.estatistica.modelos;
 import java.util.HashMap;
 import java.util.Map;
 
-public class PerfilAcesso implements Identificator {
+public class PerfilAcesso implements Validador, Identificator {
 
 	private Integer id;
 	private String nome;

@@ -1,7 +1,6 @@
 package br.com.estatistica.visao;
 
 import java.awt.EventQueue;
-import java.sql.Connection;
 
 import javax.swing.JFrame;
 
@@ -14,7 +13,7 @@ public class FrmCadastroUsuario extends GenericFormCadastro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmCadastroUsuario frame = new FrmCadastroUsuario(null);
+					FrmCadastroUsuario frame = new FrmCadastroUsuario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,11 +24,8 @@ public class FrmCadastroUsuario extends GenericFormCadastro {
 
 	/**
 	 * Create the frame.
-	 * 
-	 * @param connection
 	 */
-	public FrmCadastroUsuario(Connection connection) {
-		super("Cadastro de Usuários", connection);
+	public FrmCadastroUsuario() {
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

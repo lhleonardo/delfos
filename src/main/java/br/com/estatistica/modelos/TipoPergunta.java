@@ -1,6 +1,6 @@
 package br.com.estatistica.modelos;
 
-public class TipoPergunta {
+public class TipoPergunta implements Identificator{
 
 	private Integer id;
 	private String nome;
@@ -47,6 +47,15 @@ public class TipoPergunta {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public void validate() {
+		if (this.getId() == null || this.nome == null || this.descricao == null) {
+			throw new NullPointerException("ID,Nome ou Descrição não podem ser  nulos");
+		}		
+		
+		
+		
 	}
 
 }

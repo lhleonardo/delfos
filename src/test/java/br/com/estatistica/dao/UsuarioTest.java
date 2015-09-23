@@ -1,6 +1,7 @@
 package br.com.estatistica.dao;
 
 import java.sql.Connection;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -13,8 +14,10 @@ public class UsuarioTest {
 		Connection con = new ConnectionFactory().getConnection();
 		try (UsuarioDAO usuarioDAO = new UsuarioDAO(con)) {
 
-			Usuario resultado = (Usuario) usuarioDAO.get("lhleonardo");
-			System.out.println(resultado);
+			List<Usuario> resultado = usuarioDAO.get("lhleonardo");
+			for (Usuario usuario : resultado) {
+				System.out.println(usuario);
+			}
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, e.getMessage());
 		}

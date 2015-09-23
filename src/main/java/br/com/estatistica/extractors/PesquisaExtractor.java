@@ -3,6 +3,7 @@ package br.com.estatistica.extractors;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import br.com.estatistica.modelos.Pesquisa;
 
 public class PesquisaExtractor extends Extractable<Pesquisa> {
@@ -18,7 +19,5 @@ public class PesquisaExtractor extends Extractable<Pesquisa> {
 
 		return pesq;
 	}
-	
-	
 
 }

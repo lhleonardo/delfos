@@ -4,7 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class FrmCadastroCidade extends GenericFormCadastro {
+public class FrmCadastroBairros extends GenericFormCadastro {
 
 	/**
 	 * Launch the application.
@@ -13,7 +13,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmCadastroCidade frame = new FrmCadastroCidade();
+					FrmCadastroBairros frame = new FrmCadastroBairros();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -25,7 +25,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 	/**
 	 * Create the frame.
 	 */
-	public FrmCadastroCidade() {
+	public FrmCadastroBairros() {
 		setBounds(100, 100, 450, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

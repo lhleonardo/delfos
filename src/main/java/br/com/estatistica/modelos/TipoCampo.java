@@ -1,8 +1,8 @@
 package br.com.estatistica.modelos;
 
-public class TipoCampo {
+public class TipoCampo implements Identificator{
 
-	private int id;
+	private Integer id;
 	private String nome;
 	private String descricao;
 
@@ -21,9 +21,6 @@ public class TipoCampo {
 		this.descricao = descricao;
 	}
 
-	public int getId() {
-		return id;
-	}
 
 	public void setId(int id) {
 		this.id = id;
@@ -44,5 +41,21 @@ public class TipoCampo {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
+	@Override
+	public Integer getId() {
+		
+		return id;
+	}
+
+	@Override
+	public void validate() {
+		if (this.getId() == null || this.descricao == null) {
+			throw new NullPointerException("ID ou Descrição não podem ser  nulos");
+		}		
+		
+		
+	}
+	
 
 }

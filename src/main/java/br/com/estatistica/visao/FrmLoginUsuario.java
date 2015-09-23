@@ -2,17 +2,18 @@ package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -21,12 +22,10 @@ import javax.swing.border.EmptyBorder;
 import br.com.estatistica.dao.UsuarioDAO;
 import br.com.estatistica.modelos.Usuario;
 import br.com.estatistica.util.ConnectionFactory;
-import br.com.estatistica.util.GerenciadorDeTelas;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmLoginUsuario extends JFrame {
 
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField txtSenha;
@@ -34,27 +33,32 @@ public class FrmLoginUsuario extends JFrame {
 	private static final UsuarioDAO uDao;
 	private Usuario usuario;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					FrmLoginUsuario frame = new FrmLoginUsuario();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
 	static {
 		uDao = new UsuarioDAO(new ConnectionFactory().getConnection());
 
 	}
 
+	/**
+	 * Create the frame.
+	 */
 	public FrmLoginUsuario() {
 		initComponents();
-		addWindowListener(close());
-	}
-
-	protected WindowAdapter close() {
-		return new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent arg0) {
-				try {
-					uDao.close();
-				} catch (SQLException e) {
-					throw new RuntimeException(e);
-				}
-			}
-		};
 	}
 
 	protected void initComponents() {
@@ -121,7 +125,13 @@ public class FrmLoginUsuario extends JFrame {
 		btnCancelar.setBounds(102, 284, 118, 31);
 		panel.add(btnCancelar);
 
-		setLocation(GerenciadorDeTelas.centralizarTela(this));
+		centralizarComponente();
+	}
+
+	public void centralizarComponente() {
+		Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
+		Dimension dw = getSize();
+		setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
 	}
 
 	protected ActionListener btnCancelarActionPerformed() {
@@ -140,52 +150,32 @@ public class FrmLoginUsuario extends JFrame {
 		};
 	}
 
-	protected boolean verificaCampoObrigatorio() {
-		return (!txtUsuario.getText().isEmpty() && !new String(txtSenha.getPassword()).isEmpty());
+	protected boolean validaCampos() {
+		return (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty());
+	}
+
+	protected void autenticaUsuario() {
+		if (validaCampos()) {
+			try {
+				if (uDao.autentica(txtUsuario.getText(), txtSenha.getText())) {
+					this.chamaMenuPrincipal(uDao.get(new Usuario(txtUsuario.getText(), txtSenha.getText())));
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
+				}
+			} catch (SQLException e) {
+				JOptionPane.showMessageDialog(getParent(), "Algo aconteceu.\nDetalhes: " + e.getMessage());
+			}
+		} else {
+			JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios antes de continuar.");
+		}
 	}
 
 	protected void chamaMenuPrincipal(Usuario usuario) throws SQLException {
 		ConnectionFactory.setUsuarioConectado(usuario);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal(uDao.getConnection());
+		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
 		menuPrincipal.configPermissoes(usuario);
 		menuPrincipal.setVisible(true);
 		dispose();
-	}
-
-	protected void autenticaUsuario() {
-		if (verificaCampoObrigatorio()) {
-			try {
-				String senha = new String(txtSenha.getPassword());
-
-				if (uDao.autentica(txtUsuario.getText(), senha)) {
-					this.chamaMenuPrincipal(uDao.get(new Usuario(txtUsuario.getText(), senha)));
-				} else {
-					Mensagem.aviso(this, "Usuário ou senha incorretos.");
-				}
-
-			} catch (SQLException e) {
-				Mensagem.erro(this, e);
-			}
-		} else {
-			Mensagem.aviso(this, "Preencha os campos obrigatórios antes de continuar.");
-		}
-	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmLoginUsuario frame = new FrmLoginUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
 	}
 }

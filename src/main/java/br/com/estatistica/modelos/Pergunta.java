@@ -90,7 +90,7 @@ public class Pergunta implements Identificator {
 	@Override
 	public void validate() {
 		if (this.getId() == null || this.descricao == null || this.observacao == null || this.questionario == null || this.tipoCampo == null || this.tipoPergunta == null) {
-			throw new NullPointerException("ID, login, descrição ou perfil de acesso não podem ser nulo.");
+			throw new NullPointerException("ID,descrição, tipo de campo ou tipo de pergunta não podem ser nulo.");
 		}		
 	}
 

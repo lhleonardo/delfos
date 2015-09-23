@@ -3,35 +3,23 @@ package br.com.estatistica.visao;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Toolkit;
-import java.sql.Connection;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-import javax.swing.AbstractAction;
+import javax.swing.JComboBox;
 
-import java.awt.event.ActionEvent;
-
-import javax.swing.Action;
-
-import br.com.estatistica.dao.PesquisaDAO;
-import br.com.estatistica.modelos.Pesquisa;
-import br.com.estatistica.util.ConnectionFactory;
-import br.com.estatistica.dao.*;
-
-import java.awt.event.ActionListener;
-
-public class FrmCadastroQuestionario extends GenericFormCadastro {
+public class FrmCadastroQuestionario extends GenericFormCadastro  {
+	
 
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
-	private final Action action = new SwingAction();
 
 	/**
 	 * Launch the application.
@@ -40,7 +28,7 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmCadastroQuestionario frame = new FrmCadastroQuestionario(null);
+					FrmCadastroQuestionario frame = new FrmCadastroQuestionario();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,11 +39,10 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 
 	/**
 	 * Create the frame.
-	 * 
-	 * @param connection
 	 */
-	public FrmCadastroQuestionario(Connection connection) {
-		super("Cadastro de questionários", connection);
+	public FrmCadastroQuestionario() {
+		super();
+		setTitle("Cadastro de Questionario");
 
 		setResizable(false);
 
@@ -66,79 +53,59 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(11, 11, 17, 14);
 		panel.add(lblId);
-
+		
+		
+		
 		JButton btnSalvar = new JButton("Salvar");
-		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
-
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(109, 428, 89, 23);
+		panel.add(btnCancelar);
+		
 		JLabel lblDescrio = new JLabel("Descrição");
 		lblDescrio.setBounds(11, 58, 64, 14);
 		panel.add(lblDescrio);
-
+		
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		editorPane.setBounds(10, 84, 282, 75);
 		panel.add(editorPane);
-
+		
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setBounds(13, 36, 34, 20);
 		panel.add(textField);
 		textField.setColumns(10);
-
+		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(71, 11, 46, 14);
 		panel.add(lblNome);
-
+		
 		textField_1 = new JTextField();
 		textField_1.setBounds(68, 36, 378, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-
+		
 		JLabel lblTema = new JLabel("Tema");
 		lblTema.setBounds(11, 170, 46, 14);
 		panel.add(lblTema);
-
+		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(71, 167, 127, 20);
 		panel.add(comboBox);
-
+		
 		JLabel lblPesquisa = new JLabel("Pesquisa");
 		lblPesquisa.setBounds(11, 204, 46, 14);
 		panel.add(lblPesquisa);
-
+		
 		JButton btnNewButton = new JButton("Lupa");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnNewButton.setBounds(68, 200, 89, 23);
 		panel.add(btnNewButton);
-
+		
 		JButton button = new JButton("+");
 		button.setBounds(208, 166, 41, 23);
 		panel.add(button);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				dispose();
-				Toolkit.getDefaultToolkit().beep();
-			}
-		});
-		btnCancelar.setBounds(109, 428, 89, 23);
-		panel.add(btnCancelar);
-	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
 	}
 }
