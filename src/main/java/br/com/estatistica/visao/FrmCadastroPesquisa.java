@@ -93,31 +93,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Connection con = new ConnectionFactory().getConnection();
-				Integer valor = 0;
-				try{
-					valor = Integer.parseInt(textField_2.getText());
-					System.out.println(valor);
-					try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
-						
-						Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
-						pesquisaDAO.insert(p1);
-					}
-					catch(Exception e1){
-					}	
-					
-				
-				}
-				catch( NumberFormatException e1){
-					e1.getMessage();
-					System.out.println(e1);
-				}
-			
-				Toolkit.getDefaultToolkit().beep();
-
+			public void actionPerformed(ActionEvent e) {
+				btnSalvarActionPerformed(e);
 			}
 		});
+
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
 		
@@ -138,5 +118,28 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		editorPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		editorPane.setBounds(10, 84, 282, 75);
 		panel.add(editorPane);
+	}
+	protected void btnSalvarActionPerformed(ActionEvent e) {
+		Connection con = new ConnectionFactory().getConnection();
+		Integer valor = 0;
+		try{
+			valor = Integer.parseInt(textField_2.getText());
+			System.out.println(valor);
+			try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
+				
+				Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
+				pesquisaDAO.insert(p1);
+			}
+			catch(Exception e1){
+			}	
+			
+		
+		}
+		catch( NumberFormatException e1){
+			e1.getMessage();
+			System.out.println(e1);
+		}
+	
+		Toolkit.getDefaultToolkit().beep();
 	}
 }
