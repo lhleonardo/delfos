@@ -22,6 +22,7 @@ import br.com.estatistica.util.ConnectionFactory;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
+import javax.swing.JTable;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -31,6 +32,12 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	private JTextField textField_3;
+	private JTable table;
+	private JTable table_1;
+	private JTextField textField_4;
+	private JLabel lblResponsveis;
+	private JLabel lblEspecialistas;
 
 	/**
 	 * Launch the application.
@@ -97,26 +104,22 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 				try{
 					valor = Integer.parseInt(textField_2.getText());
 					System.out.println(valor);
-
-					try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
-						
-						Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
-						pesquisaDAO.insert(p1);
-					}
-					catch(Exception e1){
-						System.out.println("Falha ao salvar no banco");
-					}
-					Toolkit.getDefaultToolkit().beep();
-
 				}
 				catch( NumberFormatException e1){
 					e1.getMessage();
 					System.out.println(e1);
 				}
-				
+				try (PesquisaDAO pesquisaDAO = new PesquisaDAO(con)){
+					
+					Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
+					pesquisaDAO.insert(p1);
+				}
+				catch(Exception e1){
+					
+				}
+				Toolkit.getDefaultToolkit().beep();
+
 			}
-			
-			
 		});
 		btnSalvar.setBounds(10, 428, 89, 23);
 		panel.add(btnSalvar);
@@ -138,5 +141,31 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		editorPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
 		editorPane.setBounds(10, 84, 282, 75);
 		panel.add(editorPane);
+		
+		this.textField_3 = new JTextField();
+		this.textField_3.setBounds(11, 242, 281, 20);
+		panel.add(this.textField_3);
+		this.textField_3.setColumns(10);
+		
+		this.table = new JTable();
+		this.table.setBounds(11, 273, 282, 142);
+		panel.add(this.table);
+		
+		this.table_1 = new JTable();
+		this.table_1.setBounds(302, 273, 282, 142);
+		panel.add(this.table_1);
+		
+		this.textField_4 = new JTextField();
+		this.textField_4.setColumns(10);
+		this.textField_4.setBounds(303, 242, 281, 20);
+		panel.add(this.textField_4);
+		
+		this.lblResponsveis = new JLabel("Responsáveis:");
+		this.lblResponsveis.setBounds(11, 228, 85, 14);
+		panel.add(this.lblResponsveis);
+		
+		this.lblEspecialistas = new JLabel("Especialistas:");
+		this.lblEspecialistas.setBounds(302, 228, 64, 14);
+		panel.add(this.lblEspecialistas);
 	}
 }
