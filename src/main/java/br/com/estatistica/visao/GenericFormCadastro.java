@@ -2,30 +2,30 @@ package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Component;
+import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.sql.Connection;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class GenericFormCadastro extends JFrame {
 	
-	/**
-	 *
-	 */
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JPanel panel_2;
+	private Connection connection;
 	
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
@@ -37,11 +37,9 @@ public class GenericFormCadastro extends JFrame {
 		});
 	}
 	
-	/**
-	 * Create the frame.
-	 */
-	public GenericFormCadastro(String nameFrame) {
+	public GenericFormCadastro(String nameFrame, Connection connection) {
 		this.initComponents(nameFrame);
+		this.connection = connection;
 	}
 	
 	public GenericFormCadastro() {
@@ -100,5 +98,21 @@ public class GenericFormCadastro extends JFrame {
 		gbc_panel_3.gridx = 0;
 		gbc_panel_3.gridy = 1;
 		panel.add(panel_3, gbc_panel_3);
+	}
+	
+	protected Connection getConnection() {
+		return this.connection;
+	}
+
+	protected void limpaCampos(Container contentPane) {
+		for (Component component : contentPane.getComponents()) {
+			if (component instanceof JTextField) {
+				((JTextField) component).setText("");
+			} else if (component instanceof JTextArea) {
+				((JTextArea) component).setText("");
+			} else if (component instanceof Container) {
+				this.limpaCampos((Container) component);
+			}
+		}
 	}
 }
