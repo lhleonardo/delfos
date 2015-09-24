@@ -25,79 +25,63 @@ import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmMenuPrincipal extends JFrame {
-
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	private JPanel contentPane;
-
+	
 	private Map<JMenuItem, String> funcoes = new HashMap<JMenuItem, String>();
-
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmMenuPrincipal frame = new FrmMenuPrincipal();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				FrmMenuPrincipal frame = new FrmMenuPrincipal();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public FrmMenuPrincipal() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setExtendedState(Frame.MAXIMIZED_BOTH);
-
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 450, 300);
+		this.contentPane = new JPanel();
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setLayout(new BorderLayout(0, 0));
+		this.setExtendedState(Frame.MAXIMIZED_BOTH);
+		
 		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-
-		JMenu mnCadastro = criaMenuCadastro();
-
+		this.setJMenuBar(menuBar);
+		
+		JMenu mnCadastro = this.criaMenuCadastro();
+		
 		menuBar.add(mnCadastro);
-
-		aplicaRegraDePermissao(ConnectionFactory.getUsuarioConectado(), mnCadastro);
-
-		setContentPane(contentPane);
+		
+		this.aplicaRegraDePermissao(ConnectionFactory.getUsuarioConectado(), mnCadastro);
+		
+		this.setContentPane(this.contentPane);
 	}
-
+	
 	private void aplicaRegraDePermissao(Usuario usuario, JMenu jMenuBar) {
-		List<JMenuItem> items = getMenuItems(jMenuBar);
-
+		List<JMenuItem> items = this.getMenuItems(jMenuBar);
+		
 		Map<Funcionalidade, Boolean> permissoes = usuario.getPerfilAcesso().getPermissoes();
-
+		
 		for (JMenuItem jMenu : items) {
-
+			
 			for (Funcionalidade funcionalidade : permissoes.keySet()) {
-				if (funcionalidade.getChave() == funcoes.get(jMenu)) {
+				if (funcionalidade.getChave() == this.funcoes.get(jMenu)) {
 					jMenu.setVisible(permissoes.get(funcionalidade));
 				}
 			}
-
+			
 		}
 	}
-
+	
 	private List<JMenuItem> getMenuItems(Object obj) {
-		// if (obj instanceof JMenuBar) {
-		// for (Component c : ((JMenuBar) obj).getComponents()) {
-		// getMenuItems(c);
-		// }
-		// }
 		List<JMenuItem> menus = new ArrayList<JMenuItem>();
-
+		
 		if (obj instanceof JMenu) {
 			for (Component c : ((JMenu) obj).getMenuComponents()) {
 				if (c instanceof JMenuItem) {
@@ -105,101 +89,100 @@ public class FrmMenuPrincipal extends JFrame {
 				}
 			}
 		}
-
+		
 		return menus;
-
+		
 	}
-
+	
 	private JMenu criaMenuCadastro() {
-
+		
 		JMenu mnCadastro = new JMenu("Cadastro");
-
+		
 		JMenuItem mnItemCadastroPessoa = new JMenuItem("Cadastro de Pessoa");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
-		mnCadastro.add(mnItemCadastroPessoa);
 		this.addFuncao(mnItemCadastroPessoa, FrmCadastroPessoa.class.getSimpleName());
-
+		mnItemCadastroPessoa.addActionListener(e -> FrmMenuPrincipal.this.mnItemCadastroPessoaActionPerformed(e));
+		mnCadastro.add(mnItemCadastroPessoa);
+		
 		JMenuItem mnItemCadastroPesquisa = new JMenuItem("Cadastro de Pesquisa");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPesquisa.class));
+		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroPesquisa.class));
 		mnCadastro.add(mnItemCadastroPesquisa);
 		this.addFuncao(mnItemCadastroPesquisa, FrmCadastroPesquisa.class.getSimpleName());
-
+		
 		JMenuItem mnItemCadastroQuestionario = new JMenuItem("Cadastro de Questionários");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroQuestionario.class));
+		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroQuestionario.class));
 		mnCadastro.add(mnItemCadastroQuestionario);
 		this.addFuncao(mnItemCadastroQuestionario, FrmCadastroQuestionario.class.getSimpleName());
-
+		
 		JMenuItem mnItemCadastroUsuario = new JMenuItem("Cadastro de Usuário");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroUsuario.class));
+		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroUsuario.class));
 		mnCadastro.add(mnItemCadastroUsuario);
 		this.addFuncao(mnItemCadastroUsuario, FrmCadastroUsuario.class.getSimpleName());
-
+		
 		JMenuItem mnItemCadastroPerfil = new JMenuItem("Cadastro de Perfil de Acesso");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPerfilAcesso.class));
+		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroPerfilAcesso.class));
 		mnCadastro.add(mnItemCadastroPerfil);
 		this.addFuncao(mnItemCadastroPerfil, FrmCadastroPerfilAcesso.class.getSimpleName());
-
+		
 		JMenuItem mnItemCadastroFuncionalidade = new JMenuItem("Cadastro de Funcionalidade");
-		mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroFuncionalidade.class));
+		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroFuncionalidade.class));
 		mnCadastro.add(mnItemCadastroFuncionalidade);
 		this.addFuncao(mnItemCadastroFuncionalidade, FrmCadastroFuncionalidade.class.getSimpleName());
-
+		
 		JMenu mnLocalizao = new JMenu("Localização");
 		mnCadastro.add(mnLocalizao);
-
+		
 		JMenuItem mntmCadastroDeCidades = new JMenuItem("Cadastro de Cidades");
 		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeCidades);
 		this.addFuncao(mntmCadastroDeCidades, FrmCadastroCidades.class.getSimpleName());
-
+		
 		JMenuItem mntmCadastroDeEstados = new JMenuItem("Cadastro de Estados");
 		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeEstados);
 		this.addFuncao(mntmCadastroDeEstados, FrmCadastroEstados.class.getSimpleName());
-
+		
 		JMenuItem mntmCadastroDeBairros = new JMenuItem("Cadastro de Bairros");
 		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
 		mnLocalizao.add(mntmCadastroDeBairros);
 		this.addFuncao(mntmCadastroDeBairros, FrmCadastroBairro.class.getSimpleName());
-
+		
 		JSeparator separator = new JSeparator();
 		mnCadastro.add(separator);
-
+		
 		JMenuItem mntmSair = new JMenuItem("Sair");
-		mntmSair.addActionListener(mnItemSairActionPerformed());
+		mntmSair.addActionListener(this.mnItemSairActionPerformed());
 		mnCadastro.add(mntmSair);
-
+		
 		return mnCadastro;
 	}
-
-	protected ActionListener chamaTelaParaItemDeMenu(Class<? extends JFrame> classe) {
-		return new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					JFrame frame = classe.newInstance();
-					frame.setVisible(true);
-				} catch (InstantiationException | IllegalAccessException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
+	
+	protected void mnItemCadastroPessoaActionPerformed(ActionEvent e) {
+		FrmCadastroPessoa pessoa = new FrmCadastroPessoa();
+		pessoa.setVisible(true);
+	}
+	
+	protected ActionListener chamaTelaParaItemDeMenu(Class<? extends GenericFormCadastro> classe) {
+		return arg0 -> {
+			try {
+				JFrame frame = classe.newInstance();
+				frame.setVisible(true);
+			} catch (InstantiationException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 		};
 	}
-
+	
 	private void addFuncao(JMenuItem chave, String valor) {
-		funcoes.put(chave, valor);
+		this.funcoes.put(chave, valor);
 	}
-
+	
 	protected ActionListener mnItemSairActionPerformed() {
-		return new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Mensagem.confirmaSaidaDoPrograma();
-			}
-		};
+		return e -> Mensagem.confirmaSaidaDoPrograma();
 	}
-
+	
 	public void configPermissoes(Usuario usuario) {
 		// cria os menus a partir da permissão do usuário.
 	}
-
+	
 }
