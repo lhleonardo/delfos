@@ -8,9 +8,10 @@ import br.com.estatistica.visao.FrmLoginUsuario;
 public class Estatistica {
 
 	public static void main(String[] args) {
-		
+
 		try {
-			UIManager.setLookAndFeel("javax.swing.plaf.Windows.WindowsLookAndFeel");
+			// define a aplicação com look and feel do sistema.
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			FrmLoginUsuario login = new FrmLoginUsuario();
 			login.setVisible(true);
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException e) {
