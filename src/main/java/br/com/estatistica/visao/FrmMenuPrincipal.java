@@ -32,6 +32,18 @@ public class FrmMenuPrincipal extends JFrame {
 	
 	private Map<JMenuItem, String> funcoes = new HashMap<JMenuItem, String>();
 	
+	private JMenu mnCadastro;
+	
+	protected JMenuItem mnItemCadastroPessoa;
+	protected JMenuItem mnItemCadastroPesquisa;
+	protected JMenuItem mnItemCadastroQuestionario;
+	protected JMenuItem mnItemCadastroUsuario;
+	protected JMenuItem mnItemCadastroPerfil;
+	protected JMenuItem mnItemCadastroFuncionalidade;
+	protected JMenuItem mnItemCadastroDeCidades;
+	protected JMenuItem mnItemCadastroDeEstados;
+	protected JMenuItem mnItemCadastroDeBairros;
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
@@ -96,81 +108,61 @@ public class FrmMenuPrincipal extends JFrame {
 	
 	private JMenu criaMenuCadastro() {
 		
-		JMenu mnCadastro = new JMenu("Cadastro");
+		this.mnCadastro = new JMenu("Cadastro");
 		
-		JMenuItem mnItemCadastroPessoa = new JMenuItem("Cadastro de Pessoa");
-		this.addFuncao(mnItemCadastroPessoa, FrmCadastroPessoa.class.getSimpleName());
-		mnItemCadastroPessoa.addActionListener(e -> FrmMenuPrincipal.this.mnItemCadastroPessoaActionPerformed(e));
-		mnCadastro.add(mnItemCadastroPessoa);
+		this.mnItemCadastroPessoa = this.criaMenu("Cadastro de Pessoa", FrmCadastroPessoa.class);
 		
-		JMenuItem mnItemCadastroPesquisa = new JMenuItem("Cadastro de Pesquisa");
-		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroPesquisa.class));
-		mnCadastro.add(mnItemCadastroPesquisa);
-		this.addFuncao(mnItemCadastroPesquisa, FrmCadastroPesquisa.class.getSimpleName());
+		this.mnItemCadastroPesquisa = this.criaMenu("Cadastro de Pesquisa", FrmCadastroPesquisa.class);
 		
-		JMenuItem mnItemCadastroQuestionario = new JMenuItem("Cadastro de Questionários");
-		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroQuestionario.class));
-		mnCadastro.add(mnItemCadastroQuestionario);
-		this.addFuncao(mnItemCadastroQuestionario, FrmCadastroQuestionario.class.getSimpleName());
+		this.mnItemCadastroQuestionario = this.criaMenu("Cadastro de Questionários", FrmCadastroQuestionario.class);
 		
-		JMenuItem mnItemCadastroUsuario = new JMenuItem("Cadastro de Usuário");
-		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroUsuario.class));
-		mnCadastro.add(mnItemCadastroUsuario);
-		this.addFuncao(mnItemCadastroUsuario, FrmCadastroUsuario.class.getSimpleName());
+		this.mnItemCadastroUsuario = this.criaMenu("Cadastro de Usuário", FrmCadastroUsuario.class);
 		
-		JMenuItem mnItemCadastroPerfil = new JMenuItem("Cadastro de Perfil de Acesso");
-		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroPerfilAcesso.class));
-		mnCadastro.add(mnItemCadastroPerfil);
-		this.addFuncao(mnItemCadastroPerfil, FrmCadastroPerfilAcesso.class.getSimpleName());
+		this.mnItemCadastroPerfil = this.criaMenu("Cadastro de Perfis de Acesso", FrmCadastroPerfilAcesso.class);
 		
-		JMenuItem mnItemCadastroFuncionalidade = new JMenuItem("Cadastro de Funcionalidade");
-		// mnItemCadastroPessoa.addActionListener(this.chamaTelaParaItemDeMenu(FrmCadastroFuncionalidade.class));
-		mnCadastro.add(mnItemCadastroFuncionalidade);
-		this.addFuncao(mnItemCadastroFuncionalidade, FrmCadastroFuncionalidade.class.getSimpleName());
+		this.mnItemCadastroFuncionalidade = this.criaMenu("Cadastro de Funcionalidades", FrmCadastroFuncionalidade.class);
 		
 		JMenu mnLocalizao = new JMenu("Localização");
-		mnCadastro.add(mnLocalizao);
+		this.mnCadastro.add(mnLocalizao);
 		
-		JMenuItem mntmCadastroDeCidades = new JMenuItem("Cadastro de Cidades");
-		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
-		mnLocalizao.add(mntmCadastroDeCidades);
-		this.addFuncao(mntmCadastroDeCidades, FrmCadastroCidades.class.getSimpleName());
+		this.mnItemCadastroDeCidades = this.criaMenu("Cadastro de Cidades", FrmCadastroCidades.class);
 		
-		JMenuItem mntmCadastroDeEstados = new JMenuItem("Cadastro de Estados");
-		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
-		mnLocalizao.add(mntmCadastroDeEstados);
-		this.addFuncao(mntmCadastroDeEstados, FrmCadastroEstados.class.getSimpleName());
+		this.mnItemCadastroDeEstados = this.criaMenu("Cadastro de Estados", FrmCadastroEstados.class);
 		
-		JMenuItem mntmCadastroDeBairros = new JMenuItem("Cadastro de Bairros");
-		// mnItemCadastroPessoa.addActionListener(chamaTelaParaItemDeMenu(FrmCadastroPessoa.class));
-		mnLocalizao.add(mntmCadastroDeBairros);
-		this.addFuncao(mntmCadastroDeBairros, FrmCadastroBairro.class.getSimpleName());
+		this.mnItemCadastroDeBairros = this.criaMenu("Cadastro de Bairros", FrmCadastroBairro.class);
 		
 		JSeparator separator = new JSeparator();
-		mnCadastro.add(separator);
+		this.mnCadastro.add(separator);
 		
 		JMenuItem mntmSair = new JMenuItem("Sair");
 		mntmSair.addActionListener(this.mnItemSairActionPerformed());
-		mnCadastro.add(mntmSair);
+		this.mnCadastro.add(mntmSair);
 		
-		return mnCadastro;
+		return this.mnCadastro;
 	}
 	
-	protected void mnItemCadastroPessoaActionPerformed(ActionEvent e) {
-		FrmCadastroPessoa pessoa = new FrmCadastroPessoa();
-		pessoa.setVisible(true);
+	private JMenuItem criaMenu(String texto, Class<? extends GenericFormCadastro> clazz) {
+		JMenuItem mnItem = new JMenuItem(texto);
+		this.addFuncao(mnItem, clazz.getSimpleName());
+		mnItem.addActionListener(e -> FrmMenuPrincipal.this.chamaTelaActionPerformed(e));
+		this.mnCadastro.add(mnItem);
+		return mnItem;
+		
 	}
 	
-	protected ActionListener chamaTelaParaItemDeMenu(Class<? extends GenericFormCadastro> classe) {
-		return arg0 -> {
-			try {
-				JFrame frame = classe.newInstance();
-				frame.setVisible(true);
-			} catch (InstantiationException | IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	private void chamaTelaActionPerformed(ActionEvent e) {
+		try {
+			for (JMenuItem menu : this.funcoes.keySet()) {
+				if (menu.getText().equals(e.getActionCommand())) {
+					
+					Class<?> class1 = Class.forName("br.com.estatistica.visao." + this.funcoes.get(menu));
+					JFrame frame = (JFrame) class1.newInstance();
+					frame.setVisible(true);
+				}
 			}
-		};
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e1) {
+			Mensagem.erro(this, e1);
+		}
 	}
 	
 	private void addFuncao(JMenuItem chave, String valor) {
@@ -179,10 +171,6 @@ public class FrmMenuPrincipal extends JFrame {
 	
 	protected ActionListener mnItemSairActionPerformed() {
 		return e -> Mensagem.confirmaSaidaDoPrograma();
-	}
-	
-	public void configPermissoes(Usuario usuario) {
-		// cria os menus a partir da permissão do usuário.
 	}
 	
 }

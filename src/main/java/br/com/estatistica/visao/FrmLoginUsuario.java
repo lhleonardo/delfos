@@ -6,10 +6,10 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,29 +23,26 @@ import br.com.estatistica.dao.UsuarioDAO;
 import br.com.estatistica.modelos.Usuario;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
-import javax.swing.ImageIcon;
 
 public class FrmLoginUsuario extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTextField txtUsuario;
 	private JPasswordField txtSenha;
 
 	private static final UsuarioDAO uDao;
-	private Usuario usuario;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmLoginUsuario frame = new FrmLoginUsuario();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				FrmLoginUsuario frame = new FrmLoginUsuario();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -59,24 +56,24 @@ public class FrmLoginUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public FrmLoginUsuario() {
-		initComponents();
+		this.initComponents();
 	}
 
 	protected void initComponents() {
-		setTitle("Autenticação de usuário");
+		this.setTitle("Autenticação de usuário");
 
-		setResizable(false);
+		this.setResizable(false);
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setBounds(100, 100, 500, 400);
+		this.contentPane = new JPanel();
+		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		this.contentPane.setLayout(new BorderLayout(0, 0));
+		this.setContentPane(this.contentPane);
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
-		contentPane.add(panel, BorderLayout.CENTER);
+		this.contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
 		JLabel label_1 = new JLabel("");
@@ -92,11 +89,11 @@ public class FrmLoginUsuario extends JFrame {
 		lblUsurio.setBounds(208, 143, 68, 26);
 		panel.add(lblUsurio);
 
-		txtUsuario = new JTextField();
-		txtUsuario.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		txtUsuario.setBounds(101, 168, 282, 20);
-		panel.add(txtUsuario);
-		txtUsuario.setColumns(10);
+		this.txtUsuario = new JTextField();
+		this.txtUsuario.setFont(new Font("Calibri Light", Font.PLAIN, 20));
+		this.txtUsuario.setBounds(101, 168, 282, 20);
+		panel.add(this.txtUsuario);
+		this.txtUsuario.setColumns(10);
 
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(new Color(220, 220, 220));
@@ -104,62 +101,56 @@ public class FrmLoginUsuario extends JFrame {
 		lblSenha.setBounds(215, 207, 53, 20);
 		panel.add(lblSenha);
 
-		txtSenha = new JPasswordField();
-		txtSenha.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		txtSenha.setBounds(101, 228, 282, 20);
-		panel.add(txtSenha);
+		this.txtSenha = new JPasswordField();
+		this.txtSenha.setFont(new Font("Calibri Light", Font.PLAIN, 20));
+		this.txtSenha.setBounds(101, 228, 282, 20);
+		panel.add(this.txtSenha);
 
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.addActionListener(btnEntrarActionPerformed());
+		btnEntrar.addActionListener(this.btnEntrarActionPerformed());
 		btnEntrar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
 		btnEntrar.setBounds(265, 284, 118, 31);
 		panel.add(btnEntrar);
 
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(btnCancelarActionPerformed());
+		btnCancelar.addActionListener(this.btnCancelarActionPerformed());
 		btnCancelar.setFont(new Font("Calibri Light", Font.PLAIN, 15));
 		btnCancelar.setBounds(101, 284, 118, 31);
 		panel.add(btnCancelar);
 
-		centralizarComponente();
+		this.centralizarComponente();
 	}
 
 	public void centralizarComponente() {
 		Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension dw = getSize();
-		setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
+		Dimension dw = this.getSize();
+		this.setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
 	}
 
 	protected ActionListener btnCancelarActionPerformed() {
-		return new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Mensagem.confirmaSaidaDoPrograma();
-			}
-		};
+		return e -> Mensagem.confirmaSaidaDoPrograma();
 	}
 
 	protected ActionListener btnEntrarActionPerformed() {
-		return new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				autenticaUsuario();
-			}
-		};
+		return arg0 -> FrmLoginUsuario.this.autenticaUsuario();
 	}
 
 	protected boolean validaCampos() {
-		return (!txtUsuario.getText().isEmpty() && !txtSenha.getText().isEmpty());
+		return (!this.txtUsuario.getText().isEmpty() && !new String(this.txtSenha.getPassword()).isEmpty());
 	}
 
 	protected void autenticaUsuario() {
-		if (validaCampos()) {
+		if (this.validaCampos()) {
 			try {
-				if (uDao.autentica(txtUsuario.getText(), txtSenha.getText())) {
-					this.chamaMenuPrincipal(uDao.get(new Usuario(txtUsuario.getText(), txtSenha.getText())));
+				String senha = new String(this.txtSenha.getPassword());
+
+				if (uDao.autentica(this.txtUsuario.getText(), senha)) {
+					this.chamaMenuPrincipal(uDao.get(new Usuario(this.txtUsuario.getText(), senha)));
 				} else {
 					JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.");
 				}
 			} catch (SQLException e) {
-				JOptionPane.showMessageDialog(getParent(), "Algo aconteceu.\nDetalhes: " + e.getMessage());
+				JOptionPane.showMessageDialog(this.getParent(), "Algo aconteceu.\nDetalhes: " + e.getMessage());
 			}
 		} else {
 			JOptionPane.showMessageDialog(null, "Preencha os campos obrigatórios antes de continuar.");
@@ -168,10 +159,9 @@ public class FrmLoginUsuario extends JFrame {
 
 	protected void chamaMenuPrincipal(Usuario usuario) throws SQLException {
 		ConnectionFactory.setUsuarioConectado(usuario);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal();
-		menuPrincipal.configPermissoes(usuario);
 		menuPrincipal.setVisible(true);
-		dispose();
+		this.dispose();
 	}
 }
