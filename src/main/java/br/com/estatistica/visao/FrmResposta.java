@@ -6,6 +6,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JScrollPane;
 
 public class FrmResposta extends GenericFormCadastro {
 
@@ -36,6 +37,9 @@ public class FrmResposta extends GenericFormCadastro {
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(0, 0, 714, 461);
+		panel.add(scrollPane);
 	}
-
 }
