@@ -24,8 +24,8 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	}
 
 	@Override
-	public Integer insert(Pesquisa model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
+	protected Integer insert(Pesquisa model) throws SQLException {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
 			java.sql.Date dataSQL = new java.sql.Date(new java.util.Date().getTime());// Cria
 																					  // Objeto
@@ -52,7 +52,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	
 	@Override
 	protected Integer update(Pesquisa model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getDescricao());
 			pst.setInt(2, model.getLimiteDeEspecialistas());
 			pst.setInt(3, model.getId());
