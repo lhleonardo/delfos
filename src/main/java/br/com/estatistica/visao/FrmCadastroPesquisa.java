@@ -135,7 +135,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 			valor = Integer.parseInt(textField_2.getText());
 			System.out.println(valor);
 			pesquisaDAO = new PesquisaDAO(super.getConnection());
-			Pesquisa p1 = new Pesquisa(textField_1.getText(), valor);
+			Pesquisa p1 = new Pesquisa(textField_1.getText(),textArea.getText(), valor);
 			
 			int valorCodigo = pesquisaDAO.save(p1); 
 			

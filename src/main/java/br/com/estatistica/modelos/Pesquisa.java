@@ -9,14 +9,16 @@ public class Pesquisa implements Identificator {
 
 	private Integer id;
 	private String descricao;
+	private String nome;
 	private Date data;
 	private List<Pesquisador> responsaveis;
 	private List<Especialista> participantes;
 	private int LIMITE_DE_ESPECIALISTAS = 0;
 
-	public Pesquisa(int id, String descricao, Date data, List<Pesquisador> responsaveis, List<Especialista> participantes,
+	public Pesquisa(int id,String nome, String descricao, Date data, List<Pesquisador> responsaveis, List<Especialista> participantes,
 	        int limiteDeEspecialistas) {
 		this.id = id;
+		this.setNome(nome);
 		this.descricao = descricao;
 		this.data = data;
 		this.responsaveis = responsaveis;
@@ -24,8 +26,9 @@ public class Pesquisa implements Identificator {
 		this.LIMITE_DE_ESPECIALISTAS = limiteDeEspecialistas;
 	}
 
-	public Pesquisa(int id, String descricao, List<Pesquisador> responsaveis, List<Especialista> participantes, int limiteDeEspecialistas) {
+	public Pesquisa(int id, String nome,String descricao, List<Pesquisador> responsaveis, List<Especialista> participantes, int limiteDeEspecialistas) {
 		this.id = id;
+		this.setNome(nome);
 		this.descricao = descricao;
 		this.data = Calendar.getInstance().getTime();
 		this.responsaveis = responsaveis;
@@ -33,15 +36,15 @@ public class Pesquisa implements Identificator {
 		this.LIMITE_DE_ESPECIALISTAS = limiteDeEspecialistas;
 	}
 
-	public Pesquisa(String descricao, Date data, List<Pesquisador> responsaveis, List<Especialista> participantes) {
-		this.descricao = descricao;
+	public Pesquisa(String nome, Date data, List<Pesquisador> responsaveis, List<Especialista> participantes) {
+		this.setNome(nome);
 		this.data = data;
 		this.responsaveis = responsaveis;
 		this.participantes = participantes;
 	}
 
-	public Pesquisa(String descricao, List<Pesquisador> responsaveis, List<Especialista> participantes) {
-		this.descricao = descricao;
+	public Pesquisa(String nome, List<Pesquisador> responsaveis, List<Especialista> participantes) {
+		this.setNome(nome);
 		this.data = Calendar.getInstance().getTime();
 		this.responsaveis = responsaveis;
 		this.participantes = participantes;
@@ -53,8 +56,9 @@ public class Pesquisa implements Identificator {
 		this.data = Calendar.getInstance().getTime();
 	}
 	
-	public Pesquisa(String descricao, Integer LimiteDeEspecialistas){
-		this.descricao= descricao;
+	public Pesquisa(String nome, String descricao, Integer LimiteDeEspecialistas){
+		this.setNome(nome);
+		this.descricao = descricao;
 		this.LIMITE_DE_ESPECIALISTAS= LimiteDeEspecialistas;
 	}
 
@@ -111,6 +115,14 @@ public class Pesquisa implements Identificator {
 	public void validate() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

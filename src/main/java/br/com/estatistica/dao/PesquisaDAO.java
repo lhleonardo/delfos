@@ -14,9 +14,9 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE id_especialista = ? AND data = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_pesquisa = ?";
 	private static final String SQL_SELECT_BY_DATA = SQL_SELECT + " WHERE data = ?";
-	private static final String SQL_SELECT_BY_DESCRICAO = SQL_SELECT + " WHERE descricao = ?";
-	private static final String SQL_INSERT = "INSERT INTO Pesquisa(data,descricao,limite_de_especialistas) VALUES(?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE Pesquisa SET descricao = ?, limite_de_especialistas = ? WHERE id_pesquisa =?";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome = ?";
+	private static final String SQL_INSERT = "INSERT INTO Pesquisa(data,nome,descricao,limite_de_especialistas) VALUES(?,?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE Pesquisa SET nome = ?,descricao = ?, limite_de_especialistas = ? WHERE id_pesquisa =?";
 	private static final String SQL_DELETE = "DELETE FROM Pesquisa WHERE id_pesquisa = ?";
 	
 	public PesquisaDAO(Connection connection) {
@@ -42,8 +42,9 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 																					  // Java.util
 
 			pst.setDate(1, dataSQL);
-			pst.setString(2, model.getDescricao());
-			pst.setInt(3, model.getLimiteDeEspecialistas());
+			pst.setString(2, model.getNome());
+			pst.setString(3, model.getDescricao());
+			pst.setInt(4, model.getLimiteDeEspecialistas());
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
@@ -53,9 +54,10 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	@Override
 	protected Integer update(Pesquisa model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			pst.setString(1, model.getDescricao());
-			pst.setInt(2, model.getLimiteDeEspecialistas());
-			pst.setInt(3, model.getId());
+			pst.setString(1, model.getNome());
+			pst.setString(2, model.getDescricao());
+			pst.setInt(3, model.getLimiteDeEspecialistas());
+			pst.setInt(4, model.getId());
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
