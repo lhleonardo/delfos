@@ -2,10 +2,13 @@ package br.com.estatistica.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.modelos.Usuario;
 import br.com.estatistica.util.Mensagem;
 
 public class PesquisaDAO extends GenericDAO<Pesquisa> {
@@ -86,8 +89,16 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	
 	@Override
 	public List<Pesquisa> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
+		
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+			ResultSet resultSet = pst.executeQuery();
+			
+			pesquisas.addAll(EXTRACTOR.extractAll(resultSet, super.getConnection()));
+			
+		}
+		
+		return pesquisas;
 	}
 	
 	@Override
