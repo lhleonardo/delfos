@@ -40,7 +40,6 @@ public class RespostaDAO extends GenericDAO {
 	@Override
 	public Identificator get(Identificator model) throws SQLException {
 		// TODO Auto-generated method stub
-		//jhgurfytr
 		return null;
 	}
 
