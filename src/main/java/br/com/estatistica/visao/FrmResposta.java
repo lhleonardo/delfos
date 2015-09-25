@@ -32,6 +32,10 @@ public class FrmResposta extends GenericFormCadastro {
 	 */
 	public FrmResposta() {
 		super();
+		
+		JPanel panel = new JPanel();
+		getContentPane().add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
 	}
 
 }
