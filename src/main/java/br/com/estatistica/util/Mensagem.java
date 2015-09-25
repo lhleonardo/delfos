@@ -16,7 +16,7 @@ public class Mensagem {
 	}
 	
 	public static void erro(Component parent, Throwable causa) {
-		Mensagem.erro(parent, causa.getMessage());
+		Mensagem.erro(parent, causa.getClass() + ":" + causa.getMessage());
 	}
 	
 	public static void erro(Component parent, String causa) {
