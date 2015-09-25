@@ -14,6 +14,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JComboBox;
 
+import br.com.estatistica.dao.PesquisaDAO;
+
 public class FrmCadastroQuestionario extends GenericFormCadastro  {
 	
 
@@ -91,7 +93,7 @@ public class FrmCadastroQuestionario extends GenericFormCadastro  {
 		JLabel lblTema = new JLabel("Tema");
 		lblTema.setBounds(11, 170, 46, 14);
 		panel.add(lblTema);
-		
+		 
 		JComboBox comboBox = new JComboBox();
 		comboBox.setBounds(71, 167, 127, 20);
 		panel.add(comboBox);

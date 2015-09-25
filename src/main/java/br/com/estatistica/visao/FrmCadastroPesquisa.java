@@ -63,59 +63,64 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	 */
 	public FrmCadastroPesquisa(Connection connection) {
 		super("Cadastro de Pesquisa", connection);
-
-		JPanel panel = new JPanel();
+		initComponents();
+		setSize(600, 361);
+	}
+	private void initComponents() {
+		setResizable(false);
+		
+				JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
-
-		JLabel lblId = new JLabel("ID");
+		
+				JLabel lblId = new JLabel("ID");
 		lblId.setBounds(11, 11, 17, 14);
 		panel.add(lblId);
-
-		textField = new JTextField();
+		
+				textField = new JTextField();
 		textField.setEditable(false);
 		textField.setBounds(10, 27, 34, 20);
 		panel.add(textField);
 		textField.setColumns(10);
-
-		JLabel lblNome = new JLabel("Nome");
+		
+				JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(50, 11, 46, 14);
 		panel.add(lblNome);
-
-		textField_1 = new JTextField();
+		
+				textField_1 = new JTextField();
 		textField_1.setBounds(50, 27, 354, 20);
 		panel.add(textField_1);
 		textField_1.setColumns(10);
-
-		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
+		
+				JLabel lblNewLabel = new JLabel("Limite de Especialistas");
 		lblNewLabel.setBounds(11, 212, 187, 14);
 		panel.add(lblNewLabel);
-
-		textField_2 = new JTextField();
+		
+				textField_2 = new JTextField();
 		textField_2.setBounds(11, 237, 46, 20);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
-
-		JButton btnSalvar = new JButton("Salvar");
+		
+				JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				btnSalvarActionPerformed(e);
 			}
 		});
-
-		btnSalvar.setBounds(10, 428, 89, 23);
+		
+				btnSalvar.setBounds(11, 274, 89, 23);
 		panel.add(btnSalvar);
-
-		JButton btnCancelar = new JButton("Cancelar");
+		
+				JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(109, 428, 89, 23);
+		btnCancelar.setBounds(110, 274, 89, 23);
 		panel.add(btnCancelar);
-
-		JLabel lblDescrio = new JLabel("Descrição");
+		
+				JLabel lblDescrio = new JLabel("Descrição");
 		lblDescrio.setBounds(11, 58, 64, 14);
 		panel.add(lblDescrio);
 		
