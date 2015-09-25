@@ -15,7 +15,7 @@ public class Tipo_PerguntaTest {
 			tipoperguntaDAO.insert(tipopergunta);
 			}		
 		
-		catch(SQLException e){
+		catch(SQLException exception){
 			
 		}
 	

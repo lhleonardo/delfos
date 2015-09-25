@@ -26,6 +26,9 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 
 	}
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	protected Integer insert(Tipo_Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
@@ -37,6 +40,9 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 		}
 	}
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	protected Integer update(Tipo_Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
@@ -46,6 +52,9 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 
 	}
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	@Override
 	public boolean delete(Tipo_Pergunta model) throws SQLException {
 		if (model.getId() != null) {
