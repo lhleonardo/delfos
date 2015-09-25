@@ -85,7 +85,7 @@ public class RespostaDAO extends GenericDAO {
 	}
 
 	@Override
-	public Identificator get(Integer idModel) throws SQLException {
+	public Resposta get(Integer idModel) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
