@@ -125,9 +125,9 @@ public class FrmMenuPrincipal extends JFrame {
 		JMenu mnLocalizao = new JMenu("Localização");
 		this.mnCadastro.add(mnLocalizao);
 		
-		this.mnItemCadastroDeCidades = this.criaMenu("Cadastro de Cidades", FrmCadastroCidades.class);
+		this.mnItemCadastroDeCidades = this.criaMenu("Cadastro de Cidades", FrmCadastroCidade.class);
 		
-		this.mnItemCadastroDeEstados = this.criaMenu("Cadastro de Estados", FrmCadastroEstados.class);
+		this.mnItemCadastroDeEstados = this.criaMenu("Cadastro de Estados", FrmCadastroEstado.class);
 		
 		this.mnItemCadastroDeBairros = this.criaMenu("Cadastro de Bairros", FrmCadastroBairro.class);
 		

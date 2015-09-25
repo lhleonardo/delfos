@@ -1,33 +1,25 @@
 package br.com.estatistica.visao;
 
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
+import java.sql.Connection;
 
 public class FrmCadastroFuncionalidade extends GenericFormCadastro {
 
-	/**
-	 * Launch the application.
-	 */
+	private static final long serialVersionUID = 1L;
+
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmCadastroFuncionalidade frame = new FrmCadastroFuncionalidade();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				FrmCadastroFuncionalidade frame = new FrmCadastroFuncionalidade(null);
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public FrmCadastroFuncionalidade() {
-		setBounds(100, 100, 450, 300);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public FrmCadastroFuncionalidade(Connection connection) {
+		super("Cadastro de Funcionalidade", connection);
 
 	}
 
