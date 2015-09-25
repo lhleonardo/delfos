@@ -27,6 +27,8 @@ import java.sql.SQLException;
 
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.JTextArea;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -37,6 +39,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JTextField textField_1;
 	private JTextField textField_2;
 	private PesquisaDAO pesquisaDAO;
+	private JScrollPane scrollPane;
+	private JTextArea textArea;
 
 	/**
 	 * Launch the application.
@@ -84,11 +88,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		textField_1.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
-		lblNewLabel.setBounds(11, 170, 187, 14);
+		lblNewLabel.setBounds(11, 212, 187, 14);
 		panel.add(lblNewLabel);
 
 		textField_2 = new JTextField();
-		textField_2.setBounds(11, 195, 46, 20);
+		textField_2.setBounds(11, 237, 46, 20);
 		panel.add(textField_2);
 		textField_2.setColumns(10);
 
@@ -114,11 +118,15 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		JLabel lblDescrio = new JLabel("Descrição");
 		lblDescrio.setBounds(11, 58, 64, 14);
 		panel.add(lblDescrio);
-
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setBorder(new LineBorder(Color.LIGHT_GRAY));
-		editorPane.setBounds(10, 84, 282, 75);
-		panel.add(editorPane);
+		
+		this.scrollPane = new JScrollPane();
+		this.scrollPane.setBounds(11, 83, 393, 118);
+		panel.add(this.scrollPane);
+		
+		this.textArea = new JTextArea();
+		this.scrollPane.setViewportView(this.textArea);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 	}
 
 	protected void btnSalvarActionPerformed(ActionEvent e) {
