@@ -59,10 +59,17 @@ public class Bairro implements Identificator {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	@Override
 	public void validate() {
-
+		if (this.nome == null) {
+			throw new IllegalArgumentException("O campo nome é de preenchimento obrigatório.");
+		}
+	}
+	
+	@Override
+	public String toString() {
+		return "Bairro (id=" + this.id + ", nome=" + this.nome + ", descricao=" + this.descricao + ")";
 	}
 	
 }
