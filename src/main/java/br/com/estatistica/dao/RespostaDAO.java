@@ -5,12 +5,11 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-//Teste
-
+// Teste
 import br.com.estatistica.modelos.Resposta;
 import br.com.estatistica.util.Mensagem;
 
-public class RespostaDAO extends GenericDAO {
+public class RespostaDAO extends GenericDAO<Resposta> {
 	private static final String SQL_SELECT = "SELECT * FROM Resposta";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE id_especialista = ? AND data = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_pesquisa = ?";
@@ -24,23 +23,21 @@ public class RespostaDAO extends GenericDAO {
 		// TODO Auto-generated constructor stub
 	}
 	
-
 	@Override
-	protected Integer insert (Resposta model) throws SQLException {
+	protected Integer insert(Resposta model) throws SQLException {
 		
-		try(PreparedStatement pst = super.getConnection().PreparedStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)){
+		try (PreparedStatement pst = super.getConnection().PreparedStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			
 			java.sql.Date dataSQL = new java.sql.Date(new java.util.Date().getTime());
-			
 			
 			pst.setString(1, model.getDescricao());
 			pst.setString(2, model.getObservacao());
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
-
+		
 	}
-
+	
 	@Override
 	protected Integer update(Resposta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
@@ -51,7 +48,7 @@ public class RespostaDAO extends GenericDAO {
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
-
+	
 	@Override
 	public boolean delete(Resposta model) throws SQLException {
 		if (model.getId() != null) {
@@ -71,41 +68,41 @@ public class RespostaDAO extends GenericDAO {
 			throw new IllegalArgumentException("Informe um usuário antes de prosseguir.");
 		}
 	}
-
+	
 	@Override
 	public List getAll() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public Resposta get(Resposta model) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public Resposta get(Integer idModel) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public List get(String value) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
 	public boolean isExist(Observacao model) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 	@Override
 	public boolean isExist(Integer idModel) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	
 }
