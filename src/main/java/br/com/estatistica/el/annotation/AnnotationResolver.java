@@ -1,7 +1,12 @@
 package br.com.estatistica.el.annotation;
 
+import java.lang.reflect.Field;
+
+import br.com.estatistica.bean.Formatter;
 import br.com.estatistica.el.FieldResolver;
+import br.com.estatistica.el.handler.BlankHandler;
 import br.com.estatistica.el.handler.FieldAccessHandler;
+import br.com.estatistica.reflec.ClassIntrospector;
 
 /**
  * Class to get FieldResolver from the Resolvable annotation.
@@ -11,14 +16,14 @@ import br.com.estatistica.el.handler.FieldAccessHandler;
  */
 public class AnnotationResolver {
 	private Class<?> clazz;
-	
+
 	public AnnotationResolver(Class<?> clazz) {
 		if (clazz == null) {
 			throw new IllegalArgumentException("Class can't be null!");
 		}
 		this.clazz = clazz;
 	}
-	
+
 	/**
 	 * For each String of the given parameter are returned a FieldResolver.
 	 *
@@ -31,7 +36,7 @@ public class AnnotationResolver {
 		if (fieldNames.length == 0) {
 			return resolvers;
 		}
-		
+
 		for (int i = 0; i < fieldNames.length; i++) {
 			try {
 				String fieldN = fieldNames[i];
@@ -51,7 +56,7 @@ public class AnnotationResolver {
 					Field field = new ClassIntrospector(this.clazz).getField(fieldN);
 					if (field.isAnnotationPresent(Resolvable.class)) {
 						Resolvable resolvable = field.getAnnotation(Resolvable.class);
-						
+
 						resolvers[i] = this.resolve(resolvable, field.getName(), this.clazz, colName);
 					} else {
 						resolvers[i] = this.resolve(fieldN, this.clazz, colName);
@@ -63,7 +68,7 @@ public class AnnotationResolver {
 		}
 		return resolvers;
 	}
-	
+
 	/**
 	 * Give the field names in a one String value. Each name separated by
 	 * commas(,) The same as resolve(arg.split("[,]"))
@@ -71,30 +76,30 @@ public class AnnotationResolver {
 	public FieldResolver[] resolve(String arg) {
 		return this.resolve(arg.split("[,]"));
 	}
-	
+
 	/**
 	 * Return the FieldResolver for the given field name.
 	 */
 	public FieldResolver resolveSingle(String arg) {
 		return this.resolve(arg)[0];
 	}
-	
+
 	private FieldResolver resolve(String fieldName, Class<?> clazz, String colname) throws InstantiationException, IllegalAccessException,
-	        SecurityException, NoSuchFieldException {
+	SecurityException, NoSuchFieldException {
 		String fields[] = fieldName.split("[.]");
-		
+
 		Field last = new ClassIntrospector(clazz).getField(fields[0]);
 		for (int i = 1; i < fields.length; i++) {
 			last = last.getType().getDeclaredField(fields[i]);
 		}
-		
+
 		FieldResolver resolver = null;
 		Resolvable resolvable = last.getAnnotation(Resolvable.class);
 		if (resolvable == null) {
 			resolver = new FieldResolver(clazz, fieldName, (colname == null) ? "" : colname);
 		} else {
 			String colName = resolvable.colName();
-			
+
 			if (!colname.isEmpty()) {
 				colName = colname;
 			} else if (colName.isEmpty()) {
@@ -102,17 +107,17 @@ public class AnnotationResolver {
 			} else {
 				colName = fieldName.substring(0, fieldName.lastIndexOf(".")).concat(colName);
 			}
-			
+
 			resolver = new FieldResolver(clazz, fieldName, colName, (FieldAccessHandler) resolvable.accessMethod().newInstance());
 			resolver.setFormatter((Formatter) resolvable.formatter().newInstance());
 		}
 		return resolver;
 	}
-	
+
 	private FieldResolver resolve(Resolvable resolvable, String fieldName, Class<?> clazz, String colname) throws InstantiationException,
-	        IllegalAccessException {
+	IllegalAccessException {
 		String colName = resolvable.colName();
-		
+
 		if (colName.isEmpty()) {
 			if (colname.isEmpty()) {
 				colName = fieldName;
@@ -120,7 +125,7 @@ public class AnnotationResolver {
 				colName = colname;
 			}
 		}
-		
+
 		FieldResolver resolver = new FieldResolver(clazz, fieldName, colName, (FieldAccessHandler) resolvable.accessMethod().newInstance());
 		resolver.setFormatter((Formatter) resolvable.formatter().newInstance());
 		return resolver;
