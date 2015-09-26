@@ -6,8 +6,8 @@ import br.com.estatistica.util.ConnectionFactory;
 
 public class ConnectionTest {
 	public static void main (String[]args){
-		Connection con = new ConnectionFactory().getConnection();
-		PesquisaDAO pesquisa = new PesquisaDAO(con);
+		Connection conec = new ConnectionFactory().getConnection();
+		PesquisaDAO pesquisa = new PesquisaDAO(conec);
 		
 	}
 
