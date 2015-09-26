@@ -1,6 +1,7 @@
 package br.com.estatistica.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_questionario = ?";
 	private static final String SQL_SELECT_BY_DATA = SQL_SELECT + " WHERE data = ?";
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome = ?";
-	private static final String SQL_INSERT = "INSERT INTO Questionario(nome = ?,descricao = ?, limite_de_especialistas = ? WHERE id_pesquisa =?)";
+	private static final String SQL_INSERT = "INSERT INTO Questionario(nome = ?,descricao = ?, id_ = ? WHERE id_pesquisa =?)";
 	private static final String SQL_DELETE = "DELETE FROM Pesquisa WHERE id_questionario = ?";
 	
 	public QuestionarioDAO(Connection connection) {
@@ -24,8 +25,14 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 	
 	@Override
 	protected Integer insert(Questionario model) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			pst.setString(1, model.getNome());
+			pst.setString(2, model.getDescricao());
+			pst.setString(3, model.getCodIbge());
+			pst.setInt(4, model.getEstado().getId());
+			pst.executeUpdate();
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
+		}
 	}
 
 	@Override
