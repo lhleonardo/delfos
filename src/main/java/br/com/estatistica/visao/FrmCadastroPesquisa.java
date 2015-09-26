@@ -17,6 +17,7 @@ import javax.swing.border.LineBorder;
 
 import br.com.estatistica.dao.PesquisaDAO;
 import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
@@ -41,6 +42,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private PesquisaDAO pesquisaDAO;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
+	private JTable table;
+	private TableModelPesquisa modeloTabelaPesquisa;
 
 	/**
 	 * Launch the application.
@@ -132,6 +135,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.scrollPane.setViewportView(this.textArea);
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
+		
+		this.table = new JTable();
+		this.table.setBounds(208, 225, 196, 86);
+		this.table.setModel(modeloTabelaPesquisa);
+		panel.add(this.table);
 	}
 
 	protected void btnSalvarActionPerformed(ActionEvent e) {
