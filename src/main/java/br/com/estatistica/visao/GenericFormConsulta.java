@@ -17,7 +17,7 @@ import javax.swing.border.EmptyBorder;
 
 import br.com.estatistica.util.ConnectionFactory;
 
-public class GenericFormConsulta<Target> extends JFrame {
+public abstract class GenericFormConsulta<Target> extends JFrame {
 	
 	private Target object;
 	
@@ -51,7 +51,7 @@ public class GenericFormConsulta<Target> extends JFrame {
 	protected void initComponents(String nameFrame) {
 		this.setTitle(nameFrame);
 		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		this.setBounds(100, 100, 900, 500);
+		this.setBounds(100, 100, 828, 460);
 		this.contentPane = new JPanel();
 		this.contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		this.setContentPane(this.contentPane);
