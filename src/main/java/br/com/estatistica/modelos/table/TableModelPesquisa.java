@@ -16,10 +16,11 @@ public class TableModelPesquisa extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	
 	private List<Pesquisa> linhas;
-	private String[] colunas = new String[] { "Nome", "Data" };
+	private String[] colunas = new String[] { "Nome","Descrição","Data" };
 	
 	private static final int NOME = 0;
-	private static final int DATA = 1;
+	private static final int DESCRICAO = 1;
+	private static final int DATA = 2;
 	
 	public TableModelPesquisa() {
 		this.linhas = new ArrayList<Pesquisa>();
@@ -49,6 +50,8 @@ public class TableModelPesquisa extends AbstractTableModel {
 		switch (columnIndex) {
 			case NOME:
 				return String.class;
+			case DESCRICAO:
+				return String.class;
 			case DATA:
 				return Date.class;
 			default:
@@ -68,6 +71,8 @@ public class TableModelPesquisa extends AbstractTableModel {
 		switch (columnIndex) {
 			case NOME:
 				return pesquisa.getNome();
+			case DESCRICAO:
+				return pesquisa.getDescricao();
 			case DATA:
 				return pesquisa.getData();
 			default:
@@ -81,6 +86,9 @@ public class TableModelPesquisa extends AbstractTableModel {
 		
 		switch (columnIndex) {
 			case NOME:
+				pesquisa.setNome((String) aValue);
+				break;
+			case DESCRICAO:
 				pesquisa.setNome((String) aValue);
 				break;
 			case DATA:
