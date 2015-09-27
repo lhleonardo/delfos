@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import br.com.estatistica.dao.BairroDAO;
 import br.com.estatistica.modelos.Bairro;
+import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmCadastroBairro extends GenericFormCadastro {
@@ -39,7 +40,7 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
-				FrmCadastroBairro frame = new FrmCadastroBairro(null);
+				FrmCadastroBairro frame = new FrmCadastroBairro(new ConnectionFactory().getConnection());
 				frame.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -70,6 +71,7 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 		this.txtCodigo.setColumns(10);
 		
 		this.btnPesquisar = new JButton("");
+		this.btnPesquisar.addActionListener(e -> FrmCadastroBairro.this.btnPesquisarActionPerformed(e));
 		this.btnPesquisar.setBounds(58, 24, 33, 23);
 		this.panel.add(this.btnPesquisar);
 		
@@ -151,5 +153,11 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 		} catch (SQLException e1) {
 			Mensagem.erro(this, e1);
 		}
+	}
+	
+	protected void btnPesquisarActionPerformed(ActionEvent e) {
+		FrmConsultaBairro consulta = new FrmConsultaBairro(super.getConnection());
+		consulta.setVisible(true);
+
 	}
 }
