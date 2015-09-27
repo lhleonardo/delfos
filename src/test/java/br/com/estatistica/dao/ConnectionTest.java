@@ -67,21 +67,7 @@ public class ConnectionTest extends JFrame {
 		        }
 		        return tableModel;
 		    }
-		 
-		    // cria uma lista com 5 sócios meramente ilustrativos
-		    private List<Pesquisa> criaSocios() {
-		        List<Pesquisa> socios = new ArrayList<Pesquisa>();
-		        for (int i = 1; i <= 5; i++) {
-		        	Pesquisa socio = new Pesquisa();
-		            socio.setNome("Nome" + i);
-		            Date data = new Date();
-		            data.getTime();
-		            socio.setData(data);
-		            socios.add(socio);
-		        }
-		        return socios;
-		    }
-		 
+		 	 
 		    public static void main(String[] args) {
 		        EventQueue.invokeLater(new Runnable() {
 		            @Override

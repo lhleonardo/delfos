@@ -61,7 +61,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	 */
 	public FrmCadastroPesquisa(Connection connection) throws SQLException {
 		super("Cadastro de Pesquisa", connection);
-		modeloTabelaPesquisa = new TableModelPesquisa(pesquisaDAO.getAll());
 		this.initComponents();
 		this.setSize(600, 361);
 	}
