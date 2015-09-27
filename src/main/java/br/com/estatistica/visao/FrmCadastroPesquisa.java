@@ -36,7 +36,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private PesquisaDAO pesquisaDAO;
 	private JScrollPane scrollPane;
 	private JTextArea textArea;
-	private JTable table;
 	private TableModelPesquisa modeloTabelaPesquisa;
 	private JButton btnGetall;
 	private PreparedStatement stmt;
@@ -123,11 +122,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.scrollPane.setViewportView(this.textArea);
 		this.textArea.setLineWrap(true);
 		this.textArea.setWrapStyleWord(true);
-		
-		this.table = new JTable();
-		this.table.setBounds(208, 225, 196, 86);
-		this.table.setModel(getTableModel());
-		panel.add(this.table);
 	}
 	
 	private TableModelPesquisa getTableModel() {

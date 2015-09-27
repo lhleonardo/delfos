@@ -17,7 +17,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE id_especialista = ? AND data = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_pesquisa = ?";
 	private static final String SQL_SELECT_BY_DATA = SQL_SELECT + " WHERE data = ?";
-	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome = ?";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 	private static final String SQL_INSERT = "INSERT INTO Pesquisa(data,nome,descricao,limite_de_especialistas) VALUES(?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Pesquisa SET nome = ?,descricao = ?, limite_de_especialistas = ? WHERE id_pesquisa =?";
 	private static final String SQL_DELETE = "DELETE FROM Pesquisa WHERE id_pesquisa = ?";
@@ -126,9 +126,16 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	}
 
 	@Override
-	public List<Pesquisa> get(String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Pesquisa> get(String nome) throws SQLException {
+		List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
 
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
+			pst.setString(1, "%"+nome+"%");
+			ResultSet resultSet = pst.executeQuery();
+
+			pesquisas.addAll(new PesquisaExtractor().extractAll(resultSet, super.getConnection()));
+	}
+		return pesquisas;
+
+}
 }
