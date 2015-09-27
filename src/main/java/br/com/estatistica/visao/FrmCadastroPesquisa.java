@@ -126,9 +126,24 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		
 		this.table = new JTable();
 		this.table.setBounds(208, 225, 196, 86);
-		this.table.setModel(modeloTabelaPesquisa);
+		this.table.setModel(getTableModel());
 		panel.add(this.table);
 	}
+	
+	private TableModelPesquisa getTableModel() {
+        if (modeloTabelaPesquisa == null) {
+            try {
+            	pesquisaDAO = new PesquisaDAO(super.getConnection());
+            	modeloTabelaPesquisa = new TableModelPesquisa(pesquisaDAO.getAll());
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        }
+        return modeloTabelaPesquisa;
+    }
+	
+	
 	
 	protected void btnSalvarActionPerformed(ActionEvent e) {
 		Integer valor = 0;
