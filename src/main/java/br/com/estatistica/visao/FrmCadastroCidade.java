@@ -119,8 +119,8 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		this.panel.add(this.btnCancelar);
 
 		this.comboBoxModel = new ObjectComboBoxModel<Estado>();
-		this.preencheComboBox();
 		this.comboBoxModel.setFormatter(new EstadoFormatter());
+		this.preencheComboBox();
 		this.comboBox = new JComboBox<Object>(this.comboBoxModel);
 		this.comboBox.setBounds(325, 25, 47, 20);
 		this.panel.add(this.comboBox);
@@ -231,7 +231,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 				throw new NullPointerException("Registro sem identificador.");
 			}
 		} else {
-			throw new NullPointerException("Registro inválido.");
+			throw new NullPointerException("Registro inválido (null).");
 		}
 
 	}
