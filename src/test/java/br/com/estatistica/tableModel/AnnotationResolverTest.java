@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import br.com.estatistica.el.annotation.AnnotationResolver;
-import br.com.estatistica.swing.ObjectTableModel;
+import br.com.estatistica.visao.ObjectTableModel;
 
 public class AnnotationResolverTest {
 	public void show() {

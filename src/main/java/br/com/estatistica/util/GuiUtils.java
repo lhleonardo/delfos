@@ -2,7 +2,7 @@ package br.com.estatistica.util;
 
 import br.com.estatistica.el.annotation.AnnotationResolver;
 import br.com.estatistica.modelos.Identificator;
-import br.com.estatistica.swing.ObjectTableModel;
+import br.com.estatistica.visao.ObjectTableModel;
 
 public class GuiUtils {
 	/**

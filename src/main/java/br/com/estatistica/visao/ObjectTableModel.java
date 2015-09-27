@@ -1,4 +1,4 @@
-package br.com.estatistica.swing;
+package br.com.estatistica.visao;
 
 import java.util.ArrayList;
 import java.util.Collection;

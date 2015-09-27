@@ -18,7 +18,6 @@ import javax.swing.border.EmptyBorder;
 
 import br.com.estatistica.el.annotation.AnnotationResolver;
 import br.com.estatistica.modelos.Identificator;
-import br.com.estatistica.swing.ObjectTableModel;
 import br.com.estatistica.util.ConnectionFactory;
 
 public abstract class GenericFormConsulta<Target extends Identificator> extends JFrame {
