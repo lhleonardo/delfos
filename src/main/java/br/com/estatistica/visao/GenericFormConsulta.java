@@ -7,6 +7,7 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.lang.reflect.ParameterizedType;
 import java.sql.Connection;
 
 import javax.swing.ImageIcon;
@@ -15,11 +16,16 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.com.estatistica.el.annotation.AnnotationResolver;
+import br.com.estatistica.modelos.Identificator;
+import br.com.estatistica.swing.ObjectTableModel;
 import br.com.estatistica.util.ConnectionFactory;
 
-public abstract class GenericFormConsulta<Target> extends JFrame {
+public abstract class GenericFormConsulta<Target extends Identificator> extends JFrame {
 	
 	private Target object;
+	
+	protected ObjectTableModel<? extends Identificator> tableModel;
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -43,9 +49,19 @@ public abstract class GenericFormConsulta<Target> extends JFrame {
 		this.connection = connection;
 	}
 	
+	@SuppressWarnings({ "unchecked", "unused" })
 	public GenericFormConsulta() {
+		Class<Target> clazz = (Class<Target>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+		AnnotationResolver resolver = new AnnotationResolver(clazz);
+		this.tableModel = new ObjectTableModel<>(clazz, null);
 		this.initComponents("Pesquisa");
 		this.connection = new ConnectionFactory().getConnection();
+	}
+	
+	public GenericFormConsulta(String nameFrame, Connection connection, ObjectTableModel<? extends Identificator> tableModel) {
+		this.initComponents(nameFrame);
+		this.connection = connection;
+		this.tableModel = tableModel;
 	}
 	
 	protected void initComponents(String nameFrame) {
@@ -117,5 +133,12 @@ public abstract class GenericFormConsulta<Target> extends JFrame {
 	public Target getObject() {
 		return this.object;
 	}
+
+	public ObjectTableModel<? extends Identificator> getTableModel() {
+		return this.tableModel;
+	}
 	
+	protected void setTableModel(ObjectTableModel<Target> table) {
+		this.tableModel = table;
+	}
 }

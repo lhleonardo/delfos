@@ -9,20 +9,21 @@ import javax.swing.table.AbstractTableModel;
 
 import br.com.estatistica.el.FieldResolver;
 import br.com.estatistica.el.annotation.AnnotationResolver;
+import br.com.estatistica.modelos.Identificator;
 
 /**
  * A TableModel based on reflection.
  *
  * @author Marcos Vasconcelos
  */
-public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<T> {
-	
+public class ObjectTableModel<T extends Identificator> extends AbstractTableModel implements Iterable<T> {
+
 	private static final long serialVersionUID = 1L;
 	private List<T> data;
 	private FieldResolver fields[];
 	private boolean editDefault;
 	private Boolean editableCol[];
-
+	
 	/**
 	 * Creates an <code>ObjectTableModel</code> using the specified
 	 * <code>AnnotationResolver</code> to resolve the columns.
@@ -38,7 +39,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		this.editDefault = false;
 		this.editableCol = new Boolean[this.fields.length];
 	}
-
+	
 	/**
 	 * Creates an <code>ObjectTableModel</code> using the a AnnotationResolver
 	 * created with the clazz param to resolve columns.
@@ -51,7 +52,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public ObjectTableModel(Class<T> clazz, String cols) {
 		this(new AnnotationResolver(clazz), cols);
 	}
-
+	
 	/**
 	 * Creates an <code>ObjectTableModel</code> using the specified fields.
 	 *
@@ -62,7 +63,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		this.fields = fields.clone();
 		this.editDefault = false;
 	}
-
+	
 	/**
 	 * Sets the default condition for cell editing.
 	 *
@@ -72,7 +73,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public void setEditableDefault(boolean editable) {
 		this.editDefault = editable;
 	}
-
+	
 	/**
 	 * Sets the condition for the specified column's cells editing
 	 *
@@ -85,7 +86,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public void setColEditable(int col, boolean editable) {
 		this.editableCol[col] = editable;
 	}
-
+	
 	/**
 	 * Returns <tt>true</tt> if the cell at specified row and column is
 	 * editable.
@@ -100,17 +101,17 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		}
 		return this.editableCol[k];
 	}
-
+	
 	@Override
 	public int getColumnCount() {
 		return this.fields.length;
 	}
-
+	
 	@Override
 	public int getRowCount() {
 		return this.data.size();
 	}
-
+	
 	/**
 	 * Returns the value for the cell at specified row and column.
 	 *
@@ -130,7 +131,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 			return null;
 		}
 	}
-
+	
 	/**
 	 * Sets the value in the cell at specified row and column to <code>value</code>.
 	 *
@@ -146,13 +147,13 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		try {
 			Object obj = this.data.get(arg0);
 			this.fields[arg1].setValue(obj, value);
-
+			
 			this.fireTableCellUpdated(arg0, arg1);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	/**
 	 * Returns the value object in the specified row index.
 	 *
@@ -163,7 +164,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public T getValue(int arg0) {
 		return this.data.get(arg0);
 	}
-
+	
 	/**
 	 * Returns the name of the column at specified column index.
 	 *
@@ -173,7 +174,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public String getColumnName(int col) {
 		return this.fields[col].getName();
 	}
-
+	
 	/**
 	 * Appends a value object to the end of this table model.
 	 *
@@ -186,7 +187,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		int lastIndex = this.getRowCount() - 1;
 		this.fireTableRowsInserted(lastIndex, lastIndex);
 	}
-
+	
 	/**
 	 * Removes all the values of this table model.
 	 */
@@ -194,18 +195,19 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		this.data = new ArrayList<T>();
 		this.fireTableDataChanged();
 	}
-
+	
 	/**
 	 * Sets this table model data list.
 	 *
 	 * @param data
 	 *            the data list
 	 */
-	public void setData(List<T> data) {
-		this.data = data;
+	@SuppressWarnings("unchecked")
+	public void setData(List<? extends Identificator> data) {
+		this.data = (List<T>) data;
 		this.fireTableDataChanged();
 	}
-
+	
 	/**
 	 * Removes the value at the specified row.
 	 *
@@ -217,7 +219,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		// fireTableDataChanged();
 		this.fireTableRowsDeleted(row, row);
 	}
-
+	
 	/**
 	 * Returns this table model data list
 	 *
@@ -226,7 +228,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public List<T> getData() {
 		return new ArrayList<T>(this.data);
 	}
-
+	
 	/**
 	 * Removes all the values in the specified rows.
 	 *
@@ -238,7 +240,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 			this.remove(idx[i]);
 		}
 	}
-
+	
 	/**
 	 * Removes from this table model all the values contained in the specified
 	 * list.
@@ -251,7 +253,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 			this.remove(this.indexOf(t));
 		}
 	}
-
+	
 	/**
 	 * Removes the first occurrence of the specified value from this table
 	 * model.
@@ -262,7 +264,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public void remove(T obj) {
 		this.remove(this.indexOf(obj));
 	}
-
+	
 	/**
 	 * Appends all of the values in the specified collection to this table
 	 * model.
@@ -275,7 +277,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 			this.add(t);
 		}
 	}
-
+	
 	/**
 	 * Returns a list containing all the values in the specified rows.
 	 *
@@ -289,10 +291,10 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 		for (int j = 0; j < size; j++) {
 			list.add(this.getValue(idx[j]));
 		}
-
+		
 		return list;
 	}
-
+	
 	/**
 	 * Returns the index of the first occurrence of the specified value in this
 	 * table model, or -1 if this model does not contain the value.
@@ -305,7 +307,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public int indexOf(T obj) {
 		return this.data.indexOf(obj);
 	}
-
+	
 	/**
 	 * Returns <tt>true</tt> if this table model contains no values
 	 *
@@ -314,7 +316,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public boolean isEmpty() {
 		return this.data.isEmpty();
 	}
-
+	
 	/**
 	 * Returns the field resolver associated to the specified column.
 	 *
@@ -325,7 +327,7 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public FieldResolver getColumnResolver(int colIndex) {
 		return this.fields[colIndex];
 	}
-
+	
 	/**
 	 * Returns the column class for all the cell values in the column.
 	 *
@@ -337,9 +339,10 @@ public class ObjectTableModel<T> extends AbstractTableModel implements Iterable<
 	public Class<?> getColumnClass(int col) {
 		return this.getColumnResolver(col).getFieldType();
 	}
-
+	
 	@Override
 	public Iterator<T> iterator() {
 		return this.data.iterator();
 	}
+
 }
