@@ -12,6 +12,7 @@ import java.awt.Insets;
 import java.sql.Connection;
 
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -118,6 +119,8 @@ public class GenericFormCadastro extends JFrame {
 				((JTextField) component).setText("");
 			} else if (component instanceof JTextArea) {
 				((JTextArea) component).setText("");
+			} else if (component instanceof JComboBox<?>) {
+				((JComboBox<?>) component).setSelectedIndex(0);
 			} else if (component instanceof Container) {
 				this.limpaCampos((Container) component);
 			}

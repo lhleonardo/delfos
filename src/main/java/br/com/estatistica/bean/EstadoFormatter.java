@@ -8,7 +8,11 @@ public class EstadoFormatter implements Formatter {
 	public Object format(Object obj) {
 		Estado estado = (Estado) obj;
 
-		return estado.getUf() == null ? "" : estado.getUf();
+		if (estado == null) {
+			return "";
+		}
+
+		return estado.getUf();
 	}
 
 	@Override
