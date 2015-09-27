@@ -103,8 +103,10 @@ public class Endereco implements Identificator {
 	
 	@Override
 	public void validate() {
-		// TODO implementar validação de estado.
-		
+		if (this.tipoLogradouro == null || this.logradouro == null || this.numero == null || this.cidade == null) {
+			throw new IllegalArgumentException(
+			        "Deve ser informado o tipo de logradouro, o logradouro, o número e a cidade para o Endereço em questão.");
+		}
 	}
 	
 }

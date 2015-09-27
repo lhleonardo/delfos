@@ -15,21 +15,23 @@ import java.util.List;
  *
  */
 public class Pessoa implements Identificator {
-	
+
 	private Integer id;
 	private String nome;
-	
+
 	private Documento tipoDocumento;
 	private String rg;
 	private Date dataNascimento;
 	private String descricao;
 	private String email;
-	
+
 	private Endereco endereco;
-	
+
+	private Usuario usuario;
+
 	private List<Formacao> formacoes;
 	private List<AreaEstudo> areasEstudo;
-	
+
 	/**
 	 *
 	 * Método de inicialização da classe Pessoa
@@ -55,7 +57,7 @@ public class Pessoa implements Identificator {
 		this.dataNascimento = dataNascimento;
 		this.descricao = descricao;
 	}
-	
+
 	public Pessoa(Integer id, String nome, Cpf cpf, String rg, Date dataNascimento, String descricao) {
 		super();
 		this.id = id;
@@ -65,9 +67,9 @@ public class Pessoa implements Identificator {
 		this.dataNascimento = dataNascimento;
 		this.descricao = descricao;
 	}
-	
+
 	public Pessoa(Integer id, String nome, Documento tipoDocumento, String rg, Date dataNascimento, Endereco endereco,
-	        List<Formacao> formacoes, List<AreaEstudo> areasEstudo, String descricao) {
+			List<Formacao> formacoes, List<AreaEstudo> areasEstudo, String descricao) {
 		this.id = id;
 		this.nome = nome;
 		this.tipoDocumento = tipoDocumento;
@@ -78,9 +80,9 @@ public class Pessoa implements Identificator {
 		this.areasEstudo = areasEstudo;
 		this.descricao = descricao;
 	}
-	
+
 	public Pessoa(String nome, Documento tipoDocumento, String rg, Date dataNascimento, Endereco endereco, List<Formacao> formacoes,
-	        List<AreaEstudo> areasEstudo, String descricao) {
+			List<AreaEstudo> areasEstudo, String descricao) {
 		this.nome = nome;
 		this.tipoDocumento = tipoDocumento;
 		this.rg = rg;
@@ -90,12 +92,12 @@ public class Pessoa implements Identificator {
 		this.areasEstudo = areasEstudo;
 		this.descricao = descricao;
 	}
-	
+
 	public Pessoa() {
 		this.formacoes = new ArrayList<Formacao>();
 		this.areasEstudo = new ArrayList<AreaEstudo>();
 	}
-	
+
 	/**
 	 * Método responsável por retornar a informação:[id] da classe Pessoa.java
 	 *
@@ -105,7 +107,7 @@ public class Pessoa implements Identificator {
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	/**
 	 * Método responsável por definir um valor para o campo id, sendo informado pelo
 	 * parametro id
@@ -116,7 +118,7 @@ public class Pessoa implements Identificator {
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	/**
 	 * Método responsável por retornar a informação:[nome] da classe Pessoa.java
 	 *
@@ -125,7 +127,7 @@ public class Pessoa implements Identificator {
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	/**
 	 * Método responsável por definir um valor para o campo nome, sendo informado pelo
 	 * parametro nome
@@ -136,7 +138,7 @@ public class Pessoa implements Identificator {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
 	/**
 	 * Método responsável por retornar a informação:[dataNascimento] da classe
 	 * Pessoa.java
@@ -146,7 +148,7 @@ public class Pessoa implements Identificator {
 	public Date getDataNascimento() {
 		return this.dataNascimento;
 	}
-	
+
 	/**
 	 * Método responsável por definir um valor para o campo dataNascimento, sendo
 	 * informado pelo parametro dataNascimento
@@ -157,7 +159,7 @@ public class Pessoa implements Identificator {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
+
 	/**
 	 * Método responsável por retornar a informação:[descricao] da classe Pessoa.java
 	 *
@@ -166,7 +168,7 @@ public class Pessoa implements Identificator {
 	public String getDescricao() {
 		return this.descricao;
 	}
-	
+
 	/**
 	 * Método responsável por definir um valor para o campo descricao, sendo informado
 	 * pelo parametro descricao
@@ -177,7 +179,7 @@ public class Pessoa implements Identificator {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	/**
 	 * Método responsável por retornar a informação:[tipoDocumento] da classe Pessoa.java
 	 *
@@ -186,7 +188,7 @@ public class Pessoa implements Identificator {
 	public Documento getTipoDocumento() {
 		return this.tipoDocumento;
 	}
-	
+
 	/**
 	 * Método responsável por definir um valor para o campo tipoDocumento, sendo
 	 * informado pelo parametro tipoDocumento
@@ -197,7 +199,7 @@ public class Pessoa implements Identificator {
 	public void setTipoDocumento(Documento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-	
+
 	/**
 	 * Método responsável por retornar a informação:[rg] da classe Pessoa.java
 	 *
@@ -206,7 +208,7 @@ public class Pessoa implements Identificator {
 	public String getRg() {
 		return this.rg;
 	}
-	
+
 	/**
 	 * Método responsável por definir um valor para o campo rg, sendo informado pelo
 	 * parametro rg
@@ -217,52 +219,53 @@ public class Pessoa implements Identificator {
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-	
+
 	public Endereco getEndereco() {
 		return this.endereco;
 	}
-	
+
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	
+
 	public List<Formacao> getFormacoes() {
 		return this.formacoes;
 	}
-	
+
 	public void setFormacoes(List<Formacao> formacoes) {
 		this.formacoes = formacoes;
 	}
-	
+
 	public List<AreaEstudo> getAreasEstudo() {
 		return this.areasEstudo;
 	}
-	
+
 	public void setAreasEstudo(List<AreaEstudo> areasEstudo) {
 		this.areasEstudo = areasEstudo;
 	}
-	
-	public Usuario getUsuario() {
-		return this.usuario;
-	}
-	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
-	}
-	
+
 	public String getEmail() {
 		return this.email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 	@Override
 	public void validate() {
-		if (this.getId() == null || this.getNome() == null || this.getTipoDocumento().getValor() == null) {
+		if (this.getNome() == null || this.getTipoDocumento().getValor() == null) {
 			throw new NullPointerException("Informações obrigatórias estáo nulas.");
 		}
+		this.getEndereco().validate();
 	}
-	
+
 }

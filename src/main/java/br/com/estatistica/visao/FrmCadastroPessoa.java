@@ -86,6 +86,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.panel.add(this.lblCdigo);
 
 		this.txtCodigo = new JTextField();
+		this.txtCodigo.setEditable(false);
 		this.txtCodigo.setBounds(10, 25, 46, 20);
 		this.panel.add(this.txtCodigo);
 		this.txtCodigo.setColumns(10);
@@ -267,5 +268,6 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	
 	protected void btnNovoActionPerformed(ActionEvent arg0) {
 		super.limpaCampos(this.getContentPane());
+		this.txtNome.requestFocus();
 	}
 }
