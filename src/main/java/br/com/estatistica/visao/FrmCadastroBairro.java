@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -130,6 +131,8 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 			b.setId(Integer.parseInt((this.txtCodigo.getText().isEmpty()) ? null : this.txtCodigo.getText()));
 			b.setNome(this.txtNome.getText());
 			b.setDescricao(this.txtDescricao.getText());
+
+			System.out.println(b);
 			
 			this.bDao = new BairroDAO(this.getConnection());
 			this.bDao.save(b);
@@ -144,7 +147,7 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 			if (!this.txtCodigo.getText().isEmpty()) {
 				Bairro b = new Bairro();
 				b.setId(Integer.parseInt(this.txtCodigo.getText()));
-
+				
 				this.bDao = new BairroDAO(this.getConnection());
 				this.bDao.delete(b);
 			} else {
@@ -156,8 +159,59 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 	}
 	
 	protected void btnPesquisarActionPerformed(ActionEvent e) {
-		FrmConsultaBairro consulta = new FrmConsultaBairro(super.getConnection());
-		consulta.setVisible(true);
+		try {
+			String informacao = "Informe qual o tipo de pesquisa (1-Identificador/2-Nome do Registro)";
+			
+			this.bDao = new BairroDAO(this.getConnection());
+			
+			int valor = Integer.parseInt(Mensagem.entrada(this, informacao));
 
+			switch (valor) {
+				case 1: {
+					this.abreRegistro(this.pesquisaPorCodigo());
+					break;
+				}
+				case 2: {
+					this.abreRegistro(this.pesquisaPorNome());
+					break;
+				}
+				default:
+					throw new IllegalArgumentException("Valor inválido.");
+			}
+		} catch (SQLException | RuntimeException e1) {
+			Mensagem.erro(this, e1);
+		}
+		
+	}
+
+	protected Bairro pesquisaPorNome() throws SQLException {
+		List<Bairro> list = this.bDao.get(Mensagem.entrada(this, "Informe o Nome do registro"));
+		if (!list.isEmpty()) {
+			Mensagem.informa(this,
+					"Parece que foram encontrados vários registros... Vamos imprimi-los!\nApós isso, informe o código do registro que deseja.");
+			for (Bairro b : list) {
+				Mensagem.informa(this, b.toString());
+			}
+		}
+		return this.pesquisaPorCodigo();
+	}
+
+	protected Bairro pesquisaPorCodigo() throws SQLException {
+		Bairro bairro;
+		return this.bDao.get(Integer.parseInt(Mensagem.entrada(this, "Informe o código do registro")));
+	}
+
+	private void abreRegistro(Bairro bairro) {
+		if (bairro != null) {
+			if (bairro.getId() != null) {
+				this.txtCodigo.setText(String.valueOf(bairro.getId()));
+				this.txtNome.setText(bairro.getNome());
+				this.txtDescricao.setText(bairro.getDescricao());
+			} else {
+				throw new NullPointerException("Registro sem identificador.");
+			}
+		} else {
+			throw new NullPointerException("Registro inválido.");
+		}
 	}
 }
