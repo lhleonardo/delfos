@@ -8,6 +8,10 @@ import javax.swing.table.AbstractTableModel;
 
 import br.com.estatistica.modelos.Pesquisa;
 
+
+
+
+
 public class TableModelPesquisa extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	

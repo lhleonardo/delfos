@@ -5,7 +5,11 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -35,6 +39,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JTable table;
 	private TableModelPesquisa modeloTabelaPesquisa;
 	private JButton btnGetall;
+	private PreparedStatement stmt;
 	
 	/**
 	 * Launch the application.
@@ -52,12 +57,15 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	
 	/**
 	 * Create the frame.
+	 * @throws SQLException 
 	 */
-	public FrmCadastroPesquisa(Connection connection) {
+	public FrmCadastroPesquisa(Connection connection) throws SQLException {
 		super("Cadastro de Pesquisa", connection);
+		modeloTabelaPesquisa = new TableModelPesquisa(pesquisaDAO.getAll());
 		this.initComponents();
 		this.setSize(600, 361);
 	}
+	
 	
 	private void initComponents() {
 		
@@ -119,8 +127,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		
 		this.table = new JTable();
 		this.table.setBounds(208, 225, 196, 86);
-		this.modeloTabelaPesquisa = new TableModelPesquisa();
-		this.table.setModel(this.modeloTabelaPesquisa);
+		this.table.setModel(modeloTabelaPesquisa);
 		panel.add(this.table);
 	}
 	
