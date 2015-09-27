@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.estatistica.dao.TipoLogradouroDAO;
 import br.com.estatistica.modelos.TipoLogradouro;
 import br.com.estatistica.util.Mensagem;
 
