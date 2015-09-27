@@ -8,35 +8,32 @@ import java.util.List;
  * Classe responsável por modelar as pessoas que serão salvas e manipuladas em funções do
  * software. <br>
  * Algumas classes que estendem de Pessoa: {@code Especialista}, {@code Pessoa}, etc...
- * 
+ *
  * @author lhleonardo
  * @version 1.0
  * @since 1.0
  *
  */
 public class Pessoa implements Identificator {
-
+	
 	private Integer id;
 	private String nome;
-
+	
 	private Documento tipoDocumento;
 	private String rg;
 	private Date dataNascimento;
 	private String descricao;
-
 	private String email;
-
+	
 	private Endereco endereco;
-
-	private Usuario usuario;
-
+	
 	private List<Formacao> formacoes;
 	private List<AreaEstudo> areasEstudo;
-
+	
 	/**
-	 * 
+	 *
 	 * Método de inicialização da classe Pessoa
-	 * 
+	 *
 	 * @param id
 	 *            atributo identificador da pessoa
 	 * @param nome
@@ -58,7 +55,7 @@ public class Pessoa implements Identificator {
 		this.dataNascimento = dataNascimento;
 		this.descricao = descricao;
 	}
-
+	
 	public Pessoa(Integer id, String nome, Cpf cpf, String rg, Date dataNascimento, String descricao) {
 		super();
 		this.id = id;
@@ -68,7 +65,7 @@ public class Pessoa implements Identificator {
 		this.dataNascimento = dataNascimento;
 		this.descricao = descricao;
 	}
-
+	
 	public Pessoa(Integer id, String nome, Documento tipoDocumento, String rg, Date dataNascimento, Endereco endereco,
 	        List<Formacao> formacoes, List<AreaEstudo> areasEstudo, String descricao) {
 		this.id = id;
@@ -81,7 +78,7 @@ public class Pessoa implements Identificator {
 		this.areasEstudo = areasEstudo;
 		this.descricao = descricao;
 	}
-
+	
 	public Pessoa(String nome, Documento tipoDocumento, String rg, Date dataNascimento, Endereco endereco, List<Formacao> formacoes,
 	        List<AreaEstudo> areasEstudo, String descricao) {
 		this.nome = nome;
@@ -93,178 +90,179 @@ public class Pessoa implements Identificator {
 		this.areasEstudo = areasEstudo;
 		this.descricao = descricao;
 	}
-
+	
 	public Pessoa() {
 		this.formacoes = new ArrayList<Formacao>();
 		this.areasEstudo = new ArrayList<AreaEstudo>();
 	}
-
+	
 	/**
 	 * Método responsável por retornar a informação:[id] da classe Pessoa.java
-	 * 
+	 *
 	 * @return id atributo identificador
 	 */
+	@Override
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
-
+	
 	/**
 	 * Método responsável por definir um valor para o campo id, sendo informado pelo
 	 * parametro id
-	 * 
+	 *
 	 * @param id
 	 *            the id to set
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
 	/**
 	 * Método responsável por retornar a informação:[nome] da classe Pessoa.java
-	 * 
+	 *
 	 * @return the nome do objeto
 	 */
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
-
+	
 	/**
 	 * Método responsável por definir um valor para o campo nome, sendo informado pelo
 	 * parametro nome
-	 * 
+	 *
 	 * @param nome
 	 *            the nome to set
 	 */
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	
 	/**
 	 * Método responsável por retornar a informação:[dataNascimento] da classe
 	 * Pessoa.java
-	 * 
+	 *
 	 * @return the dataNascimento
 	 */
 	public Date getDataNascimento() {
-		return dataNascimento;
+		return this.dataNascimento;
 	}
-
+	
 	/**
 	 * Método responsável por definir um valor para o campo dataNascimento, sendo
 	 * informado pelo parametro dataNascimento
-	 * 
+	 *
 	 * @param dataNascimento
 	 *            the dataNascimento to set
 	 */
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-
+	
 	/**
 	 * Método responsável por retornar a informação:[descricao] da classe Pessoa.java
-	 * 
+	 *
 	 * @return the descricao
 	 */
 	public String getDescricao() {
-		return descricao;
+		return this.descricao;
 	}
-
+	
 	/**
 	 * Método responsável por definir um valor para o campo descricao, sendo informado
 	 * pelo parametro descricao
-	 * 
+	 *
 	 * @param descricao
 	 *            the descricao to set
 	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-
+	
 	/**
 	 * Método responsável por retornar a informação:[tipoDocumento] da classe Pessoa.java
-	 * 
+	 *
 	 * @return the tipoDocumento
 	 */
 	public Documento getTipoDocumento() {
-		return tipoDocumento;
+		return this.tipoDocumento;
 	}
-
+	
 	/**
 	 * Método responsável por definir um valor para o campo tipoDocumento, sendo
 	 * informado pelo parametro tipoDocumento
-	 * 
+	 *
 	 * @param tipoDocumento
 	 *            the tipoDocumento to set
 	 */
 	public void setTipoDocumento(Documento tipoDocumento) {
 		this.tipoDocumento = tipoDocumento;
 	}
-
+	
 	/**
 	 * Método responsável por retornar a informação:[rg] da classe Pessoa.java
-	 * 
+	 *
 	 * @return the rg
 	 */
 	public String getRg() {
-		return rg;
+		return this.rg;
 	}
-
+	
 	/**
 	 * Método responsável por definir um valor para o campo rg, sendo informado pelo
 	 * parametro rg
-	 * 
+	 *
 	 * @param rg
 	 *            the rg to set
 	 */
 	public void setRg(String rg) {
 		this.rg = rg;
 	}
-
+	
 	public Endereco getEndereco() {
-		return endereco;
+		return this.endereco;
 	}
-
+	
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-
+	
 	public List<Formacao> getFormacoes() {
-		return formacoes;
+		return this.formacoes;
 	}
-
+	
 	public void setFormacoes(List<Formacao> formacoes) {
 		this.formacoes = formacoes;
 	}
-
+	
 	public List<AreaEstudo> getAreasEstudo() {
-		return areasEstudo;
+		return this.areasEstudo;
 	}
-
+	
 	public void setAreasEstudo(List<AreaEstudo> areasEstudo) {
 		this.areasEstudo = areasEstudo;
 	}
-
+	
 	public Usuario getUsuario() {
-		return usuario;
+		return this.usuario;
 	}
-
+	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
+	
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	
 	@Override
 	public void validate() {
 		if (this.getId() == null || this.getNome() == null || this.getTipoDocumento().getValor() == null) {
 			throw new NullPointerException("Informações obrigatórias estáo nulas.");
 		}
 	}
-
+	
 }
