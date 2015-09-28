@@ -30,20 +30,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	protected Integer insert(Pesquisa model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			
-			java.sql.Date dataSQL = new java.sql.Date(new java.util.Date().getTime());// Cria
-			                                                                          // Objeto
-			                                                                          // Data
-			                                                                          // do
-			                                                                          // Java.sql
-			                                                                          // e
-			                                                                          // utiliza
-			                                                                          // o
-			                                                                          // método
-			                                                                          // getTime
-			                                                                          // do
-			                                                                          // Objeto
-			                                                                          // Java.util
-			
+			java.sql.Date dataSQL = new java.sql.Date(new java.util.Date().getTime());
 			pst.setDate(1, dataSQL);
 			pst.setString(2, model.getNome());
 			pst.setString(3, model.getDescricao());
