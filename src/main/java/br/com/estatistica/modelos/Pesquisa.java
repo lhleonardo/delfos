@@ -62,6 +62,14 @@ public class Pesquisa implements Identificator {
 		this.descricao = descricao;
 		this.LIMITE_DE_ESPECIALISTAS= LimiteDeEspecialistas;
 	}
+	
+	public Pesquisa (String nome, String descricao, Integer LimiteDeEspecialistas){
+		this.nome = nome;
+		this.descricao = descricao;
+		this.LIMITE_DE_ESPECIALISTAS = LimiteDeEspecialistas;
+	}
+	
+	
 
 	public Integer getId() {
 		return id;

@@ -156,6 +156,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.btnNewButton);
 		
 		this.novaPesquisaBotao = new JButton("Nova Pesquisa");
+		this.novaPesquisaBotao.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				novaPesquisaBotaoActionPerformed(arg0);
+			}
+		});
 		this.novaPesquisaBotao.setBounds(315, 55, 130, 23);
 		panel.add(this.novaPesquisaBotao);
 	}
@@ -188,26 +193,34 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	
 	
 	protected void btnSalvarActionPerformed(ActionEvent e) {
-		Integer limiteDeEspecialistas = 0;
-		Integer id = 0;
-		try {
-			limiteDeEspecialistas = Integer.parseInt(this.limiteField.getText());
-			id = Integer.parseInt(this.codigoField.getText());
-			System.out.println(limiteDeEspecialistas);
-			this.pesquisaDAO = new PesquisaDAO(super.getConnection());
-			Pesquisa p1 = new Pesquisa(id, this.nomeField.getText(), this.descricaoField.getText(), limiteDeEspecialistas);
-			
-			int valorCodigo = this.pesquisaDAO.save(p1);
-			
-			this.codigoField.setText(String.valueOf(valorCodigo));
-			table.setModel(getTableModelTodos());
-			
-		} catch (NumberFormatException e1) {
-			Mensagem.erro(this, e1);
-		} catch (SQLException e1) {
-			Mensagem.erro(this, e1);
-		}
+//		Integer limiteDeEspecialistas = 0;
+//		Integer id = 0;
+//		try {
+//			limiteDeEspecialistas = Integer.parseInt(this.limiteField.getText());
+//			id = Integer.parseInt(this.codigoField.getText());
+//			System.out.println(limiteDeEspecialistas);
+//			this.pesquisaDAO = new PesquisaDAO(super.getConnection());
+//			Pesquisa p1 = new Pesquisa(this.nomeField.getText(), this.descricaoField.getText(), limiteDeEspecialistas);
+//			this.pesquisaDAO.save(p1);
+//			
+//			
+//			table.setModel(getTableModelTodos());
+//			
+//		} catch (NumberFormatException e1) {
+//			Mensagem.erro(this, e1);
+//		} catch (SQLException e1) {
+//			Mensagem.erro(this, e1);
+//		}
+		Integer limiteEspecialistas = Integer.parseInt(limiteField.getText());
 		
+		Pesquisa p1 = new Pesquisa(nomeField.getText(), descricaoField.getText(), limiteEspecialistas);
+		try {
+			pesquisaDAO.save(p1);
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		this.table.setModel(getTableModelTodos());
 		Toolkit.getDefaultToolkit().beep();
 	}
 
@@ -221,13 +234,10 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		limiteField.setText(Integer.toString(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getLimiteDeEspecialistas()));
 	}
 
-//	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
-//		table.setModel(getTableModelTodos());
-//		int tamanho = modeloTabelaPesquisa.getRowCount()+1;
-//		String tamanhoString = String.valueOf(tamanho);
-//		codigoField.setText(tamanhoString);
-//		nomeField.setText(null);
-//		descricaoField.setText(null);
-//		limiteField.setText(null);
-//	}
+	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
+		table.setModel(getTableModelTodos());
+		nomeField.setText(null);
+		descricaoField.setText(null);
+		limiteField.setText(null);
+	}
 }
