@@ -24,21 +24,23 @@ import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
+import java.awt.event.ActionListener;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField codigoField;
+	private JTextField nomeField;
+	private JTextField limiteField;
 	private PesquisaDAO pesquisaDAO;
 	private JScrollPane scrollPane;
-	private JTextArea textArea;
+	private JTextArea descricaoField;
 	private TableModelPesquisa modeloTabelaPesquisa;
 	private JButton btnGetall;
 	private PreparedStatement stmt;
+	private JButton btnPesquisar;
 	
 	/**
 	 * Launch the application.
@@ -61,7 +63,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	public FrmCadastroPesquisa(Connection connection) throws SQLException {
 		super("Cadastro de Pesquisa", connection);
 		this.initComponents();
-		this.setSize(600, 361);
+		this.setSize(600, 408);
 	}
 	
 	
@@ -75,29 +77,29 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		lblId.setBounds(11, 11, 17, 14);
 		panel.add(lblId);
 		
-		this.textField = new JTextField();
-		this.textField.setEditable(false);
-		this.textField.setBounds(10, 27, 34, 20);
-		panel.add(this.textField);
-		this.textField.setColumns(10);
+		this.codigoField = new JTextField();
+		this.codigoField.setEditable(false);
+		this.codigoField.setBounds(10, 27, 34, 20);
+		panel.add(this.codigoField);
+		this.codigoField.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(50, 11, 46, 14);
 		panel.add(lblNome);
 		
-		this.textField_1 = new JTextField();
-		this.textField_1.setBounds(50, 27, 354, 20);
-		panel.add(this.textField_1);
-		this.textField_1.setColumns(10);
+		this.nomeField = new JTextField();
+		this.nomeField.setBounds(50, 27, 260, 20);
+		panel.add(this.nomeField);
+		this.nomeField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
 		lblNewLabel.setBounds(11, 212, 187, 14);
 		panel.add(lblNewLabel);
 		
-		this.textField_2 = new JTextField();
-		this.textField_2.setBounds(11, 237, 46, 20);
-		panel.add(this.textField_2);
-		this.textField_2.setColumns(10);
+		this.limiteField = new JTextField();
+		this.limiteField.setBounds(11, 237, 46, 20);
+		panel.add(this.limiteField);
+		this.limiteField.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(e -> FrmCadastroPesquisa.this.btnSalvarActionPerformed(e));
@@ -118,10 +120,19 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.scrollPane.setBounds(11, 83, 393, 118);
 		panel.add(this.scrollPane);
 		
-		this.textArea = new JTextArea();
-		this.scrollPane.setViewportView(this.textArea);
-		this.textArea.setLineWrap(true);
-		this.textArea.setWrapStyleWord(true);
+		this.descricaoField = new JTextArea();
+		this.scrollPane.setViewportView(this.descricaoField);
+		this.descricaoField.setLineWrap(true);
+		this.descricaoField.setWrapStyleWord(true);
+		
+		this.btnPesquisar = new JButton("Pesquisar");
+		this.btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnPesquisarActionPerformed(arg0);
+			}
+		});
+		this.btnPesquisar.setBounds(315, 26, 89, 23);
+		panel.add(this.btnPesquisar);
 	}
 	
 	private TableModelPesquisa getTableModel() {
@@ -142,14 +153,14 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	protected void btnSalvarActionPerformed(ActionEvent e) {
 		Integer valor = 0;
 		try {
-			valor = Integer.parseInt(this.textField_2.getText());
+			valor = Integer.parseInt(this.limiteField.getText());
 			System.out.println(valor);
 			this.pesquisaDAO = new PesquisaDAO(super.getConnection());
-			Pesquisa p1 = new Pesquisa(this.textField_1.getText(), this.textArea.getText(), valor);
+			Pesquisa p1 = new Pesquisa(this.nomeField.getText(), this.descricaoField.getText(), valor);
 			
 			int valorCodigo = this.pesquisaDAO.save(p1);
 			
-			this.textField.setText(String.valueOf(valorCodigo));
+			this.codigoField.setText(String.valueOf(valorCodigo));
 			
 		} catch (NumberFormatException e1) {
 			Mensagem.erro(this, e1);
@@ -160,4 +171,49 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		Toolkit.getDefaultToolkit().beep();
 	}
 
+	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
+		FrmBuscaPesquisa buscaPesquisa;
+		try {
+			buscaPesquisa = new FrmBuscaPesquisa(super.getConnection());
+			buscaPesquisa.setVisible(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+	}
+
+	public JTextField getCodigoField() {
+		return codigoField;
+	}
+
+	public void setCodigoField(JTextField codigoField) {
+		this.codigoField = codigoField;
+	}
+
+	public JTextField getNomeField() {
+		return nomeField;
+	}
+
+	public void setNomeField(JTextField nomeField) {
+		this.nomeField = nomeField;
+	}
+
+	public JTextField getLimiteField() {
+		return limiteField;
+	}
+
+	public void setLimiteField(JTextField limiteField) {
+		this.limiteField = limiteField;
+	}
+
+	public JTextArea getDescricaoField() {
+		return descricaoField;
+	}
+
+	public void setDescricaoField(JTextArea descricaoField) {
+		this.descricaoField = descricaoField;
+	}
+
+	
 }

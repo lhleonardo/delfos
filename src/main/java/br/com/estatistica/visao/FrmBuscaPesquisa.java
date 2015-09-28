@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JTable;
 
 import br.com.estatistica.dao.PesquisaDAO;
+import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 
@@ -11,12 +12,16 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import javax.swing.JScrollPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class FrmBuscaPesquisa extends GenericFormCadastro {
 	/**
@@ -30,7 +35,19 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 	private JTextField textField;
 	private JButton btnPesquisar;
 	private JScrollPane scrollPane;
+	private JButton btnSelecionar;
+	private Pesquisa pesquisa;
 	
+	
+
+	public Pesquisa getPesquisa() {
+		return pesquisa;
+	}
+
+	public void setPesquisa(Pesquisa pesquisa) {
+		this.pesquisa = pesquisa;
+	}
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			try {
@@ -52,6 +69,8 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 		initComponents();
 	}
 	private void initComponents() {
+		
+		
 		setTitle("Busca Pesquisa");
 		setAutoRequestFocus(false);
 		
@@ -64,6 +83,7 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 		this.panel.add(this.scrollPane);
 		
 		this.table = new JTable();
+		this.table.setCellSelectionEnabled(true);
 		this.scrollPane.setViewportView(this.table);
 		this.table.setModel(getTableModelTodos());
 		
@@ -80,6 +100,10 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 		});
 		this.btnPesquisar.setBounds(193, 8, 88, 23);
 		this.panel.add(this.btnPesquisar);
+		
+		this.btnSelecionar = new JButton("Selecionar");
+		this.btnSelecionar.setBounds(10, 205, 89, 23);
+		this.panel.add(this.btnSelecionar);
 	}
 	
 	private TableModelPesquisa getTableModelTodos() {
@@ -111,4 +135,5 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 		this.table.setModel(getTableModelPesquisa());
 		
 	}
+	
 }

@@ -106,7 +106,7 @@ public class TableModelPesquisa extends AbstractTableModel {
 	}
 	
 	// Retorna o sócio referente a linha especificada
-	public Pesquisa getSocio(int indiceLinha) {
+	public Pesquisa getPesquisa(int indiceLinha) {
 		return this.linhas.get(indiceLinha);
 	}
 	
