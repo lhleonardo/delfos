@@ -24,6 +24,8 @@ import br.com.estatistica.util.Mensagem;
  */
 public abstract class GenericDAO<T extends Identificator> implements AutoCloseable {
 	
+	private boolean mostraConfirmacao = true;
+	
 	private Connection connection;
 	
 	/**
@@ -65,7 +67,10 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 			chavesGeradas = this.update(model);
 		}
 		
-		Mensagem.informa(null, "Salvo com sucesso.");
+		if (this.mostraConfirmacao) {
+			Mensagem.informa(null, "Salvo com sucesso.");
+		}
+
 		return chavesGeradas;
 	}
 	
@@ -250,7 +255,9 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	
 	public boolean confereExclusao(Integer id) throws SQLException {
 		if (this.isExist(id) == false) {
-			Mensagem.informa(null, "Excluído com sucesso.");
+			if (this.mostraConfirmacao) {
+				Mensagem.informa(null, "Excluído com sucesso.");
+			}
 			return true;
 		} else {
 			Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
@@ -258,6 +265,14 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 		}
 	}
 	
+	public boolean isMostraConfirmacao() {
+		return this.mostraConfirmacao;
+	}
+
+	public void setMostraConfirmacao(boolean mostraConfirmacao) {
+		this.mostraConfirmacao = mostraConfirmacao;
+	}
+
 	/**
 	 * Método responsável por retornar a conexão com o banco de dados atual
 	 *

@@ -23,19 +23,26 @@ import br.com.estatistica.util.Mensagem;
 public class PessoaTest {
 
 	public static void main(String[] args) {
-		try (PessoaDAO pDao = new PessoaDAO(new ConnectionFactory().getConnection())) {
-			cadastraPessoa(pDao);
-			
+		try {
+			PessoaDAO pDao = new PessoaDAO(new ConnectionFactory().getConnection());
+			Pessoa p = pDao.get(cadastraPessoa(pDao));
+			Mensagem.informa(null, "");
+			p.setDescricao("Mudei a descrição da pessoa.");
+			Endereco endereco = p.getEndereco();
+			endereco.setDescricao("Nova descrição do endereço da pessoa");
+			p.setEndereco(endereco);
+			pDao.save(p);
 		} catch (SQLException ex) {
 			Mensagem.erro(null, ex);
 		}
+		
 	}
 	
 	/**
 	 * @param pDao
 	 * @throws SQLException
 	 */
-	private static void cadastraPessoa(PessoaDAO pDao) throws SQLException {
+	private static Integer cadastraPessoa(PessoaDAO pDao) throws SQLException {
 		Pessoa pessoa = new Pessoa();
 		pessoa.setNome("Leonardo Henrique de Braz");
 		pessoa.setRg("12345123");
@@ -58,7 +65,7 @@ public class PessoaTest {
 		
 		pessoa.setEndereco(enderecoDoLeonardo);
 		
-		pDao.save(pessoa);
+		return pDao.save(pessoa);
 		
 	}
 }

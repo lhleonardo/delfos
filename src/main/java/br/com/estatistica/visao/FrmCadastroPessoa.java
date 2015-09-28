@@ -19,6 +19,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.com.estatistica.dao.TipoLogradouroDAO;
+import br.com.estatistica.modelos.Pessoa;
 import br.com.estatistica.modelos.TipoLogradouro;
 import br.com.estatistica.util.Mensagem;
 
@@ -145,6 +146,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.panel.add(this.scrollPane);
 		
 		this.txtDescricao = new JTextArea();
+		this.txtDescricao.setLocation(10, 0);
 		this.txtDescricao.setLineWrap(true);
 		this.scrollPane.setViewportView(this.txtDescricao);
 		
@@ -153,6 +155,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.panel.add(this.tabbedPane);
 		
 		this.panel_1 = new JPanel();
+		this.panel_1.setLocation(10, 25);
 		this.tabbedPane.addTab("Endereço", null, this.panel_1, "Informações sobre localização.");
 		this.panel_1.setLayout(null);
 		
@@ -225,6 +228,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.panel_1.add(this.scrollPane_1);
 		
 		this.txtEnderecoDescricao = new JTextArea();
+		this.txtEnderecoDescricao.setLocation(10, 0);
 		this.scrollPane_1.setViewportView(this.txtEnderecoDescricao);
 
 		this.panel_2 = new JPanel();
@@ -236,6 +240,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.panel.add(this.btnNovo);
 		
 		this.btnSalvar = new JButton("Salvar");
+		this.btnSalvar.addActionListener(e -> FrmCadastroPessoa.this.btnSalvarActionPerformed(e));
 		this.btnSalvar.setBounds(new Rectangle(0, 0, 0, 30));
 		this.btnSalvar.setBounds(98, 399, 89, 30);
 		this.panel.add(this.btnSalvar);
@@ -269,5 +274,16 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	protected void btnNovoActionPerformed(ActionEvent arg0) {
 		super.limpaCampos(this.getContentPane());
 		this.txtNome.requestFocus();
+	}
+	
+	protected void btnSalvarActionPerformed(ActionEvent e) {
+		// if (this.cbEspecialista.isSelected())
+		
+		Pessoa p = new Pessoa();
+		
+		p.setId(Integer.parseInt((this.txtCodigo.getText().isEmpty()) ? null : this.txtCodigo.getText()));
+		p.setNome(this.txtNome.getText());
+		p.setDescricao(this.txtDescricao.getText());
+
 	}
 }

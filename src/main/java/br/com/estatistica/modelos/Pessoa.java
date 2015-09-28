@@ -27,8 +27,7 @@ public class Pessoa implements Identificator {
 
 	private Endereco endereco;
 
-	private Usuario usuario;
-
+	// TODO salvar as formações e áreas de estudo para uma pessoa
 	private List<Formacao> formacoes;
 	private List<AreaEstudo> areasEstudo;
 
@@ -250,14 +249,6 @@ public class Pessoa implements Identificator {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public Usuario getUsuario() {
-		return this.usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 	@Override
