@@ -102,6 +102,11 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 		this.panel.add(this.btnPesquisar);
 		
 		this.btnSelecionar = new JButton("Selecionar");
+		this.btnSelecionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				btnSelecionarActionPerformed(e);
+			}
+		});
 		this.btnSelecionar.setBounds(10, 205, 89, 23);
 		this.panel.add(this.btnSelecionar);
 	}
@@ -136,4 +141,8 @@ public class FrmBuscaPesquisa extends GenericFormCadastro {
 		
 	}
 	
+	protected void btnSelecionarActionPerformed(ActionEvent e) {
+		pesquisa = modeloTabelaPesquisa.getPesquisa(table.getSelectedRow());
+		System.out.println(pesquisa.getNome());
+	}
 }
