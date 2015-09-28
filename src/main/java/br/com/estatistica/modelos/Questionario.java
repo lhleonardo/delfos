@@ -3,19 +3,21 @@ package br.com.estatistica.modelos;
 public class Questionario implements Identificator {
 
 	private int id;
+	private String nome;
 	private String descricao;
 	private Pesquisa pesquisa;
 	private TemaQuestionario tema;
 
-	public Questionario(int id, String descricao, Pesquisa pesquisa, TemaQuestionario tema) {
+	public Questionario(int id, String nome, String descricao, Pesquisa pesquisa, TemaQuestionario tema) {
 		this.id = id;
+		this.setNome(nome);
 		this.descricao = descricao;
 		this.pesquisa = pesquisa;
 		this.tema = tema;
 	}
 
-	public Questionario(String descricao, Pesquisa pesquisa, TemaQuestionario tema) {
-		this.descricao = descricao;
+	public Questionario(String nome, Pesquisa pesquisa, TemaQuestionario tema) {
+		this.setNome(nome);
 		this.pesquisa = pesquisa;
 		this.tema = tema;
 	}
@@ -60,6 +62,14 @@ public class Questionario implements Identificator {
 	public void validate() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

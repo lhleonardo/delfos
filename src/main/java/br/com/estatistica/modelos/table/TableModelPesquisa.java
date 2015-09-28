@@ -1,12 +1,16 @@
 package br.com.estatistica.modelos.table;
 
+import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
+import br.com.estatistica.dao.PesquisaDAO;
 import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.util.ConnectionFactory;
 
 
 
@@ -21,6 +25,7 @@ public class TableModelPesquisa extends AbstractTableModel {
 	private static final int NOME = 0;
 	private static final int DESCRICAO = 1;
 	private static final int DATA = 2;
+	
 	
 	public TableModelPesquisa() {
 		this.linhas = new ArrayList<Pesquisa>();
@@ -101,7 +106,7 @@ public class TableModelPesquisa extends AbstractTableModel {
 	}
 	
 	// Retorna o sócio referente a linha especificada
-	public Pesquisa getSocio(int indiceLinha) {
+	public Pesquisa getPesquisa(int indiceLinha) {
 		return this.linhas.get(indiceLinha);
 	}
 	
