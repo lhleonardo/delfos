@@ -41,7 +41,9 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JButton btnGetall;
 	private PreparedStatement stmt;
 	private JButton btnPesquisar;
-	
+	private JTable table;
+	private JScrollPane scrollPane_1;
+	private JButton btnNewButton;
 	/**
 	 * Launch the application.
 	 */
@@ -63,7 +65,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	public FrmCadastroPesquisa(Connection connection) throws SQLException {
 		super("Cadastro de Pesquisa", connection);
 		this.initComponents();
-		this.setSize(600, 408);
+		this.setSize(626, 557);
 	}
 	
 	
@@ -93,37 +95,28 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.nomeField.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
-		lblNewLabel.setBounds(11, 212, 187, 14);
+		lblNewLabel.setBounds(11, 375, 187, 14);
 		panel.add(lblNewLabel);
 		
 		this.limiteField = new JTextField();
-		this.limiteField.setBounds(11, 237, 46, 20);
+		this.limiteField.setBounds(11, 400, 46, 20);
 		panel.add(this.limiteField);
 		this.limiteField.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(e -> FrmCadastroPesquisa.this.btnSalvarActionPerformed(e));
 		
-		btnSalvar.setBounds(11, 274, 89, 23);
+		btnSalvar.setBounds(7, 474, 89, 23);
 		panel.add(btnSalvar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(e -> FrmCadastroPesquisa.this.dispose());
-		btnCancelar.setBounds(110, 274, 89, 23);
+		btnCancelar.setBounds(106, 474, 89, 23);
 		panel.add(btnCancelar);
 		
 		JLabel lblDescrio = new JLabel("Descrição");
-		lblDescrio.setBounds(11, 58, 64, 14);
+		lblDescrio.setBounds(10, 221, 64, 14);
 		panel.add(lblDescrio);
-		
-		this.scrollPane = new JScrollPane();
-		this.scrollPane.setBounds(11, 83, 393, 118);
-		panel.add(this.scrollPane);
-		
-		this.descricaoField = new JTextArea();
-		this.scrollPane.setViewportView(this.descricaoField);
-		this.descricaoField.setLineWrap(true);
-		this.descricaoField.setWrapStyleWord(true);
 		
 		this.btnPesquisar = new JButton("Pesquisar");
 		this.btnPesquisar.addActionListener(new ActionListener() {
@@ -131,11 +124,38 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 				btnPesquisarActionPerformed(arg0);
 			}
 		});
-		this.btnPesquisar.setBounds(315, 26, 89, 23);
+		this.btnPesquisar.setBounds(315, 26, 105, 23);
 		panel.add(this.btnPesquisar);
+		
+		this.scrollPane = new JScrollPane();
+		this.scrollPane.setBounds(11, 246, 393, 118);
+		panel.add(this.scrollPane);
+		
+		this.descricaoField = new JTextArea();
+		this.scrollPane.setViewportView(this.descricaoField);
+		this.descricaoField.setLineWrap(true);
+		this.descricaoField.setWrapStyleWord(true);
+		
+		this.scrollPane_1 = new JScrollPane();
+		this.scrollPane_1.setBounds(50, 58, 260, 118);
+		panel.add(this.scrollPane_1);
+		
+		this.table = new JTable();
+		this.table.setCellSelectionEnabled(true);
+		this.scrollPane_1.setViewportView(this.table);
+		this.table.setModel(getTableModelTodos());
+		
+		this.btnNewButton = new JButton("Selecionar Pesquisa");
+		this.btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnNewButtonActionPerformed(arg0);
+			}
+		});
+		this.btnNewButton.setBounds(50, 187, 187, 23);
+		panel.add(this.btnNewButton);
 	}
 	
-	private TableModelPesquisa getTableModel() {
+	private TableModelPesquisa getTableModelTodos() {
         if (modeloTabelaPesquisa == null) {
             try {
             	pesquisaDAO = new PesquisaDAO(super.getConnection());
@@ -147,6 +167,19 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
         }
         return modeloTabelaPesquisa;
     }
+	
+	private TableModelPesquisa getTableModelPesquisa() {
+        try {
+        	pesquisaDAO = new PesquisaDAO(super.getConnection());
+        	modeloTabelaPesquisa = new TableModelPesquisa(pesquisaDAO.get(nomeField.getText()));
+        	//modeloTabelaPesquisa.fireTableDataChanged();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    
+    return modeloTabelaPesquisa;
+}
 	
 	
 	
@@ -172,48 +205,12 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
-		FrmBuscaPesquisa buscaPesquisa;
-		try {
-			buscaPesquisa = new FrmBuscaPesquisa(super.getConnection());
-			buscaPesquisa.setVisible(true);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
+		table.setModel(getTableModelPesquisa());
 	}
-
-	public JTextField getCodigoField() {
-		return codigoField;
+	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
+		codigoField.setText(Integer.toString(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getId()));
+		nomeField.setText(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getNome());
+		descricaoField.setText(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getDescricao());
+		limiteField.setText(Integer.toString(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getLimiteDeEspecialistas()));
 	}
-
-	public void setCodigoField(JTextField codigoField) {
-		this.codigoField = codigoField;
-	}
-
-	public JTextField getNomeField() {
-		return nomeField;
-	}
-
-	public void setNomeField(JTextField nomeField) {
-		this.nomeField = nomeField;
-	}
-
-	public JTextField getLimiteField() {
-		return limiteField;
-	}
-
-	public void setLimiteField(JTextField limiteField) {
-		this.limiteField = limiteField;
-	}
-
-	public JTextArea getDescricaoField() {
-		return descricaoField;
-	}
-
-	public void setDescricaoField(JTextArea descricaoField) {
-		this.descricaoField = descricaoField;
-	}
-
-	
 }
