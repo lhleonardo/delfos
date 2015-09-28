@@ -20,7 +20,7 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 	private static final String SQL_INSERT = "INSERT INTO Questionario(id_questionario,nome,descricao,id_tema_questionario,id_pesquisa) VALUES (?,?,?,?,?)";
 	private static final String SQL_DELETE = "DELETE FROM Pesquisa WHERE id_questionario = ?";
-	private static final String SQL_UPDATE = "UPDATE Questionario SET nome = ?,descricao = ?, id_tema_questionario = ?, id_pesquisa = ?  WHERE id_pesquisa =?";
+	private static final String SQL_UPDATE = "UPDATE Questionario SET nome = ?,descricao = ? WHERE id_pesquisa =?";
 	
 	public QuestionarioDAO(Connection connection) {
 		super(connection);
@@ -46,9 +46,9 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
-			pst.setInt(3, model.getTema().getId());
-			pst.setInt(4, model.getPesquisa().getId());
-			pst.setInt(5, model.getId());
+//			pst.setInt(3, model.getTema().getId());
+//			pst.setInt(4, model.getPesquisa().getId());
+			pst.setInt(3, model.getId());
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}

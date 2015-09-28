@@ -56,7 +56,8 @@ public class Pesquisa implements Identificator {
 		this.data = Calendar.getInstance().getTime();
 	}
 	
-	public Pesquisa(String nome, String descricao, Integer LimiteDeEspecialistas){
+	public Pesquisa(Integer id, String nome, String descricao, Integer LimiteDeEspecialistas){
+		this.id = id;
 		this.setNome(nome);
 		this.descricao = descricao;
 		this.LIMITE_DE_ESPECIALISTAS= LimiteDeEspecialistas;

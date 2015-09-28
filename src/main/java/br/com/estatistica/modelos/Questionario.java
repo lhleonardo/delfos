@@ -21,6 +21,11 @@ public class Questionario implements Identificator {
 		this.pesquisa = pesquisa;
 		this.tema = tema;
 	}
+	
+	public Questionario(String nome, String descricao){
+		this.nome = nome;
+		this.descricao = descricao;
+	}
 
 	public Questionario() {
 
