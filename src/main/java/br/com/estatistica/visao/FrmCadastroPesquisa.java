@@ -156,11 +156,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.btnNewButton);
 		
 		this.novaPesquisaBotao = new JButton("Nova Pesquisa");
-		this.novaPesquisaBotao.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				novaPesquisaBotaoActionPerformed(e);
-			}
-		});
 		this.novaPesquisaBotao.setBounds(315, 55, 130, 23);
 		panel.add(this.novaPesquisaBotao);
 	}
