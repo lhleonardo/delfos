@@ -19,12 +19,15 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.com.estatistica.dao.TipoLogradouroDAO;
+import br.com.estatistica.modelos.Especialista;
+import br.com.estatistica.modelos.Pesquisador;
+import br.com.estatistica.modelos.PesquisadorEspecialista;
 import br.com.estatistica.modelos.Pessoa;
 import br.com.estatistica.modelos.TipoLogradouro;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmCadastroPessoa extends GenericFormCadastro {
-
+	
 	private static final long serialVersionUID = 1L;
 	private JPanel panel;
 	private JLabel lblCdigo;
@@ -48,7 +51,10 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	private JPanel panel_2;
 	private JLabel lblLogradouro;
 	private JTextField txtLogradouro;
+
+	@SuppressWarnings("rawtypes")
 	private JComboBox cbLogradouro;
+	
 	private JLabel lblNmero;
 	private JTextField txtEnderecoNumero;
 	private JLabel lblCep;
@@ -67,39 +73,41 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	private JTextArea txtEnderecoDescricao;
 	private JScrollPane scrollPane_1;
 	private ObjectComboBoxModel<TipoLogradouro> comboBoxModel;
-
+	private TipoLogradouroDAO tDao;
+	
 	public FrmCadastroPessoa(Connection connection) {
 		super("Cadastro de Pessoa", connection);
 		this.initComponents();
 	}
 	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private void initComponents() {
 		this.setSize(664, 479);
 		
 		this.setResizable(false);
-
+		
 		this.panel = new JPanel();
 		this.getContentPane().add(this.panel, BorderLayout.CENTER);
 		this.panel.setLayout(null);
-
+		
 		this.lblCdigo = new JLabel("Código");
 		this.lblCdigo.setBounds(10, 11, 46, 14);
 		this.panel.add(this.lblCdigo);
-
+		
 		this.txtCodigo = new JTextField();
 		this.txtCodigo.setEditable(false);
 		this.txtCodigo.setBounds(10, 25, 46, 20);
 		this.panel.add(this.txtCodigo);
 		this.txtCodigo.setColumns(10);
-
+		
 		this.txtPesquisar = new JButton("");
 		this.txtPesquisar.setBounds(56, 24, 27, 23);
 		this.panel.add(this.txtPesquisar);
-
+		
 		this.lblNome = new JLabel("Nome");
 		this.lblNome.setBounds(89, 11, 46, 14);
 		this.panel.add(this.lblNome);
-
+		
 		this.txtNome = new JTextField();
 		this.txtNome.setBounds(89, 25, 380, 20);
 		this.panel.add(this.txtNome);
@@ -187,7 +195,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.lblCep = new JLabel("CEP");
 		this.lblCep.setBounds(355, 11, 80, 14);
 		this.panel_1.add(this.lblCep);
-
+		
 		this.txtEnderecoCep = new JFormattedTextField();
 		this.txtEnderecoCep.setBounds(355, 26, 89, 20);
 		this.panel_1.add(this.txtEnderecoCep);
@@ -230,7 +238,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.txtEnderecoDescricao = new JTextArea();
 		this.txtEnderecoDescricao.setLocation(10, 0);
 		this.scrollPane_1.setViewportView(this.txtEnderecoDescricao);
-
+		
 		this.panel_2 = new JPanel();
 		this.tabbedPane.addTab("...", null, this.panel_2, null);
 		
@@ -255,11 +263,11 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.btnCancelar.setBounds(380, 399, 89, 30);
 		this.panel.add(this.btnCancelar);
 	}
-
+	
 	private void preencheComboBox() {
 		try {
-			TipoLogradouroDAO dao = new TipoLogradouroDAO(this.getConnection());
-			List<TipoLogradouro> all = dao.getAll();
+			this.tDao = new TipoLogradouroDAO(this.getConnection());
+			List<TipoLogradouro> all = this.tDao.getAll();
 			
 			this.comboBoxModel.add(null);
 			
@@ -277,13 +285,30 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	}
 	
 	protected void btnSalvarActionPerformed(ActionEvent e) {
-		// if (this.cbEspecialista.isSelected())
-		
-		Pessoa p = new Pessoa();
+		Pessoa p = this.retornaTipoDePessoa();
 		
 		p.setId(Integer.parseInt((this.txtCodigo.getText().isEmpty()) ? null : this.txtCodigo.getText()));
 		p.setNome(this.txtNome.getText());
 		p.setDescricao(this.txtDescricao.getText());
-
+		
+	}
+	
+	/**
+	 * @return
+	 */
+	private Pessoa retornaTipoDePessoa() {
+		// caso seja um pesquisador e poderá ser um especialista, ele será um
+		// PesquisadorEspecialista
+		// para os outros casos, ele será um pesquisador ou especialista.
+		if (this.cbPesquisador.isSelected() && this.cbEspecialista.isSelected()) {
+			return new PesquisadorEspecialista();
+		} else if (this.cbPesquisador.isSelected() && !this.cbEspecialista.isSelected()) {
+			return new Pesquisador();
+		} else if (!this.cbPesquisador.isSelected() && this.cbEspecialista.isSelected()) {
+			return new Especialista();
+		} else {
+			return null;
+		}
+		
 	}
 }
