@@ -42,9 +42,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 		}
 	}
 	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+
 	@Override
 	protected Integer update(Tipo_Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
