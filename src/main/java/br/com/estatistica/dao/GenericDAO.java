@@ -24,7 +24,7 @@ import br.com.estatistica.util.Mensagem;
  */
 public abstract class GenericDAO<T extends Identificator> implements AutoCloseable {
 	
-	private boolean mostraConfirmacao = true;
+	boolean mostraConfirmacao = true;
 	
 	private Connection connection;
 	
