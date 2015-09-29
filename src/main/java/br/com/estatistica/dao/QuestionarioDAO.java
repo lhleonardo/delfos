@@ -7,9 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.estatistica.extractors.PesquisaExtractor;
+
 import br.com.estatistica.extractors.QuestionarioExtractor;
-import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.Questionario;
 import br.com.estatistica.util.Mensagem;
 
@@ -28,7 +27,6 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 	
 	
 	
-	@Override
 	protected Integer insert(Questionario model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setInt(1, model.getId());

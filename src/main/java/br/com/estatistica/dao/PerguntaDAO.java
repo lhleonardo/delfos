@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 
 import br.com.estatistica.extractors.PerguntaExtractor;
 import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.util.Mensagem;
 
 public class PerguntaDAO extends GenericDAO<Pergunta> {
 	private static final String SQL_SELECT = "SELECT * FROM Pergunta";
@@ -38,7 +39,8 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 			return null;
 		}
 	}
-
+	
+	
 	@Override
 	protected Integer update(Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {

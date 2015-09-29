@@ -2,16 +2,32 @@ package br.com.estatistica.visao;
 
 
 import java.awt.EventQueue;
+
 import javax.swing.JTextField;
+
 import java.awt.BorderLayout;
+
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+
 import java.awt.Label;
 import java.awt.Font;
+import java.awt.Toolkit;
+
 import javax.swing.JLabel;
-import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+
+import br.com.estatistica.dao.PerguntaDAO;
+import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.util.Mensagem;
+import br.com.estatistica.util.ConnectionFactory;
+
+import java.sql.Connection;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
 
 
 
@@ -25,7 +41,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FrmCadastroPergunta frame = new FrmCadastroPergunta();
+					FrmCadastroPergunta frame = new FrmCadastroPergunta(new ConnectionFactory().getConnection());;;
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -35,15 +51,19 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 	}
 
 	
-	public FrmCadastroPergunta() {
-		super();
-		setTitle("Cadastro de Pergunta");
-		
+	public FrmCadastroPergunta(Connection connection) {
+		super("Cadastro de Pergunta", connection);
+				
 		JPanel panel = new JPanel();
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		txtOi = new JTextField();
+		txtOi.addActionListener(new ActionListener() {
+			
+			
+			}
+		});
 		txtOi.setHorizontalAlignment(SwingConstants.LEFT);
 		txtOi.setBounds(29, 57, 451, 20);
 		panel.add(txtOi);
@@ -70,10 +90,30 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		lblTipoDePergunta.setBounds(29, 206, 116, 14);
 		panel.add(lblTipoDePergunta);
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox<?> comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Coeficiente de Argumentação ", "Coeficiente de Competência"}));
 		comboBox.setToolTipText("");
 		comboBox.setBounds(29, 231, 197, 20);
 		panel.add(comboBox);
+		
+		JButton btnSalvar = new JButton("Cancelar");
+		btnSalvar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnSalvar.setBounds(216, 438, 89, 23);
+		panel.add(btnSalvar);
+		
+		JButton button = new JButton("Salvar");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		button.setBounds(104, 438, 89, 23);
+		panel.add(button);
 	}
+
+						}
+
 }
