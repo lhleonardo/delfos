@@ -30,22 +30,22 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 
 	@Override
 	protected Integer insert(Pergunta model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getObservacao());
 			pst.setString(3, model.getDescricao());
 
 			pst.executeUpdate();
-			return null;
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
 	
 	
 	@Override
 	protected Integer update(Pergunta model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE , PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.executeUpdate();
-			return null;
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
 
@@ -54,14 +54,24 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 		if (model.getId() != null) {
 			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
-				int linhasAfetadas = pst.executeUpdate();
-				if (linhasAfetadas > 0) {
-					JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
-				}
+				
+				pst.executeUpdate();
+				
+			}if (this.get(model.getId()) == null) {
+				Mensagem.informa(null, "Excluído com sucesso.");
+				return true;
+			} else {
+				Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
+				return false;
 			}
+		} else {
+			throw new IllegalArgumentException("Informe um usuário antes de prosseguir.");
 		}
-		return false;
-	}
+			
+		}
+		
+	
+	
 
 	@Override
 	public List<Pergunta> getAll() throws SQLException {
