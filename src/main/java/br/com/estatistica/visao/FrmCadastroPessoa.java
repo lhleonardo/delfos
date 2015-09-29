@@ -18,7 +18,13 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.estatistica.dao.PessoaDAO;
 import br.com.estatistica.dao.TipoLogradouroDAO;
+import br.com.estatistica.modelos.Bairro;
+import br.com.estatistica.modelos.Cidade;
+import br.com.estatistica.modelos.Cnpj;
+import br.com.estatistica.modelos.Cpf;
+import br.com.estatistica.modelos.Endereco;
 import br.com.estatistica.modelos.Especialista;
 import br.com.estatistica.modelos.Pesquisador;
 import br.com.estatistica.modelos.PesquisadorEspecialista;
@@ -51,7 +57,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	private JPanel panel_2;
 	private JLabel lblLogradouro;
 	private JTextField txtLogradouro;
-
+	
 	@SuppressWarnings("rawtypes")
 	private JComboBox cbLogradouro;
 	
@@ -74,6 +80,12 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	private JScrollPane scrollPane_1;
 	private ObjectComboBoxModel<TipoLogradouro> comboBoxModel;
 	private TipoLogradouroDAO tDao;
+	
+	private Bairro bairro = null;
+	private TipoLogradouro tipoLogradouro = null;
+	private Cidade cidade = null;
+	private PessoaDAO pDao;
+	private Integer idEndereco;
 	
 	public FrmCadastroPessoa(Connection connection) {
 		super("Cadastro de Pessoa", connection);
@@ -281,16 +293,42 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	
 	protected void btnNovoActionPerformed(ActionEvent arg0) {
 		super.limpaCampos(this.getContentPane());
+		this.bairro = null;
+		this.cidade = null;
+		this.tipoLogradouro = null;
+		this.idEndereco = null;
 		this.txtNome.requestFocus();
 	}
 	
 	protected void btnSalvarActionPerformed(ActionEvent e) {
-		Pessoa p = this.retornaTipoDePessoa();
 		
-		p.setId(Integer.parseInt((this.txtCodigo.getText().isEmpty()) ? null : this.txtCodigo.getText()));
-		p.setNome(this.txtNome.getText());
-		p.setDescricao(this.txtDescricao.getText());
-		
+		try {
+			Pessoa p = this.retornaTipoDePessoa();
+			
+			p.setId(Integer.parseInt((this.txtCodigo.getText().isEmpty()) ? null : this.txtCodigo.getText()));
+			p.setNome(this.txtNome.getText());
+			p.setTipoDocumento((this.txtCpfCnpj.getText().length() == 7) ? new Cpf(this.txtCpfCnpj.getText()) : new Cnpj(this.txtCpfCnpj
+			        .getText()));
+			p.setRg(this.txtRgIe.getText());
+			p.setEmail(this.txtEmail.getText());
+			p.setDescricao(this.txtDescricao.getText());
+			
+			Endereco end = new Endereco();
+			end.setId(this.idEndereco);
+			end.setLogradouro(this.txtLogradouro.getText());
+			end.setCep(this.txtEnderecoCep.getText());
+			end.setNumero(this.txtEnderecoNumero.getText());
+			end.setBairro(this.bairro);
+			end.setTipoLogradouro(this.tipoLogradouro);
+			end.setCidade(this.cidade);
+			
+			p.setEndereco(end);
+			
+			this.pDao = new PessoaDAO(this.getConnection());
+			this.pDao.save(p);
+		} catch (SQLException ex) {
+			Mensagem.erro(this, ex);
+		}
 	}
 	
 	/**
