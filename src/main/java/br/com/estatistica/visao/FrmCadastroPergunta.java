@@ -37,6 +37,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 	private static final long serialVersionUID = 1L;
 	private JTextField txtOi;
 	private JTextField textField;
+	private JTextField textField_1;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -58,12 +59,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
-		txtOi = new JTextField();
-		txtOi.addActionListener(new ActionListener() {
-			
-			
-			}
-		});
+					
 		txtOi.setHorizontalAlignment(SwingConstants.LEFT);
 		txtOi.setBounds(29, 57, 451, 20);
 		panel.add(txtOi);
@@ -82,7 +78,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setColumns(10);
-		textField.setBounds(29, 132, 451, 53);
+		textField.setBounds(29, 57, 409, 23);
 		panel.add(textField);
 		
 		JLabel lblTipoDePergunta = new JLabel("Tipo de Pergunta:");
@@ -93,7 +89,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		JComboBox<?> comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Coeficiente de Argumentação ", "Coeficiente de Competência"}));
 		comboBox.setToolTipText("");
-		comboBox.setBounds(29, 231, 197, 20);
+		comboBox.setBounds(29, 232, 197, 20);
 		panel.add(comboBox);
 		
 		JButton btnSalvar = new JButton("Cancelar");
@@ -101,7 +97,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 			public void actionPerformed(ActionEvent arg0) {
 			}
 		});
-		btnSalvar.setBounds(216, 438, 89, 23);
+		btnSalvar.setBounds(144, 417, 89, 23);
 		panel.add(btnSalvar);
 		
 		JButton button = new JButton("Salvar");
@@ -110,10 +106,15 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 				
 			}
 		});
-		button.setBounds(104, 438, 89, 23);
+		button.setBounds(29, 417, 89, 23);
 		panel.add(button);
+		
+		textField_1 = new JTextField();
+		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_1.setColumns(10);
+		textField_1.setBounds(29, 132, 409, 35);
+		panel.add(textField_1);
 	}
-
 						}
 
-}
+
