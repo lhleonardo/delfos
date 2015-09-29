@@ -13,7 +13,7 @@ public class Tipo_PerguntaTest {
 		
 		Connection con = new ConnectionFactory().getConnection(); 
 		Tipo_PerguntaDAO tipop1 = new Tipo_PerguntaDAO(con);
-		Tipo_Pergunta tpergunta = new Tipo_Pergunta(15,"ola", "teste");
+		Tipo_Pergunta tpergunta = new Tipo_Pergunta("ola", "teste");
 		try {
 			tipop1.insert(tpergunta);
 		} catch (SQLException e) {

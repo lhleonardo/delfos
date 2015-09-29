@@ -13,6 +13,9 @@ import br.com.estatistica.extractors.TipoPerguntaExtractor;
 import br.com.estatistica.modelos.Tipo_Pergunta;
 
 public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
+	
+	private static final TipoPerguntaExtractor EXTRACTOR = new TipoPerguntaExtractor();
+	
 
 	private static final String SQL_SELECT = "SELECT * FROM Tipo_Pergunta";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
@@ -20,23 +23,22 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	private static final String SQL_INSERT = "INSERT INTO Tipo_Pergunta(id_tipo_pergunta,nome, descricao) VALUES(?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Tipo_Pergunta SET descricao = ?";
 	private static final String SQL_DELETE = "DELETE FROM Tipo_Pergunta WHERE id_usuario = ?";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 	
 	public Tipo_PerguntaDAO(Connection connection) {
 		super(connection);
 
 	}
-	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+
 	@Override
 	protected Integer insert(Tipo_Pergunta model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT , PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setInt(1, model.getId());
-			pst.setString(2, model.getDescricao());
+			pst.setString (2, model.getNome());
+			pst.setString(3, model.getDescricao());
 			
 			pst.executeUpdate();
-			return null;
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
 	
@@ -45,16 +47,19 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	 */
 	@Override
 	protected Integer update(Tipo_Pergunta model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			pst.setInt(1, model.getId());
+			pst.setString (2, model.getNome());
+			pst.setString(3,  model.getDescricao());
+			
+			
 			pst.executeUpdate();
-			return null;
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 
 	}
 	
-	/**
-	 * @wbp.parser.entryPoint
-	 */
+	
 	@Override
 	public boolean delete(Tipo_Pergunta model) throws SQLException {
 		if (model.getId() != null) {
@@ -87,6 +92,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 		Tipo_Pergunta tipopergunta = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
+			pst.setString(2,model.getNome());
 			pst.setString(2, model.getDescricao());
 
 			ResultSet resultSet = pst.executeQuery();
@@ -115,9 +121,16 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	
 	@Override
 	public List<Tipo_Pergunta> get(String value) throws SQLException {
+		List<Tipo_Pergunta> perguntas = new ArrayList<>();
 
-		return null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
+			pst.setString(1, value);
+			perguntas.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
+		}
+
+		return perguntas;
 	}
+	
 	
 	@Override
 	public boolean isExist(Tipo_Pergunta model) throws SQLException {
