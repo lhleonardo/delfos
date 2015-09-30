@@ -20,6 +20,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 import br.com.estatistica.dao.PerguntaDAO;
+import br.com.estatistica.extractors.PerguntaExtractor;
 import br.com.estatistica.modelos.Pergunta;
 import br.com.estatistica.util.Mensagem;
 import br.com.estatistica.util.ConnectionFactory;
@@ -76,6 +77,11 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		panel.add(lblObservao);
 		
 		textField = new JTextField();
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				textField = PerguntaExtractor
+			}
+		});
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.setColumns(10);
 		textField.setBounds(29, 57, 409, 23);

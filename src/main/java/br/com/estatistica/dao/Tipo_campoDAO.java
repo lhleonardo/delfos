@@ -17,7 +17,7 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	private static final String SQL_SELECT = "SELECT * FROM Tipo_campo";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_INSERT = "INSERT INTO Tipo_campo(id_Tipo_campo, descricao,nome) VALUES(?,?,?)";
+	private static final String SQL_INSERT = "INSERT INTO Tipo_campo(descricao,nome) VALUES(?,?)";
 	private static final String SQL_UPDATE = "UPDATE TipoCampo SET descricao = ?, nome = ?, WHERE id_Tipo_campo =?";
 	private static final String SQL_DELETE = "DELETE FROM Tipo_campoWHERE id_usuario = ?";
 

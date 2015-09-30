@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.estatistica.dao.QuestionarioDAO;
 import br.com.estatistica.modelos.Pergunta;
 
 
@@ -18,12 +19,20 @@ public class PerguntaExtractor extends Extractable<Pergunta> {
 			return null;
 	}
 	;
-	//arrumar questionario, tipo pergunta, tipo campo
 	@Override
 	protected Pergunta extractModel(ResultSet rs, Connection con) throws SQLException{
 	Pergunta pergunta = new Pergunta();
-	pergunta.setId(rs.getInt("id_usuario"));
+	QuestionarioDAO q1 = new QuestionarioDAO(con);
+	pergunta.setId(rs.getInt("id_pergunta"));
 	pergunta.setDescricao(rs.getString("Descricao"));
+	pergunta.setNome(rs.getString("Nome"));
+	pergunta.setQuestionario(rs.getInt(pergunta.getQuestionario().getId()));
+	pergunta.setObservacao(rs.getString("obs"));
+	pergunta.setTipo_campo(rs.getInt(1));
+	pergunta.setTipoPergunta.getInt(rs.getInt(1));
+	
+	
+	
 
 
 	
