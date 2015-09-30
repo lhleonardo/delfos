@@ -1,6 +1,6 @@
 package br.com.estatistica.modelos;
 
-public class Resposta {
+public class Resposta implements Identificator {
 	private int id;
 	private String descricao;
 	private String observacao;
@@ -24,7 +24,8 @@ public class Resposta {
 	public Resposta() {
 	}
 
-	public int getId() {
+	@Override
+	public Integer getId() {
 		return id;
 	}
 
@@ -62,6 +63,13 @@ public class Resposta {
 
 	public void setPessoa(Pessoa pessoa) {
 		this.pessoa = pessoa;
+	}
+
+	
+	@Override
+	public void validate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
