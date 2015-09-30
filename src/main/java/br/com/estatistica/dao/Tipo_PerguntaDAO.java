@@ -20,9 +20,9 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	private static final String SQL_SELECT = "SELECT * FROM Tipo_Pergunta";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_INSERT = "INSERT INTO Tipo_Pergunta(id_tipo_pergunta,nome, descricao) VALUES(?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE Tipo_Pergunta SET descricao = ?";
-	private static final String SQL_DELETE = "DELETE FROM Tipo_Pergunta WHERE id_usuario = ?";
+	private static final String SQL_INSERT = "INSERT INTO Tipo_Pergunta(nome, descricao) VALUES(?,?)";
+	private static final String SQL_UPDATE = "UPDATE Tipo_Pergunta SET nome = ?, descricao = ?";
+	private static final String SQL_DELETE = "DELETE FROM Tipo_Pergunta WHERE id_tipo_pergunta = ?";
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 	
 	public Tipo_PerguntaDAO(Connection connection) {
@@ -33,9 +33,9 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	@Override
 	protected Integer insert(Tipo_Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT , PreparedStatement.RETURN_GENERATED_KEYS)) {
-			pst.setInt(1, model.getId());
-			pst.setString (2, model.getNome());
-			pst.setString(3, model.getDescricao());
+			
+			pst.setString (1, model.getNome());
+			pst.setString(2, model.getDescricao());
 			
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());

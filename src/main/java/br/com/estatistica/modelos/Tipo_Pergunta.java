@@ -50,8 +50,8 @@ public class Tipo_Pergunta implements Identificator{
 	}
 
 	public void validate() {
-		if (this.getId() == null || this.nome == null || this.descricao == null) {
-			throw new NullPointerException("ID,Nome ou Descrição não podem ser  nulos");
+		if ( this.nome == null || this.descricao == null) {
+			throw new NullPointerException("Nome ou Descrição não podem ser  nulos");
 		}		
 		
 		
