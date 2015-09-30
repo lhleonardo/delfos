@@ -1,12 +1,12 @@
 package br.com.estatistica.modelos.table;
 
-import java.sql.Date;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
-import br.com.estatistica.modelos.Pesquisa;
+
 import br.com.estatistica.modelos.Questionario;
 
 public class TableModelQuestionario extends AbstractTableModel {
