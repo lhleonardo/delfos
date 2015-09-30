@@ -5,11 +5,7 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -23,7 +19,6 @@ import br.com.estatistica.dao.PesquisaDAO;
 import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
-import br.com.estatistica.util.Mensagem;
 import java.awt.event.ActionListener;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
@@ -38,13 +33,12 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JScrollPane scrollPane;
 	private JTextArea descricaoField;
 	private TableModelPesquisa modeloTabelaPesquisa;
-	private JButton btnGetall;
-	private PreparedStatement stmt;
 	private JButton btnPesquisar;
 	private JTable table;
 	private JScrollPane scrollPane_1;
 	private JButton btnNewButton;
 	private JButton novaPesquisaBotao;
+	private JButton btnExcluir;
 	/**
 	 * Launch the application.
 	 */
@@ -82,9 +76,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 
 		this.codigoField = new JTextField();
 		this.codigoField.setEditable(false);
+		this.codigoField.setText(" ");
 		this.codigoField.setBounds(10, 27, 34, 20);
 		panel.add(this.codigoField);
 		this.codigoField.setColumns(10);
+		
 
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(50, 11, 46, 14);
@@ -163,6 +159,15 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		});
 		this.novaPesquisaBotao.setBounds(315, 55, 130, 23);
 		panel.add(this.novaPesquisaBotao);
+		
+		this.btnExcluir = new JButton("Excluir");
+		this.btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				btnExcluirActionPerformed(arg0);
+			}
+		});
+		this.btnExcluir.setBounds(205, 474, 89, 23);
+		panel.add(this.btnExcluir);
 	}
 
 	private TableModelPesquisa getTableModelTodos() {
@@ -211,15 +216,30 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		//		} catch (SQLException e1) {
 		//			Mensagem.erro(this, e1);
 		//		}
-		Integer limiteEspecialistas = Integer.parseInt(limiteField.getText());
-		Integer idPesquisaSelecionada = Integer.parseInt(codigoField.getText());
-		Pesquisa p1 = new Pesquisa(idPesquisaSelecionada, nomeField.getText(), descricaoField.getText(), limiteEspecialistas);
-		try {
-			Integer idNovaPesquisa =pesquisaDAO.save(p1);
-			codigoField.setText(Integer.toString(idNovaPesquisa));
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		if(codigoField.getText().equals(" ")){
+			try{
+				Integer limiteEspecialistas = Integer.parseInt(limiteField.getText());
+				Pesquisa p1 = new Pesquisa(null, nomeField.getText(), descricaoField.getText(), limiteEspecialistas);
+				Integer idNovaPesquisa =pesquisaDAO.save(p1);
+				codigoField.setText(Integer.toString(idNovaPesquisa));
+				}catch(SQLException e1){
+					System.out.println("Erro SQL");
+				}catch(NumberFormatException e2 ){
+					javax.swing.JOptionPane.showMessageDialog(null, "É necessário informar o Limite de Especialistas.");
+				}
+			
+		}else{
+			try{
+				Integer idPesquisaSelecionada = Integer.parseInt(codigoField.getText());
+				Integer limiteEspecialistas = Integer.parseInt(limiteField.getText());
+				Pesquisa p1 = new Pesquisa(idPesquisaSelecionada, nomeField.getText(), descricaoField.getText(), limiteEspecialistas);
+				pesquisaDAO.save(p1);
+				}catch(SQLException e1){
+					System.out.println("Erro SQL");
+				}catch(NumberFormatException e2){
+					javax.swing.JOptionPane.showMessageDialog(null, "É necessário informar o Limite de Especialistas.");
+				}
+			
 		}
 
 		this.table.setModel(getTableModelTodos());
@@ -238,9 +258,28 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 
 	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
 		table.setModel(getTableModelTodos());
-		codigoField.setText(null);
+		codigoField.setText(" ");
 		nomeField.setText(null);
 		descricaoField.setText(null);
 		limiteField.setText(null);
 	}
+	protected void btnExcluirActionPerformed(ActionEvent arg0) {
+		try{
+			if(codigoField.getText()!=null){
+				Integer idPesquisaDeletar = Integer.parseInt(codigoField.getText());
+				Pesquisa p1 = new Pesquisa(idPesquisaDeletar);
+				pesquisaDAO.delete(p1);
+				table.setModel(getTableModelTodos());
+				codigoField.setText(" ");
+				nomeField.setText(null);
+				descricaoField.setText(null);
+				limiteField.setText(null);
+			}
+			
+		}catch(NumberFormatException|SQLException e){
+
+		}
+	}
+		
+	
 }
