@@ -26,6 +26,10 @@ public class Questionario implements Identificator {
 		this.nome = nome;
 		this.descricao = descricao;
 	}
+	public Questionario(int id){
+		this.id = id;
+		
+	}
 
 	public Questionario() {
 

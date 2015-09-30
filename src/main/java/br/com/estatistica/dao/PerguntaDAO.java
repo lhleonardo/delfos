@@ -18,9 +18,9 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	private static final String SQL_SELECT = "SELECT * FROM Pergunta";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_INSERT = "INSERT INTO Pergunta(id_pergunta, descricao,observacao,questionario,tipopergunta, tipocampo) VALUES(?,?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE Pergunta SET descricao = ?, observacao = ?, questionario = ?, tipopergunta = ?, tipocampo = ? WHERE id_pergunta =?";
-	private static final String SQL_DELETE = "DELETE FROM Pergunta WHERE id_usuario = ?";
+	private static final String SQL_INSERT = "INSERT INTO Pergunta(nome, descricao,observacao,id_tipo_pergunta, id_tipo_campo,id_questionario) VALUES(?,?,?,?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE Pergunta SET nome = ?,descricao = ?, observacao = ?, id_questionario = ?, id_tipo_pergunta = ?, id_tipo_campo = ? WHERE id_pergunta =?";
+	private static final String SQL_DELETE = "DELETE FROM Pergunta WHERE id_pergunta = ?";
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 
 
@@ -32,11 +32,14 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	@Override
 	protected Integer insert(Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			pst.setInt(1, model.getId());
-			pst.setString(2,model.getNome());
-			pst.setString(2, model.getObservacao());
-			pst.setString(3, model.getDescricao());
-
+			
+			pst.setString(1,model.getNome());
+			pst.setString (2, model.getDescricao());			
+			pst.setString(3, model.getObservacao());	
+			pst.setInt(4, model.getTipoPergunta().getId());		
+			pst.setInt(5, model.getTipoCampo().getId());			
+			pst.setInt(6, model.getQuestionario().getId());
+			
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
@@ -46,6 +49,14 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	@Override
 	protected Integer update(Pergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE , PreparedStatement.RETURN_GENERATED_KEYS)) {
+			pst.setString(1,model.getNome());
+			pst.setString (2, model.getDescricao());			
+			pst.setString(3, model.getObservacao());	
+			pst.setInt(4, model.getTipoPergunta().getId());		
+			pst.setInt(5, model.getTipoCampo().getId());			
+			pst.setInt(6, model.getQuestionario().getId());
+			pst.setInt(7, model.getId());
+			
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
@@ -93,9 +104,13 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 		Pergunta pergunta = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
-			pst.setString(2, model.getNome());
-			pst.setString(2, model.getDescricao());
-			pst.setString(3, model.getObservacao());
+			pst.setString(2,model.getNome());
+			pst.setString (3, model.getDescricao());			
+			pst.setString(4, model.getObservacao());	
+			pst.setInt(5, model.getTipoPergunta().getId());		
+			pst.setInt(6, model.getTipoCampo().getId());			
+			pst.setInt(7, model.getQuestionario().getId());
+			
 			ResultSet resultSet = pst.executeQuery();
 
 			pergunta = new PerguntaExtractor().extract(resultSet, super.getConnection());
