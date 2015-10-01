@@ -83,7 +83,7 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
-			respostas = new ArrayList<>(EXTRACTOR.extractAll(resultSet, null));
+			//respostas = new ArrayList<>(Extractor.extractAll(resultSet, null));
 		}
 
 		return respostas;
@@ -129,7 +129,7 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
 			pst.setString(1, value);
-			respostas.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
+		//	respostas.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
 		}
 
 		return respostas;
