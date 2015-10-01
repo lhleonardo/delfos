@@ -1,14 +1,22 @@
 package br.com.estatistica.dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
+import br.com.estatistica.extractors.PerguntaExtractor;
+import br.com.estatistica.extractors.RespostaExtractor;
+import br.com.estatistica.modelos.Pergunta;
 import br.com.estatistica.modelos.Resposta;
+import br.com.estatistica.util.Mensagem;
 public class RespostaDAO extends GenericDAO<Resposta> {
 	
 	private static final String SQL_SELECT = "SELECT * FROM Resposta";
-	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_resposta = ?";
+	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
 	private static final String SQL_INSERT = "INSERT INTO Resposta(id_resposta, descricao,observacao, ) VALUES(?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Resposta SET descricao = ?, observacao = ?, pergunta = ?, pessoa =? WHERE id_pergunta =?";
 	private static final String SQL_DELETE = "DELETE FROM Resposta WHERE id_resposta = ?";
@@ -22,55 +30,119 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 
 	@Override
 	protected Integer insert(Resposta model) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			
+			pst.setString (1, model.getDescricao());			
+			pst.setString(2, model.getObservacao());	
+			pst.setInt(3, model.getPergunta().getId());
+			pst.setInt(4, model.getPessoa().getId());
+
+			pst.executeUpdate();
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
+}
 	}
 
 	@Override
 	protected Integer update(Resposta model) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE , PreparedStatement.RETURN_GENERATED_KEYS)) {
+			pst.setString (1, model.getDescricao());			
+			pst.setString(2, model.getObservacao());	
+			pst.setInt(3, model.getPergunta().getId());
+			pst.setInt(4, model.getPessoa().getId());
+			pst.setInt(5, model.getId());
+			
+			pst.executeUpdate();
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
+		}
 	}
 
 	@Override
 	public boolean delete(Resposta model) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		if (model.getId() != null) {
+			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
+				pst.setInt(1, model.getId());
+				
+				pst.executeUpdate();
+				
+			}if (this.get(model.getId()) == null) {
+				Mensagem.informa(null, "Excluído com sucesso.");
+				return true;
+			} else {
+				Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
+				return false;
+			}
+		} else {
+			throw new IllegalArgumentException("Informe um usuário antes de prosseguir.");
+		}
 	}
 
 	@Override
 	public List<Resposta> getAll() throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Resposta> respostas = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+			ResultSet resultSet = pst.executeQuery();
+
+			respostas = new ArrayList<>(EXTRACTOR.extractAll(resultSet, null));
+		}
+
+		return respostas;
 	}
 
 	@Override
 	public Resposta get(Resposta model) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Resposta resposta = null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
+			pst.setInt(1, model.getId());
+			pst.setString (2, model.getDescricao());			
+			pst.setString(3, model.getObservacao());	
+			pst.setInt(3, model.getPergunta().getId());
+			pst.setInt(4, model.getPessoa().getId());
+			
+			ResultSet resultSet = pst.executeQuery();
+
+			resposta = new RespostaExtractor().extract(resultSet, super.getConnection());
+
+		}
+
+		return resposta;
 	}
 
 	@Override
 	public Resposta get(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Resposta resposta = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+			pst.setInt(1, idModel);
+			ResultSet rs = pst.executeQuery();
+
+			resposta = new RespostaExtractor().extract(rs, super.getConnection());
+
+		}
+
+		return resposta;
 	}
 
 	@Override
 	public List<Resposta> get(String value) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		List<Resposta> respostas = new ArrayList<>();
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
+			pst.setString(1, value);
+			respostas.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
+		}
+
+		return respostas;
 	}
 
 	@Override
 	public boolean isExist(Resposta model) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		return this.get(model) != null;
+
 	}
 
 	@Override
 	public boolean isExist(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		return this.get(idModel) != null;
 	}	
 }
