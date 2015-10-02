@@ -79,8 +79,12 @@ public class Resposta implements Identificator {
 	
 	@Override
 	public void validate() {
-		// TODO Auto-generated method stub
+		if (this.nome == null || this.descricao == null || this.observacao == null ) {
+			throw new NullPointerException("nome, descrição, tipo de campo ou tipo de pergunta não podem ser nulo.");
+	
+}
+	}
 		
 	}
 
-}
+

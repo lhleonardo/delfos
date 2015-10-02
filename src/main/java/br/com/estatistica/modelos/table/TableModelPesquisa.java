@@ -1,17 +1,11 @@
 package br.com.estatistica.modelos.table;
 
-
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 import br.com.estatistica.modelos.Pesquisa;
-
-
-
-
-
 
 public class TableModelPesquisa extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
