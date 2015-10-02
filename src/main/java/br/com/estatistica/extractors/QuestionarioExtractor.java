@@ -16,6 +16,7 @@ public class QuestionarioExtractor extends Extractable<Questionario> {
 		quest.setId(rs.getInt("id_questionario"));
 		quest.setNome(rs.getString("nome"));
 		quest.setDescricao(rs.getString("descricao"));
+		quest.setTema();
 
 		return quest;
 	}

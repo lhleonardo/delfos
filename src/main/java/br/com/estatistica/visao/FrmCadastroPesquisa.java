@@ -60,7 +60,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	public FrmCadastroPesquisa(Connection connection) throws SQLException {
 		super("Cadastro de Pesquisa", connection);
 		this.initComponents();
-		this.setSize(664, 557);
+		this.setSize(661, 553);
 	}
 
 

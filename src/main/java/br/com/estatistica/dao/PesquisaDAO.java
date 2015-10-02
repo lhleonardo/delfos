@@ -17,7 +17,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE id_especialista = ? AND data = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_pesquisa = ?";
 	private static final String SQL_SELECT_BY_DATA = SQL_SELECT + " WHERE data = ?";
-	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + "  WHERE nome LIKE ?";
 	private static final String SQL_INSERT = "INSERT INTO Pesquisa(data,nome,descricao,limite_de_especialistas) VALUES(?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Pesquisa SET nome = ?,descricao = ?, limite_de_especialistas = ? WHERE id_pesquisa =?";
 	private static final String SQL_DELETE = "DELETE FROM Pesquisa WHERE id_pesquisa = ?";

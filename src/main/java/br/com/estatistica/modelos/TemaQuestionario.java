@@ -1,6 +1,6 @@
 package br.com.estatistica.modelos;
 
-public class TemaQuestionario {
+public class TemaQuestionario implements Identificator {
 
 	private int id;
 	private String nome;
@@ -25,7 +25,7 @@ public class TemaQuestionario {
 
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
@@ -47,6 +47,12 @@ public class TemaQuestionario {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	@Override
+	public void validate() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
