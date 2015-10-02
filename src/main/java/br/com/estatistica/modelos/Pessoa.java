@@ -96,6 +96,11 @@ public class Pessoa implements Identificator {
 		this.formacoes = new ArrayList<Formacao>();
 		this.areasEstudo = new ArrayList<AreaEstudo>();
 	}
+	
+	public Pessoa(Integer id){
+		this.id = id;
+		
+	}
 
 	/**
 	 * Método responsável por retornar a informação:[id] da classe Pessoa.java

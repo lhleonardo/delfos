@@ -14,17 +14,20 @@ public class RespostaTest {
 public static void main(String[] args){
 		
 		Connection con = new ConnectionFactory().getConnection();
-		//Pergunta pergunta1= new Pergunta(1, "oi", "des");
-		//Pessoa pessoa = new Pessoa(1,"ola", "oi");
-		//RespostaDAO respostaDAO = new RespostaDAO(con);
-		//Resposta resposta1 = new Resposta ("É uma resposta", "Respondida");
+		RespostaDAO respostaDAO = new RespostaDAO(con);
+		Pergunta pergunta1= new Pergunta(1, "Ela", "É", "Feliz");
+		Pessoa pessoa1 = new Pessoa(1);
+		Resposta resposta1 = new Resposta("Oi", pergunta1, pessoa1, "Qual seu nome");
 		
-		//try {
-		//	RespostaDAO.save(p1);
-		//} catch (SQLException e) {
-		//				e.printStackTrace();
+		try {
+					respostaDAO.save(resposta1);
+				} catch (SQLException e) {
+								e.printStackTrace();
+		
+		
 		}
 		
-	}
+	
+}}
 
 //}

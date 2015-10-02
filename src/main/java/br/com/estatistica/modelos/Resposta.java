@@ -6,19 +6,23 @@ public class Resposta implements Identificator {
 	private String observacao;
 	private Pergunta pergunta;
 	private Pessoa pessoa;
+	private String nome;
 
-	public Resposta(int id, String descricao, String observacao, Pergunta pergunta, Pessoa pessoa) {
+	public Resposta(int id, String descricao, String observacao, Pergunta pergunta, Pessoa pessoa, String nome) {
 		this.id = id;
 		this.descricao = descricao;
 		this.observacao = observacao;
 		this.pergunta = pergunta;
 		this.pessoa = pessoa;
+		this.nome = nome;
+		
 	}
 
-	public Resposta(String descricao, Pergunta pergunta, Pessoa pessoa) {
+	public Resposta(String descricao, Pergunta pergunta, Pessoa pessoa, String nome) {
 		this.descricao = descricao;
 		this.pergunta = pergunta;
 		this.pessoa = pessoa;
+		this.nome = nome;
 	}
 
 	public Resposta() {
@@ -44,6 +48,10 @@ public class Resposta implements Identificator {
 	public String getObservacao() {
 		return observacao;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
 
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
@@ -65,6 +73,9 @@ public class Resposta implements Identificator {
 		this.pessoa = pessoa;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
 	@Override
 	public void validate() {

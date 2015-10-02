@@ -8,19 +8,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.extractors.PerguntaExtractor;
+import br.com.estatistica.extractors.PesquisaExtractor;
 import br.com.estatistica.extractors.RespostaExtractor;
 import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.Resposta;
 import br.com.estatistica.util.Mensagem;
 public class RespostaDAO extends GenericDAO<Resposta> {
 	
+	private static final RespostaExtractor EXTRACTOR = new RespostaExtractor();
+	
 	private static final String SQL_SELECT = "SELECT * FROM Resposta";
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_INSERT = "INSERT INTO Resposta(id_resposta, descricao,observacao, ) VALUES(?,?,?)";
-	private static final String SQL_UPDATE = "UPDATE Resposta SET descricao = ?, observacao = ?, pergunta = ?, pessoa =? WHERE id_pergunta =?";
+	private static final String SQL_INSERT = "INSERT INTO Resposta(nome, descricao,observacao, id_pergunta, id_pessoa) VALUES(?, ?, ?,?,?)";
+	private static final String SQL_UPDATE = "UPDATE Resposta SET id_pergunta=?, id_pessoa=?, nome = ?, descricao = ?, observacao = ? WHERE id_resposta=?";
 	private static final String SQL_DELETE = "DELETE FROM Resposta WHERE id_resposta = ?";
-	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
+	private static final String SQL_SELECT_BY_DESCRICAO = SQL_SELECT + " WHERE descricao LIKE ?";
 
 	
 	public RespostaDAO(Connection connection) {
@@ -32,10 +36,11 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 	protected Integer insert(Resposta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			
-			pst.setString (1, model.getDescricao());			
-			pst.setString(2, model.getObservacao());	
-			pst.setInt(3, model.getPergunta().getId());
-			pst.setInt(4, model.getPessoa().getId());
+			pst.setString (1, model.getNome());			
+			pst.setString (2, model.getDescricao());			
+			pst.setString(3, model.getObservacao());
+			pst.setInt(4, model.getPergunta().getId());
+			pst.setInt(5, model.getPessoa().getId());
 
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
@@ -45,11 +50,13 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 	@Override
 	protected Integer update(Resposta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE , PreparedStatement.RETURN_GENERATED_KEYS)) {
-			pst.setString (1, model.getDescricao());			
-			pst.setString(2, model.getObservacao());	
-			pst.setInt(3, model.getPergunta().getId());
-			pst.setInt(4, model.getPessoa().getId());
-			pst.setInt(5, model.getId());
+			
+			pst.setInt(1, model.getPergunta().getId());
+			pst.setInt(2, model.getPessoa().getId());
+			pst.setString (3, model.getNome());			
+			pst.setString (4, model.getDescricao());			
+			pst.setString(5, model.getObservacao());
+			pst.setInt(6, model.getId());
 			
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
@@ -78,17 +85,18 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 
 	@Override
 	public List<Resposta> getAll() throws SQLException {
-		List<Resposta> respostas = null;
+		List<Resposta> respostas = new ArrayList<Resposta>();
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
-			//respostas = new ArrayList<>(Extractor.extractAll(resultSet, null));
+			respostas.addAll(new RespostaExtractor().extractAll(resultSet, super.getConnection()));
 		}
 
 		return respostas;
 	}
 
+	
 	@Override
 	public Resposta get(Resposta model) throws SQLException {
 		Resposta resposta = null;
@@ -124,17 +132,20 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 	}
 
 	@Override
-	public List<Resposta> get(String value) throws SQLException {
-		List<Resposta> respostas = new ArrayList<>();
+	public List<Resposta> get(String descricao) throws SQLException {
+		List<Resposta> respostas = new ArrayList<Resposta>();
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
-			pst.setString(1, value);
-		//	respostas.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_DESCRICAO)) {
+			pst.setString(1, "%"+descricao+"%");
+			ResultSet resultSet  = pst.executeQuery();
+			respostas.addAll(EXTRACTOR.extractAll (resultSet, super.getConnection()));
 		}
 
 		return respostas;
 	}
 
+
+	
 	@Override
 	public boolean isExist(Resposta model) throws SQLException {
 		return this.get(model) != null;
