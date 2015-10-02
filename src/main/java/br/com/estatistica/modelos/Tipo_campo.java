@@ -50,7 +50,7 @@ public class Tipo_campo implements Identificator{
 
 	@Override
 	public void validate() {
-		if (this.getId() == null || this.descricao == null) {
+		if (this.descricao == null) {
 			throw new NullPointerException("ID ou Descrição não podem ser  nulos");
 		}		
 		

@@ -19,7 +19,7 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
 	private static final String SQL_INSERT = "INSERT INTO Tipo_campo(descricao,nome) VALUES(?,?)";
 	private static final String SQL_UPDATE = "UPDATE TipoCampo SET descricao = ?, nome = ?, WHERE id_Tipo_campo =?";
-	private static final String SQL_DELETE = "DELETE FROM Tipo_campoWHERE id_usuario = ?";
+	private static final String SQL_DELETE = "DELETE FROM Tipo_campo WHERE id_tipo_campo = ?";
 
 	public Tipo_campoDAO(Connection connection) {
 		super(connection);
@@ -28,22 +28,23 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 
 	@Override
 	protected Integer insert(Tipo_campo model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
-			pst.setInt(1, model.getId());
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT , PreparedStatement.RETURN_GENERATED_KEYS)) {
+			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
 
 			pst.executeUpdate();
-			return null;
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
 
 	@Override
 	protected Integer update(Tipo_campo model) throws SQLException {
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.executeUpdate();
-		}
-		return null;
+		
+		return super.getGeneratedKeys(pst.getGeneratedKeys());
+	}
 	}
 
 	@Override
@@ -79,6 +80,7 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 		Tipo_campo tipocampo = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
+			pst.setString(2, model.getNome());
 			pst.setString(2, model.getDescricao());
 
 			ResultSet resultSet = pst.executeQuery();
