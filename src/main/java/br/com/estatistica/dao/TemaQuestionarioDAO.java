@@ -98,11 +98,11 @@ try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, 
 			pst.setInt(1, idModel);
 			ResultSet rs = pst.executeQuery();
 
-			tema = EXTRACTOR.extract(rs, super.getConnection());
+			tema = new TemaQuestionarioExtractor().extract(rs, super.getConnection());
 
 		}
 
-		return usuario;
+		return tema;
 	}
 
 	@Override
