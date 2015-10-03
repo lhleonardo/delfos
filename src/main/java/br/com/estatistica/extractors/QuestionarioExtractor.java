@@ -5,7 +5,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import br.com.estatistica.dao.TemaQuestionarioDAO;
-import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.Questionario;
 
 public class QuestionarioExtractor extends Extractable<Questionario> {
@@ -19,7 +18,7 @@ public class QuestionarioExtractor extends Extractable<Questionario> {
 		quest.setNome(rs.getString("nome"));
 		quest.setDescricao(rs.getString("descricao"));
 		quest.setTema(temaDAO.get(quest.getId()));
-
+		
 		return quest;
 	}
 
