@@ -86,24 +86,24 @@ public class FrmLoginUsuario extends JFrame {
 		JLabel lblUsurio = new JLabel("Usuário");
 		lblUsurio.setForeground(new Color(220, 220, 220));
 		lblUsurio.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		lblUsurio.setBounds(208, 143, 68, 26);
+		lblUsurio.setBounds(204, 143, 118, 26);
 		panel.add(lblUsurio);
 		
 		this.txtUsuario = new JTextField();
 		this.txtUsuario.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		this.txtUsuario.setBounds(101, 168, 282, 20);
+		this.txtUsuario.setBounds(101, 168, 282, 28);
 		panel.add(this.txtUsuario);
 		this.txtUsuario.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
 		lblSenha.setForeground(new Color(220, 220, 220));
 		lblSenha.setFont(new Font("Calibri Light", Font.BOLD, 20));
-		lblSenha.setBounds(215, 207, 53, 20);
+		lblSenha.setBounds(215, 207, 97, 20);
 		panel.add(lblSenha);
 		
 		this.txtSenha = new JPasswordField();
 		this.txtSenha.setFont(new Font("Calibri Light", Font.PLAIN, 20));
-		this.txtSenha.setBounds(101, 228, 282, 20);
+		this.txtSenha.setBounds(101, 228, 282, 28);
 		panel.add(this.txtSenha);
 		
 		JButton btnEntrar = new JButton("Entrar");

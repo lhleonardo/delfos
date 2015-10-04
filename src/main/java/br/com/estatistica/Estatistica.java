@@ -6,7 +6,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import br.com.estatistica.visao.FrmLoginUsuario;
 
 public class Estatistica {
-
+	
 	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
