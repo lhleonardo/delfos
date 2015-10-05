@@ -27,6 +27,7 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private JPanel contentPane;
 	private JTextField codigoField;
 	private JTextField nomeField;
@@ -55,6 +56,7 @@ public class FrmCadastroQuestionario extends GenericFormCadastro {
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("rawtypes")
 	public FrmCadastroQuestionario(Connection connection) {
 		super("Cadastro de Pesquisa", connection);
 		this.setTitle("Cadastro de Questionario");

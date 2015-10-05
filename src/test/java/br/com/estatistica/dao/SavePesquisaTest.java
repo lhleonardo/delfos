@@ -7,9 +7,11 @@ import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 
 public class SavePesquisaTest {
+	private static PesquisaDAO pd1;
+
 	public static void main(String[] args){
 		Connection con = new ConnectionFactory().getConnection(); 
-		PesquisaDAO pd1 = new PesquisaDAO(con);
+		pd1 = new PesquisaDAO(con);
 		Pesquisa p1 = new Pesquisa("Nome Lixo", "ola", 10);
 		try {
 			pd1.save(p1);

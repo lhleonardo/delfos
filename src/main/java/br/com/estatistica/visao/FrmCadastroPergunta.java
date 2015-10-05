@@ -36,6 +36,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		});
 	}
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public FrmCadastroPergunta(Connection connection) {
 		super("Cadastro de Pergunta", connection);
 

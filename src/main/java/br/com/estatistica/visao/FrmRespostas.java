@@ -3,27 +3,28 @@ package br.com.estatistica.visao;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.JScrollPane;
 
 public class FrmRespostas extends GenericFormCadastro {
 
+	/**
+	 *
+	 */
+	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("unused")
 	private JPanel contentPane;
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					FrmRespostas frame = new FrmRespostas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
+		EventQueue.invokeLater(() -> {
+			try {
+				FrmRespostas frame = new FrmRespostas();
+				frame.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 	}
@@ -35,7 +36,7 @@ public class FrmRespostas extends GenericFormCadastro {
 		super();
 		
 		JPanel panel = new JPanel();
-		getContentPane().add(panel, BorderLayout.CENTER);
+		this.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
