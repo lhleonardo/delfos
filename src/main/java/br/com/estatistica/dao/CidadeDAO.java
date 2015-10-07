@@ -66,7 +66,7 @@ public class CidadeDAO extends GenericDAO<Cidade> {
 		List<Cidade> cidades = null;
 		
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
-			pst.setString(1, value);
+			pst.setString(1, "%" + value + "%");
 			
 			cidades = new ArrayList<Cidade>(EXTRACTOR.extractAll(pst.executeQuery(), this.getConnection()));
 		}

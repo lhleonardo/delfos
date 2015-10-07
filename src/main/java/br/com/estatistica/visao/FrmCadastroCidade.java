@@ -15,7 +15,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import br.com.estatistica.bean.EstadoFormatter;
 import br.com.estatistica.dao.CidadeDAO;
 import br.com.estatistica.dao.EstadoDAO;
 import br.com.estatistica.modelos.Cidade;
@@ -46,6 +45,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 	private JLabel lblCodIbge;
 	private JTextField txtCodIbge;
 	private CidadeDAO cDao;
+	private JTextField txtUf;
 	
 	public FrmCadastroCidade(Connection connection) {
 		super("Cadastro de Cidades", connection);
@@ -61,7 +61,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		this.panel.setLayout(null);
 		
 		this.lblCdigo = new JLabel("Código");
-		this.lblCdigo.setBounds(10, 11, 46, 14);
+		this.lblCdigo.setBounds(10, 11, 58, 14);
 		this.panel.add(this.lblCdigo);
 		
 		this.txtCodigo = new JTextField();
@@ -97,6 +97,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		this.panel.add(this.scrollPane);
 		
 		this.txtDescricao = new JTextArea();
+		this.txtDescricao.setLocation(173, 0);
 		this.scrollPane.setViewportView(this.txtDescricao);
 		
 		this.btnNovo = new JButton("Novo");
@@ -119,12 +120,12 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		this.btnCancelar.setBounds(281, 298, 94, 31);
 		this.panel.add(this.btnCancelar);
 		
-		this.comboBoxModel = new ObjectComboBoxModel<Estado>();
-		this.comboBoxModel.setFormatter(new EstadoFormatter());
-		this.preencheComboBox();
-		this.comboBox = new JComboBox<Object>(this.comboBoxModel);
-		this.comboBox.setBounds(325, 25, 47, 20);
-		this.panel.add(this.comboBox);
+		// this.comboBoxModel = new ObjectComboBoxModel<Estado>();
+		// this.comboBoxModel.setFormatter(new EstadoFormatter());
+		// this.preencheComboBox();
+		// this.comboBox = new JComboBox<Object>(this.comboBoxModel);
+		// this.comboBox.setBounds(325, 25, 47, 20);
+		// this.panel.add(this.comboBox);
 		
 		this.lblCodIbge = new JLabel("Cod. IBGE");
 		this.lblCodIbge.setBounds(230, 11, 70, 14);
@@ -134,6 +135,11 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		this.txtCodIbge.setBounds(230, 25, 86, 20);
 		this.panel.add(this.txtCodIbge);
 		this.txtCodIbge.setColumns(10);
+
+		this.txtUf = new JTextField();
+		this.txtUf.setBounds(326, 25, 52, 19);
+		this.panel.add(this.txtUf);
+		this.txtUf.setColumns(10);
 	}
 	
 	private void preencheComboBox() {
@@ -245,6 +251,8 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 			for (Cidade b : list) {
 				Mensagem.informa(this, b.toString());
 			}
+		} else {
+			Mensagem.informa(this, "Lista Vazia.");
 		}
 		return this.pesquisaPorCodigo();
 		

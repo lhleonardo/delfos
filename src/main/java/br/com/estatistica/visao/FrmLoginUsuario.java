@@ -2,11 +2,11 @@ package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Toolkit;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -22,6 +22,7 @@ import javax.swing.border.EmptyBorder;
 import br.com.estatistica.dao.UsuarioDAO;
 import br.com.estatistica.modelos.Usuario;
 import br.com.estatistica.util.ConnectionFactory;
+import br.com.estatistica.util.GuiUtils;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmLoginUsuario extends JFrame {
@@ -58,7 +59,7 @@ public class FrmLoginUsuario extends JFrame {
 	 */
 	public FrmLoginUsuario() {
 		this.initComponents();
-
+		
 	}
 	
 	protected void initComponents() {
@@ -92,6 +93,12 @@ public class FrmLoginUsuario extends JFrame {
 		panel.add(lblUsurio);
 		
 		this.txtUsuario = new JTextField();
+		this.txtUsuario.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				FrmLoginUsuario.this.txtUsuarioKeyPressed(e);
+			}
+		});
 		this.txtUsuario.setFont(new Font("Calibri Light", Font.PLAIN, 20));
 		this.txtUsuario.setBounds(101, 168, 282, 28);
 		panel.add(this.txtUsuario);
@@ -104,6 +111,12 @@ public class FrmLoginUsuario extends JFrame {
 		panel.add(lblSenha);
 		
 		this.txtSenha = new JPasswordField();
+		this.txtSenha.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				FrmLoginUsuario.this.txtSenhaKeyPressed(e);
+			}
+		});
 		this.txtSenha.setFont(new Font("Calibri Light", Font.PLAIN, 20));
 		this.txtSenha.setBounds(101, 228, 282, 28);
 		panel.add(this.txtSenha);
@@ -120,13 +133,8 @@ public class FrmLoginUsuario extends JFrame {
 		btnCancelar.setBounds(101, 284, 118, 31);
 		panel.add(btnCancelar);
 		
-		this.centralizarComponente();
-	}
-	
-	public void centralizarComponente() {
-		Dimension ds = Toolkit.getDefaultToolkit().getScreenSize();
-		Dimension dw = this.getSize();
-		this.setLocation((ds.width - dw.width) / 2, (ds.height - dw.height) / 2);
+		this.setLocation(GuiUtils.centralizaTela(this));
+		
 	}
 	
 	protected ActionListener btnCancelarActionPerformed() {
@@ -165,5 +173,19 @@ public class FrmLoginUsuario extends JFrame {
 		FrmMenuPrincipal menuPrincipal = new FrmMenuPrincipal(new ConnectionFactory().getConnection());
 		menuPrincipal.setVisible(true);
 		this.dispose();
+	}
+	
+	protected void txtUsuarioKeyPressed(KeyEvent e) {
+		// muda o foco do textField
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			this.txtSenha.requestFocus();
+		}
+	}
+	
+	protected void txtSenhaKeyPressed(KeyEvent e) {
+		// executa método do botão entrar
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			this.autenticaUsuario();
+		}
 	}
 }
