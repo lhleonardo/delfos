@@ -8,15 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.extractors.QuestionarioExtractor;
-import br.com.estatistica.extractors.TemaQuestionarioExtractor;
 import br.com.estatistica.modelos.Questionario;
-import br.com.estatistica.modelos.TemaQuestionario;
 import br.com.estatistica.util.Mensagem;
 
 public class QuestionarioDAO extends GenericDAO<Questionario> {
 
 	private static final String SQL_SELECT = "SELECT * FROM Questionario";
-	@SuppressWarnings("unused")
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_questionario = ?";
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 	private static final String SQL_INSERT = "INSERT INTO Questionario(nome,descricao,id_pesquisa,id_tema_questionario) VALUES (?,?,?,?)";
