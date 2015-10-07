@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.estatistica.extractors.QuestionarioExtractor;
+import br.com.estatistica.extractors.TemaQuestionarioExtractor;
 import br.com.estatistica.modelos.Questionario;
+import br.com.estatistica.modelos.TemaQuestionario;
 import br.com.estatistica.util.Mensagem;
 
 public class QuestionarioDAO extends GenericDAO<Questionario> {
@@ -92,8 +94,17 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 	
 	@Override
 	public Questionario get(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Questionario quest = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+			pst.setInt(1, idModel);
+			ResultSet rs = pst.executeQuery();
+
+			quest = new QuestionarioExtractor().extract(rs, super.getConnection());
+
+		}
+
+		return quest;
 	}
 	
 	@Override

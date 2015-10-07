@@ -15,6 +15,5 @@ public class RespostaExtractor extends Extractable<Resposta> {
 		resposta.setDescricao(rs.getString("descricao"));
 		resposta.setObservacao(rs.getString("observacao"));
 		return resposta;
-		
 	}
 }
