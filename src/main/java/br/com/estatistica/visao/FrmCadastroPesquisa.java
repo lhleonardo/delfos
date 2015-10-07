@@ -39,25 +39,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JButton btnNewButton;
 	private JButton novaPesquisaBotao;
 	private JButton btnExcluir;
-	private JTable table_1;
-	private JScrollPane scrollPane_2;
-	private JScrollPane scrollPane_3;
-	private JButton btnNewButton_1;
-	private JButton button;
-	private JLabel lblBuscaPesquisa;
-	private JLabel lblSelecionadas;
-	private JTextField textField;
-	private JButton btnPesquisa;
-	private JLabel lblNomePesquisa;
-	private JScrollPane scrollPane_4;
-	private JLabel lblBuscaEspecialista;
-	private JButton button_1;
-	private JButton button_2;
-	private JScrollPane scrollPane_5;
-	private JLabel lblSelecionados;
-	private JButton button_3;
-	private JTextField textField_1;
-	private JLabel lblNomeEspecialista;
 	/**
 	 * Launch the application.
 	 */
@@ -79,7 +60,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	public FrmCadastroPesquisa(Connection connection) throws SQLException {
 		super("Cadastro de Pesquisa", connection);
 		this.initComponents();
-		this.setSize(1110, 469);
+		this.setSize(658, 469);
 	}
 
 
@@ -187,88 +168,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		});
 		this.btnExcluir.setBounds(208, 386, 89, 23);
 		panel.add(this.btnExcluir);
-		
-		this.scrollPane_2 = new JScrollPane();
-		this.scrollPane_2.setBounds(455, 74, 187, 118);
-		panel.add(this.scrollPane_2);
-		
-		this.table_1 = new JTable();
-		this.scrollPane_2.setViewportView(this.table_1);
-		
-		this.scrollPane_3 = new JScrollPane();
-		this.scrollPane_3.setBounds(711, 74, 187, 118);
-		panel.add(this.scrollPane_3);
-		
-		this.btnNewButton_1 = new JButton(">>");
-		this.btnNewButton_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnNewButton_1ActionPerformed(arg0);
-			}
-		});
-		this.btnNewButton_1.setBounds(652, 73, 49, 23);
-		panel.add(this.btnNewButton_1);
-		
-		this.button = new JButton("<<");
-		this.button.setBounds(652, 169, 49, 23);
-		panel.add(this.button);
-		
-		this.lblBuscaPesquisa = new JLabel("Busca Responsavel");
-		this.lblBuscaPesquisa.setBounds(455, 58, 118, 14);
-		panel.add(this.lblBuscaPesquisa);
-		
-		this.lblSelecionadas = new JLabel("Selecionados");
-		this.lblSelecionadas.setBounds(711, 58, 95, 14);
-		panel.add(this.lblSelecionadas);
-		
-		this.textField = new JTextField();
-		this.textField.setBounds(455, 27, 187, 20);
-		panel.add(this.textField);
-		this.textField.setColumns(10);
-		
-		this.btnPesquisa = new JButton("Pesquisa");
-		this.btnPesquisa.setBounds(652, 26, 89, 23);
-		panel.add(this.btnPesquisa);
-		
-		this.lblNomePesquisa = new JLabel("Nome Responsavel");
-		this.lblNomePesquisa.setBounds(455, 11, 118, 14);
-		panel.add(this.lblNomePesquisa);
-		
-		this.scrollPane_4 = new JScrollPane();
-		this.scrollPane_4.setBounds(455, 291, 187, 118);
-		panel.add(this.scrollPane_4);
-		
-		this.lblBuscaEspecialista = new JLabel("Busca Especialista");
-		this.lblBuscaEspecialista.setBounds(455, 275, 118, 14);
-		panel.add(this.lblBuscaEspecialista);
-		
-		this.button_1 = new JButton(">>");
-		this.button_1.setBounds(652, 290, 49, 23);
-		panel.add(this.button_1);
-		
-		this.button_2 = new JButton("<<");
-		this.button_2.setBounds(652, 386, 49, 23);
-		panel.add(this.button_2);
-		
-		this.scrollPane_5 = new JScrollPane();
-		this.scrollPane_5.setBounds(711, 291, 187, 118);
-		panel.add(this.scrollPane_5);
-		
-		this.lblSelecionados = new JLabel("Selecionados");
-		this.lblSelecionados.setBounds(711, 275, 95, 14);
-		panel.add(this.lblSelecionados);
-		
-		this.button_3 = new JButton("Pesquisa");
-		this.button_3.setBounds(652, 243, 89, 23);
-		panel.add(this.button_3);
-		
-		this.textField_1 = new JTextField();
-		this.textField_1.setColumns(10);
-		this.textField_1.setBounds(455, 244, 187, 20);
-		panel.add(this.textField_1);
-		
-		this.lblNomeEspecialista = new JLabel("Nome Especialista");
-		this.lblNomeEspecialista.setBounds(455, 228, 118, 14);
-		panel.add(this.lblNomeEspecialista);
 	}
 
 	private TableModelPesquisa getTableModelTodos() {
@@ -380,7 +279,5 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		}catch(NumberFormatException|SQLException e){
 
 		}
-	}
-	protected void btnNewButton_1ActionPerformed(ActionEvent arg0) {
 	}
 }
