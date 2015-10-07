@@ -46,7 +46,6 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 	private JLabel lblCodIbge;
 	private JTextField txtCodIbge;
 	private CidadeDAO cDao;
-	private JTextField txtUf;
 
 	public FrmCadastroCidade(Connection connection) {
 		super("Cadastro de Cidades", connection);
@@ -166,7 +165,7 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 			cidade.setDescricao(this.txtDescricao.getText());
 			cidade.setCodIbge(this.txtCodIbge.getText());
 			System.out.println(this.comboBoxModel.getSelectedItem());
-			cidade.setEstado((Estado) this.comboBoxModel.getSelectedItem());
+			cidade.setEstado(this.comboBoxModel.getSelectedObject());
 
 			this.cDao = new CidadeDAO(this.getConnection());
 			this.txtCodigo.setText(String.valueOf(this.cDao.save(cidade)));
@@ -206,13 +205,15 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 
 			int valor = Integer.parseInt(Mensagem.entrada(this, informacao));
 
+			this.cDao = new CidadeDAO(this.getConnection());
+
 			switch (valor) {
 				case 1: {
-					this.abreRegistro(this.pesquisaPorCodigo());
+					this.abreRegistro(this.pesquisaPorCodigo(this.cDao));
 					break;
 				}
 				case 2: {
-					this.abreRegistro(this.pesquisaPorNome());
+					this.abreRegistro(this.pesquisaPorNome(this.cDao));
 					break;
 				}
 				default:
@@ -242,9 +243,8 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 
 	}
 
-	private Cidade pesquisaPorNome() throws NumberFormatException, SQLException {
-		this.cDao = new CidadeDAO(this.getConnection());
-		List<Cidade> list = this.cDao.get(Mensagem.entrada(this, "Informe o nome do registro"));
+	private Cidade pesquisaPorNome(CidadeDAO cDao) throws NumberFormatException, SQLException {
+		List<Cidade> list = cDao.get(Mensagem.entrada(this, "Informe o nome do registro"));
 		System.out.println("Vai verificar se a lista está vazia");
 		if (!list.isEmpty()) {
 			Mensagem.informa(this,
@@ -255,12 +255,12 @@ public class FrmCadastroCidade extends GenericFormCadastro {
 		} else {
 			Mensagem.informa(this, "Lista Vazia.");
 		}
-		return this.pesquisaPorCodigo();
+		return this.pesquisaPorCodigo(cDao);
 
 	}
 
-	private Cidade pesquisaPorCodigo() throws NumberFormatException, SQLException {
-		return this.cDao.get(Integer.parseInt(Mensagem.entrada(this, "Informe o código do registro")));
+	private Cidade pesquisaPorCodigo(CidadeDAO cDao) throws NumberFormatException, SQLException {
+		return cDao.get(Integer.parseInt(Mensagem.entrada(this, "Informe o código do registro")));
 	}
 
 	protected void btnCancelarActionPerformed(ActionEvent e) {
