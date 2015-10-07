@@ -6,6 +6,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.estatistica.dao.QuestionarioDAO;
+import br.com.estatistica.dao.TemaQuestionarioDAO;
+import br.com.estatistica.dao.Tipo_PerguntaDAO;
+import br.com.estatistica.dao.Tipo_campoDAO;
 import br.com.estatistica.modelos.Pergunta;
 
 public class PerguntaExtractor extends Extractable<Pergunta> {
@@ -22,15 +26,18 @@ public class PerguntaExtractor extends Extractable<Pergunta> {
 	@Override
 	protected Pergunta extractModel(ResultSet rs, Connection con) throws SQLException {
 		Pergunta pergunta = new Pergunta();
-		// QuestionarioDAO q1 = new QuestionarioDAO(con);
+		
+		QuestionarioDAO q1 = new QuestionarioDAO(con);
+		Tipo_campoDAO tcDAO = new Tipo_campoDAO(con);
+		Tipo_PerguntaDAO tpDAO = new Tipo_PerguntaDAO (con);
+		
 		pergunta.setId(rs.getInt("id_pergunta"));
 		pergunta.setDescricao(rs.getString("Descricao"));
 		pergunta.setNome(rs.getString("Nome"));
-		// TODO Erro na lógica... (lhleonardo)
-		// pergunta.setQuestionario(rs.getInt(pergunta.getQuestionario().getId()));
-		// pergunta.setObservacao(rs.getString("obs"));
-		// pergunta.setTipo_campo(rs.getInt(1));
-		// pergunta.setTipoPergunta.getInt(rs.getInt(1));
+	    pergunta.setQuestionario(q1.get(pergunta.getId()));
+	    pergunta.setObservacao(rs.getString("obs"));
+	    pergunta.setTipoCampo(tcDAO.get(pergunta.getId()));
+	    pergunta.setTipoPergunta(tpDAO.get(pergunta.getId()));
 		
 		return pergunta;
 	}

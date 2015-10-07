@@ -22,6 +22,7 @@ public class TipoPerguntaExtractor extends Extractable<Tipo_Pergunta>{
 	Tipo_Pergunta tipopergunta = new Tipo_Pergunta();
 	tipopergunta.setId(rs.getInt("id_tipopergunta"));
 	tipopergunta.setDescricao(rs.getString("Descricao"));
+	tipopergunta.setNome(rs.getString("nome"));
 
 	return tipopergunta;
 	
