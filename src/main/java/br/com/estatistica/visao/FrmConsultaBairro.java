@@ -2,10 +2,7 @@ package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -14,12 +11,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import br.com.estatistica.dao.BairroDAO;
-import br.com.estatistica.modelos.Bairro;
 import br.com.estatistica.util.ConnectionFactory;
-import br.com.estatistica.util.GuiUtils;
-import br.com.estatistica.util.Mensagem;
 
-public class FrmConsultaBairro extends GenericFormConsulta<Bairro> {
+public class FrmConsultaBairro extends GenericFormConsulta {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -33,10 +27,10 @@ public class FrmConsultaBairro extends GenericFormConsulta<Bairro> {
 	private JTable table;
 	private JLabel lblResultados;
 	
-	private BairroDAO dao;
+	protected BairroDAO dao;
 	
 	public FrmConsultaBairro(Connection connection) {
-		super("Pesquisa de Bairros", connection, GuiUtils.criaTableModel(Bairro.class, "id:Código, nome:Nome"));
+		super("Pesquisa de Bairros", connection);
 		this.dao = new BairroDAO(this.getConnection());
 		this.initComponents();
 	}
@@ -57,7 +51,6 @@ public class FrmConsultaBairro extends GenericFormConsulta<Bairro> {
 		this.textField.setColumns(10);
 		
 		this.btnPesquisar = new JButton("Pesquisar");
-		this.btnPesquisar.addActionListener(arg0 -> FrmConsultaBairro.this.btnPesquisarActionPerformed(arg0));
 		this.btnPesquisar.setBounds(375, 25, 79, 23);
 		this.panel.add(this.btnPesquisar);
 		
@@ -83,16 +76,6 @@ public class FrmConsultaBairro extends GenericFormConsulta<Bairro> {
 		this.panel.add(this.lblResultados);
 	}
 	
-	private void btnPesquisarActionPerformed(ActionEvent arg0) {
-		try {
-			List<Bairro> list = this.dao.get(this.textField.getText());
-			this.tableModel.setData(list);
-			
-		} catch (RuntimeException | SQLException e) {
-			Mensagem.erro(this, e);
-		}
-	}
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(() -> {
 			FrmConsultaBairro frame = new FrmConsultaBairro(new ConnectionFactory().getConnection());
