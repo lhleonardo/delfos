@@ -156,7 +156,7 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 		if (model.getPerfilAcesso().getId() == null) {
 			this.daoPerfil = new PerfilAcessoDAO(super.getConnection());
 			this.daoPerfil.save(model.getPerfilAcesso());
-			PerfilAcesso acesso = this.daoPerfil.get(model.getPerfilAcesso());
+			PerfilAcesso acesso = this.daoPerfil.get(model.getPerfilAcesso().getId());
 			return acesso.getId();
 		} else {
 			return model.getPerfilAcesso().getId();

@@ -17,12 +17,14 @@ public class TableModelEstado extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<Estado> linhas;
-	private String[] colunas = { "Cód.", "Nome", "UF", "Cod. IBGE" };
+	private String[] colunas = { "*", "Cód.", "Nome", "UF", "Cod. IBGE" };
 
-	private static final int CODIGO = 0;
-	private static final int NOME = 1;
-	private static final int UF = 2;
-	private static final int COD_IBGE = 3;
+	private static final int MARCADO = 0;
+	private static final int CODIGO = 1;
+	private static final int NOME = 2;
+	private static final int UF = 3;
+	private static final int COD_IBGE = 4;
+	
 
 	public TableModelEstado() {
 		this.linhas = new ArrayList<Estado>();

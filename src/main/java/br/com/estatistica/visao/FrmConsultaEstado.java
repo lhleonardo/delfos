@@ -18,13 +18,12 @@ import br.com.estatistica.dao.EstadoDAO;
 import br.com.estatistica.modelos.Estado;
 import br.com.estatistica.modelos.table.TableModelEstado;
 import br.com.estatistica.util.ConnectionFactory;
-import br.com.estatistica.util.Mensagem;
 
 public class FrmConsultaEstado extends GenericDialogConsulta {
-
+	
 	private static final long serialVersionUID = 1L;
 	private TableModelEstado tableModel;
-
+	
 	@SuppressWarnings("unused")
 	private final JPanel contentPanel = new JPanel();
 	private JPanel panel;
@@ -37,83 +36,80 @@ public class FrmConsultaEstado extends GenericDialogConsulta {
 	private JButton btnNewButton;
 	private JTable tbResultados;
 	private EstadoDAO eDao;
-
-	public FrmConsultaEstado(Frame owner, Connection connection) {
+	
+	private List<Estado> resultados;
+	
+	public FrmConsultaEstado(Frame owner, Connection connection) throws SQLException {
 		super(owner, "Consulta de Estados", connection);
 		initComponents();
 	}
-
-	private void initComponents() {
-
+	
+	private void initComponents() throws SQLException {
+		
 		this.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 		this.panel = new JPanel();
 		getContentPane().add(this.panel, BorderLayout.CENTER);
 		this.panel.setLayout(null);
-
+		
 		this.lblNewLabel = new JLabel("Código");
 		this.lblNewLabel.setBounds(10, 11, 46, 14);
 		this.panel.add(this.lblNewLabel);
-
+		
 		this.txtCodigo = new JTextField();
 		this.txtCodigo.setBounds(10, 25, 46, 20);
 		this.panel.add(this.txtCodigo);
 		this.txtCodigo.setColumns(10);
-
+		
 		this.txtNome = new JTextField();
 		this.txtNome.setColumns(10);
 		this.txtNome.setBounds(66, 25, 285, 20);
 		this.panel.add(this.txtNome);
-
+		
 		this.lblNome = new JLabel("Nome");
 		this.lblNome.setBounds(66, 11, 46, 14);
 		this.panel.add(this.lblNome);
-
+		
 		this.txtUf = new JTextField();
 		this.txtUf.setColumns(10);
 		this.txtUf.setBounds(361, 25, 46, 20);
 		this.panel.add(this.txtUf);
-
+		
 		this.lblUf = new JLabel("UF");
 		this.lblUf.setBounds(361, 11, 46, 14);
 		this.panel.add(this.lblUf);
-
+		
 		this.btnNewButton = new JButton("Pesquisar");
-		this.btnNewButton
-				.addActionListener(e -> btnNewButtonActionPerformed(e));
+		this.btnNewButton.addActionListener(e -> btnNewButtonActionPerformed(e));
 		this.btnNewButton.setBounds(421, 24, 46, 23);
 		this.panel.add(this.btnNewButton);
-
+		
 		this.tbResultados = new JTable();
-		this.tableModel = new TableModelEstado(inicializaRegistros());
+		this.tableModel = new TableModelEstado(inicializaTabela());
 		this.tbResultados.setBounds(463, 395, -451, -333);
 		this.panel.add(this.tbResultados);
 	}
-
+	
 	public static void main(String[] args) {
 		try {
-			FrmConsultaEstado dialog = new FrmConsultaEstado(null,
-					new ConnectionFactory().getConnection());
+			FrmConsultaEstado dialog = new FrmConsultaEstado(null, new ConnectionFactory().getConnection());
 			dialog.execute();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
+	
+	private List<Estado> inicializaTabela() throws SQLException {
+		eDao = new EstadoDAO(getConnection());
+		return eDao.getAll();
+	}
+	
 	@Override
 	protected void btnOkActionPerformed(ActionEvent e) {
-		// TODO Implementar lógica para o método gerado automaticamente.
-
+		
 	}
-
+	
 	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
 		// TODO Implementar lógica para o método gerado automaticamente.
 	}
-
-	/**
-	 * @return
-	 */
-	private Estado criaEstado() {
-		// TODO Implementar lógica para o método gerado automaticamente.
-		return null;
-	}
+	
 }
