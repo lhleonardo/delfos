@@ -108,7 +108,7 @@ public class PessoaDAO extends GenericDAO<Pessoa> {
 
 	@Deprecated
 	@Override
-	public Pessoa get(Pessoa model) throws SQLException {
+	public List<Pessoa> get(Pessoa model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não suportada.");
 	}
 

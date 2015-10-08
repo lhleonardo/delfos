@@ -12,51 +12,53 @@ import br.com.estatistica.modelos.Pergunta;
 import br.com.estatistica.util.Mensagem;
 
 public class PerguntaDAO extends GenericDAO<Pergunta> {
-	
+
 	private static final PerguntaExtractor EXTRACTOR = new PerguntaExtractor();
 
 	private static final String SQL_SELECT = "SELECT * FROM Pergunta";
-	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
-	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
+	private static final String SQL_SELECT_WHERE = SQL_SELECT
+			+ " WHERE login = ? AND senha = ?";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT
+			+ " WHERE id_usuario = ?";
 	private static final String SQL_INSERT = "INSERT INTO Pergunta(nome, descricao,observacao,id_tipo_pergunta, id_tipo_campo,id_questionario) VALUES(?,?,?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Pergunta SET nome = ?,descricao = ?, observacao = ?, id_questionario = ?, id_tipo_pergunta = ?, id_tipo_campo = ? WHERE id_pergunta =?";
 	private static final String SQL_DELETE = "DELETE FROM Pergunta WHERE id_pergunta = ?";
-	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
-
+	private static final String SQL_SELECT_BY_NOME = SQL_SELECT
+			+ " WHERE nome LIKE ?";
 
 	public PerguntaDAO(Connection connection) {
 		super(connection);
 	}
 
-	
 	@Override
 	protected Integer insert(Pergunta model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
-			
-			pst.setString(1,model.getNome());
-			pst.setString (2, model.getDescricao());			
-			pst.setString(3, model.getObservacao());	
-			pst.setInt(4, model.getTipoPergunta().getId());		
-			pst.setInt(5, model.getTipoCampo().getId());			
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
+			pst.setString(1, model.getNome());
+			pst.setString(2, model.getDescricao());
+			pst.setString(3, model.getObservacao());
+			pst.setInt(4, model.getTipoPergunta().getId());
+			pst.setInt(5, model.getTipoCampo().getId());
 			pst.setInt(6, model.getQuestionario().getId());
-			
+
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
 	}
-	
-	
+
 	@Override
 	protected Integer update(Pergunta model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE , PreparedStatement.RETURN_GENERATED_KEYS)) {
-			pst.setString(1,model.getNome());
-			pst.setString (2, model.getDescricao());			
-			pst.setString(3, model.getObservacao());	
-			pst.setInt(4, model.getTipoPergunta().getId());		
-			pst.setInt(5, model.getTipoCampo().getId());			
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
+			pst.setString(1, model.getNome());
+			pst.setString(2, model.getDescricao());
+			pst.setString(3, model.getObservacao());
+			pst.setInt(4, model.getTipoPergunta().getId());
+			pst.setInt(5, model.getTipoCampo().getId());
 			pst.setInt(6, model.getQuestionario().getId());
 			pst.setInt(7, model.getId());
-			
+
 			pst.executeUpdate();
 			return super.getGeneratedKeys(pst.getGeneratedKeys());
 		}
@@ -65,32 +67,34 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	@Override
 	public boolean delete(Pergunta model) throws SQLException {
 		if (model.getId() != null) {
-			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
+			try (PreparedStatement pst = super.getConnection()
+					.prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
-				
+
 				pst.executeUpdate();
-				
-			}if (this.get(model.getId()) == null) {
+
+			}
+			if (this.get(model.getId()) == null) {
 				Mensagem.informa(null, "Excluído com sucesso.");
 				return true;
 			} else {
-				Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
+				Mensagem.aviso(null,
+						"O registro não foi excluído corretamente, tente novamente mais tarde.");
 				return false;
 			}
 		} else {
-			throw new IllegalArgumentException("Informe um usuário antes de prosseguir.");
+			throw new IllegalArgumentException(
+					"Informe um usuário antes de prosseguir.");
 		}
-			
-		}
-		
-	
-	
+
+	}
 
 	@Override
 	public List<Pergunta> getAll() throws SQLException {
 		List<Pergunta> perguntas = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
 			perguntas = new ArrayList<>(EXTRACTOR.extractAll(resultSet, null));
@@ -100,35 +104,39 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	}
 
 	@Override
-	public Pergunta get(Pergunta model) throws SQLException {
-		Pergunta pergunta = null;
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
+	public List<Pergunta> get(Pergunta model) throws SQLException {
+		List<Pergunta> perguntas = null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
-			pst.setString(2,model.getNome());
-			pst.setString (3, model.getDescricao());			
-			pst.setString(4, model.getObservacao());	
-			pst.setInt(5, model.getTipoPergunta().getId());		
-			pst.setInt(6, model.getTipoCampo().getId());			
+			pst.setString(2, model.getNome());
+			pst.setString(3, model.getDescricao());
+			pst.setString(4, model.getObservacao());
+			pst.setInt(5, model.getTipoPergunta().getId());
+			pst.setInt(6, model.getTipoCampo().getId());
 			pst.setInt(7, model.getQuestionario().getId());
-			
+
 			ResultSet resultSet = pst.executeQuery();
 
-			pergunta = new PerguntaExtractor().extract(resultSet, super.getConnection());
+			perguntas = new ArrayList<>(EXTRACTOR.extractAll(resultSet,
+					super.getConnection()));
 
 		}
 
-		return pergunta;
+		return perguntas;
 	}
 
 	@Override
 	public Pergunta get(Integer idModel) throws SQLException {
 		Pergunta pergunta = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
 			ResultSet rs = pst.executeQuery();
 
-			pergunta = new PerguntaExtractor().extract(rs, super.getConnection());
+			pergunta = new PerguntaExtractor().extract(rs,
+					super.getConnection());
 
 		}
 
@@ -140,14 +148,14 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 
 		List<Pergunta> perguntas = new ArrayList<>();
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_NOME)) {
 			pst.setString(1, value);
 			perguntas.addAll(EXTRACTOR.extractAll(pst.executeQuery(), null));
 		}
 
 		return perguntas;
 	}
-	
 
 	@Override
 	public boolean isExist(Pergunta model) throws SQLException {

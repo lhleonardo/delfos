@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 
 
-import br.com.estatistica.modelos.Tipo_Pergunta;
+import br.com.estatistica.modelos.TipoPergunta;
 
 import br.com.estatistica.util.ConnectionFactory;
 
@@ -17,7 +17,7 @@ public static void main(String[] args){
 		Connection con = new ConnectionFactory().getConnection();
 		
 		Tipo_PerguntaDAO tpDAO = new Tipo_PerguntaDAO(con);
-		Tipo_Pergunta tp1 = new Tipo_Pergunta ("Ola", "Ola" );
+		TipoPergunta tp1 = new TipoPergunta ("Ola", "Ola" );
 		
 		try {
 			tpDAO.save(tp1);

@@ -74,8 +74,8 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 	}
 	
 	@Override
-	public Funcionalidade get(Funcionalidade model) throws SQLException {
-		Funcionalidade funcionalidade = null;
+	public List<Funcionalidade> get(Funcionalidade model) throws SQLException {
+		List<Funcionalidade> funcionalidades = null;
 		
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
 			pst.setString(1, model.getNome());
@@ -83,10 +83,10 @@ public class FuncionalidadeDAO extends GenericDAO<Funcionalidade> {
 			pst.setString(3, model.getChave());
 			ResultSet resultSet = pst.executeQuery();
 			
-			funcionalidade = this.extractor.extract(resultSet, null);
+			funcionalidades = new ArrayList<>( this.extractor.extractAll(resultSet, null));
 		}
 		
-		return funcionalidade;
+		return funcionalidades;
 	}
 	
 	@Override

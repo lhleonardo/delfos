@@ -12,9 +12,10 @@ import br.com.estatistica.modelos.TipoLogradouro;
 public class TipoLogradouroDAO extends GenericDAO<TipoLogradouro> {
 
 	private static final TipoLogradouroExtractor EXTRACTOR = new TipoLogradouroExtractor();
-	
+
 	private static final String SQL_SELECT = "SELECT * FROM Tipo_logradouro";
-	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_tipo_logradouro = ?";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT
+			+ " WHERE id_tipo_logradouro = ?";
 
 	public TipoLogradouroDAO(Connection connection) {
 		super(connection);
@@ -44,15 +45,17 @@ public class TipoLogradouroDAO extends GenericDAO<TipoLogradouro> {
 	public List<TipoLogradouro> getAll() throws SQLException {
 		List<TipoLogradouro> tipos = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
-			tipos = new ArrayList<>(EXTRACTOR.extractAll(pst.executeQuery(), null));
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT)) {
+			tipos = new ArrayList<>(EXTRACTOR.extractAll(pst.executeQuery(),
+					null));
 		}
 
 		return tipos;
 	}
 
 	@Override
-	public TipoLogradouro get(TipoLogradouro model) throws SQLException {
+	public List<TipoLogradouro> get(TipoLogradouro model) throws SQLException {
 		// TODO implementar
 
 		return null;
@@ -61,7 +64,8 @@ public class TipoLogradouroDAO extends GenericDAO<TipoLogradouro> {
 	@Override
 	public TipoLogradouro get(Integer idModel) throws SQLException {
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
 			return EXTRACTOR.extract(pst.executeQuery(), null);
 		}

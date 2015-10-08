@@ -3,7 +3,7 @@ package br.com.estatistica.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import br.com.estatistica.modelos.Tipo_Pergunta;
+import br.com.estatistica.modelos.TipoPergunta;
 import br.com.estatistica.util.ConnectionFactory;
 
 public class TipoPerguntaTest {
@@ -12,7 +12,7 @@ public class TipoPerguntaTest {
 		
 		Connection con = new ConnectionFactory().getConnection(); 
 		Tipo_PerguntaDAO tp1 = new Tipo_PerguntaDAO(con);
-		Tipo_Pergunta tc1 = new Tipo_Pergunta("oi", "ola");
+		TipoPergunta tc1 = new TipoPergunta("oi", "ola");
 		try {
 			tp1.save(tc1);
 		} catch (SQLException e) {

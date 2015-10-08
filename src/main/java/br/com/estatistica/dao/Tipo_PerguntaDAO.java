@@ -10,9 +10,9 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.estatistica.extractors.TipoPerguntaExtractor;
-import br.com.estatistica.modelos.Tipo_Pergunta;
+import br.com.estatistica.modelos.TipoPergunta;
 
-public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
+public class Tipo_PerguntaDAO extends GenericDAO<TipoPergunta> {
 	
 	private static final TipoPerguntaExtractor EXTRACTOR = new TipoPerguntaExtractor();
 	
@@ -31,7 +31,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	}
 
 	@Override
-	protected Integer insert(Tipo_Pergunta model) throws SQLException {
+	protected Integer insert(TipoPergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT , PreparedStatement.RETURN_GENERATED_KEYS)) {
 			
 			pst.setString (1, model.getNome());
@@ -44,7 +44,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	
 
 	@Override
-	protected Integer update(Tipo_Pergunta model) throws SQLException {
+	protected Integer update(TipoPergunta model) throws SQLException {
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setInt(1, model.getId());
 			pst.setString (2, model.getNome());
@@ -59,7 +59,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	
 	
 	@Override
-	public boolean delete(Tipo_Pergunta model) throws SQLException {
+	public boolean delete(TipoPergunta model) throws SQLException {
 		if (model.getId() != null) {
 			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
@@ -73,8 +73,8 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	}
 	
 	@Override
-	public List<Tipo_Pergunta> getAll() throws SQLException {
-		List<Tipo_Pergunta> tipoperguntas = new ArrayList<Tipo_Pergunta>();
+	public List<TipoPergunta> getAll() throws SQLException {
+		List<TipoPergunta> tipoperguntas = new ArrayList<TipoPergunta>();
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 			
@@ -86,8 +86,8 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	}
 	
 	@Override
-	public Tipo_Pergunta get(Tipo_Pergunta model) throws SQLException {
-		Tipo_Pergunta tipopergunta = null;
+	public List<TipoPergunta> get(TipoPergunta model) throws SQLException {
+		List<TipoPergunta> tipos = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2,model.getNome());
@@ -95,16 +95,16 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 
 			ResultSet resultSet = pst.executeQuery();
 			
-			tipopergunta = new TipoPerguntaExtractor().extract(resultSet, super.getConnection());
+			tipos = new ArrayList<>( EXTRACTOR.extractAll(resultSet, super.getConnection()));
 			
 		}
 		
-		return tipopergunta;
+		return tipos;
 	}
 	
 	@Override
-	public Tipo_Pergunta get(Integer idModel) throws SQLException {
-		Tipo_Pergunta tipopergunta = null;
+	public TipoPergunta get(Integer idModel) throws SQLException {
+		TipoPergunta tipopergunta = null;
 		
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
@@ -118,8 +118,8 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	}
 	
 	@Override
-	public List<Tipo_Pergunta> get(String value) throws SQLException {
-		List<Tipo_Pergunta> perguntas = new ArrayList<>();
+	public List<TipoPergunta> get(String value) throws SQLException {
+		List<TipoPergunta> perguntas = new ArrayList<>();
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_NOME)) {
 			pst.setString(1, value);
@@ -131,7 +131,7 @@ public class Tipo_PerguntaDAO extends GenericDAO<Tipo_Pergunta> {
 	
 	
 	@Override
-	public boolean isExist(Tipo_Pergunta model) throws SQLException {
+	public boolean isExist(TipoPergunta model) throws SQLException {
 
 		return this.get(model) != null;
 	}

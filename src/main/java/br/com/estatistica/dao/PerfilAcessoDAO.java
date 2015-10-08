@@ -70,17 +70,17 @@ public class PerfilAcessoDAO extends GenericDAO<PerfilAcesso> {
 	}
 
 	@Override
-	public PerfilAcesso get(PerfilAcesso model) throws SQLException {
-		PerfilAcesso perfil = null;
+	public List<PerfilAcesso> get(PerfilAcesso model) throws SQLException {
+		List<PerfilAcesso> perfis = null;
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
 			pst.setString(1, '%' + model.getNome() + '%');
 			pst.setString(2, model.getDescricao());
 
-			perfil = EXTRACTOR.extract(pst.executeQuery(), this.getConnection());
+			perfis = new ArrayList<>( EXTRACTOR.extractAll(pst.executeQuery(), getConnection()));
 
 		}
-		return perfil;
+		return perfis;
 	}
 
 	@Override

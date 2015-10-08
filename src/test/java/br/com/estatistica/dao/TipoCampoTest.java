@@ -2,7 +2,7 @@ package br.com.estatistica.dao;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import br.com.estatistica.modelos.Tipo_campo;
+import br.com.estatistica.modelos.TipoCampo;
 import br.com.estatistica.util.ConnectionFactory;
 
 public class TipoCampoTest {
@@ -13,7 +13,7 @@ public class TipoCampoTest {
 			
 			Connection con = new ConnectionFactory().getConnection(); 
 			Tipo_campoDAO pd1 = new Tipo_campoDAO(con);
-			Tipo_campo tc1 = new Tipo_campo("oi", "ola");
+			TipoCampo tc1 = new TipoCampo("oi", "ola");
 			try {
 				pd1.save(tc1);
 			} catch (SQLException e) {

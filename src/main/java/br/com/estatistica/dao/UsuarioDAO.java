@@ -16,10 +16,14 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 	private static final UsuarioExtractor EXTRACTOR = new UsuarioExtractor();
 
 	private static final String SQL_SELECT = "SELECT * FROM Usuario";
-	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
-	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
-	private static final String SQL_SELECT_BY_LOGIN = SQL_SELECT + " WHERE login = ?";
-	private static final String SQL_SELECT_BY_LOGIN_AND_SENHA = SQL_SELECT_BY_LOGIN + " AND senha = ?";
+	private static final String SQL_SELECT_WHERE = SQL_SELECT
+			+ " WHERE login = ? AND senha = ?";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT
+			+ " WHERE id_usuario = ?";
+	private static final String SQL_SELECT_BY_LOGIN = SQL_SELECT
+			+ " WHERE login = ?";
+	private static final String SQL_SELECT_BY_LOGIN_AND_SENHA = SQL_SELECT_BY_LOGIN
+			+ " AND senha = ?";
 	private static final String SQL_INSERT = "INSERT INTO Usuario(login,senha,descricao,id_perfil_usuario) VALUES(?,?,?,?)";
 	private static final String SQL_UPDATE = "UPDATE Usuario SET login = ?, senha = ?, descricao = ?, id_perfil_usuario = ? WHERE id_usuario =?";
 	private static final String SQL_DELETE = "DELETE FROM Usuario WHERE id_usuario = ?";
@@ -33,14 +37,16 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 	@Override
 	public boolean delete(Usuario model) throws SQLException {
 		if (model.getId() != null) {
-			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
+			try (PreparedStatement pst = super.getConnection()
+					.prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
 				pst.executeUpdate();
 
 				return this.confereExclusao(model.getId());
 			}
 		} else {
-			throw new IllegalArgumentException("Informe um usuário antes de prosseguir.");
+			throw new IllegalArgumentException(
+					"Informe um usuário antes de prosseguir.");
 		}
 	}
 
@@ -48,10 +54,12 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 	public List<Usuario> getAll() throws SQLException {
 		List<Usuario> usuarios = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
-			usuarios = new ArrayList<>(EXTRACTOR.extractAll(resultSet, super.getConnection()));
+			usuarios = new ArrayList<>(EXTRACTOR.extractAll(resultSet,
+					super.getConnection()));
 
 		}
 
@@ -59,24 +67,27 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 	}
 
 	@Override
-	public Usuario get(Usuario model) throws SQLException {
-		Usuario usuario = null;
+	public List<Usuario> get(Usuario model) throws SQLException {
+		List<Usuario> usuarios = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_WHERE)) {
 			pst.setString(1, model.getLogin());
 			pst.setString(2, model.getSenha());
 			ResultSet resultSet = pst.executeQuery();
 
-			usuario = EXTRACTOR.extract(resultSet, super.getConnection());
+			usuarios = new ArrayList<>(EXTRACTOR.extractAll(resultSet,
+					super.getConnection()));
 
 		}
 
-		return usuario;
+		return usuarios;
 	}
 
 	public boolean autentica(String login, String senha) throws SQLException {
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_LOGIN_AND_SENHA)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_LOGIN_AND_SENHA)) {
 			pst.setString(1, login);
 			pst.setString(2, senha);
 			ResultSet resultSet = pst.executeQuery();
@@ -95,7 +106,8 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 	public List<Usuario> get(String login) throws SQLException {
 		List<Usuario> usuarios = new ArrayList<>();
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_LOGIN)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_LOGIN)) {
 			pst.setString(1, login);
 			ResultSet rs = pst.executeQuery();
 
@@ -113,7 +125,8 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
 	@Override
 	protected Integer update(Usuario model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_UPDATE)) {
 			pst.setString(1, model.getLogin());
 			pst.setString(2, model.getSenha());
 			pst.setString(3, model.getDescricao());
@@ -128,7 +141,8 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 
 	@Override
 	protected Integer insert(Usuario model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_INSERT)) {
 			pst.setString(1, model.getLogin());
 			pst.setString(2, model.getSenha());
 			pst.setString(3, model.getDescricao());
@@ -153,10 +167,12 @@ public class UsuarioDAO extends GenericDAO<Usuario> {
 	public Usuario get(Integer idModel) throws SQLException {
 		Usuario usuario = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
 
-			usuario = EXTRACTOR.extract(pst.executeQuery(), super.getConnection());
+			usuario = EXTRACTOR.extract(pst.executeQuery(),
+					super.getConnection());
 
 		}
 

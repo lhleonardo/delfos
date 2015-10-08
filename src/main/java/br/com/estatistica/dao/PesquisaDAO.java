@@ -92,7 +92,7 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 	}
 	
 	@Override
-	public Pesquisa get(Pesquisa model) throws SQLException {
+	public List<Pesquisa> get(Pesquisa model) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

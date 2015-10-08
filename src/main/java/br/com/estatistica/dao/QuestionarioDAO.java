@@ -84,7 +84,7 @@ public class QuestionarioDAO extends GenericDAO<Questionario> {
 	}
 	
 	@Override
-	public Questionario get(Questionario model) throws SQLException {
+	public List<Questionario> get(Questionario model) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

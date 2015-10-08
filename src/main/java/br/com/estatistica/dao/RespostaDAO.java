@@ -94,8 +94,8 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 	}
 	
 	@Override
-	public Resposta get(Resposta model) throws SQLException {
-		Resposta resposta = null;
+	public List<Resposta> get(Resposta model) throws SQLException {
+		List<Resposta> respostas = null;
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getDescricao());
@@ -105,11 +105,11 @@ public class RespostaDAO extends GenericDAO<Resposta> {
 			
 			ResultSet resultSet = pst.executeQuery();
 			
-			resposta = new RespostaExtractor().extract(resultSet, super.getConnection());
+			respostas = new ArrayList<>(EXTRACTOR.extractAll(resultSet, super.getConnection()));
 			
 		}
 		
-		return resposta;
+		return respostas;
 	}
 	
 	@Override

@@ -7,10 +7,10 @@ public class Pergunta implements Identificator {
 	private String descricao;
 	private String observacao;
 	private Questionario questionario;
-	private Tipo_Pergunta tipoPergunta;
-	private Tipo_campo tipoCampo;
+	private TipoPergunta tipoPergunta;
+	private TipoCampo tipoCampo;
 
-	public Pergunta(Integer id, String nome, String descricao, String observacao, Questionario questionario, Tipo_Pergunta tipoPergunta, Tipo_campo tipoCampo) {
+	public Pergunta(Integer id, String nome, String descricao, String observacao, Questionario questionario, TipoPergunta tipoPergunta, TipoCampo tipoCampo) {
 		this.id = id;
 		this.nome= nome;
 		this.descricao = descricao;
@@ -20,7 +20,7 @@ public class Pergunta implements Identificator {
 		this.tipoCampo = tipoCampo;
 	}
 
-	public Pergunta(String descricao,String nome, String observacao, Questionario questionario, Tipo_Pergunta tipoPergunta, Tipo_campo tipoCampo) {
+	public Pergunta(String descricao,String nome, String observacao, Questionario questionario, TipoPergunta tipoPergunta, TipoCampo tipoCampo) {
 		this.descricao = descricao;
 		this.nome= nome;
 		this.observacao = observacao;
@@ -29,7 +29,7 @@ public class Pergunta implements Identificator {
 		this.tipoCampo = tipoCampo;
 	}
 
-	public Pergunta(String nome, String descricao, Questionario questionario, Tipo_Pergunta tipoPergunta, Tipo_campo tipoCampo) {
+	public Pergunta(String nome, String descricao, Questionario questionario, TipoPergunta tipoPergunta, TipoCampo tipoCampo) {
 		this.descricao = descricao;
 		this.nome= nome;
 		this.questionario = questionario;
@@ -90,19 +90,19 @@ public class Pergunta implements Identificator {
 		this.questionario = questionario;
 	}
 
-	public Tipo_Pergunta getTipoPergunta() {
+	public TipoPergunta getTipoPergunta() {
 		return tipoPergunta;
 	}
 
-	public void setTipoPergunta(Tipo_Pergunta tipoPergunta) {
+	public void setTipoPergunta(TipoPergunta tipoPergunta) {
 		this.tipoPergunta = tipoPergunta;
 	}
 
-	public Tipo_campo getTipoCampo() {
+	public TipoCampo getTipoCampo() {
 		return tipoCampo;
 	}
 
-	public void setTipoCampo(Tipo_campo tipoCampo) {
+	public void setTipoCampo(TipoCampo tipoCampo) {
 		this.tipoCampo = tipoCampo;
 	}		
 	

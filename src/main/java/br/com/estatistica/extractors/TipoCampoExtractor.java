@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import br.com.estatistica.modelos.Tipo_campo;
+import br.com.estatistica.modelos.TipoCampo;
 
-public class TipoCampoExtractor extends Extractable<Tipo_campo> {
+public class TipoCampoExtractor extends Extractable<TipoCampo> {
 	
-	public Tipo_campo extract(ResultSet rs, Connection con) throws SQLException {
+	public TipoCampo extract(ResultSet rs, Connection con) throws SQLException {
 		if (rs.next()) {
 			return extractModel(rs, con);
 		} else
@@ -19,8 +19,8 @@ public class TipoCampoExtractor extends Extractable<Tipo_campo> {
 	}
 //não sei o erro do null- arrumar
 	@Override
-	protected Tipo_campo extractModel(ResultSet rs, Connection con) throws SQLException{
-		Tipo_campo tipocampo = new Tipo_campo(null);
+	protected TipoCampo extractModel(ResultSet rs, Connection con) throws SQLException{
+		TipoCampo tipocampo = new TipoCampo(null);
 		tipocampo.setId(rs.getInt("id_usuario"));
 		tipocampo.setDescricao(rs.getString("Descricao"));
 
@@ -29,8 +29,8 @@ public class TipoCampoExtractor extends Extractable<Tipo_campo> {
 	return tipocampo;
 	}
 	;
-	public List<Tipo_campo> extractAll(ResultSet rs, Connection con) throws SQLException {
-		List<Tipo_campo> tiposcampos = new ArrayList<Tipo_campo>();
+	public List<TipoCampo> extractAll(ResultSet rs, Connection con) throws SQLException {
+		List<TipoCampo> tiposcampos = new ArrayList<TipoCampo>();
 
 		while (rs.next() && con != null) {
 			tiposcampos.add(extractModel(rs, con));

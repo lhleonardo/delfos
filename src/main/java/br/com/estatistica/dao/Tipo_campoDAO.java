@@ -10,13 +10,19 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import br.com.estatistica.extractors.TipoCampoExtractor;
-import br.com.estatistica.modelos.Tipo_campo;
+import br.com.estatistica.modelos.TipoCampo;
 
-public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
+public class Tipo_campoDAO extends GenericDAO<TipoCampo> {
 
+	/**
+	 * 
+	 */
+	private static final TipoCampoExtractor EXTRACTOR = new TipoCampoExtractor();
 	private static final String SQL_SELECT = "SELECT * FROM Tipo_campo";
-	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE login = ? AND senha = ?";
-	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_usuario = ?";
+	private static final String SQL_SELECT_WHERE = SQL_SELECT
+			+ " WHERE login = ? AND senha = ?";
+	private static final String SQL_SELECT_BY_ID = SQL_SELECT
+			+ " WHERE id_usuario = ?";
 	private static final String SQL_INSERT = "INSERT INTO Tipo_campo(descricao,nome) VALUES(?,?)";
 	private static final String SQL_UPDATE = "UPDATE TipoCampo SET descricao = ?, nome = ?, WHERE id_Tipo_campo =?";
 	private static final String SQL_DELETE = "DELETE FROM Tipo_campo WHERE id_tipo_campo = ?";
@@ -27,8 +33,9 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	}
 
 	@Override
-	protected Integer insert(Tipo_campo model) throws SQLException {
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_INSERT , PreparedStatement.RETURN_GENERATED_KEYS)) {
+	protected Integer insert(TipoCampo model) throws SQLException {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_INSERT, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.setString(1, model.getNome());
 			pst.setString(2, model.getDescricao());
 
@@ -38,23 +45,26 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	}
 
 	@Override
-	protected Integer update(Tipo_campo model) throws SQLException {
+	protected Integer update(TipoCampo model) throws SQLException {
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_UPDATE, PreparedStatement.RETURN_GENERATED_KEYS)) {
 			pst.executeUpdate();
-		
-		return super.getGeneratedKeys(pst.getGeneratedKeys());
-	}
+
+			return super.getGeneratedKeys(pst.getGeneratedKeys());
+		}
 	}
 
 	@Override
-	public boolean delete(Tipo_campo model) throws SQLException {
+	public boolean delete(TipoCampo model) throws SQLException {
 		if (model.getId() != null) {
-			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
+			try (PreparedStatement pst = super.getConnection()
+					.prepareStatement(SQL_DELETE)) {
 				pst.setInt(1, model.getId());
 				int linhasAfetadas = pst.executeUpdate();
 				if (linhasAfetadas > 0) {
-					JOptionPane.showMessageDialog(null, "Excluído com sucesso.");
+					JOptionPane
+							.showMessageDialog(null, "Excluído com sucesso.");
 				}
 			}
 		}
@@ -63,12 +73,14 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	}
 
 	@Override
-	public List<Tipo_campo> getAll() throws SQLException {
-		List<Tipo_campo> tiposcampos = new ArrayList<Tipo_campo>();
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT)) {
+	public List<TipoCampo> getAll() throws SQLException {
+		List<TipoCampo> tiposcampos = new ArrayList<TipoCampo>();
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT)) {
 			ResultSet resultSet = pst.executeQuery();
 
-			tiposcampos.addAll(new TipoCampoExtractor().extractAll(resultSet, super.getConnection()));
+			tiposcampos.addAll(EXTRACTOR.extractAll(resultSet,
+					super.getConnection()));
 
 		}
 
@@ -76,16 +88,18 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	}
 
 	@Override
-	public Tipo_campo get(Tipo_campo model) throws SQLException {
-		Tipo_campo tipocampo = null;
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_WHERE)) {
+	public List<TipoCampo> get(TipoCampo model) throws SQLException {
+		List<TipoCampo> tipocampo = null;
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_WHERE)) {
 			pst.setInt(1, model.getId());
 			pst.setString(2, model.getNome());
 			pst.setString(2, model.getDescricao());
 
 			ResultSet resultSet = pst.executeQuery();
 
-			tipocampo = new TipoCampoExtractor().extract(resultSet, super.getConnection());
+			tipocampo = new ArrayList<>(EXTRACTOR.extractAll(resultSet,
+					super.getConnection()));
 
 		}
 
@@ -93,14 +107,15 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	}
 
 	@Override
-	public Tipo_campo get(Integer idModel) throws SQLException {
-		Tipo_campo tipocampo = null;
+	public TipoCampo get(Integer idModel) throws SQLException {
+		TipoCampo tipocampo = null;
 
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ID)) {
+		try (PreparedStatement pst = super.getConnection().prepareStatement(
+				SQL_SELECT_BY_ID)) {
 			pst.setInt(1, idModel);
 			ResultSet rs = pst.executeQuery();
 
-			tipocampo = new TipoCampoExtractor().extract(rs, super.getConnection());
+			tipocampo = EXTRACTOR.extract(rs, super.getConnection());
 
 		}
 
@@ -109,12 +124,12 @@ public class Tipo_campoDAO extends GenericDAO<Tipo_campo> {
 	}
 
 	@Override
-	public List<Tipo_campo> get(String value) throws SQLException {
+	public List<TipoCampo> get(String value) throws SQLException {
 		return null;
 	}
 
 	@Override
-	public boolean isExist(Tipo_campo model) throws SQLException {
+	public boolean isExist(TipoCampo model) throws SQLException {
 		return this.get(model) != null;
 	}
 

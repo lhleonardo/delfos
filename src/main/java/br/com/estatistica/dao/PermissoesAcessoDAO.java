@@ -120,7 +120,7 @@ public class PermissoesAcessoDAO extends GenericDAO<PerfilAcesso> {
 	
 	@Override
 	@Deprecated
-	public PerfilAcesso get(PerfilAcesso model) throws SQLException {
+	public List<PerfilAcesso> get(PerfilAcesso model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não disponível.");
 	}
 	

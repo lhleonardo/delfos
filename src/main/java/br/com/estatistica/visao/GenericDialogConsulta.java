@@ -145,8 +145,4 @@ public abstract class GenericDialogConsulta extends JDialog {
 		return this.btnOkPressed;
 	}
 
-	protected List<Object> initializeTable(GenericDAO dao) throws SQLException {
-		return dao.getAll();
-	}
-
 }

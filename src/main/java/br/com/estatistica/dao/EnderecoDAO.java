@@ -71,7 +71,7 @@ public class EnderecoDAO extends GenericDAO<Endereco> {
 
 	@Override
 	@Deprecated
-	public Endereco get(Endereco model) throws SQLException {
+	public List<Endereco> get(Endereco model) throws SQLException {
 		throw new UnsupportedOperationException("Operação não suportada.");
 	}
 
