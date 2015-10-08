@@ -1,4 +1,4 @@
-package br.com.estatistica.visao;
+package br.com.estatistica.modelos.table;
 
 import java.util.ArrayList;
 import java.util.HashMap;

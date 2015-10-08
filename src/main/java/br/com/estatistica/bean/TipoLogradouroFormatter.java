@@ -1,6 +1,5 @@
-package br.com.estatistica.visao;
+package br.com.estatistica.bean;
 
-import br.com.estatistica.bean.Formatter;
 import br.com.estatistica.modelos.TipoLogradouro;
 
 public class TipoLogradouroFormatter implements Formatter {

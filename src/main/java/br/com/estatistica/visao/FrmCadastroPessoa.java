@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.estatistica.bean.TipoLogradouroFormatter;
 import br.com.estatistica.dao.PessoaDAO;
 import br.com.estatistica.dao.TipoLogradouroDAO;
 import br.com.estatistica.modelos.Bairro;
@@ -30,6 +31,7 @@ import br.com.estatistica.modelos.Pesquisador;
 import br.com.estatistica.modelos.PesquisadorEspecialista;
 import br.com.estatistica.modelos.Pessoa;
 import br.com.estatistica.modelos.TipoLogradouro;
+import br.com.estatistica.modelos.table.ObjectComboBoxModel;
 import br.com.estatistica.util.Mensagem;
 
 public class FrmCadastroPessoa extends GenericFormCadastro {

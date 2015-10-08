@@ -20,6 +20,7 @@ import br.com.estatistica.dao.CidadeDAO;
 import br.com.estatistica.dao.EstadoDAO;
 import br.com.estatistica.modelos.Cidade;
 import br.com.estatistica.modelos.Estado;
+import br.com.estatistica.modelos.table.ObjectComboBoxModel;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
