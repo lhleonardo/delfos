@@ -74,8 +74,8 @@ public class EstadoDAO extends GenericDAO<Estado> {
 	}
 
 	@Override
-	public Estado get(Estado model) throws SQLException {
-		Estado estado = null;
+	public List<Estado> get(Estado model) throws SQLException {
+		List<Estado> estados = null;
 
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
 			pst.setInt(1, model.getId());
@@ -84,10 +84,10 @@ public class EstadoDAO extends GenericDAO<Estado> {
 			pst.setString(4, model.getDescricao());
 			pst.setString(5, model.getCodIbge());
 
-			estado = EXTRACTOR.extract(pst.executeQuery(), null);
+			estados = new ArrayList<>(EXTRACTOR.extractAll(pst.executeQuery(), null));
 		}
 
-		return estado;
+		return estados;
 	}
 
 	@Override

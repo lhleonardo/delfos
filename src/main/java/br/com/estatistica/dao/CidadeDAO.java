@@ -33,8 +33,9 @@ public class CidadeDAO extends GenericDAO<Cidade> {
 	}
 	
 	@Override
-	public Cidade get(Cidade model) throws SQLException {
-		Cidade cidade = null;
+	public List<Cidade> get(Cidade model) throws SQLException {
+
+		List<Cidade> cidades = null;
 		
 		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
 			pst.setString(1, "%" + model.getNome() + "%");
@@ -42,10 +43,10 @@ public class CidadeDAO extends GenericDAO<Cidade> {
 			pst.setString(3, "%" + model.getDescricao() + "%");
 			pst.setInt(4, model.getEstado().getId());
 			
-			cidade = EXTRACTOR.extract(pst.executeQuery(), null);
+			cidades = new ArrayList<>(EXTRACTOR.extractAll(pst.executeQuery(), null));
 		}
 		
-		return cidade;
+		return cidades;
 	}
 	
 	@Override

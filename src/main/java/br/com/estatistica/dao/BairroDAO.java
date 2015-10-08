@@ -72,20 +72,6 @@ public class BairroDAO extends GenericDAO<Bairro> {
 		return bairros;
 	}
 
-	@Override
-	public Bairro get(Bairro model) throws SQLException {
-		Bairro bairro = null;
-
-		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
-			pst.setInt(1, model.getId());
-			pst.setString(2, model.getNome());
-			pst.setString(3, model.getDescricao());
-
-			bairro = EXTRACTOR.extract(pst.executeQuery(), null);
-		}
-
-		return bairro;
-	}
 
 	@Override
 	public Bairro get(Integer idModel) throws SQLException {
@@ -113,14 +99,20 @@ public class BairroDAO extends GenericDAO<Bairro> {
 
 	@Override
 	public boolean isExist(Bairro model) throws SQLException {
-		// TODO Auto-generated method stub
+		// TODO Implementar lógica para o método gerado automaticamente.
 		return false;
 	}
 
 	@Override
 	public boolean isExist(Integer idModel) throws SQLException {
-		// TODO Auto-generated method stub
+		// TODO Implementar lógica para o método gerado automaticamente.
 		return false;
+	}
+
+	@Override
+	public List<Bairro> get(Bairro model) throws SQLException {
+		// TODO Implementar lógica para o método gerado automaticamente.
+		return null;
 	}
 
 }

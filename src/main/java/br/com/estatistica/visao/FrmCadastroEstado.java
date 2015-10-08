@@ -129,10 +129,6 @@ public class FrmCadastroEstado extends GenericFormCadastro {
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent e) {
-		// try {
-		// String informacao =
-		// "Informe qual o tipo de pesquisa (1-Identificador/2-Nome do Registro)";
-		//
 		// this.eDao = new EstadoDAO(this.getConnection());
 		//
 		// int valor = Integer.parseInt(Mensagem.entrada(this, informacao));
