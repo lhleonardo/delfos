@@ -50,11 +50,11 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		
 		JButton salvar = new JButton("Salvar");
 		salvar.addActionListener(new ActionListener() {
-
+///erro no save
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Pergunta p1 = new Pergunta(pergunta.getText(),desc.getText(),obs.getText(),null,null,null);
-				Integer idNovaPesquisa  = PerguntaDAO.insert(p1);
+				Integer idNovaPesquisa  = PerguntaDAO.save(p1);
 				
 			}
 		
