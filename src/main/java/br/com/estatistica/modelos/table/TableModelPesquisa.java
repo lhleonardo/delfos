@@ -145,5 +145,5 @@ public class TableModelPesquisa extends AbstractTableModel {
 		// Notifica a mudança.
 		this.fireTableDataChanged();
 	}
-	
+ 	
 }
