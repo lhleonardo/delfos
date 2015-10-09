@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.util.function.Supplier;
 
 import br.com.estatistica.dao.PerguntaDAO;
+import br.com.estatistica.dao.PesquisaDAO;
 import br.com.estatistica.modelos.Pergunta;
 import br.com.estatistica.util.ConnectionFactory;
 
@@ -49,6 +50,13 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		
 		JButton salvar = new JButton("Salvar");
 		salvar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Pergunta p1 = new Pergunta(pergunta.getText(),desc.getText(),obs.getText(),null,null,null);
+				Integer idNovaPesquisa  = PerguntaDAO.insert(p1);
+				
+			}
 		
 		});
 		salvar.setBounds(17, 404, 89, 23);
