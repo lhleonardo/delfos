@@ -49,6 +49,12 @@ public class Pergunta implements Identificator {
 		this.observacao = observacao;
 
 	}
+	public Pergunta( String nome,String descricao, String observacao) {
+		
+		this.nome= nome;
+		this.descricao = descricao;
+		this.observacao = observacao;
+	}
 
 	public Integer getId() {
 		return id;
