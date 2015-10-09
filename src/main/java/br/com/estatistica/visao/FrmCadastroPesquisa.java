@@ -20,6 +20,8 @@ import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -134,10 +136,22 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.descricaoField.setWrapStyleWord(true);
 		
 		this.scrollPane_1 = new JScrollPane();
+		this.scrollPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				scrollPane_1MouseClicked(arg0);
+			}
+		});
 		this.scrollPane_1.setBounds(50, 58, 260, 118);
 		panel.add(this.scrollPane_1);
 		
 		this.table = new JTable();
+		this.table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				tableMouseClicked(e);
+			}
+		});
 		this.table.setCellSelectionEnabled(true);
 		this.scrollPane_1.setViewportView(this.table);
 		this.table.setModel(getTableModelTodos());
@@ -248,12 +262,16 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
 		table.setModel(getTableModelPesquisa());
 	}
-	
-	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
+	protected void SelecionaPesquisa(){
 		codigoField.setText(Integer.toString(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getId()));
 		nomeField.setText(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getNome());
 		descricaoField.setText(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getDescricao());
 		limiteField.setText(Integer.toString(modeloTabelaPesquisa.getPesquisa(table.getSelectedRow()).getLimiteDeEspecialistas()));
+		
+		
+	}
+	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
+	SelecionaPesquisa();
 	}
 	
 	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
@@ -281,4 +299,15 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 			
 		}
 	}
-}
+	protected void scrollPane_1MouseClicked(MouseEvent e) {
+	          if(e.getClickCount() == 2)  
+	           SelecionaPesquisa();
+	        }
+
+	protected void tableMouseClicked(MouseEvent e) {
+		 if(e.getClickCount() == 2)  
+	           SelecionaPesquisa();
+
+	}
+	}
+
