@@ -18,7 +18,7 @@ public class BairroDAO extends GenericDAO<Bairro> {
 	private static final String SQL_UPDATE = "UPDATE Bairro SET nome = ?, descricao = ? WHERE id_bairro = ?";
 	private static final String SQL_DELETE = "DELETE FROM Bairro WHERE id_bairro = ?";
 	private static final String SQL_SELECT = "SELECT * FROM Bairro";
-	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE id_bairro = ? OR nome LIKE ? OR descricao LIKE ?";
+	private static final String SQL_SELECT_BY_ALL = SQL_SELECT + " WHERE id_bairro = ? OR nome LIKE ?";
 	private static final String SQL_SELECT_BY_ID = SQL_SELECT + " WHERE id_bairro = ?";
 	private static final String SQL_SELECT_BY_NOME = SQL_SELECT + " WHERE nome LIKE ?";
 
@@ -72,7 +72,6 @@ public class BairroDAO extends GenericDAO<Bairro> {
 		return bairros;
 	}
 
-
 	@Override
 	public Bairro get(Integer idModel) throws SQLException {
 		Bairro bairro = null;
@@ -83,6 +82,20 @@ public class BairroDAO extends GenericDAO<Bairro> {
 		}
 
 		return bairro;
+	}
+
+	@Override
+	public List<Bairro> get(Bairro model) throws SQLException {
+		List<Bairro> bairros = null;
+
+		try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_SELECT_BY_ALL)) {
+			pst.setInt(1, model.getId());
+			pst.setString(2, model.getNome());
+
+			bairros = new ArrayList<>(EXTRACTOR.extractAll(pst.executeQuery(), null));
+		}
+
+		return bairros;
 	}
 
 	@Override
@@ -107,12 +120,6 @@ public class BairroDAO extends GenericDAO<Bairro> {
 	public boolean isExist(Integer idModel) throws SQLException {
 		// TODO Implementar lógica para o método gerado automaticamente.
 		return false;
-	}
-
-	@Override
-	public List<Bairro> get(Bairro model) throws SQLException {
-		// TODO Implementar lógica para o método gerado automaticamente.
-		return null;
 	}
 
 }
