@@ -10,6 +10,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -20,6 +21,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import br.com.estatistica.dao.GenericDAO;
 
 public class GenericFormCadastro extends JFrame {
 
@@ -129,5 +132,13 @@ public class GenericFormCadastro extends JFrame {
 			}
 
 		}
+	}
+
+	protected GenericDAO<?> initializeDAO(GenericDAO<?> dao) throws SQLException {
+		if (dao.getConnection().isClosed() || dao.getConnection() == null) {
+			dao.setConnection(this.getConnection());
+		}
+
+		return dao;
 	}
 }

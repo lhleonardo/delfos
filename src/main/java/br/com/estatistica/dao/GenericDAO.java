@@ -23,11 +23,11 @@ import br.com.estatistica.util.Mensagem;
  *            modelo, afim de que seja genericamente configurado suas operações.
  */
 public abstract class GenericDAO<T extends Identificator> implements AutoCloseable {
-	
+
 	boolean mostraConfirmacao = true;
-	
+
 	private Connection connection;
-	
+
 	/**
 	 * Construtor responsável por inicializar a instância de um DAO para
 	 * determinado CRUD.
@@ -38,7 +38,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	public GenericDAO(Connection connection) {
 		this.connection = connection;
 	}
-	
+
 	/**
 	 * Método responsável por <b>salvar</b> determinado registro no banco de
 	 * dados.<br>
@@ -68,14 +68,14 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 		} else {
 			chavesGeradas = this.update(model);
 		}
-		
+
 		if (this.mostraConfirmacao) {
 			Mensagem.informa(null, "Salvo com sucesso.");
 		}
-		
+
 		return chavesGeradas;
 	}
-	
+
 	/**
 	 * Método auxiliar responsável por realizar a inserção de um determinado
 	 * registro informado como parâmetro. <br>
@@ -95,7 +95,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 *
 	 */
 	protected abstract Integer insert(T model) throws SQLException;
-	
+
 	/**
 	 * Método auxiliar responsável por realizar a atualização de determinado
 	 * registro existente no banco de dados. <br>
@@ -113,7 +113,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 */
 	protected abstract Integer update(T model) throws SQLException;
-	
+
 	/**
 	 * Método auxiliar responsável por realizar a <b>exclusão</b> de determinado
 	 * registro existente no banco de dados. <br>
@@ -131,7 +131,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 */
 	public abstract boolean delete(T model) throws SQLException;
-	
+
 	/**
 	 * Método responsável por retornar <b>todos</b> os registros no banco de
 	 * dados para determinado tipo de <code>Identificator</code> informado na
@@ -144,7 +144,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 */
 	public abstract List<T> getAll() throws SQLException;
-	
+
 	/**
 	 * Método responsável por retornar <b>um registro</b> no banco de dados para
 	 * determinado tipo de <code>Identificator</code> informado na instância da
@@ -159,7 +159,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 */
 	public abstract List<T> get(T model) throws SQLException;
-	
+
 	/**
 	 * Método responsável por retornar <b>um registro</b> no banco de dados para
 	 * determinado tipo de <code>Identificator</code> informado na instância da
@@ -175,7 +175,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 */
 	public abstract T get(Integer idModel) throws SQLException;
-	
+
 	/**
 	 * Método responsável por retornar <b>um registro</b> no banco de dados para
 	 * determinado tipo de <code>Identificator</code> informado na instância da
@@ -191,7 +191,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 * @throws SQLException
 	 */
 	public abstract List<T> get(String value) throws SQLException;
-	
+
 	/**
 	 * Método responsável por verificar se determinado registro está presente no
 	 * banco de dados.
@@ -203,7 +203,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 *             caso ocorra algum erro de consulta no banco de dados.
 	 */
 	public abstract boolean isExist(T model) throws SQLException;
-	
+
 	/**
 	 * Método responsável por verificar se determinado registro está presente no
 	 * banco de dados.
@@ -216,7 +216,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	 *             caso ocorra algum erro de consulta no banco de dados.
 	 */
 	public abstract boolean isExist(Integer idModel) throws SQLException;
-	
+
 	/**
 	 * Método responsável por realizar uma lista de instruções <b>DML(Data
 	 * Manipulation Language)</b> no banco de dados. <br>
@@ -242,7 +242,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 			throw new IllegalArgumentException("Não é possível adicionar uma lista vazia para a sequência de instruções.");
 		}
 	}
-	
+
 	/**
 	 * Método responsável por retornar a chave primária gerada pelo auto
 	 * incremento do banco de dados.
@@ -260,7 +260,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 		}
 		return null;
 	}
-	
+
 	public boolean confereExclusao(Integer id) throws SQLException {
 		if (this.isExist(id) == false) {
 			if (this.mostraConfirmacao) {
@@ -272,15 +272,15 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 			return false;
 		}
 	}
-	
+
 	public boolean isMostraConfirmacao() {
 		return this.mostraConfirmacao;
 	}
-	
+
 	public void setMostraConfirmacao(boolean mostraConfirmacao) {
 		this.mostraConfirmacao = mostraConfirmacao;
 	}
-	
+
 	/**
 	 * Método responsável por retornar a conexão com o banco de dados atual
 	 *
@@ -289,7 +289,7 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 	public Connection getConnection() {
 		return this.connection;
 	}
-	
+
 	/**
 	 * Método responsável por fechar todas as conexões com o banco.
 	 */
@@ -300,16 +300,24 @@ public abstract class GenericDAO<T extends Identificator> implements AutoCloseab
 			System.out.println("Desconectado do banco.");
 		}
 	}
-	
+
 	@Override
 	protected void finalize() throws Throwable {
 		this.close();
-		
+
 		if (this.connection != null) {
 			this.connection = null;
 		}
 		System.gc();
 		super.finalize();
 	}
-	
+
+	/**
+	 * @param connection
+	 *            the connection to set
+	 */
+	public void setConnection(Connection connection) {
+		this.connection = connection;
+	}
+
 }

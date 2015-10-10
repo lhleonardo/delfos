@@ -11,7 +11,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -20,12 +19,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import br.com.estatistica.dao.GenericDAO;
-import br.com.estatistica.modelos.Identificator;
 
 /**
  * Classe responsável por ser um molde de telas de consulta, fazendo uma espera
  * até a confirmação do usuário.
- * 
+ *
  * @author lhleonardo
  * @version 1.0
  * @since 1.6
@@ -47,8 +45,7 @@ public abstract class GenericDialogConsulta extends JDialog {
 		}
 	}
 
-	public GenericDialogConsulta(Frame owner, String title,
-			Connection connection) {
+	public GenericDialogConsulta(Frame owner, String title, Connection connection) {
 		super(owner, title);
 		this.connection = connection;
 		this.initComponents();
@@ -73,14 +70,12 @@ public abstract class GenericDialogConsulta extends JDialog {
 
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
-		getContentPane().add(panel, BorderLayout.WEST);
+		this.getContentPane().add(panel, BorderLayout.WEST);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[] { 30, 110, 30, 0 };
 		gbl_panel.rowHeights = new int[] { 0, 0, 23, 0, 0 };
-		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0,
-				Double.MIN_VALUE };
-		gbl_panel.rowWeights = new double[] { 1.0, 1.0, 0.0, 0.0,
-				Double.MIN_VALUE };
+		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
 
 		JPanel panel_1 = new JPanel();
@@ -96,9 +91,8 @@ public abstract class GenericDialogConsulta extends JDialog {
 
 		JLabel lblIcon = new JLabel();
 		lblIcon.setForeground(new Color(220, 220, 220));
-		lblIcon.setIcon(new ImageIcon(
-				GenericDialogConsulta.class
-						.getResource("/br/com/estatistica/util/icons/logo/Logo-vers-1(16-09)min.png")));
+		lblIcon.setIcon(new ImageIcon(GenericDialogConsulta.class
+				.getResource("/br/com/estatistica/util/icons/logo/Logo-vers-1(16-09)min.png")));
 		lblIcon.setFont(new Font("Calibri Light", Font.BOLD, 20));
 		lblIcon.setBounds(13, 11, 143, 81);
 		panel_1.add(lblIcon);
@@ -120,8 +114,7 @@ public abstract class GenericDialogConsulta extends JDialog {
 		GridBagLayout gbl_panel_3 = new GridBagLayout();
 		gbl_panel_3.columnWidths = new int[] { 0, 0, 0, 0 };
 		gbl_panel_3.rowHeights = new int[] { 0, 0 };
-		gbl_panel_3.columnWeights = new double[] { 0.0, 0.0, 0.0,
-				Double.MIN_VALUE };
+		gbl_panel_3.columnWeights = new double[] { 0.0, 0.0, 0.0, Double.MIN_VALUE };
 		gbl_panel_3.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_3.setLayout(gbl_panel_3);
 	}
@@ -143,6 +136,14 @@ public abstract class GenericDialogConsulta extends JDialog {
 		this.setModal(true);
 		this.setVisible(true);
 		return this.btnOkPressed;
+	}
+
+	protected GenericDAO<?> initializeDAO(GenericDAO<?> dao) throws SQLException {
+		if (dao.getConnection().isClosed() || dao.getConnection() == null) {
+			dao.setConnection(this.getConnection());
+		}
+
+		return dao;
 	}
 
 }

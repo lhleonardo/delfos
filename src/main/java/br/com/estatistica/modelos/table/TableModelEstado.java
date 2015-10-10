@@ -17,14 +17,12 @@ public class TableModelEstado extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 
 	private List<Estado> linhas;
-	private String[] colunas = { "*", "Cód.", "Nome", "UF", "Cod. IBGE" };
+	private String[] colunas = { "Cód.", "Nome", "UF", "Cod. IBGE" };
 
-	private static final int MARCADO = 0;
-	private static final int CODIGO = 1;
-	private static final int NOME = 2;
-	private static final int UF = 3;
-	private static final int COD_IBGE = 4;
-	
+	private static final int CODIGO = 0;
+	private static final int NOME = 1;
+	private static final int UF = 2;
+	private static final int COD_IBGE = 3;
 
 	public TableModelEstado() {
 		this.linhas = new ArrayList<Estado>();
@@ -52,16 +50,16 @@ public class TableModelEstado extends AbstractTableModel {
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
 		switch (columnIndex) {
-		case CODIGO:
-			return int.class;
-		case NOME:
-			return String.class;
-		case UF:
-			return String.class;
-		case COD_IBGE:
-			return String.class;
-		default:
-			throw new IndexOutOfBoundsException("Indice da coluna nao existe");
+			case CODIGO:
+				return int.class;
+			case NOME:
+				return String.class;
+			case UF:
+				return String.class;
+			case COD_IBGE:
+				return String.class;
+			default:
+				throw new IndexOutOfBoundsException("Indice da coluna nao existe");
 		}
 	}
 
@@ -75,16 +73,16 @@ public class TableModelEstado extends AbstractTableModel {
 		Estado estado = this.linhas.get(rowIndex);
 
 		switch (columnIndex) {
-		case CODIGO:
-			return estado.getId();
-		case NOME:
-			return estado.getNome();
-		case UF:
-			return estado.getUf();
-		case COD_IBGE:
-			return estado.getCodIbge();
-		default:
-			throw new IndexOutOfBoundsException("Indice da coluna nao existe");
+			case CODIGO:
+				return estado.getId();
+			case NOME:
+				return estado.getNome();
+			case UF:
+				return estado.getUf();
+			case COD_IBGE:
+				return estado.getCodIbge();
+			default:
+				throw new IndexOutOfBoundsException("Indice da coluna nao existe");
 		}
 
 	}
@@ -100,19 +98,19 @@ public class TableModelEstado extends AbstractTableModel {
 	public void remove(int rowIndex) {
 		this.linhas.remove(rowIndex);
 
-		fireTableRowsDeleted(rowIndex, rowIndex);
+		this.fireTableRowsDeleted(rowIndex, rowIndex);
 	}
 
-	public void addAll(Collection<? extends Estado> c) {
-		int rowCount = getRowCount();
+	public void addAll(Collection<Estado> c) {
+		int rowCount = this.getRowCount();
 		this.linhas.addAll(c);
-		fireTableRowsInserted(rowCount, rowCount + c.size());
+		this.fireTableRowsInserted(rowCount, rowCount + c.size());
 	}
 
 	public void clear() {
 		this.linhas.clear();
 
-		fireTableDataChanged();
+		this.fireTableDataChanged();
 	}
 
 	public Estado get(int rowIndex) {
