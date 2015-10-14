@@ -31,6 +31,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
+import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -52,6 +53,13 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JScrollPane scrollPane;
 	private JLabel lblTotalPesquisas;
 	private JTextField textField;
+	private JPanel panel;
+	private JLabel lblId;
+	private JLabel lblNome;
+	private JLabel lblNewLabel;
+	private JButton btnSalvar;
+	private JButton btnCancelar;
+	private JLabel lblDescrio;
 
 	/**
 	 * Launch the application.
@@ -131,15 +139,16 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		super("Cadastro de Pesquisa", connection);
 		this.initComponents();
 		this.setSize(952, 588);
+		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{this.nomeField, this.descricaoField, this.limiteField, getContentPane(), this.panel, this.btnSalvar, this.btnCancelar, this.btnExcluir, this.btnPesquisar, this.novaPesquisaBotao, this.scrollPane_1, this.table, this.btnNewButton, this.scrollPane, this.lblTotalPesquisas}));
 	}
 
 	private void initComponents() {
 
-		JPanel panel = new JPanel();
+		panel = new JPanel();
 		this.getContentPane().add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
 
-		JLabel lblId = new JLabel("ID");
+		lblId = new JLabel("ID");
 		lblId.setBounds(11, 11, 17, 14);
 		panel.add(lblId);
 
@@ -150,7 +159,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.codigoField);
 		this.codigoField.setColumns(10);
 
-		JLabel lblNome = new JLabel("Nome");
+		lblNome = new JLabel("Nome");
 		lblNome.setBounds(50, 11, 46, 14);
 		panel.add(lblNome);
 
@@ -169,7 +178,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.nomeField);
 		this.nomeField.setColumns(10);
 
-		JLabel lblNewLabel = new JLabel("Limite de Especialistas");
+		lblNewLabel = new JLabel("Limite de Especialistas");
 		lblNewLabel.setBounds(12, 449, 187, 14);
 		panel.add(lblNewLabel);
 
@@ -184,18 +193,18 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.limiteField);
 		this.limiteField.setColumns(10);
 
-		JButton btnSalvar = new JButton("Salvar");
+		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(e -> FrmCadastroPesquisa.this.btnSalvarActionPerformed(e));
 
 		btnSalvar.setBounds(11, 506, 89, 23);
 		panel.add(btnSalvar);
 
-		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(e -> FrmCadastroPesquisa.this.dispose());
 		btnCancelar.setBounds(110, 506, 89, 23);
 		panel.add(btnCancelar);
 
-		JLabel lblDescrio = new JLabel("Descrição");
+		lblDescrio = new JLabel("Descrição");
 		lblDescrio.setBounds(50, 303, 64, 14);
 		panel.add(lblDescrio);
 
@@ -270,7 +279,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		
 		this.textField = new JTextField();
 		this.textField.setEditable(false);
-		this.textField.setBounds(551, 191, 86, 20);
+		this.textField.setBounds(551, 191, 46, 20);
 		panel.add(this.textField);
 		this.textField.setColumns(10);
 		setTotal();
