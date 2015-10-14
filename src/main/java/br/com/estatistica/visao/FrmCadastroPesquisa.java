@@ -24,6 +24,10 @@ import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
+import java.awt.Component;
+import javax.swing.border.SoftBevelBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.Color;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -116,7 +120,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(btnCancelar);
 
 		JLabel lblDescrio = new JLabel("Descrição");
-		lblDescrio.setBounds(11, 303, 64, 14);
+		lblDescrio.setBounds(50, 303, 64, 14);
 		panel.add(lblDescrio);
 
 		this.btnPesquisar = new JButton("Pesquisar");
@@ -125,6 +129,13 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.btnPesquisar);
 
 		this.scrollPane_1 = new JScrollPane();
+		this.scrollPane_1.addKeyListener(new KeyAdapter() {
+			
+			@Override
+			public void keyTyped(KeyEvent e) {
+				
+			}
+		});
 		this.scrollPane_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
@@ -151,10 +162,13 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.table.setCellSelectionEnabled(true);
 		this.scrollPane_1.setViewportView(this.table);
 		this.table.setModel(this.getTableModelTodos());
-
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
+		table.getColumnModel().getColumn(2).setPreferredWidth(73); 
 		this.btnNewButton = new JButton("Selecionar Pesquisa");
 		this.btnNewButton.addActionListener(arg0 -> FrmCadastroPesquisa.this.btnNewButtonActionPerformed(arg0));
-		this.btnNewButton.setBounds(50, 269, 187, 23);
+		this.btnNewButton.setBounds(50, 269, 175, 23);
 		panel.add(this.btnNewButton);
 
 		this.novaPesquisaBotao = new JButton("Nova Pesquisa");
@@ -168,7 +182,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.btnExcluir);
 
 		this.scrollPane = new JScrollPane();
-		this.scrollPane.setBounds(11, 324, 434, 114);
+		this.scrollPane.setBounds(50, 324, 491, 114);
 		panel.add(this.scrollPane);
 
 		this.descricaoField = new JTextArea();
@@ -199,6 +213,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 
 		return this.modeloTabelaPesquisa;
 	}
+	
 
 	protected void btnSalvarActionPerformed(ActionEvent e) {
 		if (this.codigoField.getText().equals(" ")) {
@@ -255,9 +270,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.nomeField.setText(null);
 		this.descricaoField.setText(null);
 		this.limiteField.setText(null);
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
+		table.getColumnModel().getColumn(2).setPreferredWidth(73); 
 	}
-
-	protected void btnExcluirActionPerformed(ActionEvent arg0) {
+	protected void excluir(){
 		try {
 			if (this.codigoField.getText() != null) {
 				Integer idPesquisaDeletar = Integer.parseInt(this.codigoField.getText());
@@ -268,12 +285,20 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 				this.nomeField.setText(null);
 				this.descricaoField.setText(null);
 				this.limiteField.setText(null);
+				table.getColumnModel().getColumn(0).setPreferredWidth(200);  
+				table.getColumnModel().getColumn(1).setPreferredWidth(200);   
+				table.getColumnModel().getColumn(2).setPreferredWidth(73); 
 			}
 
 		} catch (NumberFormatException | SQLException e) {
 			Mensagem.erro(this, e);
 		}
 	}
+		
+	protected void btnExcluirActionPerformed(ActionEvent arg0) {
+		excluir();
+	}
+		
 
 	protected void scrollPane_1MouseClicked(MouseEvent e) {
 		if (e.getClickCount() == 2) {
@@ -285,6 +310,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		if (e.getClickCount() == 2) {
 			this.selecionaPesquisa();
 		}
+		
 
 	}
 
@@ -292,5 +318,14 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			this.selecionaPesquisa();
 		}
+		else {
+			if (e.getKeyCode() == KeyEvent.VK_DELETE) {
+				excluir();	 
+				}
 	}
-}
+	
+
+	}
+	
+	}
+
