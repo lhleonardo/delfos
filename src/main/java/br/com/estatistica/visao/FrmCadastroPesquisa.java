@@ -155,6 +155,16 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(lblNome);
 
 		this.nomeField = new JTextField();
+		this.nomeField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				nomeFieldKeyPressed(e);
+			}
+			@Override
+			public void keyTyped(KeyEvent e) {
+				nomeFieldKeyTyped(e);
+			}
+		});
 		this.nomeField.setBounds(50, 27, 491, 20);
 		panel.add(this.nomeField);
 		this.nomeField.setColumns(10);
@@ -296,6 +306,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
 		this.table.setModel(this.getTableModelPesquisa());
+		setTamanhoColunas();
 	}
 
 	protected void selecionaPesquisa() {
@@ -376,6 +387,20 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	protected void limiteFieldKeyPressed(KeyEvent arg0) {
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
 			salvar();
+		}
+	}
+	protected void nomeFieldKeyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_TAB) {
+			descricaoField.requestFocus();
+			
+			
+		}
+	}
+	protected void nomeFieldKeyTyped(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_TAB) {
+			descricaoField.requestFocus(true);
+			
+			
 		}
 	}
 	}
