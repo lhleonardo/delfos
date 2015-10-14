@@ -61,6 +61,13 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 			}
 		});
 	}
+	
+	protected void setTamanhoColunas(){
+		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
+		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
+		table.getColumnModel().getColumn(2).setPreferredWidth(73);
+		}
 
 	/**
 	 * Create the frame.
@@ -146,13 +153,14 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(this.scrollPane_1);
 
 		this.table = new JTable();
-
+		
 		this.table.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				FrmCadastroPesquisa.this.tableKeyPressed(e);
 			}
 		});
+		
 		this.table.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -162,10 +170,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.table.setCellSelectionEnabled(true);
 		this.scrollPane_1.setViewportView(this.table);
 		this.table.setModel(this.getTableModelTodos());
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
-		table.getColumnModel().getColumn(2).setPreferredWidth(73); 
+		setTamanhoColunas();
 		this.btnNewButton = new JButton("Selecionar Pesquisa");
 		this.btnNewButton.addActionListener(arg0 -> FrmCadastroPesquisa.this.btnNewButtonActionPerformed(arg0));
 		this.btnNewButton.setBounds(50, 269, 175, 23);
@@ -245,6 +250,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 
 		this.table.setModel(this.getTableModelTodos());
 		Toolkit.getDefaultToolkit().beep();
+		setTamanhoColunas();
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
@@ -262,6 +268,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 
 	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
 		this.selecionaPesquisa();
+		setTamanhoColunas();
 	}
 
 	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
@@ -270,9 +277,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.nomeField.setText(null);
 		this.descricaoField.setText(null);
 		this.limiteField.setText(null);
-		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
-		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
-		table.getColumnModel().getColumn(2).setPreferredWidth(73); 
+		setTamanhoColunas();
 	}
 	protected void excluir(){
 		try {
