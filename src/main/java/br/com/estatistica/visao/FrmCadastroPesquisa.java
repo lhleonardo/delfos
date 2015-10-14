@@ -24,9 +24,12 @@ import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
+
 import java.awt.Component;
+
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
+
 import java.awt.Color;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
@@ -47,6 +50,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JButton novaPesquisaBotao;
 	private JButton btnExcluir;
 	private JScrollPane scrollPane;
+	private JLabel lblTotalPesquisas;
+	private JTextField textField;
 
 	/**
 	 * Launch the application.
@@ -62,12 +67,24 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		});
 	}
 	
-	protected void setTamanhoColunas(){
+	protected void setTamanhoColunas(){  // método que arruma o tamanho dos campos da tabela 
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
 		table.getColumnModel().getColumn(2).setPreferredWidth(73);
 		}
+	protected void setTotal(){
+		String a = "oi";
+		try {
+			a =Integer.toString( pesquisaDAO.getAll().size());
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		textField.setText(a);
+		
+		
+	}
 
 	/**
 	 * Create the frame.
@@ -194,6 +211,17 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.scrollPane.setViewportView(this.descricaoField);
 		this.descricaoField.setLineWrap(true);
 		this.descricaoField.setWrapStyleWord(true);
+		
+		this.lblTotalPesquisas = new JLabel("Total Pesquisas");
+		this.lblTotalPesquisas.setBounds(551, 166, 96, 14);
+		panel.add(this.lblTotalPesquisas);
+		
+		this.textField = new JTextField();
+		this.textField.setEditable(false);
+		this.textField.setBounds(551, 191, 86, 20);
+		panel.add(this.textField);
+		this.textField.setColumns(10);
+		setTotal();
 	}
 
 	private TableModelPesquisa getTableModelTodos() {
@@ -251,6 +279,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.table.setModel(this.getTableModelTodos());
 		Toolkit.getDefaultToolkit().beep();
 		setTamanhoColunas();
+		setTotal();
+		
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
@@ -269,6 +299,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
 		this.selecionaPesquisa();
 		setTamanhoColunas();
+		setTotal();
 	}
 
 	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
@@ -278,6 +309,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.descricaoField.setText(null);
 		this.limiteField.setText(null);
 		setTamanhoColunas();
+		setTotal();
 	}
 	protected void excluir(){
 		try {
@@ -290,9 +322,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 				this.nomeField.setText(null);
 				this.descricaoField.setText(null);
 				this.limiteField.setText(null);
-				table.getColumnModel().getColumn(0).setPreferredWidth(200);  
-				table.getColumnModel().getColumn(1).setPreferredWidth(200);   
-				table.getColumnModel().getColumn(2).setPreferredWidth(73); 
+				setTamanhoColunas();
+				setTotal();
 			}
 
 		} catch (NumberFormatException | SQLException e) {
@@ -331,6 +362,5 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	
 
 	}
-	
 	}
 

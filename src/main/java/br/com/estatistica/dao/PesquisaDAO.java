@@ -14,6 +14,7 @@ import br.com.estatistica.util.Mensagem;
 public class PesquisaDAO extends GenericDAO<Pesquisa> {
 
 	private static final String SQL_SELECT = "SELECT * FROM Pesquisa";
+	private static final String SQL_SELECTCOUNT = "SELECT COUNT(*) as 'Total' FROM Pesquisa";
 	@SuppressWarnings("unused")
 	private static final String SQL_SELECT_WHERE = SQL_SELECT + " WHERE id_especialista = ? AND data = ?";
 	@SuppressWarnings("unused")
@@ -76,7 +77,6 @@ public class PesquisaDAO extends GenericDAO<Pesquisa> {
 		}
 
 	}
-	
 	@Override
 	public List<Pesquisa> getAll() throws SQLException {
 		List<Pesquisa> pesquisas = new ArrayList<Pesquisa>();
