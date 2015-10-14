@@ -85,6 +85,42 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		
 		
 	}
+	
+	protected void salvar(){
+		if (this.codigoField.getText().equals(" ")) {
+			try {
+				Integer limiteEspecialistas = Integer.parseInt(this.limiteField.getText());
+				Pesquisa p1 = new Pesquisa(null, this.nomeField.getText(), this.descricaoField.getText(), limiteEspecialistas);
+				Integer idNovaPesquisa = this.pesquisaDAO.save(p1);
+				this.codigoField.setText(Integer.toString(idNovaPesquisa));
+			} catch (SQLException e1) {
+				System.out.println("Erro SQL");
+			} catch (NumberFormatException e2) {
+				javax.swing.JOptionPane.showMessageDialog(null, "É necessário informar o Limite de Especialistas.");
+			}
+
+		} else {
+			try {
+				Integer idPesquisaSelecionada = Integer.parseInt(this.codigoField.getText());
+				Integer limiteEspecialistas = Integer.parseInt(this.limiteField.getText());
+				Pesquisa p1 = new Pesquisa(idPesquisaSelecionada, this.nomeField.getText(), this.descricaoField.getText(),
+						limiteEspecialistas);
+				this.pesquisaDAO.save(p1);
+			} catch (SQLException e1) {
+				System.out.println("Erro SQL");
+			} catch (NumberFormatException e2) {
+				javax.swing.JOptionPane.showMessageDialog(null, "É necessário informar o Limite de Especialistas.");
+			}
+
+		}
+
+		this.table.setModel(this.getTableModelTodos());
+		Toolkit.getDefaultToolkit().beep();
+		setTamanhoColunas();
+		setTotal();
+		
+		
+	}
 
 	/**
 	 * Create the frame.
@@ -128,6 +164,12 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		panel.add(lblNewLabel);
 
 		this.limiteField = new JTextField();
+		this.limiteField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent arg0) {
+				limiteFieldKeyPressed(arg0);
+			}
+		});
 		this.limiteField.setBounds(12, 465, 46, 20);
 		panel.add(this.limiteField);
 		this.limiteField.setColumns(10);
@@ -249,38 +291,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	
 
 	protected void btnSalvarActionPerformed(ActionEvent e) {
-		if (this.codigoField.getText().equals(" ")) {
-			try {
-				Integer limiteEspecialistas = Integer.parseInt(this.limiteField.getText());
-				Pesquisa p1 = new Pesquisa(null, this.nomeField.getText(), this.descricaoField.getText(), limiteEspecialistas);
-				Integer idNovaPesquisa = this.pesquisaDAO.save(p1);
-				this.codigoField.setText(Integer.toString(idNovaPesquisa));
-			} catch (SQLException e1) {
-				System.out.println("Erro SQL");
-			} catch (NumberFormatException e2) {
-				javax.swing.JOptionPane.showMessageDialog(null, "É necessário informar o Limite de Especialistas.");
-			}
-
-		} else {
-			try {
-				Integer idPesquisaSelecionada = Integer.parseInt(this.codigoField.getText());
-				Integer limiteEspecialistas = Integer.parseInt(this.limiteField.getText());
-				Pesquisa p1 = new Pesquisa(idPesquisaSelecionada, this.nomeField.getText(), this.descricaoField.getText(),
-						limiteEspecialistas);
-				this.pesquisaDAO.save(p1);
-			} catch (SQLException e1) {
-				System.out.println("Erro SQL");
-			} catch (NumberFormatException e2) {
-				javax.swing.JOptionPane.showMessageDialog(null, "É necessário informar o Limite de Especialistas.");
-			}
-
-		}
-
-		this.table.setModel(this.getTableModelTodos());
-		Toolkit.getDefaultToolkit().beep();
-		setTamanhoColunas();
-		setTotal();
-		
+		salvar();
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
@@ -361,6 +372,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	}
 	
 
+	}
+	protected void limiteFieldKeyPressed(KeyEvent arg0) {
+		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+			salvar();
+		}
 	}
 	}
 
