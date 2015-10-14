@@ -31,7 +31,6 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 
 import java.awt.Color;
-import org.eclipse.wb.swing.FocusTraversalOnArray;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
@@ -139,7 +138,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		super("Cadastro de Pesquisa", connection);
 		this.initComponents();
 		this.setSize(952, 588);
-		setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{this.nomeField, this.descricaoField, this.limiteField, getContentPane(), this.panel, this.btnSalvar, this.btnCancelar, this.btnExcluir, this.btnPesquisar, this.novaPesquisaBotao, this.scrollPane_1, this.table, this.btnNewButton, this.scrollPane, this.lblTotalPesquisas}));
 	}
 
 	private void initComponents() {
