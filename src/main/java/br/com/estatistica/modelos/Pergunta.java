@@ -100,7 +100,7 @@ public class Pergunta implements Identificator {
 		return tipoPergunta;
 	}
 
-	public void setTipoPergunta(TipoPergunta tipoPergunta) {
+	public void setTipoPergunta(String aValue) {
 		this.tipoPergunta = tipoPergunta;
 	}
 
