@@ -6,10 +6,12 @@ import java.sql.SQLException;
 import java.util.List;
 
 import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.util.Mensagem;
 
 public class PesquisadorParticipaPesquisaDAO extends GenericDAO<Pesquisa> {
 
 	private static final String SQL_INSERT = "INSERT INTO Pesquisador_responsavel_pesquisa(id_pesquisa, id_pesquisador) VALUES(?,?)";
+	private static final String SQL_DELETE = "DELETE FROM Pesquisador_responsavel_pesquisa WHERE id_pesquisador_responsavel_pesquisa = ?";
 	
 	public PesquisadorParticipaPesquisaDAO(Connection connection) {
 		super(connection);
@@ -36,8 +38,22 @@ public class PesquisadorParticipaPesquisaDAO extends GenericDAO<Pesquisa> {
 	
 	@Override
 	public boolean delete(Pesquisa model) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		if (model.getId() != null) {
+			try (PreparedStatement pst = super.getConnection().prepareStatement(SQL_DELETE)) {
+				pst.setInt(1, model.getId());
+				
+				pst.executeUpdate();
+			}
+			if (this.get(model.getId()) == null) {
+				Mensagem.informa(null, "Excluído com sucesso.");
+				return true;
+			} else {
+				Mensagem.aviso(null, "O registro não foi excluído corretamente, tente novamente mais tarde.");
+				return false;
+			}
+		} else {
+			throw new IllegalArgumentException("Informe um usuário antes de prosseguir.");
+		}
 	}
 	
 	@Override
