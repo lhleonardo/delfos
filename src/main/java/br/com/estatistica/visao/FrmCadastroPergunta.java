@@ -36,6 +36,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 	public FrmCadastroPergunta(Connection connection) {
 		super("Cadastro de Perguntas", connection);
 
+		
 		JPanel coeficientes = new JPanel();
 		this.getContentPane().add(coeficientes, BorderLayout.CENTER);
 		coeficientes.setLayout(null);
@@ -143,6 +144,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		Pergunta p1 = new Pergunta(FrmCadastroPergunta.this.pergunta.getText(),
 				FrmCadastroPergunta.this.desc.getText(),
 				FrmCadastroPergunta.this.obs.getText(), null, null, null);
+		
 		try {
 			dao = new PerguntaDAO(getConnection());
 			Integer idNovaPesquisa = dao.save(p1);
