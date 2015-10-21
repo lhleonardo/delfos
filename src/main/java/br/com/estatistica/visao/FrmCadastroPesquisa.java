@@ -25,12 +25,6 @@ import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
-import java.awt.Component;
-
-import javax.swing.border.SoftBevelBorder;
-import javax.swing.border.BevelBorder;
-
-import java.awt.Color;
 
 public class FrmCadastroPesquisa extends GenericFormCadastro {
 	/**
