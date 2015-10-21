@@ -74,6 +74,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		table.getColumnModel().getColumn(0).setPreferredWidth(200);  
 		table.getColumnModel().getColumn(1).setPreferredWidth(200);   
 		table.getColumnModel().getColumn(2).setPreferredWidth(73);
+		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		}
 	protected void setTotal(){
 		String a = "oi";
