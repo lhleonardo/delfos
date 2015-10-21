@@ -43,8 +43,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JButton novaPesquisaBotao;
 	private JButton btnExcluir;
 	private JScrollPane scrollPane;
-	private JLabel lblTotalPesquisas;
-	private JTextField textField;
 	private JPanel panel;
 	private JLabel lblId;
 	private JLabel lblNome;
@@ -76,18 +74,10 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		table.getColumnModel().getColumn(2).setPreferredWidth(73);
 		scrollPane_1.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		}
-	protected void setTotal(){
-		String a = "oi";
-		try {
-			a =Integer.toString( pesquisaDAO.getAll().size());
-		} catch (SQLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		textField.setText(a);
+	
 		
 		
-	}
+	
 	
 	protected void salvar(){
 		if (this.codigoField.getText().equals(" ")) {
@@ -120,7 +110,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.table.setModel(this.getTableModelTodos());
 		Toolkit.getDefaultToolkit().beep();
 		setTamanhoColunas();
-		setTotal();
+
 		
 		
 	}
@@ -263,16 +253,6 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.descricaoField.setLineWrap(true);
 		this.descricaoField.setWrapStyleWord(true);
 		
-		this.lblTotalPesquisas = new JLabel("Total Pesquisas");
-		this.lblTotalPesquisas.setBounds(512, 184, 96, 14);
-		panel.add(this.lblTotalPesquisas);
-		
-		this.textField = new JTextField();
-		this.textField.setEditable(false);
-		this.textField.setBounds(512, 209, 46, 20);
-		panel.add(this.textField);
-		this.textField.setColumns(10);
-		
 		this.textField_1 = new JTextField();
 		this.textField_1.setEditable(false);
 		this.textField_1.setBounds(11, 270, 86, 20);
@@ -282,7 +262,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.lblData = new JLabel("Data");
 		this.lblData.setBounds(11, 255, 46, 14);
 		this.panel.add(this.lblData);
-		setTotal();
+		
 	}
 
 	private TableModelPesquisa getTableModelTodos() {
@@ -330,7 +310,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	protected void btnNewButtonActionPerformed(ActionEvent arg0) {
 		this.selecionaPesquisa();
 		setTamanhoColunas();
-		setTotal();
+	
 	}
 
 	protected void novaPesquisaBotaoActionPerformed(ActionEvent e) {
@@ -340,8 +320,8 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.descricaoField.setText(null);
 		this.limiteField.setText(null);
 		setTamanhoColunas();
-		setTotal();
 	}
+	
 	protected void excluir(){
 		try {
 			if (this.codigoField.getText() != null) {
@@ -354,7 +334,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 				this.descricaoField.setText(null);
 				this.limiteField.setText(null);
 				setTamanhoColunas();
-				setTotal();
+			
 			}
 
 		} catch (NumberFormatException | SQLException e) {
