@@ -1,6 +1,7 @@
 package br.com.estatistica.visao;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
 
@@ -12,10 +13,9 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import br.com.estatistica.dao.PerguntaDAO;
-
 import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPergunta;
-
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
@@ -35,7 +35,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 
 	public FrmCadastroPergunta(Connection connection) {
 		super("Cadastro de Perguntas", connection);
-
+				
 		
 		JPanel coeficientes = new JPanel();
 		this.getContentPane().add(coeficientes, BorderLayout.CENTER);
@@ -138,8 +138,31 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 
 		return this.modeloTabelaPergunta;
 	}
-	
+	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
+		this.table.setModel(this.getTableModelPergunta());
+		
+	}
 
+	protected void excluir(){
+		try {
+			if (this.idPergunta.getText() != null) {
+				Integer idPerguntaDeletar = Integer.parseInt(this.idPergunta.getText());
+				Pergunta p1 = new Pergunta(idPerguntaDeletar);
+				this.dao.delete(p1);
+				this.table.setModel(this.getTableModelTodos());
+				this.idPergunta.setText(" ");
+				this.pergunta.setText(null);
+				this.desc.setText(null);
+				
+				//setTamanhoColunas();
+			
+			}
+
+		} catch (NumberFormatException | SQLException e) {
+			Mensagem.erro(this, e);
+		}
+		}
+	
 	private void btnSalvarActionPerformed() {
 		Pergunta p1 = new Pergunta(FrmCadastroPergunta.this.pergunta.getText(),
 				FrmCadastroPergunta.this.desc.getText(),
@@ -147,8 +170,8 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		
 		try {
 			dao = new PerguntaDAO(getConnection());
-			Integer idNovaPesquisa = dao.save(p1);
-			System.out.println(idNovaPesquisa);
+			Integer idNovaPergunta = dao.save(p1);
+			System.out.println(idNovaPergunta);
 		} catch (SQLException e1) {
 			Mensagem.erro(this, e1);
 		}

@@ -65,16 +65,16 @@ public class PerguntaDAO extends GenericDAO<Pergunta> {
 	}
 
 	@Override
-	public boolean delete(Pergunta model) throws SQLException {
-		if (model.getId() != null) {
+	public boolean delete(Pergunta p1) throws SQLException {
+		if (p1.getId() != null) {
 			try (PreparedStatement pst = super.getConnection()
 					.prepareStatement(SQL_DELETE)) {
-				pst.setInt(1, model.getId());
+				pst.setInt(1, p1.getId());
 
 				pst.executeUpdate();
 
 			}
-			if (this.get(model.getId()) == null) {
+			if (this.get(p1.getId()) == null) {
 				Mensagem.informa(null, "Excluído com sucesso.");
 				return true;
 			} else {
