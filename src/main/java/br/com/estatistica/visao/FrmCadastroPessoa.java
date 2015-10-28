@@ -19,18 +19,18 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.com.estatistica.bean.TipoLogradouroFormatter;
+import br.com.estatistica.dao.LogradouroDAO;
 import br.com.estatistica.dao.PessoaDAO;
-import br.com.estatistica.dao.TipoLogradouroDAO;
 import br.com.estatistica.modelos.Bairro;
 import br.com.estatistica.modelos.Cidade;
 import br.com.estatistica.modelos.Cnpj;
 import br.com.estatistica.modelos.Cpf;
 import br.com.estatistica.modelos.Endereco;
 import br.com.estatistica.modelos.Especialista;
+import br.com.estatistica.modelos.Logradouro;
 import br.com.estatistica.modelos.Pesquisador;
 import br.com.estatistica.modelos.PesquisadorEspecialista;
 import br.com.estatistica.modelos.Pessoa;
-import br.com.estatistica.modelos.TipoLogradouro;
 import br.com.estatistica.modelos.table.ObjectComboBoxModel;
 import br.com.estatistica.util.Mensagem;
 
@@ -80,11 +80,11 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 	private JLabel lblDescrio_1;
 	private JTextArea txtEnderecoDescricao;
 	private JScrollPane scrollPane_1;
-	private ObjectComboBoxModel<TipoLogradouro> comboBoxModel;
-	private TipoLogradouroDAO tDao;
+	private ObjectComboBoxModel<Logradouro> comboBoxModel;
+	private LogradouroDAO tDao;
 
 	private Bairro bairro = null;
-	private TipoLogradouro tipoLogradouro = null;
+	private Logradouro tipoLogradouro = null;
 	private Cidade cidade = null;
 	private PessoaDAO pDao;
 	private Integer idEndereco;
@@ -191,7 +191,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.panel_1.add(this.txtLogradouro);
 		this.txtLogradouro.setColumns(10);
 
-		this.comboBoxModel = new ObjectComboBoxModel<TipoLogradouro>();
+		this.comboBoxModel = new ObjectComboBoxModel<Logradouro>();
 		this.comboBoxModel.setFormatter(new TipoLogradouroFormatter());
 		this.preencheComboBox();
 		this.cbLogradouro = new JComboBox(this.comboBoxModel);
@@ -282,12 +282,12 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 
 	private void preencheComboBox() {
 		try {
-			this.tDao = new TipoLogradouroDAO(this.getConnection());
-			List<TipoLogradouro> all = this.tDao.getAll();
+			this.tDao = new LogradouroDAO(this.getConnection());
+			List<Logradouro> all = this.tDao.getAll();
 
 			this.comboBoxModel.add(null);
 
-			for (TipoLogradouro tipoLogradouro : all) {
+			for (Logradouro tipoLogradouro : all) {
 				this.comboBoxModel.add(tipoLogradouro);
 			}
 		} catch (SQLException e) {

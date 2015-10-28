@@ -8,12 +8,12 @@ import br.com.estatistica.extractors.Extractable;
 import br.com.estatistica.modelos.Bairro;
 import br.com.estatistica.modelos.Cidade;
 import br.com.estatistica.modelos.Endereco;
-import br.com.estatistica.modelos.TipoLogradouro;
+import br.com.estatistica.modelos.Logradouro;
 
 public class EnderecoExtractor extends Extractable<Endereco> {
 
 	private BairroDAO dao;
-	private TipoLogradouroDAO tlDao;
+	private LogradouroDAO tlDao;
 	private CidadeDAO cDao;
 
 	@Override
@@ -42,7 +42,7 @@ public class EnderecoExtractor extends Extractable<Endereco> {
 	private Cidade extractCidade(int int1, Connection con) throws SQLException {
 
 		this.cDao = new CidadeDAO(con);
-		
+
 		return this.cDao.get(int1);
 	}
 
@@ -52,8 +52,8 @@ public class EnderecoExtractor extends Extractable<Endereco> {
 	 * @return
 	 * @throws SQLException
 	 */
-	private TipoLogradouro extractLogradouro(int idTipoLogradouro, Connection con) throws SQLException {
-		this.tlDao = new TipoLogradouroDAO(con);
+	private Logradouro extractLogradouro(int idTipoLogradouro, Connection con) throws SQLException {
+		this.tlDao = new LogradouroDAO(con);
 
 		return this.tlDao.get(idTipoLogradouro);
 	}

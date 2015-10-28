@@ -9,19 +9,19 @@ package br.com.estatistica.modelos;
  * @since 1.5
  */
 public class Endereco implements Identificator {
-	
+
 	private Integer id;
 	private String logradouro;
 	private String descricao;
 	private String numero;
 	private String cep;
-	
-	private TipoLogradouro tipoLogradouro;
+
+	private Logradouro tipoLogradouro;
 	private Bairro bairro;
 	private Cidade cidade;
-	
-	public Endereco(Integer id, String logradouro, TipoLogradouro tipoLogradouro, String descricao, String numero, String cep,
-	        Bairro bairro, Cidade cidade) {
+
+	public Endereco(Integer id, String logradouro, Logradouro tipoLogradouro, String descricao, String numero, String cep, Bairro bairro,
+	        Cidade cidade) {
 		this.id = id;
 		this.logradouro = logradouro;
 		this.tipoLogradouro = tipoLogradouro;
@@ -31,82 +31,82 @@ public class Endereco implements Identificator {
 		this.bairro = bairro;
 		this.cidade = cidade;
 	}
-	
+
 	public Endereco() {
 		super();
 	}
-	
+
 	@Override
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
-	
+
 	public String getLogradouro() {
 		return this.logradouro;
 	}
-	
+
 	public void setLogradouro(String logradouro) {
 		this.logradouro = logradouro;
 	}
-	
-	public TipoLogradouro getTipoLogradouro() {
+
+	public Logradouro getTipoLogradouro() {
 		return this.tipoLogradouro;
 	}
-	
-	public void setTipoLogradouro(TipoLogradouro tipoLogradouro) {
+
+	public void setTipoLogradouro(Logradouro tipoLogradouro) {
 		this.tipoLogradouro = tipoLogradouro;
 	}
-	
+
 	public String getDescricao() {
 		return this.descricao;
 	}
-	
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	public String getNumero() {
 		return this.numero;
 	}
-	
+
 	public void setNumero(String numero) {
 		this.numero = numero;
 	}
-	
+
 	public String getCep() {
 		return this.cep;
 	}
-	
+
 	public void setCep(String cep) {
 		this.cep = cep;
 	}
-	
+
 	public Bairro getBairro() {
 		return this.bairro;
 	}
-	
+
 	public void setBairro(Bairro bairro) {
 		this.bairro = bairro;
 	}
-	
+
 	public Cidade getCidade() {
 		return this.cidade;
 	}
-	
+
 	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
-	
+
 	@Override
 	public void validate() {
 		if (this.tipoLogradouro == null || this.logradouro == null || this.numero == null || this.cidade == null) {
 			throw new IllegalArgumentException(
-			        "Deve ser informado o tipo de logradouro, o logradouro, o número e a cidade para o Endereço em questão.");
+					"Deve ser informado o tipo de logradouro, o logradouro, o número e a cidade para o Endereço em questão.");
 		}
 	}
-	
+
 }

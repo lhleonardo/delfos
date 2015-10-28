@@ -36,28 +36,28 @@ import br.com.estatistica.util.Mensagem;
  * @param <TableModel>
  */
 public abstract class GenericDialogConsulta<Identify extends Identificator, DAO extends GenericDAO<Identify>, TableModel extends AbstractTableModel>
-        extends JDialog {
-	
+extends JDialog {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	private Connection connection;
-	
+
 	protected DAO dao;
-	
+
 	protected List<Identify> resultados;
 	protected List<Identify> selecionadas;
 	protected JTable tbResultados;
-	
+
 	protected TableModel tableModel;
-	
+
 	private boolean btnOkPressed;
-	
+
 	public GenericDialogConsulta(Frame owner, String title, Connection connection) {
 		super(owner, title);
 		this.connection = connection;
 		this.initComponents();
 	}
-	
+
 	private void initComponents() {
 		this.setBounds(100, 100, 643, 477);
 		this.getContentPane().setLayout(new BorderLayout());
@@ -71,7 +71,7 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		});
 		buttonPane.add(okButton);
 		this.getRootPane().setDefaultButton(okButton);
-		
+
 		JPanel panel = new JPanel();
 		panel.setBackground(Color.DARK_GRAY);
 		this.getContentPane().add(panel, BorderLayout.WEST);
@@ -81,7 +81,7 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		gbl_panel.columnWeights = new double[] { 0.0, 1.0, 0.0, Double.MIN_VALUE };
 		gbl_panel.rowWeights = new double[] { 1.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-		
+
 		JPanel panel_1 = new JPanel();
 		panel_1.setLayout(null);
 		panel_1.setBackground(Color.DARK_GRAY);
@@ -92,19 +92,19 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		gbc_panel_1.gridx = 0;
 		gbc_panel_1.gridy = 0;
 		panel.add(panel_1, gbc_panel_1);
-		
+
 		JLabel lblIcon = new JLabel();
 		lblIcon.setForeground(new Color(220, 220, 220));
 		lblIcon.setIcon(new ImageIcon(GenericDialogConsulta.class
-		        .getResource("/br/com/estatistica/util/icons/logo/Logo-vers-1(16-09)min.png")));
+				.getResource("/br/com/estatistica/util/icons/logo/Logo-vers-1(16-09)min.png")));
 		lblIcon.setFont(new Font("Calibri Light", Font.BOLD, 20));
 		lblIcon.setBounds(13, 11, 143, 81);
 		panel_1.add(lblIcon);
-		
+
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(3, 103, 187, 1);
 		panel_1.add(panel_2);
-		
+
 		JPanel panel_3 = new JPanel();
 		panel_3.setBackground(Color.DARK_GRAY);
 		GridBagConstraints gbc_panel_3 = new GridBagConstraints();
@@ -122,53 +122,53 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		gbl_panel_3.rowWeights = new double[] { 0.0, Double.MIN_VALUE };
 		panel_3.setLayout(gbl_panel_3);
 	}
-	
+
 	/**
 	 *
 	 */
 	protected void btnOkActionPerformed() {
 		int[] selectedRows = this.tbResultados.getSelectedRows();
-		
+
 		this.selecionadas = new ArrayList<Identify>();
-		
+
 		for (int row : selectedRows) {
 			this.selecionadas.add(this.resultados.get(row));
 		}
-
+		
 		this.setBtnOkPressed(true);
-
+		
 		this.dispose();
 	}
-	
+
 	/**
 	 * @return the selecionadas
 	 */
 	public List<Identify> getSelecionadas() {
 		return this.selecionadas;
 	}
-	
+
 	/**
 	 * @return the connection
 	 */
 	protected Connection getConnection() {
 		return this.connection;
 	}
-	
+
 	public boolean execute() {
 		this.btnOkPressed = false;
 		this.setModal(true);
 		this.setVisible(true);
 		return this.btnOkPressed;
 	}
-	
+
 	protected GenericDAO<?> initializeDAO(GenericDAO<?> dao) throws SQLException {
 		if (dao.getConnection().isClosed() || dao.getConnection() == null) {
 			dao.setConnection(this.getConnection());
 		}
-		
+
 		return dao;
 	}
-	
+
 	/**
 	 * @param btnOkPressed
 	 *            the btnOkPressed to set
@@ -176,11 +176,11 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 	protected void setBtnOkPressed(boolean btnOkPressed) {
 		this.btnOkPressed = btnOkPressed;
 	}
-	
+
 	protected boolean isBtnOkPressed() {
 		return this.btnOkPressed;
 	}
-	
+
 	/**
 	 * @return
 	 * @throws SQLException
@@ -196,13 +196,14 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		try {
 			this.initializeTableModel();
 			table = this.newInstanceTableModel();
+
 		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | SQLException
-		        | NoSuchMethodException | SecurityException ex) {
+				| NoSuchMethodException | SecurityException ex) {
 			Mensagem.erro(this, ex);
 		}
 		return table;
 	}
-	
+
 	/**
 	 * @return
 	 * @throws InvocationTargetException
@@ -214,14 +215,14 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 	 */
 	@SuppressWarnings("unchecked")
 	private TableModel newInstanceTableModel() throws InstantiationException, IllegalAccessException, IllegalArgumentException,
-	        InvocationTargetException, NoSuchMethodException, SecurityException {
+	InvocationTargetException, NoSuchMethodException, SecurityException {
 		Class<TableModel> clazz = ((Class<TableModel>) ((ParameterizedType) this.getClass().getGenericSuperclass())
-		        .getActualTypeArguments()[2]);
+				.getActualTypeArguments()[2]);
 		return clazz.newInstance();
 	}
-	
+
 	protected abstract void initializeTableModel() throws SQLException;
-	
+
 	protected JTable getTbResultados() throws SQLException {
 		JTable table = new JTable();
 		table.setCellSelectionEnabled(true);
@@ -230,9 +231,9 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		table.setCellSelectionEnabled(false);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		
+
 		table.addMouseListener(new MouseAdapter() {
-			
+
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if (e.getClickCount() == 2) {
@@ -242,5 +243,5 @@ public abstract class GenericDialogConsulta<Identify extends Identificator, DAO 
 		});
 		return table;
 	}
-	
+
 }

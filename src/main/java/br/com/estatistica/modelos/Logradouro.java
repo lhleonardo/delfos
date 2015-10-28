@@ -1,43 +1,35 @@
 package br.com.estatistica.modelos;
 
 /**
- * Classe responsável por representar um tipo de logradouro para um determinado endereço.
- *
- * EX: Rua, Avenida, etc.
- *
- * @version 1.0
  * @author Leonardo Braz
- * @since 1.5
+ *
  */
-
-public class TipoLogradouro implements Identificator {
+public class Logradouro implements Identificator {
 
 	private Integer id;
 	private String nome;
 	private String descricao;
 	private String sigla;
 
-	public TipoLogradouro(int id, String nome, String sigla, String descricao) {
-		super();
+	public Logradouro(Integer id, String nome, String descricao, String sigla) {
 		this.id = id;
 		this.nome = nome;
-		this.sigla = sigla;
 		this.descricao = descricao;
+		this.sigla = sigla;
 	}
 
-	public TipoLogradouro(String nome, String sigla, String descricao) {
-		super();
-		this.nome = nome;
-		this.sigla = sigla;
-		this.descricao = descricao;
-	}
-
-	public TipoLogradouro(String nome, String sigla) {
+	public Logradouro(String nome, String sigla) {
 		this.nome = nome;
 		this.sigla = sigla;
 	}
 
-	public TipoLogradouro() {
+	public Logradouro(String nome, String descricao, String sigla) {
+		this.nome = nome;
+		this.descricao = descricao;
+		this.sigla = sigla;
+	}
+	
+	public Logradouro() {
 	}
 	
 	@Override
@@ -75,10 +67,9 @@ public class TipoLogradouro implements Identificator {
 
 	@Override
 	public void validate() {
-		if (this.nome == null | this.sigla == null) {
-			throw new IllegalArgumentException("Os campos Nome e Sigla para o registro de Logradouro são de preenchimento obrigatório.");
+		if (this.nome.isEmpty()) {
+			throw new IllegalArgumentException("O nome é de preenchimento obrigatório.");
 		}
 
 	}
-
 }
