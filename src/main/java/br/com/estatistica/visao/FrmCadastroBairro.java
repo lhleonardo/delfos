@@ -122,7 +122,12 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 
 		this.btnCancelar = new JButton("Cancelar");
 		this.btnCancelar.setBounds(362, 0, 92, 43);
+		this.btnCancelar.addActionListener(arg0 -> this.btnCancelarActionPerformed(arg0));
 		this.panel_1.add(this.btnCancelar);
+	}
+
+	private void btnCancelarActionPerformed(ActionEvent arg0) {
+		this.dispose();
 	}
 
 	protected void btnNovoActionPerformed(ActionEvent arg0) {
@@ -132,19 +137,26 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 
 	protected void btnSalvarActionPerformed(ActionEvent e) {
 		try {
-			Bairro b = new Bairro();
-			b.setId(Integer.parseInt((this.txtCodigo.getText().isEmpty()) ? null : this.txtCodigo.getText()));
-			b.setNome(this.txtNome.getText());
-			b.setDescricao(this.txtDescricao.getText());
-
-			System.out.println(b);
-
 			this.bDao = new BairroDAO(this.getConnection());
-			this.bDao.save(b);
-		} catch (SQLException e1) {
-			Mensagem.erro(this, e1);
+			Integer chaveGerada = this.bDao.save(this.montaBairro());
+			if (chaveGerada != null) {
+				this.txtCodigo.setText(String.valueOf(chaveGerada));
+			}
+		} catch (SQLException ex) {
+			Mensagem.erro(this, ex);
 		}
 
+	}
+
+	/**
+	 * @return
+	 */
+	private Bairro montaBairro() {
+		Bairro bairro = new Bairro();
+		bairro.setNome(this.txtNome.getText());
+		bairro.setDescricao(this.txtDescricao.getText());
+		bairro.setId((this.txtCodigo.getText().isEmpty()) ? null : Integer.parseInt(this.txtCodigo.getText()));
+		return bairro;
 	}
 
 	protected void btnExcluirActionPerformed(ActionEvent e) {
@@ -155,7 +167,9 @@ public class FrmCadastroBairro extends GenericFormCadastro {
 					b.setId(Integer.parseInt(this.txtCodigo.getText()));
 
 					this.bDao = new BairroDAO(this.getConnection());
-					this.bDao.delete(b);
+					if (this.bDao.delete(b)) {
+						this.btnNovoActionPerformed(null);
+					}
 				} else {
 					Mensagem.erro(this, "É necessário que seja informado o código do registro antes de realizar a exclusão.");
 				}
