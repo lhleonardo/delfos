@@ -101,6 +101,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.setResizable(false);
 
 		this.panel = new JPanel();
+		
 		this.getContentPane().add(this.panel, BorderLayout.CENTER);
 		this.panel.setLayout(null);
 

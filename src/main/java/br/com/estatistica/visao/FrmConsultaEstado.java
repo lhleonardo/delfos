@@ -114,11 +114,11 @@ public class FrmConsultaEstado extends GenericDialogConsulta<Estado, EstadoDAO, 
 		}
 	}
 
-	protected void preencheTabela(Estado estado) throws SQLException {
-		this.dao = new EstadoDAO(this.getConnection());
-		this.resultados = this.dao.get(estado);
-		this.tableModel.clear();
-		this.tableModel.addAll(this.resultados);
+protected void preencheTabela(Estado estado) throws SQLException {
+	this.dao = new EstadoDAO(this.getConnection());
+	this.resultados = this.dao.get(estado);
+	this.tableModel.clear();
+	this.tableModel.addAll(this.resultados);
 	}
 
 	public static void main(String[] args) {

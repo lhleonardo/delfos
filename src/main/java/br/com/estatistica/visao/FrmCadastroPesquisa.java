@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import br.com.estatistica.dao.PesquisaDAO;
+import br.com.estatistica.modelos.Estado;
 import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPesquisa;
 import br.com.estatistica.util.ConnectionFactory;
@@ -294,8 +296,21 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	}
 
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
-		this.table.setModel(this.getTableModelPesquisa());
-		setTamanhoColunas();
+//		this.table.setModel(this.getTableModelPesquisa());
+//		setTamanhoColunas();
+		
+		FrmConsultaEstado consulta= null;
+		try {
+			consulta = new FrmConsultaEstado(null, new ConnectionFactory().getConnection());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (consulta.execute()) {
+			List<Estado> selecionadas = consulta.getSelecionadas();
+			Estado estado = selecionadas.get(0);
+			System.out.println("Nome: "+ selecionadas.get(0).getNome()+"Nome 2:" +selecionadas.get(1).getNome());
+		}
 	}
 
 	protected void selecionaPesquisa() {
