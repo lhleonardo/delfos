@@ -299,17 +299,17 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 //		this.table.setModel(this.getTableModelPesquisa());
 //		setTamanhoColunas();
 		
-		FrmConsultaEstado consulta= null;
+		FrmConsultaPesquisa consulta= null;
 		try {
-			consulta = new FrmConsultaEstado(null, new ConnectionFactory().getConnection());
+			consulta = new FrmConsultaPesquisa(null, new ConnectionFactory().getConnection());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		if (consulta.execute()) {
-			List<Estado> selecionadas = consulta.getSelecionadas();
-			Estado estado = selecionadas.get(0);
-			System.out.println("Nome: "+ selecionadas.get(0).getNome()+"Nome 2:" +selecionadas.get(1).getNome());
+			List<Pesquisa> selecionadas = consulta.getSelecionadas();
+			Pesquisa pesquisa = selecionadas.get(0);
+			System.out.println("Nome: "+ selecionadas.get(0).getNome()+"Nome 2:" +selecionadas.get(0).getNome());
 		}
 	}
 
