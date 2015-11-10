@@ -10,17 +10,15 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import br.com.estatistica.dao.PerguntaDAO;
 import br.com.estatistica.modelos.Pergunta;
-import br.com.estatistica.modelos.Pesquisa;
 import br.com.estatistica.modelos.table.TableModelPergunta;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
-
-import javax.swing.JTable;
-import javax.swing.JScrollPane;
 
 public class FrmCadastroPergunta extends GenericFormCadastro {
 
@@ -35,8 +33,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 
 	public FrmCadastroPergunta(Connection connection) {
 		super("Cadastro de Perguntas", connection);
-				
-		
+
 		JPanel coeficientes = new JPanel();
 		this.getContentPane().add(coeficientes, BorderLayout.CENTER);
 		coeficientes.setLayout(null);
@@ -52,7 +49,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 
 		JButton salvar = new JButton("Salvar");
 		salvar.addActionListener(e -> {
-			btnSalvarActionPerformed();
+			this.btnSalvarActionPerformed();
 
 		});
 		salvar.setBounds(17, 404, 89, 23);
@@ -91,8 +88,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		coeficientes.add(lblTipoDePergunta);
 
 		JComboBox tppergunta = new JComboBox();
-		tppergunta.setModel(new DefaultComboBoxModel(new String[] {
-				"Coeficiente de Argumentação", "Coeficiente de Competência" }));
+		tppergunta.setModel(new DefaultComboBoxModel(new String[] { "Coeficiente de Argumentação", "Coeficiente de Competência" }));
 		tppergunta.setToolTipText("");
 		tppergunta.setBounds(10, 314, 215, 20);
 		coeficientes.add(tppergunta);
@@ -107,15 +103,16 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 		});
 		NovaPergunta.setBounds(565, 25, 129, 23);
 		coeficientes.add(NovaPergunta);
-		
+
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(60, 57, 495, 118);
 		coeficientes.add(scrollPane);
-		
-		table = new JTable();
-		scrollPane.setViewportView(table);
-		table.setModel(getTableModelTodos());
+
+		this.table = new JTable();
+		scrollPane.setViewportView(this.table);
+		this.table.setModel(this.getTableModelTodos());
 	}
+
 	private TableModelPergunta getTableModelTodos() {
 		try {
 			this.dao = new PerguntaDAO(super.getConnection());
@@ -138,39 +135,39 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 
 		return this.modeloTabelaPergunta;
 	}
+
 	protected void btnPesquisarActionPerformed(ActionEvent arg0) {
 		this.table.setModel(this.getTableModelPergunta());
-		
+
 	}
 
-	protected void excluir(){
+	protected void excluir() {
 		try {
 			if (this.idPergunta.getText() != null) {
 				Integer idPerguntaDeletar = Integer.parseInt(this.idPergunta.getText());
-				Pergunta p1 = new Pergunta(idPerguntaDeletar);
-				this.dao.delete(p1);
+				// Pergunta p1 = new Pergunta(idPerguntaDeletar);
+				// this.dao.delete(p1);
 				this.table.setModel(this.getTableModelTodos());
 				this.idPergunta.setText(" ");
 				this.pergunta.setText(null);
 				this.desc.setText(null);
-				
-				//setTamanhoColunas();
-			
+
+				// setTamanhoColunas();
+
 			}
 
-		} catch (NumberFormatException | SQLException e) {
+		} catch (NumberFormatException e) {
 			Mensagem.erro(this, e);
 		}
-		}
-	
+	}
+
 	private void btnSalvarActionPerformed() {
-		Pergunta p1 = new Pergunta(FrmCadastroPergunta.this.pergunta.getText(),
-				FrmCadastroPergunta.this.desc.getText(),
+		Pergunta p1 = new Pergunta(FrmCadastroPergunta.this.pergunta.getText(), FrmCadastroPergunta.this.desc.getText(),
 				FrmCadastroPergunta.this.obs.getText(), null, null, null);
-		
+
 		try {
-			dao = new PerguntaDAO(getConnection());
-			Integer idNovaPergunta = dao.save(p1);
+			this.dao = new PerguntaDAO(this.getConnection());
+			Integer idNovaPergunta = this.dao.save(p1);
 			System.out.println(idNovaPergunta);
 		} catch (SQLException e1) {
 			Mensagem.erro(this, e1);
@@ -178,8 +175,7 @@ public class FrmCadastroPergunta extends GenericFormCadastro {
 	}
 
 	public static void main(String[] args) {
-		FrmCadastroPergunta frame = new FrmCadastroPergunta(
-				new ConnectionFactory().getConnection());
+		FrmCadastroPergunta frame = new FrmCadastroPergunta(new ConnectionFactory().getConnection());
 		frame.setVisible(true);
 
 	}

@@ -11,8 +11,8 @@ import br.com.estatistica.modelos.Bairro;
 import br.com.estatistica.modelos.Cidade;
 import br.com.estatistica.modelos.Cpf;
 import br.com.estatistica.modelos.Endereco;
+import br.com.estatistica.modelos.Logradouro;
 import br.com.estatistica.modelos.Pessoa;
-import br.com.estatistica.modelos.TipoLogradouro;
 import br.com.estatistica.util.ConnectionFactory;
 import br.com.estatistica.util.Mensagem;
 
@@ -35,9 +35,9 @@ public class PessoaTest {
 		} catch (SQLException ex) {
 			Mensagem.erro(null, ex);
 		}
-		
+
 	}
-	
+
 	/**
 	 * @param pDao
 	 * @throws SQLException
@@ -59,13 +59,13 @@ public class PessoaTest {
 		Cidade c = new Cidade();
 		c.setId(21);
 		enderecoDoLeonardo.setCidade(c);
-		TipoLogradouro l = new TipoLogradouro();
+		Logradouro l = new Logradouro();
 		l.setId(1);
 		enderecoDoLeonardo.setTipoLogradouro(l);
-		
+
 		pessoa.setEndereco(enderecoDoLeonardo);
-		
+
 		return pDao.save(pessoa);
-		
+
 	}
 }

@@ -18,7 +18,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import br.com.estatistica.bean.TipoLogradouroFormatter;
+import br.com.estatistica.bean.LogradouroFormatter;
 import br.com.estatistica.dao.LogradouroDAO;
 import br.com.estatistica.dao.PessoaDAO;
 import br.com.estatistica.modelos.Bairro;
@@ -193,7 +193,7 @@ public class FrmCadastroPessoa extends GenericFormCadastro {
 		this.txtLogradouro.setColumns(10);
 
 		this.comboBoxModel = new ObjectComboBoxModel<Logradouro>();
-		this.comboBoxModel.setFormatter(new TipoLogradouroFormatter());
+		this.comboBoxModel.setFormatter(new LogradouroFormatter());
 		this.preencheComboBox();
 		this.cbLogradouro = new JComboBox(this.comboBoxModel);
 		this.cbLogradouro.setBounds(10, 26, 57, 20);
