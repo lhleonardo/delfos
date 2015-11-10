@@ -10,6 +10,9 @@ import br.com.estatistica.modelos.table.TableModelPesquisa;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import javax.swing.JScrollPane;
 
 public class FrmConsultaPesquisa extends GenericDialogConsulta<Pesquisa, PesquisaDAO, TableModelPesquisa> {
 
@@ -20,6 +23,11 @@ public class FrmConsultaPesquisa extends GenericDialogConsulta<Pesquisa, Pesquis
 	private JPanel panel;
 	private JPanel panel_1;
 	private JLabel lblNewLabel;
+	private JTextField textField;
+	private JLabel lblNome;
+	private JTextField textField_1;
+	private JButton btnIr;
+	private JScrollPane scrollPane;
 
 	public FrmConsultaPesquisa(Frame owner, Connection connection) {
 		super(owner, "Consulta Pesquisa", connection);
@@ -41,6 +49,28 @@ public class FrmConsultaPesquisa extends GenericDialogConsulta<Pesquisa, Pesquis
 		this.lblNewLabel = new JLabel("Código");
 		this.lblNewLabel.setBounds(10, 11, 63, 14);
 		this.panel_1.add(this.lblNewLabel);
+		
+		this.textField = new JTextField();
+		this.textField.setBounds(10, 25, 70, 20);
+		this.panel_1.add(this.textField);
+		this.textField.setColumns(10);
+		
+		this.lblNome = new JLabel("Nome");
+		this.lblNome.setBounds(92, 11, 46, 14);
+		this.panel_1.add(this.lblNome);
+		
+		this.textField_1 = new JTextField();
+		this.textField_1.setBounds(90, 25, 260, 20);
+		this.panel_1.add(this.textField_1);
+		this.textField_1.setColumns(10);
+		
+		this.btnIr = new JButton("Ir");
+		this.btnIr.setBounds(401, 24, 46, 23);
+		this.panel_1.add(this.btnIr);
+		
+		this.scrollPane = new JScrollPane();
+		this.scrollPane.setBounds(10, 56, 447, 338);
+		this.panel_1.add(this.scrollPane);
 	}
 
 	@Override
