@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -20,6 +21,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import br.com.estatistica.bean.DateFormatter;
 import br.com.estatistica.dao.PesquisaDAO;
 import br.com.estatistica.modelos.Estado;
 import br.com.estatistica.modelos.Pesquisa;
@@ -309,7 +311,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		if (consulta.execute()) {
 			List<Pesquisa> selecionadas = consulta.getSelecionadas();
 			Pesquisa pesquisa = selecionadas.get(0);
-			System.out.println("Nome: "+ selecionadas.get(0).getNome()+"Nome 2:" +selecionadas.get(0).getNome());
+			this.codigoField.setText(Integer.toString(pesquisa.getId()));
+			this.nomeField.setText(pesquisa.getNome());
+			this.descricaoField.setText(pesquisa.getDescricao());
+			this.textField_1.setText(new DateFormatter().format(pesquisa.getData()));
+			
 		}
 	}
 
