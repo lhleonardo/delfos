@@ -1,3 +1,4 @@
+
 package br.com.estatistica.visao;
 
 import java.awt.Frame;
