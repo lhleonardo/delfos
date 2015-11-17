@@ -10,7 +10,7 @@ public class DateFormatter implements Formatter {
 
 	@Override
 	public Object format(Object obj) {
-		Date date = (Date) obj;
+		Date date = (Date)obj;
 		return date.getDay()+"/"+date.getMonth()+"/"+date.getYear();
 	}
 

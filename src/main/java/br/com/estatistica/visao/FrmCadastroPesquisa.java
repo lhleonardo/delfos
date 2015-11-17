@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -54,7 +55,7 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 	private JButton btnSalvar;
 	private JButton btnCancelar;
 	private JLabel lblDescrio;
-	private JTextField textField_1;
+	private JTextField txtData;
 	private JLabel lblData;
 
 	/**
@@ -257,11 +258,11 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 		this.descricaoField.setLineWrap(true);
 		this.descricaoField.setWrapStyleWord(true);
 		
-		this.textField_1 = new JTextField();
-		this.textField_1.setEditable(false);
-		this.textField_1.setBounds(11, 270, 86, 20);
-		this.panel.add(this.textField_1);
-		this.textField_1.setColumns(10);
+		this.txtData = new JTextField();
+		this.txtData.setEditable(false);
+		this.txtData.setBounds(11, 270, 86, 20);
+		this.panel.add(this.txtData);
+		this.txtData.setColumns(10);
 		
 		this.lblData = new JLabel("Data");
 		this.lblData.setBounds(11, 255, 46, 14);
@@ -314,7 +315,10 @@ public class FrmCadastroPesquisa extends GenericFormCadastro {
 			this.codigoField.setText(Integer.toString(pesquisa.getId()));
 			this.nomeField.setText(pesquisa.getNome());
 			this.descricaoField.setText(pesquisa.getDescricao());
-			this.textField_1.setText(new DateFormatter().format(pesquisa.getData()));
+			this.limiteField.setText(Integer.toString(pesquisa.getLimiteDeEspecialistas()));
+			SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+			this.txtData.setText(formatadorData.format(pesquisa.getData()));
+			//this.textField_1.setText(new DateFormatter().format(pesquisa.getData()));
 			
 		}
 	}
