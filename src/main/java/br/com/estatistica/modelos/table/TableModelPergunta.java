@@ -2,11 +2,13 @@ package br.com.estatistica.modelos.table;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 
 import br.com.estatistica.modelos.Pergunta;
+import br.com.estatistica.modelos.Pesquisa;
 
 
 public class TableModelPergunta extends AbstractTableModel{
@@ -118,15 +120,19 @@ private static final long serialVersionUID = 1L;
 		// Pega a quantidade de registros e subtrai 1 para
 		// achar o último índice. A subtração é necessária
 		// porque os índices começam em zero.
+		
 		int ultimoIndice = this.getRowCount() - 1;
 		
 		// Notifica a mudança.
+		
 		this.fireTableRowsInserted(ultimoIndice, ultimoIndice);
 	}
 	
 	// Remove o sócio da linha especificada.
-	public void removePergunta(int indiceLinha) {
+	
+	public void removePesquisa(int indiceLinha) {
 		// Remove o registro.
+		
 		this.linhas.remove(indiceLinha);
 		
 		// Notifica a mudança.
@@ -134,9 +140,11 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	// Adiciona uma lista de sócios no final da lista.
-	public void addListaDePergunta(List<Pergunta> perguntas) {
+	
+	public void addListaDePerguntas(List<Pergunta> perguntas) {
 		// Pega o tamanho antigo da tabela, que servirá
 		// como índice para o primeiro dos novos registros
+		
 		int indice = this.getRowCount();
 		
 		// Adiciona os registros.
@@ -147,13 +155,27 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	// Remove todos os registros.
+	
 	public void limpar() {
+		
 		// Remove todos os elementos da lista de sócios.
+		
 		this.linhas.clear();
 		
 		// Notifica a mudança.
 		this.fireTableDataChanged();
 	}
+	
+	public void clear() {
+		this.linhas.clear();
+		
+		this.fireTableDataChanged();
+	}
+	
+	public void addAll(Collection<Pergunta> c) {
+		int rowCount = this.getRowCount();
+		this.linhas.addAll(c);
+		this.fireTableRowsInserted(rowCount, rowCount + c.size());
+	}
  	
-
 }
