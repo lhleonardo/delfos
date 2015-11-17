@@ -1,6 +1,5 @@
 package br.com.estatistica.modelos.table;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,11 +12,10 @@ public class TableModelPesquisa extends AbstractTableModel {
 	private static final long serialVersionUID = 1L;
 	
 	private List<Pesquisa> linhas;
-	private String[] colunas = new String[] { "Nome","Descrição","Data" };
+	private String[] colunas = new String[] { "Nome","Descrição" };
 	
 	private static final int NOME = 0;
 	private static final int DESCRICAO = 1;
-	private static final int DATA = 2;
 	
 	
 	public TableModelPesquisa() {
@@ -50,8 +48,6 @@ public class TableModelPesquisa extends AbstractTableModel {
 				return String.class;
 			case DESCRICAO:
 				return String.class;
-			case DATA:
-				return Date.class;
 			default:
 				throw new IndexOutOfBoundsException("Indice Invalido para o Array");
 		}
@@ -71,8 +67,7 @@ public class TableModelPesquisa extends AbstractTableModel {
 				return pesquisa.getNome();
 			case DESCRICAO:
 				return pesquisa.getDescricao();
-			case DATA:
-				return pesquisa.getData();
+		
 			default:
 				throw new IndexOutOfBoundsException("Indice da coluna nao existe");
 		}
@@ -89,9 +84,7 @@ public class TableModelPesquisa extends AbstractTableModel {
 			case DESCRICAO:
 				pesquisa.setNome((String) aValue);
 				break;
-			case DATA:
-				pesquisa.setData((Date) aValue);
-				break;
+
 			default:
 				throw new IndexOutOfBoundsException("Indice da coluna nao existe");
 		}
