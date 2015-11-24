@@ -69,7 +69,7 @@ public class FrmResposta extends GenericFormCadastro {
 		panel.add(lblNewLabel);
 
 		this.table = new JTable();
-		this.table.setBounds(96, 134, 152, 100);
+		this.table.setBounds(96, 134, 203, 139);
 		panel.add(this.table);
 
 		
@@ -77,7 +77,7 @@ public class FrmResposta extends GenericFormCadastro {
 		JButton btnSelecionar = new JButton("Selecionar");
 		FrmConsultaQuestionario consulta= null;
 		try {
-			consulta = new FrmConsultaPesquisa(null, new ConnectionFactory().getConnection());
+			consulta = new FrmConsultaQuestionario(null, new ConnectionFactory().getConnection());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
