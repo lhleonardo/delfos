@@ -9,6 +9,15 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import br.com.estatistica.modelos.Pesquisa;
+import br.com.estatistica.util.ConnectionFactory;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.List;
+
 public class FrmResposta extends GenericFormCadastro {
 	
 	private static final long serialVersionUID = 1L;
@@ -63,10 +72,30 @@ public class FrmResposta extends GenericFormCadastro {
 		this.table.setBounds(96, 134, 152, 100);
 		panel.add(this.table);
 
+		
+		//MUDAR AQUI OS DADOS
 		JButton btnSelecionar = new JButton("Selecionar");
-		btnSelecionar.setBounds(258, 197, 89, 23);
-		panel.add(btnSelecionar);
+		FrmConsultaQuestionario consulta= null;
+		try {
+			consulta = new FrmConsultaPesquisa(null, new ConnectionFactory().getConnection());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (consulta.execute()) {
+			List<Pesquisa> selecionadas = consulta.getSelecionadas();
+			Pesquisa pesquisa = selecionadas.get(0);
+			this.codigoField.setText(Integer.toString(pesquisa.getId()));
+			this.nomeField.setText(pesquisa.getNome());
+			this.descricaoField.setText(pesquisa.getDescricao());
+			this.limiteField.setText(Integer.toString(pesquisa.getLimiteDeEspecialistas()));
+			SimpleDateFormat formatadorData = new SimpleDateFormat("dd/MM/yyyy");
+			this.txtData.setText(formatadorData.format(pesquisa.getData()));
+			//this.textField_1.setText(new DateFormatter().format(pesquisa.getData()));
+			
+		}
 	}
+	
 	
 	@Override
 	public JPanel getContentPane() {
