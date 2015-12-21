@@ -1,8 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</BorderPane>
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="380.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="171.0" fitWidth="219.0" layoutX="82.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="164.76097869873047" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="79.0" AnchorPane.topAnchor="13.0">
+         <image>
+            <Image url="@../../util/icons/logo/Logo-vers-1.2(16-09).png" />
+         </image>
+      </ImageView>
+      <Label layoutX="87.0" layoutY="158.0" text="Usuário" AnchorPane.leftAnchor="87.0" />
+      <Label layoutX="95.0" layoutY="194.0" text="Senha" />
+      <TextField layoutX="137.0" layoutY="158.0" AnchorPane.leftAnchor="137.0" AnchorPane.rightAnchor="87.0" />
+      <TextField layoutX="136.0" layoutY="198.0" AnchorPane.leftAnchor="136.0" AnchorPane.rightAnchor="88.0" />
+      <Button layoutX="215.0" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="78.0" text="Entrar" AnchorPane.rightAnchor="87.0" />
+      <Button layoutX="136.0" layoutY="235.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="67.0" text="Cancelar" AnchorPane.leftAnchor="136.0" />
+   </children>
+</AnchorPane>
